@@ -10,7 +10,7 @@
     </extension>
 
     <extension point="xbmc.addon.metadata">
-        <summary lang="en">Local repository for Skippy</summary>
+        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi</summary>
         <description lang="en">Installs Skippy with full metadata and visuals</description>
         <platform>all</platform>
         <icon>icon.png</icon>
