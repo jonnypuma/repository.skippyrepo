@@ -1,24 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <addons>
-<addon id="repository.skippyrepo"
-       name="Skippy Repo"
-       version="1.0.0"
-       provider-name="Skippy-McSkipface">
-
-    <extension point="xbmc.addon.repository">
-        <info>https://raw.githubusercontent.com/jonnypuma/kodi-skippy-repo/main/addons.xml</info>
-        <checksum>https://raw.githubusercontent.com/jonnypuma/kodi-skippy-repo/main/addons.xml.md5</checksum>
-        <datadir>https://raw.githubusercontent.com/jonnypuma/kodi-skippy-repo/main/zips/</datadir>
-    </extension>
-
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Local repository for Skippy</summary>
-        <description lang="en">Installs Skippy with full metadata and visuals</description>
-        <platform>all</platform>
-        <icon>icon.png</icon>
-        <fanart>fanart.jpg</fanart>
-    </extension>
-</addon>
 <addon id="service.skippy" name="Skippy - Video Segment Skipper" version="1.0.0" provider-name="Skippy-McSkipface">
        
     <requires>
