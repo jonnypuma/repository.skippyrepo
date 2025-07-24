@@ -15,11 +15,11 @@ Discreet, cross-platform, and customizable.
 ✅ Supported Kodi Versions and Platforms
 Tested on **Kodi Omega 21.2** across:
 
-| Platform       			| Status     |
+| Platform       			        | Status     |
 |---------------------------|------------|
-| Android (Nvidia Shield) 	| ✅ Tested |
-| Linux (CoreELEC)  		| ✅ Tested |
-| Windows 11       			| ✅ Tested |
+| Android (Nvidia Shield) 	 | ✅ Tested |
+| Linux (CoreELEC)  		      | ✅ Tested |
+| Windows 11       			      | ✅ Tested |
 
 ---
 
