@@ -6,9 +6,9 @@
     <extension point="xbmc.addon.repository">
         <dir>
             <version>21.2.0</version>
-            <info>https://raw.githubusercontent.com/jonnypuma/kodi-skippy-repo/main/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/jonnypuma/kodi-skippy-repo/main/addons.xml.md5</checksum>
-            <datadir>https://raw.githubusercontent.com/jonnypuma/kodi-skippy-repo/main/zips/</datadir>
+            <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5</checksum>
+            <datadir>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
         </dir>
     </extension>
 
