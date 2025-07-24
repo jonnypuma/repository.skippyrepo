@@ -4,9 +4,9 @@
        provider-name="Skippy-McSkipface">
 
     <extension point="xbmc.addon.repository">
-        <info>http://127.0.0.1:8888/repository.skippyrepo/addons.xml</info>
-        <checksum>http://127.0.0.1:8888/repository.skippyrepo/addons.xml.md5</checksum>
-        <datadir>http://127.0.0.1:8888/repository.skippyrepo/zips/</datadir>
+        <info>https://raw.githubusercontent.com/jonnypuma/kodi-skippy-repo/main/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/jonnypuma/kodi-skippy-repo/main/addons.xml.md5</checksum>
+        <datadir>https://raw.githubusercontent.com/jonnypuma/kodi-skippy-repo/main/zips/</datadir>
     </extension>
 
     <extension point="xbmc.addon.metadata">
@@ -17,4 +17,3 @@
         <fanart>fanart.jpg</fanart>
     </extension>
 </addon>
-
