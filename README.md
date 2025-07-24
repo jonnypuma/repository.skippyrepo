@@ -1,4 +1,4 @@
-# kodi-skippy-repo
+# repository.skippyrepo
 Repository for the Kodi addon: Skippy - Video Segment Skipper 
 # 📼 Skippy — The XML-EDL Segment Skipper
 
