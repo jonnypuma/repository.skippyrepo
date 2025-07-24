@@ -1,0 +1,108 @@
+<window>
+  <!-- ADDED: Coordinates for resolution independence -->
+  <coordinates>
+    <system>1</system> <!-- Use 1 for resolution independence (scaled by Kodi) -->
+    <posx>0</posx>
+    <posy>0</posy>
+    <width>1920</width> <!-- Standard base resolution for most skins -->
+    <height>1080</height> <!-- Standard base resolution for most skins -->
+  </coordinates>
+
+  <zorder>1</zorder>
+  <defaultcontrol>3012</defaultcontrol>
+
+  <!-- Slide in from top-right -->
+  <animation type="WindowOpen">
+    <effect type="slide" start="0,-100" end="0,0" time="300" tween="quadratic" easing="out" />
+    <effect type="fade" start="0" end="100" time="400" />
+  </animation>
+
+  <!-- Slide out upward -->
+  <animation type="WindowClose">
+    <effect type="slide" start="0,0" end="0,-100" time="300" tween="quadratic" easing="in" />
+    <effect type="fade" start="100" end="0" time="300" />
+  </animation>
+
+  <controls>
+    <control type="group">
+      <!-- UPDATED: Using explicit posx and posy for bottom-left alignment with margins.
+           posx = 10 (small left margin).
+           posy = 620 (empirically found value for bottom alignment). -->
+      <posx>10</posx>  <!-- 10px left margin -->
+      <posy>620</posy>   <!-- Using the empirically found value for bottom alignment -->
+      <!-- Removed align and anchorx to rely solely on this explicit positioning -->
+      <width>430</width>
+      <height>100</height>
+
+      <!-- Background -->
+      <control type="image">
+        <left>0</left><top>0</top>
+        <width>430</width><height>100</height>
+        <texture>white.png</texture>
+        <colordiffuse>F0000000</colordiffuse>
+      </control>
+
+      <!-- Skip icon -->
+      <control type="image">
+        <left>5</left><top>13</top>
+        <width>20</width><height>20</height>
+        <texture>icon_skip.png</texture>
+      </control>
+
+      <!-- Close icon -->
+      <control type="image">
+        <left>280</left><top>13</top>
+        <width>20</width><height>20</height>
+        <texture>icon_close.png</texture>
+      </control>
+
+      <!-- Skip button -->
+      <control type="button" id="3012">
+        <left>35</left><top>10</top>
+        <width>240</width><height>25</height>
+        <label>Skip</label><onright>3013</onright>
+        <font>font16</font>
+        <texturefocus>button_focus_blue.png</texturefocus>
+        <texturenofocus>-</texturenofocus>
+        <textcolor>lightgrey</textcolor>
+        <textcolorfocus>white</textcolorfocus>
+        <aligny>center</aligny><textoffsetx>10</textoffsetx>
+      </control>
+
+      <!-- Close button -->
+      <control type="button" id="3013">
+        <left>300</left><top>10</top>
+        <width>80</width><height>25</height>
+        <label>Close</label><onleft>3012</onleft>
+        <font>font16</font>
+        <texturefocus>button_focus_blue.png</texturefocus>
+        <texturenofocus>-</texturenofocus>
+        <textcolor>lightgrey</textcolor>
+        <textcolorfocus>white</textcolorfocus>
+        <aligny>center</aligny><textoffsetx>10</textoffsetx>
+      </control>
+
+      <!-- Countdown label -->
+      <control type="label" id="2">
+        <left>5</left><top>50</top>
+        <width>360</width><height>20</height>
+        <label>Segment ending in: $INFO[Window.Property(countdown)]</label>
+        <font>font10</font>
+        <textcolor>lightgrey</textcolor>
+        <align>left</align><visible>true</visible>
+      </control>
+
+      <!-- Progress bar -->
+      <control type="progress" id="3014">
+        <left>5</left><top>85</top>
+        <width>370</width><height>5</height>
+        <texturebg>progress_background.png</texturebg>
+        <textureleft>progress_left.png</textureleft>
+        <midtexture>progress_mid.png</midtexture>
+        <textureright>progress_right.png</textureright>
+        <aspectratio>stretch</aspectratio>
+        <orientation>horizontal</orientation>
+      </control>
+    </control>
+  </controls>
+</window>

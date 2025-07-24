@@ -1,0 +1,87 @@
+<settings>
+  <category label="Segment Settings">
+
+    <setting id="custom_segment_keywords"
+             type="text"
+             label="Segment Keywords to Watch For"
+             default="intro,recap,prologue,epilogue,ad,ads,sponsor,sponsors,commercial,commercials,outro,credits,preview,next time on,next on,sneak peek,last time on,last on,previously on,closing,ending"
+             tooltip="Comma-separated list of chapterstrings (case-insensitive) the skipper should monitor." />
+
+    <setting id="segment_always_skip"
+             type="text"
+             label="Always Skip These"
+             default="commercial,commercials,sponsor,sponsors,ad,ads"
+             tooltip="Subset of your segment keywords that should skip automatically." />
+
+    <setting id="segment_ask_skip"
+             type="text"
+             label="Ask to Skip These"
+             default="intro,recap,segment,preview,next time on,next on,sneak peek,last time on,last on,previously on"
+             tooltip="Subset that should prompt you before skipping." />
+
+    <setting id="segment_never_skip"
+             type="text"
+             label="Never Skip These"
+             default="prologue,epilogue,main,credits,outro,closing,ending"
+             tooltip="Subset to always play, never skip." />
+
+    <setting id="edl_action_mapping"
+             type="text"
+             label="EDL Action Type Mapping"
+             default="4:Segment,5:Intro,6:Ad,7:Commercial,8:Credits,9:Recap,10:Prologue,11:Epilogue"
+             tooltip="Format: action_type:label. Example: 4:Segment,5:Intro,6:Ad,7:Credits" />
+
+  </category>
+
+  <category label="Customize Skip Dialog Look and Behavior">
+    <setting id="show_progress_bar"
+             type="bool"
+             label="Show Progress Bar in Skip Dialog"
+             default="true"
+             tooltip="Hide or show the progress bar while a skipable segment is active." />
+
+    <setting id="rewind_threshold_seconds" 
+             type="number" 
+             label="Major rewind threshold (seconds)" 
+             default="8" 
+             min="2" 
+             max="30"
+             tooltip="If playback jumps backward more than this threshold, skip prompts will reset. Helps avoid false triggers from buffering or auto-rewind addons." />
+
+	<setting id="skip_dialog_position"
+         type="labelenum"
+		 label="Skip Dialog Position" 
+         default="Bottom Right"
+         values="Bottom Right|Top Right|Top Left|Bottom Left"
+         optionvalues="BottomRight|TopRight|TopLeft|BottomLeft"
+         tooltip="Choose which corner of the screen the skip dialog appears in." />
+  </category>
+
+  <category label="Not Found Toast notifications">
+	<setting id="always_show_missing_toast"
+			 type="bool"
+			 label="Always show toast on missing segments"
+			 default="false"
+			 tooltip="If enabled, Skippy shows the 'no segments found' toast every time playback starts, even for repeated videos." />
+
+    <setting id="enable_for_tv_episodes" 
+             type="bool" 
+             label="Enable for TV episodes" 
+             default="true"
+             tooltip="Show a notification if the metadata file (chapters.xml or .edl) cannot be found or read for the current episode." />
+
+    <setting id="enable_for_movies" 
+             type="bool" 
+             label="Enable for movies" 
+             default="false"
+             tooltip="Show a notification if the metadata file (chapters.xml or .edl) cannot be found or read for the current movie." />
+  </category>
+
+  <category label="Debug Logging">
+    <setting id="enable_verbose_logging"
+             type="bool"
+             label="Enable verbose logging"
+             default="false"
+             tooltip="Turn this on for verbose logging in the kodi.log file and for debugging." />
+  </category>
+</settings>
