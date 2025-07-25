@@ -206,8 +206,6 @@ If no label is present in edl file or defined in settings, 'Segment' is used as 
 
 XML files define segments using chapter metadata:
 
-xml
-<?xml version="1.0" encoding="UTF-8"?>
 <Chapters>
   <EditionEntry>
     <ChapterAtom>
@@ -226,6 +224,7 @@ xml
     </ChapterAtom>
   </EditionEntry>
 </Chapters>
+
 ChapterString is the label used for skip mode matching
 
 Times must be in HH:MM:SS.mmm format
