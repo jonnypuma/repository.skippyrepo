@@ -184,7 +184,9 @@ EDL files define skip segments using three values per line
 210 235 4 
 
 → Will skip or prompt from 3:30 to 3:55 if action type `4` is mapped to `'Intro'` 
+
 Format: <start_time> <end_time> <action_type>. start_time and end_time are in seconds. <action type> is an integer between 4 to 99
+
 Action mapping: action_code maps to a label via edl_action_mapping (e.g. 4:intro, 5:credits)
 
 
