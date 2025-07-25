@@ -174,6 +174,7 @@ Skippy supports two segment metadata formats, placed alongside the .mkv or video
 EDL files define skip segments using three values per line
 
 🧾 .edl File Content Example:
+
 210 235 4 
 
 → Will skip or prompt from 3:30 to 3:55 if action type `4` is mapped to `'Intro'` 
