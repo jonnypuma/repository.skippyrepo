@@ -88,6 +88,8 @@ if True:  # triggers skip dialog
 Found under:  
 `Settings → Add-ons → My Add-ons → Services → Skippy - Video Segment Skipper`
 
+<img width="2559" height="1599" alt="screenshot04" src="https://github.com/user-attachments/assets/b2ee73d6-2cdb-49a4-ac8d-e0f8b385cc05" />
+
 ⚙ Default settings Overview
 Default settings file loaded at first start located in: .../addons/service.skippy/resources/settings.xml
 Setting	Description:
