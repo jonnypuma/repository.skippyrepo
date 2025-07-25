@@ -71,6 +71,7 @@ Each second:
 ---
 
 🧪Forced cache clearing
+
 Force cache clearing (reparse segments every time), to avoid Kodi cache remembering what you have skipped if you want to restart a playback for instance.
 
 Done by:
