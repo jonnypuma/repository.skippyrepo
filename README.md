@@ -220,15 +220,6 @@ Labels are normalized (e.g. Intro, intro, INTRO all match)
 
 ---
 
-🧩 File Example
-Breaking.Bad.S01E02.mkv
-├── Breaking.Bad.S01E02-chapters.xml or Breaking.Bad.S01E02_chapters.xml    # XML chapter file
-└── Breaking.Bad.S01E02.edl                                                 # Fallback if no XML found
-
-XML takes priority if both exist.
-
----
-
 🚀 Usage Examples
 ✅ Auto-skip
 If your chapters.xml contains:
