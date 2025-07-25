@@ -1,5 +1,6 @@
 # repository.skippyrepo
 Repository for the Kodi addon: Skippy - Video Segment Skipper 
+<img width="1024" height="1024" alt="icon" src="https://github.com/user-attachments/assets/a9566ad0-f74c-45b7-8243-85357f33b194" />
 # 📼 Skippy — The XML-EDL Segment Skipper
 
 Skippy is a Kodi service that intelligently detects and can skip predefined video segments such as intros, recaps, ads, or credits using companion `.xml` or `.edl` files. 
@@ -62,6 +63,10 @@ Each second:
     ❓ Prompts the user
     🚫 Does nothing — based on label behavior
 - Remembers if a segment is dismissed to avoid repeat prompts (unless user seeks back), i.e. at stop, end, or rewind: clears segment cache and skip history
+
+<img width="2559" height="1599" alt="screenshot01" src="https://github.com/user-attachments/assets/c684b0b4-0d01-4908-8c00-f229984274b1" />
+<img width="2559" height="1599" alt="screenshot02" src="https://github.com/user-attachments/assets/e4dfe5d3-fb4d-45e2-892a-ed721b8b8781" />
+<img width="2559" height="1599" alt="screenshot03" src="https://github.com/user-attachments/assets/59602deb-c5c5-4f9f-98e6-fdc2578b5cc5" />
 
 ---
 
