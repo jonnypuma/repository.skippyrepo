@@ -51,7 +51,7 @@ Start playback of MyMovie.mkv in Kodi. Skippy will:
 
 4. Skip, prompt or never ask based on your preferences
 
-5- Show a toast if no segments are found (if enabled)
+5. Show a toast if no segments are found (if enabled)
 
 Each second:
 - Checks current time against segment list
