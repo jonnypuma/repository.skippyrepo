@@ -45,11 +45,11 @@ Tested on **Kodi Omega 21.2** across:
 
 Start playback of MyMovie.mkv in Kodi. Skippy will:
 
-1. Searches for XML or EDL metadata file alongside the video.
+1. Search for XML or EDL metadata file alongside the video.
 
-2. Tries to read .xml first, then .edl as fallback. Parses segment list and stores in memory
+2. Try to read .xml first, then .edl as fallback. Parses segment list and stores in memory
 
-3. Matches segment labels
+3. Match segment labels
 
 4. Skip, prompt or never ask based on your preferences
 
