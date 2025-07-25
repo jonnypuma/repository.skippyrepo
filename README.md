@@ -237,6 +237,33 @@ Labels are normalized (e.g. Intro, intro, INTRO all match)
 
 ---
 
+✅ Segment Behavior Logic Summary
+Behavior	Dialogs Enabled (show_dialogs = True)	Dialogs Disabled (show_dialogs = False)
+never	            ❌ Skip silently	                            ❌ Skip silently
+ask	                ✅ Show dialog	                                ❌ Suppress dialog
+auto	            ✅ Skip automatically	                        ✅ Skip automatically
+
+If show_skip_dialog_movies = False, then dialogs will be suppressed for movie segments even if their behavior is "ask".
+
+If show_skip_dialog_episodes = False, then dialogs will be suppressed for episode segments with "ask" behavior.
+
+This suppression is independent of the segment file presence or toast settings.
+
+✅ Example
+If a segment in a movie has behavior "ask" and show_skip_dialog_movies = False, the dialog will not appear. Instead, the segment will be silently skipped or ignored depending on other settings.
+
+More detailed
+Skip Dialog Enabled	 Segment File Present	Toast Enabled	Show Toast?
+✅ Yes	                    ✅ Yes	            ✅ Yes	        ❌ No
+✅ Yes	                    ❌ No	            ✅ Yes	        ✅ Yes
+❌ No	                    ✅ Yes	            ✅ Yes	        ❌ No
+❌ No	                    ❌ No	            ✅ Yes	        ✅ Yes
+❌ No	                    ❌ No	            ❌ No	        ❌ No
+✅ Yes	                    ❌ No	            ❌ No	        ❌ No
+❌ No	                    ✅ Yes	            ❌ No	        ❌ No
+
+---
+
 🚀 Usage Examples
 
 ✅ Auto-skip
