@@ -5,7 +5,7 @@ Repository for the Kodi addon: Skippy - Video Segment Skipper
 
 Skippy is a Kodi service that intelligently detects and can skip predefined video segments such as intros, recaps, ads, or credits using companion `.xml` or `.edl` files. 
 
-Supports chaptered Matroska XMLs, enhanced EDLs with labeled action types.
+Supports chaptered Matroska XML files and Mplayer/Kodi style EDL files.
  
 It provides both automatic and user-prompted skipping, and integrates seamlessly into playback with customizable notifications and dialogs.
 
@@ -145,6 +145,7 @@ These should reside in the same directory as the video file. EDL files follow Ko
 
 🧩 File Example
 Breaking.Bad.S01E02.mkv
+
 ├── Breaking.Bad.S01E02-chapters.xml or Breaking.Bad.S01E02_chapters.xml    # XML chapter file
 └── Breaking.Bad.S01E02.edl                                                 # Fallback if no XML found
 
