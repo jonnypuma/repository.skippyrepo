@@ -14,6 +14,7 @@ Discreet, cross-platform, and customizable.
 ---
 
 ✅ Supported Kodi Versions and Platforms
+
 Tested on **Kodi Omega 21.2** across:
 
 | Platform       			        | Status     |
@@ -41,6 +42,7 @@ Tested on **Kodi Omega 21.2** across:
 ---
 
 🎬 Play the Video
+
 Start playback of MyMovie.mkv in Kodi. Skippy will:
 
 1. Searches for XML or EDL metadata file alongside the video.
@@ -119,6 +121,7 @@ Category: Debug Logging
 ---
 
 🧠 Skip Modes examples
+
 Segment behavior is matched via normalized labels and defined in:
 
 - segment_always_skip
@@ -161,12 +164,14 @@ XML takes priority if both exist.
 Skippy supports two segment metadata formats, placed alongside the .mkv or video file:
 
 1. ✅ XML Chapter Files (Preferred)
+
 - Filenames: filename-chapters.xml or filename_chapters.xml
 - Format: Matroska-style (e.g. exported by Jellyfin)
 - Label: `<ChapterString>Intro</ChapterString>`
 - Configurable behavior per label: auto-skip / ask to skip / never
 
 2. ✅ Enhanced EDL Files (Fallback)
+
 - Filename: `filename.edl`
 - Format: <start_time> <end_time> <action_type> ;label=Intro (or set preferred label in the settings.xml)
 - Configurable behavior per label: auto-skip / ask-to-skip / never (shares the same label settings as the xml route)
@@ -196,6 +201,7 @@ Optional label support using comments:
 If no label is present in edl file or defined in settings, 'Segment' is used as fallback
 
 📘 .xml Chapter Format
+
 XML files define segments using chapter metadata:
 
 xml
@@ -227,7 +233,9 @@ Labels are normalized (e.g. Intro, intro, INTRO all match)
 ---
 
 🚀 Usage Examples
+
 ✅ Auto-skip
+
 If your chapters.xml contains:
 
 <ChapterString>Intro</ChapterString>
@@ -235,6 +243,7 @@ If your chapters.xml contains:
 And you've configured "Intro" to auto-skip, the addon will jump past it without prompting.
 
 ❓ Ask to skip
+
 If your .edl file contains:
 
 0.0 90.0 9
@@ -242,11 +251,13 @@ And action code 9 maps to "Recap", and "Recap" is mapped to the "Ask to skip" se
 
 
 🔕 Never skip example
+
 If your segment label is "Credits" and you've mapped "Credits" to the "Never skip" setting, playback continues uninterrupted with no skip popup.
 
 ---
 
 🍿 Toast Notification Behavior
+
 - Appears when a video has no matching skip segments
 - Suppressed if filtered by playback type unless always_show_missing_toast is enabled
 
@@ -257,6 +268,7 @@ Cooldown enforced per playback session (default: 6 seconds)
 ---
 
 🚨 Logging
+
 Verbose logging reveals:
 
 - Parsed segments and labels
@@ -268,6 +280,7 @@ Verbose logging reveals:
 ---
 
 🔄 Batch EDL Action Type Normalizer (Windows)
+
 Located in tools/edl-updater.bat:
 
 Updates all .edl files under a folder recursively
@@ -281,6 +294,7 @@ Ensures full compatibility with Skippy’s behavior mappings
 ---
 
 🧾 License & Credits
+
 Not affiliated with Jellyfin, Kodi, MPlayer or Matroska
 
 white.png background courtesy of im85288 (Up Next add-on)
@@ -296,6 +310,7 @@ ________________________________________________________________________________
 ---
 
 🧑‍💻 Contributors
+
 jonnyp — Architect, debugger
 
 Microsoft Copilot — Code assistant and README wrangler
