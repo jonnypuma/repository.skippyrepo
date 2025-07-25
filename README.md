@@ -110,6 +110,8 @@ Category: Customize Skip Dialog Look and Behavior
 - show_progress_bar			    Enables visual progress bar during skip dialog
 - skip_dialog_position	    	Chooses layout position for the skip confirmation dialog
 - rewind_threshold_seconds	    Threshold for detecting rewind and clearing dialog suppression states
+- show_skip_dialog_movies	    Show skip dialog for movies when behavior is set to ask	
+- show_skip_dialog_episodes	    Show skip dialog for TV episodes when behavior is set to ask
 
 Category: Not Found Toast notifications
 - always_show_missing_toast	    Forces toast to show even when movie/episode toggles are disabled
