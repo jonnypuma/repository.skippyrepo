@@ -60,11 +60,11 @@ Each second:
 - If within an active segment: Applies skip behavior
 - Flags as prompted to avoid repeats
 - Checks current playback time
-- If a matching segment is active and unskipped:
+- If a matching segment becomes active, Skippy will based on label behavior defined in settings:
 ```xml
-    ⏩ Skips automatically 
-    ❓ Prompts the user
-    🚫 Does nothing — based on label behavior
+    ⏩ Skip automatically 
+    ❓ Prompt the user
+    🚫 Do nothing 
 ```
 - Remembers if a segment is dismissed to avoid repeat prompts (unless user seeks back), i.e. at stop, end, or rewind: clears segment cache and skip history
 
