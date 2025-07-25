@@ -314,5 +314,3 @@ ________________________________________________________________________________
 🧑‍💻 Contributors
 
 jonnyp — Architect, debugger
-
-Microsoft Copilot — Code assistant and README wrangler
