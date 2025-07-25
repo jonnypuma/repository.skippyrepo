@@ -61,9 +61,11 @@ Each second:
 - Flags as prompted to avoid repeats
 - Checks current playback time
 - If a matching segment is active and unskipped:
+```xml
     ⏩ Skips automatically 
     ❓ Prompts the user
     🚫 Does nothing — based on label behavior
+```
 - Remembers if a segment is dismissed to avoid repeat prompts (unless user seeks back), i.e. at stop, end, or rewind: clears segment cache and skip history
 
 <img width="2559" height="1599" alt="screenshot01" src="https://github.com/user-attachments/assets/c684b0b4-0d01-4908-8c00-f229984274b1" />
@@ -129,21 +131,20 @@ Segment behavior is matched via normalized labels and defined in:
 - segment_never_skip
 
 Examples:
-
+```xml
 segment_always_skip = commercial, ad
 segment_ask_skip = intro, recap, credits, pre-roll
 segment_never_skip = logo, preview, prologue, epilogue, main
+```
 
 ---
 
 📁 File Support
 Skippy supports the following segment definition files:
 
-filename.edl
-
-filename-chapters.xml
-
-filename_chapters.xml
+- filename.edl
+- filename-chapters.xml
+. filename_chapters.xml
 
 These should reside in the same directory as the video file. EDL files follow Kodi’s native format with start, end, and action code lines. XML files use a chapter-based structure. See section below.
 
@@ -151,11 +152,10 @@ These should reside in the same directory as the video file. EDL files follow Ko
 
 🧩 File Example
 Breaking.Bad.S01E02.mkv
-
+```xml
 ├── Breaking.Bad.S01E02-chapters.xml or Breaking.Bad.S01E02_chapters.xml    # XML chapter file
-
 └── Breaking.Bad.S01E02.edl                                                 # Fallback if no XML found
-
+```
 XML takes priority if both exist.
 
 ---
@@ -180,13 +180,14 @@ Skippy supports two segment metadata formats, placed alongside the .mkv or video
 EDL files define skip segments using three values per line
 
 🧾 .edl File Content Example:
-
+```xml
 210 235 4 
-
+```
 → Will skip or prompt from 3:30 to 3:55 if action type `4` is mapped to `'Intro'` 
 
-Format: <start_time> <end_time> <action_type>. start_time and end_time are in seconds. <action type> is an integer between 4 to 99
-
+```xml
+Format: <start_time> <end_time> <action_type>. start_time and end_time are in seconds. action type is an integer between 4 to 99
+```
 Action mapping: action_code maps to a label via edl_action_mapping (e.g. 4:intro, 5:credits)
 
 
@@ -197,15 +198,13 @@ Custom action types (4–99) are supported amd configurable via settings:
 5 → Intro
 6 → Ad, etc. — 
 
-Optional label support using comments:
-42.0 58.3 4 ;label=Intro
-
 If no label is present in edl file or defined in settings, 'Segment' is used as fallback
 
 📘 .xml Chapter Format
 
 XML files define segments using chapter metadata:
 
+```xml
 <Chapters>
   <EditionEntry>
     <ChapterAtom>
@@ -224,6 +223,11 @@ XML files define segments using chapter metadata:
     </ChapterAtom>
   </EditionEntry>
 </Chapters>
+```
+
+Here’s a breakdown of the chapters:
+- Intro: 00:00–01:00
+- Credits: 20:00–21:00
 
 ChapterString is the label used for skip mode matching
 
