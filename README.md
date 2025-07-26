@@ -175,7 +175,7 @@ Skippy supports two segment metadata formats, placed alongside the .mkv or video
 2. ✅ Enhanced EDL Files (Fallback)
 
 - Filename: `filename.edl`
-- Format: <start_time> <end_time> <action_type> ;label=Intro (or set preferred label in the settings.xml)
+- Format: <start_time> <end_time> <action_type>
 - Configurable behavior per label: auto-skip / ask-to-skip / never (shares the same label settings as the xml route)
 
 📄 Sample Segment Files
