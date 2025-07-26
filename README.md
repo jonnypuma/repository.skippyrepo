@@ -340,7 +340,7 @@ ________________________________________________________________________________
 
 🧼 Developer Notes
 - UI driven by WindowXMLDialog
-- EDL action types 0 and 3 (Kodi-native) are ignored
+- EDL action types 0 and 3 (Kodi-native) are ignored by the addon due to them being used by Kodi's internal autoskip feature
 - Only -chapters.xml and _chapters.xml and .edl files are scanned
 
 ---
