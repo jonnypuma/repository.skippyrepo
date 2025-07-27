@@ -104,6 +104,7 @@ Category: Segment Settings
 - segment_always_skip			Comma-separated list of segment labels to skip automatically
 - segment_ask_skip			    Comma-separated list of labels to prompt for skipping
 - segment_never_skip			Comma-separated list of labels to never skip
+- ignore_kodi_edl_actions       Default value - true
 - edl_action_mapping			Map .edl action codes to skip labels (e.g. 4:intro,5:credits)
 
 Category: Customize Skip Dialog Look and Behavior
@@ -289,6 +290,28 @@ And action code 9 maps to "Recap", and "Recap" is mapped to the "Ask to skip" se
 🔕 Never skip example
 
 If your segment label is "Credits" and you've mapped "Credits" to the "Never skip" setting, playback continues uninterrupted with no skip popup.
+
+---
+
+### 🎛️ EDL Action Filtering
+
+Skippy supports optional filtering of Kodi-native EDL action types (`0`, `1`, `2`, `3`). This allows users to ignore internal skip markers and rely only on custom-defined segments.
+
+#### 🔧 Setting
+- **Name:** `ignore_kodi_edl_actions`
+- **Type:** Boolean
+- **Default:** `true`
+
+#### ✅ Behavior
+| Setting Value | Action Types Parsed | Result |
+|---------------|---------------------|--------|
+| `true`        | Only custom actions (`>=4`) | Internal Kodi skip markers are ignored |
+| `false`       | All action types     | Skippy will prompt for all segments, including Kodi-native ones |
+
+#### 📝 Example
+```edl
+237.5    326.326    5    intro
+1323.45  1429.184   2    segment
 
 ---
 
