@@ -306,7 +306,7 @@ Skippy supports optional filtering of Kodi-native EDL action types (`0`, `1`, `2
 | Setting Value | Action Types Parsed | Result |
 |---------------|---------------------|--------|
 | `true`        | Only custom actions (`>=4`) | Internal Kodi skip markers are ignored |
-| `false`       | All action types     | Skippy will prompt for all segments, including Kodi-native ones |
+| `false`       | All action types     | Autoskip or prompt for all segments, including Kodi-native ones |
 
 #### 📝 Example
 ```edl
