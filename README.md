@@ -106,6 +106,7 @@ Category: Segment Settings
 - segment_never_skip			Comma-separated list of labels to never skip
 - ignore_kodi_edl_actions       Default value - true
 - edl_action_mapping			Map .edl action codes to skip labels (e.g. 4:intro,5:credits)
+- skip_overlapping_segments Configurable overlap detection to help avoid redundant or conflicting skips
 
 Category: Customize Skip Dialog Look and Behavior
 - show_progress_bar			    Enables visual progress bar during skip dialog
@@ -349,6 +350,55 @@ Replaces old action types with new ones (e.g. 3 → 4)
 User can specify which action type to look for and which action type to replace with in accordance with user specifications in the settings.xml file.
 
 Ensures full compatibility with Skippy’s behavior mappings
+
+---
+
+🔁 Skip Overlapping Segments
+Skippy now supports configurable overlap detection to help avoid redundant or conflicting skips. This feature ensures that segments which overlap in time are handled according to your preference.
+
+⚙️ Setting: Skip overlapping segments
+Location: settings.xml → Segment Settings
+
+Type: Boolean toggle (true / false)
+
+Default: true
+
+🧠 What It Does
+When enabled, Skippy will skip any segment that overlaps with one already accepted. This is useful when:
+
+EDL or chapter files contain redundant entries
+
+Multiple tools or sources generate overlapping metadata
+
+You want to avoid double prompts or conflicting skips
+
+📊 Example
+Given the following segments:
+
+Segment A: 45.5 → 133.175
+Segment B: 50.0 → 100.0
+Segment C: 1416.45 → 1507.59
+Segment B overlaps with Segment A:
+
+Overlap window: 50.0 → 100.0
+
+Overlap duration: 50.0 → 100.0 (50 seconds)
+
+Percent overlap of Segment B: 100%
+
+Behavior:
+Setting Value	Result
+true	Segment B is skipped
+false	Segment B is kept
+🧪 How to Test
+Enable verbose logging in settings.
+
+Toggle Skip overlapping segments on/off.
+
+Observe logs like:
+
+⚠ Overlapping segment detected: 50.0–100.0 overlaps with 45.5–133.175
+🚫 Skipping overlapping segment: 50.0–100.0 | label='segment'
 
 ---
 
