@@ -36,7 +36,7 @@ Tested on **Kodi Omega 21.2** across:
 - 📊 Progress Bar Display toggle: Progress bar which fills up until end of segment. On/off toggle available under settings.
 - 🖼️ Skip Dialog Placement: Choose dialog layout position (Center, Top, Bottom, Side)
 - ⏪ Rewind detection logic: Resets skip prompts only on significant rewinds — with a user-defined threshold.
-- 📺 Toast segment file not-found notification filtering: Notifies when no segments were found for the current video. Toggle on/off for movies or TV episodes, or always on (Always Show Toast override). Supports per-playback cooldown (default: 6 seconds)
+- 📺 Toast segment file not-found notification filtering: Notifies when no segments were found for the current video. Toggle on/off for movies or TV episodes. Supports per-playback cooldown (default: 6 seconds)
 - 🧹 Debug logging: Verbose logs for each segment processed and decision made. Toggle on/off.
 
 ---
@@ -116,7 +116,6 @@ Category: Customize Skip Dialog Look and Behavior
 - show_skip_dialog_episodes	    Show skip dialog for TV episodes when behavior is set to ask
 
 Category: Not Found Toast notifications
-- always_show_missing_toast	    Forces toast to show even when movie/episode toggles are disabled
 - enable_for_movies			    Skip support toggle for movie playback
 - enable_for_tv_episodes		Skip support toggle for episode playback
 
@@ -319,7 +318,7 @@ Skippy supports optional filtering of Kodi-native EDL action types (`0`, `1`, `2
 🍿 Toast Notification Behavior
 
 - Appears when a video has no matching skip segments
-- Suppressed if filtered by playback type unless always_show_missing_toast is enabled
+- Suppressed if filtered by playback type
 
 Cooldown enforced per playback session (default: 6 seconds)
 
