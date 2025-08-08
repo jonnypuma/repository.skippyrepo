@@ -18,9 +18,17 @@ def log_always(msg):
 class SkipDialog(xbmcgui.WindowXMLDialog):
     def __init__(self, *args, **kwargs):
         super().__init__(*args)
+        self.segment = kwargs.get("segment", None)
         log(f"📦 Loaded dialog layout: {args[0]}")
-    
+
     def onInit(self):
+        log_always(f"🔍 onInit called — segment={getattr(self, 'segment', None)}")
+
+        if not hasattr(self, "segment") or not self.segment:
+            log("❌ Segment not set — aborting dialog init")
+            self.close()
+            return
+
         duration = int(self.segment.end_seconds - self.segment.start_seconds)
         m, s = divmod(duration, 60)
         duration_str = f"{m}m{s}s" if m else f"{s}s"
@@ -31,15 +39,19 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
         self.response = None
         self.player = xbmc.Player()
         self._total_duration = self.segment.end_seconds - self.segment.start_seconds
+        self._start_time = time.time()
 
+        # 🔧 Load progress bar setting
         try:
             raw = get_addon().getSetting("show_progress_bar").lower()
             self._show_progress = json.loads(raw)
         except Exception:
             self._show_progress = True
+            log("⚠️ Failed to parse show_progress_bar setting — defaulting to True")
 
         log(f"🧩 show_progress_bar setting: {self._show_progress}")
 
+        # 📊 Setup progress bar
         try:
             progress = self.getControl(3014)
             progress.setVisible(self._show_progress)
@@ -53,7 +65,8 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
         threading.Thread(target=self._monitor_segment_end, daemon=True).start()
 
     def _monitor_segment_end(self):
-        delay = 0.25  # Balanced update rate
+        delay = 0.25
+        timeout = 30  # Max dialog duration fallback
 
         while not self._closing:
             if not self.player.isPlaying():
@@ -65,6 +78,7 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
             m, s = divmod(max(remaining, 0), 60)
             self.setProperty("countdown", f"{m}m{s}s" if m else f"{s}s")
 
+            # 📊 Update progress bar
             if self._show_progress:
                 try:
                     elapsed = max(current - self.segment.start_seconds, 0)
@@ -74,8 +88,17 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
                 except Exception as e:
                     log(f"⚠️ Progress bar update error: {e}")
 
+            # ⌛ Segment end reached
             if current >= self.segment.end_seconds - 0.5:
                 log("⌛ Segment ended — auto-decline")
+                self._closing = True
+                self.response = False
+                self.close()
+                break
+
+            # ⏳ Timeout fallback
+            if time.time() - self._start_time > timeout:
+                log("⏳ Timeout reached — auto-decline")
                 self._closing = True
                 self.response = False
                 self.close()
@@ -101,5 +124,5 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
             if self._show_progress:
                 self.getControl(3014).setPercent(0)
                 log("🔄 Progress bar reset on close")
-        except Exception:
-            pass
+        except Exception as e:
+            log(f"⚠️ Error resetting progress bar on close: {e}")

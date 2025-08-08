@@ -9,7 +9,7 @@ It provides both automatic and user-prompted skipping, and integrates seamlessly
 Discreet, cross-platform, and customizable.
 
 ---
-
+'''xml
 ## 📁 Folder Structure
 
 service.skippy/
@@ -43,6 +43,7 @@ service.skippy/
 │               └── white.png             # Dialog background (credit: im85288, Up Next)
 └── tools/
     └── edl-updater.bat                   # (Optional) EDL action type batch normalizer
+'''
 
 ✅ Supported Kodi Versions and Platforms
 Tested on **Kodi Omega 21.2** across:
@@ -66,7 +67,7 @@ Tested on **Kodi Omega 21.2** across:
 - 📊 Progress Bar Display toggle: Progress bar which fills up until end of segment. On/off toggle available under settings.
 - 🖼️ Skip Dialog Placement: Choose dialog layout position (Center, Top, Bottom, Side)
 - ⏪ Rewind detection logic: Resets skip prompts only on significant rewinds — with a user-defined threshold.
-- 📺 Toast segment file not-found notification filtering: Notifies when no segments were found for the current video. Toggle on/off for movies or TV episodes, or always on (Always Show Toast override). Supports per-playback cooldown (default: 6 seconds)
+- 📺 Toast segment file not-found notification filtering: Notifies when no segments were found for the current video. Toggle on/off for movies or TV episodes. Supports per-playback cooldown (default: 6 seconds)
 - 🧹 Debug logging: Verbose logs for each segment processed and decision made. Toggle on/off.
 
 ---
@@ -124,15 +125,18 @@ Category: Segment Settings
 - segment_always_skip			Comma-separated list of segment labels to skip automatically
 - segment_ask_skip			    Comma-separated list of labels to prompt for skipping
 - segment_never_skip			Comma-separated list of labels to never skip
+- ignore_kodi_edl_actions       Default value - true
 - edl_action_mapping			Map .edl action codes to skip labels (e.g. 4:intro,5:credits)
+- skip_overlapping_segments     Configurable overlap detection to help avoid redundant or conflicting skips
 
 Category: Customize Skip Dialog Look and Behavior
 - show_progress_bar			    Enables visual progress bar during skip dialog
 - skip_dialog_position	    	Chooses layout position for the skip confirmation dialog
 - rewind_threshold_seconds	    Threshold for detecting rewind and clearing dialog suppression states
+- show_skip_dialog_movies	    Show skip dialog for movies when behavior is set to ask	
+- show_skip_dialog_episodes	    Show skip dialog for TV episodes when behavior is set to ask	
 
 Category: Not Found Toast notifications
-- always_show_missing_toast	    Forces toast to show even when movie/episode toggles are disabled
 - enable_for_movies			    Skip support toggle for movie playback
 - enable_for_tv_episodes		Skip support toggle for episode playback
 
@@ -256,6 +260,33 @@ XML takes priority if both exist.
 
 ---
 
+✅ Segment Behavior Logic Summary
+Behavior	Dialogs Enabled (show_dialogs = True)	Dialogs Disabled (show_dialogs = False)
+never	            ❌ Skip silently	                            ❌ Skip silently
+ask	                ✅ Show dialog	                                ❌ Suppress dialog
+auto	            ✅ Skip automatically	                        ✅ Skip automatically
+
+If show_skip_dialog_movies = False, then dialogs will be suppressed for movie segments even if their behavior is "ask".
+
+If show_skip_dialog_episodes = False, then dialogs will be suppressed for episode segments with "ask" behavior.
+
+This suppression is independent of the segment file presence or toast settings.
+
+✅ Example
+If a segment in a movie has behavior "ask" and show_skip_dialog_movies = False, the dialog will not appear. Instead, the segment will be silently skipped or ignored depending on other settings.
+
+More detailed
+Skip Dialog Enabled	 Segment File Present	Toast Enabled	Show Toast?
+✅ Yes	                    ✅ Yes	            ✅ Yes	        ❌ No
+✅ Yes	                    ❌ No	            ✅ Yes	        ✅ Yes
+❌ No	                    ✅ Yes	            ✅ Yes	        ❌ No
+❌ No	                    ❌ No	            ✅ Yes	        ✅ Yes
+❌ No	                    ❌ No	            ❌ No	        ❌ No
+✅ Yes	                    ❌ No	            ❌ No	        ❌ No
+❌ No	                    ✅ Yes	            ❌ No	        ❌ No
+
+---
+
 🚀 Usage Examples
 ✅ Auto-skip
 If your chapters.xml contains:
@@ -278,11 +309,82 @@ If your segment label is "Credits" and you've mapped "Credits" to the "Never ski
 
 🍿 Toast Notification Behavior
 - Appears when a video has no matching skip segments
-- Suppressed if filtered by playback type unless always_show_missing_toast is enabled
+
 
 Cooldown enforced per playback session (default: 6 seconds)
 
 - Resets on video stop or replay after cooldown
+
+---
+
+### 🎛️ EDL Action Filtering
+
+Skippy supports optional filtering of Kodi-native EDL action types (`0`, `1`, `2`, `3`). This allows users to ignore internal skip markers and rely only on custom-defined segments.
+
+#### 🔧 Setting
+- **Name:** `ignore_kodi_edl_actions`
+- **Type:** Boolean
+- **Default:** `true`
+
+#### ✅ Behavior
+| Setting Value | Action Types Parsed | Result |
+|---------------|---------------------|--------|
+| `true`        | Only custom actions (`>=4`) | Internal Kodi skip markers are ignored |
+| `false`       | All action types     | Autoskip or prompt for all segments, including Kodi-native ones |
+
+#### 📝 Example
+```edl
+237.5    326.326    5    intro
+1323.45  1429.184   2    segment
+
+---
+
+🔁 Skip Overlapping Segments
+Skippy now supports configurable overlap detection to help avoid redundant or conflicting skips. This feature ensures that segments which overlap in time are handled according to your preference.
+
+⚙️ Setting: Skip overlapping segments
+Location: settings.xml → Segment Settings
+
+Type: Boolean toggle (true / false)
+
+Default: true
+
+🧠 What It Does
+When enabled, Skippy will skip any segment that overlaps with one already accepted. This is useful when:
+
+EDL or chapter files contain redundant entries
+
+Multiple tools or sources generate overlapping metadata
+
+You want to avoid double prompts or conflicting skips
+
+📊 Example
+Given the following segments:
+
+Segment A: 45.5 → 133.175
+Segment B: 50.0 → 100.0
+Segment C: 1416.45 → 1507.59
+Segment B overlaps with Segment A:
+
+Overlap window: 50.0 → 100.0
+
+Overlap duration: 50.0 → 100.0 (50 seconds)
+
+Percent overlap of Segment B: 100%
+
+Behavior:
+Setting Value	Result
+true	Segment B is skipped
+false	Segment B is kept
+🧪 How to Test
+Enable verbose logging in settings.
+
+Toggle Skip overlapping segments on/off.
+
+Observe logs like:
+
+⚠ Overlapping segment detected: 50.0–100.0 overlaps with 45.5–133.175
+🚫 Skipping overlapping segment: 50.0–100.0 | label='segment'
 
 ---
 

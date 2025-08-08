@@ -1,37 +1,30 @@
 <window>
-  <!-- ADDED: Coordinates for resolution independence -->
   <coordinates>
-    <system>1</system> <!-- Use 1 for resolution independence (scaled by Kodi) -->
+    <system>1</system>
     <posx>0</posx>
     <posy>0</posy>
-    <width>1920</width> <!-- Standard base resolution for most skins -->
-    <height>1080</height> <!-- Standard base resolution for most skins -->
+    <width>1920</width>
+    <height>1080</height>
   </coordinates>
 
   <zorder>1</zorder>
   <defaultcontrol>3012</defaultcontrol>
 
-  <!-- Slide in from top-right -->
+  <!-- 🔼 Slide up from below -->
   <animation type="WindowOpen">
-    <effect type="slide" start="0,-100" end="0,0" time="300" tween="quadratic" easing="out" />
+    <effect type="slide" start="0,100" end="0,0" time="300" tween="quadratic" easing="out" />
     <effect type="fade" start="0" end="100" time="400" />
   </animation>
 
-  <!-- Slide out upward -->
   <animation type="WindowClose">
-    <effect type="slide" start="0,0" end="0,-100" time="300" tween="quadratic" easing="in" />
+    <effect type="slide" start="0,0" end="0,100" time="300" tween="quadratic" easing="in" />
     <effect type="fade" start="100" end="0" time="300" />
   </animation>
 
   <controls>
     <control type="group">
-      <!-- UPDATED: Using posx="900" for consistency with the working top-right alignment.
-           This value empirically positions the LEFT edge of the popup correctly for the right side.
-           posy is calculated for the bottom edge with a margin.
-           For a 1080px base height, 100px popup height, 10px bottom margin: 1080 - 100 - 10 = 970. -->
-      <posx>895</posx> <!-- Using the empirically found value for right alignment -->
-      <posy>620</posy>   <!-- Calculated: 1080 (screen height) - 100 (popup height) - 10 (bottom margin) -->
-      <!-- Removed align and anchorx to rely solely on this explicit positioning -->
+      <posx>895</posx> <!-- Centered horizontally: (1920 - 430) / 2 -->
+      <posy>620</posy> <!-- Centered vertically: (1080 - 100) / 2 -->
       <width>430</width>
       <height>100</height>
 
@@ -61,26 +54,31 @@
       <control type="button" id="3012">
         <left>35</left><top>10</top>
         <width>240</width><height>25</height>
-        <label>Skip</label><onright>3013</onright>
+        <label>Skip</label>
+        <onright>3013</onright>
         <font>font16</font>
         <texturefocus>button_focus_blue.png</texturefocus>
         <texturenofocus>-</texturenofocus>
         <textcolor>lightgrey</textcolor>
         <textcolorfocus>white</textcolorfocus>
-        <aligny>center</aligny><textoffsetx>10</textoffsetx>
+        <aligny>center</aligny>
+        <textoffsetx>10</textoffsetx>
       </control>
 
       <!-- Close button -->
       <control type="button" id="3013">
         <left>300</left><top>10</top>
         <width>80</width><height>25</height>
-        <label>Close</label><onleft>3012</onleft>
+        <label>Close</label>
+        <onleft>3012</onleft>
+        <onclick>Close</onclick>
         <font>font16</font>
         <texturefocus>button_focus_blue.png</texturefocus>
         <texturenofocus>-</texturenofocus>
         <textcolor>lightgrey</textcolor>
         <textcolorfocus>white</textcolorfocus>
-        <aligny>center</aligny><textoffsetx>10</textoffsetx>
+        <aligny>center</aligny>
+        <textoffsetx>10</textoffsetx>
       </control>
 
       <!-- Countdown label -->
@@ -90,7 +88,8 @@
         <label>Segment ending in: $INFO[Window.Property(countdown)]</label>
         <font>font10</font>
         <textcolor>lightgrey</textcolor>
-        <align>left</align><visible>true</visible>
+        <align>left</align>
+        <visible>true</visible>
       </control>
 
       <!-- Progress bar -->

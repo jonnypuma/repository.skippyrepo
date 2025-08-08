@@ -10,55 +10,25 @@ import xbmcgui
 import xbmcvfs
 import xbmcaddon
 
+from settings_utils import is_skip_dialog_enabled
 from skipdialog import SkipDialog
 from segment_item import SegmentItem
 from settings_utils import (
     get_user_skip_mode,
     get_edl_type_map,
+    get_addon,
+    log,
+    log_always,
+    normalize_label,
 )
 
-def get_addon():
-    return xbmcaddon.Addon()
-    
 CHECK_INTERVAL = 1
-
-ICON_PATH = os.path.join(xbmcaddon.Addon().getAddonInfo("path"), "icon.png")
-
-
-def infer_playback_type(item):
-    showtitle = item.get("showtitle", "")
-    episode = item.get("episode", -1)
-    file_path = item.get("file", "")
-
-    log(f"📺 showtitle: {showtitle}, episode: {episode}")
-
-    normalized_path = file_path.lower()
-
-    if showtitle:
-        return "episode"
-    if isinstance(episode, int) and episode > 0:
-        return "episode"
-    if re.search(r"s\d{2}e\d{2}", normalized_path):
-        log("🧠 Fallback heuristic matched SxxExx pattern — inferring episode")
-        return "episode"
-
-    return "movie"
-
-
-
-def log(msg):
-    if get_addon().getSettingBool("enable_verbose_logging"):
-        xbmc.log(f"[XML-EDL Skipper] {msg}", xbmc.LOGINFO)
-
-def log_always(msg):
-    xbmc.log(f"[XML-EDL Skipper] {msg}", xbmc.LOGINFO)
-
-def normalize_label(text):
-    return unicodedata.normalize("NFKC", text or "").strip().lower()
+ICON_PATH = os.path.join(get_addon().getAddonInfo("path"), "icon.png")
 
 class PlayerMonitor(xbmc.Monitor):
     def __init__(self):
         super().__init__()
+        self.segment_file_found = False
         self.prompted = set()
         self.recently_dismissed = set()
         self.current_segments = []
@@ -80,24 +50,6 @@ def hms_to_seconds(hms):
     h, m, s = hms.strip().split(":")
     return int(h)*3600 + int(m)*60 + float(s)
 
-def get_video_file():
-    try:
-        if not player.isPlayingVideo():
-            return None
-        path = player.getPlayingFile()
-    except RuntimeError:
-        return None
-
-    log(f"🎯 Kodi playback path: {path}")
-    log(f"🔧 enable_for_movies: {get_addon().getSettingBool('enable_for_movies')}")
-    log(f"🔧 enable_for_tv_episodes: {get_addon().getSettingBool('enable_for_tv_episodes')}")
-
-    if xbmcvfs.exists(path):
-        return path
-
-    log(f"❓ Unrecognized or inaccessible path: {path}")
-    return None
-
 def safe_file_read(*paths):
     for path in paths:
         if path:
@@ -117,26 +69,65 @@ def safe_file_read(*paths):
                 log(f"❌ Failed to read {path}: {e}")
     return None
 
-def should_show_missing_file_toast(_):
+def get_video_file():
+    try:
+        if not player.isPlayingVideo():
+            return None
+        path = player.getPlayingFile()
+    except RuntimeError:
+        return None
+
+    log(f"🎯 Kodi playback path: {path}")
+    log(f"🔧 enable_for_movies: {get_addon().getSettingBool('enable_for_movies')}")
+    log(f"🔧 enable_for_tv_episodes: {get_addon().getSettingBool('enable_for_tv_episodes')}")
+
+    if xbmcvfs.exists(path):
+        return path
+
+    log(f"❓ Unrecognized or inaccessible path: {path}")
+    return None
+
+def infer_playback_type(item):
+    showtitle = item.get("showtitle", "")
+    episode = item.get("episode", -1)
+    file_path = item.get("file", "")
+
+    log(f"📺 showtitle: {showtitle}, episode: {episode}")
+    normalized_path = file_path.lower()
+
+    if showtitle:
+        return "episode"
+    if isinstance(episode, int) and episode > 0:
+        return "episode"
+    if re.search(r"s\d{2}e\d{2}", normalized_path):
+        log("🧠 Fallback heuristic matched SxxExx pattern — inferring episode")
+        return "episode"
+
+    return "movie"
+
+def should_show_missing_file_toast():
     log("🚦 Entered should_show_missing_file_toast()")
 
-    addon = xbmcaddon.Addon()  # ⚠ Dynamic access — avoid cached settings
-    enable_for_movies = addon.getSetting("enable_for_movies").strip().lower() == "true"
-    enable_for_tv_episodes = addon.getSetting("enable_for_tv_episodes").strip().lower() == "true"
-    always_show = addon.getSetting("always_show_missing_toast").strip().lower() == "true"
+    addon = get_addon()
+    enable_for_movies = addon.getSettingBool("enable_for_movies")
+    enable_for_tv_episodes = addon.getSettingBool("enable_for_tv_episodes")
 
     query_active = {
         "jsonrpc": "2.0",
         "id": "getPlayers",
         "method": "Player.GetActivePlayers"
     }
+    log(f"📨 JSON-RPC request: {json.dumps(query_active)}")
     response_active = xbmc.executeJSONRPC(json.dumps(query_active))
+    log(f"📬 JSON-RPC response: {response_active}")
     active_result = json.loads(response_active)
     active_players = active_result.get("result", [])
 
     if not active_players:
+        log("⏳ No active players — retrying after 250ms")
         xbmc.sleep(250)
         retry_response = xbmc.executeJSONRPC(json.dumps(query_active))
+        log(f"📬 JSON-RPC retry response: {retry_response}")
         retry_result = json.loads(retry_response)
         active_players = retry_result.get("result", [])
 
@@ -160,7 +151,9 @@ def should_show_missing_file_toast(_):
             "properties": ["file", "title", "showtitle", "episode"]
         }
     }
+    log(f"📨 JSON-RPC request: {json.dumps(query_item)}")
     response_item = xbmc.executeJSONRPC(json.dumps(query_item))
+    log(f"📬 JSON-RPC response: {response_item}")
     item_result = json.loads(response_item)
     item = item_result.get("result", {}).get("item", {})
 
@@ -169,24 +162,25 @@ def should_show_missing_file_toast(_):
         return False, {}
 
     playback_type = infer_playback_type(item)
-    log(f"🔍 Playback type inferred: {playback_type}")
+    log(f"🧠 Inferred playback type: {playback_type}")
+    log(f"📁 File: {item.get('file')}, Title: {item.get('title')}, Showtitle: {item.get('showtitle')}, Episode: {item.get('episode')}")
 
-    log(f"🧮 enable_for_movies (raw): '{addon.getSetting('enable_for_movies')}'")
-    log(f"🧮 enable_for_tv_episodes (raw): '{addon.getSetting('enable_for_tv_episodes')}'")
-    log(f"🧮 always_show_missing_toast (raw): '{addon.getSetting('always_show_missing_toast')}'")
-
-    if always_show:
-        log("📢 Forcing toast display due to always_show_missing_toast = true")
-        return True, item
-
-    if playback_type == "movie" and not enable_for_movies:
-        log("🛑 Suppressing toast — movie playback and disabled in settings")
-        return False, item
-    if playback_type == "episode" and not enable_for_tv_episodes:
-        log("🛑 Suppressing toast — episode playback and disabled in settings")
+    if playback_type == "movie":
+        if not enable_for_movies:
+            log("🛑 Suppressing toast — movie playback and disabled in settings")
+            return False, item
+        log("✅ Toast allowed — movie playback and enabled in settings")
+    elif playback_type == "episode":
+        if not enable_for_tv_episodes:
+            log("🛑 Suppressing toast — episode playback and disabled in settings")
+            return False, item
+        log("✅ Toast allowed — episode playback and enabled in settings")
+    else:
+        log(f"⚠ Unknown playback type '{playback_type}' — suppressing toast")
         return False, item
 
     return True, item
+
 def parse_chapters(video_path):
     base = os.path.splitext(video_path)[0]
     suffixes = ["-chapters.xml", "_chapters.xml"]
@@ -195,6 +189,7 @@ def parse_chapters(video_path):
     try:
         if player.isPlayingVideo():
             fallback_base = player.getPlayingFile().rsplit('.', 1)[0]
+            log(f"🔄 Fallback base path from player: {fallback_base}")
     except RuntimeError:
         log("⚠️ getPlayingFile() failed inside parse_chapters fallback")
 
@@ -202,9 +197,16 @@ def parse_chapters(video_path):
     if fallback_base:
         paths_to_try += [f"{fallback_base}{s}" for s in suffixes]
 
+    log(f"🔍 Attempting chapter XML paths: {paths_to_try}")
     xml_data = safe_file_read(*paths_to_try)
     if not xml_data:
+        monitor.segment_file_found = False
+        log("🚫 No chapter XML file found — segment_file_found set to False")
         return None
+
+    monitor.segment_file_found = True
+    log("✅ Chapter XML file found — segment_file_found set to True")
+
     try:
         root = ET.fromstring(xml_data)
         result = []
@@ -220,10 +222,16 @@ def parse_chapters(video_path):
                     label,
                     source="xml"
                 ))
+                log(f"📘 Parsed XML segment: {start} → {end} | label='{label}'")
+        if result:
+            log(f"✅ Total segments parsed from XML: {len(result)}")
+        else:
+            log("⚠ Chapter XML parsed but no valid segments found")
         return result if result else None
     except Exception as e:
         log(f"❌ XML parse failed: {e}")
     return None
+
 
 def parse_edl(video_path):
     base = video_path.rsplit('.', 1)[0]
@@ -232,6 +240,7 @@ def parse_edl(video_path):
     try:
         if player.isPlayingVideo():
             fallback_base = player.getPlayingFile().rsplit('.', 1)[0]
+            log(f"🔄 Fallback base path from player: {fallback_base}")
     except RuntimeError:
         log("⚠️ getPlayingFile() failed inside parse_edl fallback")
 
@@ -239,51 +248,154 @@ def parse_edl(video_path):
     if fallback_base:
         paths_to_try.append(f"{fallback_base}.edl")
 
+    log(f"🔍 Attempting EDL paths: {paths_to_try}")
     edl_data = safe_file_read(*paths_to_try)
     if not edl_data:
+        monitor.segment_file_found = False
+        log("🚫 No EDL file found — segment_file_found set to False")
         return []
 
+    monitor.segment_file_found = True
+    log("✅ EDL file found — segment_file_found set to True")
     log(f"🧾 Raw EDL content:\n{edl_data}")
+
     segments = []
     mapping = get_edl_type_map()
+    ignore_internal = get_addon().getSettingBool("ignore_internal_edl_actions")
+    log(f"🔧 ignore_internal_edl_actions setting: {ignore_internal}")
+
     try:
         for line in edl_data.splitlines():
             parts = line.strip().split()
             if len(parts) == 3:
                 s, e, action = float(parts[0]), float(parts[1]), int(parts[2])
-                label = mapping.get(action, "segment")
+                label = mapping.get(action)
+
+                if ignore_internal and label is None:
+                    log(f"⚠ Unrecognized EDL action type: {action} — not in mapping")
+                    log(f"🚫 Ignoring unmapped EDL action {action} due to setting")
+                    continue
+
+                label = label or "segment"
                 segments.append(SegmentItem(s, e, label, source="edl"))
-                log(f"📦 Parsed EDL line: {s} → {e} | action={action} | label='{label}'")
+                log(f"📗 Parsed EDL line: {s} → {e} | action={action} | label='{label}'")
     except Exception as e:
         log(f"❌ EDL parse failed: {e}")
+
     log(f"✅ Total segments parsed from EDL: {len(segments)}")
     return segments
 
+
 def parse_segments(path):
+    log(f"🚦 Starting segment parse for: {path}")
     parsed = parse_chapters(path)
     if parsed:
-        return parsed
-    return parse_edl(path) or []
+        log("📘 Segments loaded from chapter XML")
+    else:
+        parsed = parse_edl(path)
+        if parsed:
+            log("📗 Segments loaded from EDL")
+
+    if not parsed:
+        log("🚫 No segment file found — segment_file_found should already be set by parser")
+        return []
+
+    addon = get_addon()
+    skip_overlaps = addon.getSettingBool("skip_overlapping_segments")
+    log(f"🔧 skip_overlapping_segments setting: {skip_overlaps}")
+
+    valid_segments = []
+    for seg in parsed:
+        overlap = False
+        for existing in valid_segments:
+            if not (seg.end_seconds <= existing.start_seconds or seg.start_seconds >= existing.end_seconds):
+                log(f"⚠ Overlapping segment detected: {seg.start_seconds}-{seg.end_seconds} overlaps with {existing.start_seconds}-{existing.end_seconds}")
+                overlap = True
+                break
+        if overlap and skip_overlaps:
+            log(f"🚫 Skipping overlapping segment: {seg.start_seconds}-{seg.end_seconds} | label='{seg.segment_type_label}'")
+            continue
+        elif overlap and not skip_overlaps:
+            log(f"⚠ Overlap allowed by setting — keeping segment: {seg.start_seconds}-{seg.end_seconds} | label='{seg.segment_type_label}'")
+
+        valid_segments.append(seg)
+
+    log(f"✅ Final segment count after overlap check: {len(valid_segments)}")
+    return valid_segments
+
 
 log_always("📡 XML-EDL Intro Skipper service started.")
+
 while not monitor.abortRequested():
     if player.isPlayingVideo() or xbmc.getCondVisibility("Player.HasVideo"):
         video = get_video_file()
         if not video:
+            log("⚠ get_video_file() returned None — skipping this cycle")
             monitor.last_video = None
 
-        if video and video != monitor.last_video:
-            monitor.last_video = video
-            monitor.shown_missing_file_toast = False
-            monitor.current_segments = parse_segments(video) or []
-            monitor.prompted.clear()
-            monitor.recently_dismissed.clear()
-            monitor.playback_ready = False
-            monitor.play_start_time = time.time()
-            monitor.last_time = 0
-            monitor.last_toast_time = 0  # 🧼 Reset cooldown when new video starts
-            log(f"📺 New video: {video}, segments: {len(monitor.current_segments)}")
-            log(f"🔍 Segment labels: {[s.segment_type_label for s in monitor.current_segments]}")
+        if video:
+            # 🔁 Detect replay of same video
+            if (
+                video == monitor.last_video
+                and monitor.playback_ready
+                and player.getTime() < 5.0
+                and time.time() - monitor.playback_ready_time > 5.0
+            ):
+                log("🔁 Replay of same video detected — resetting monitor state")
+                monitor.shown_missing_file_toast = False
+                monitor.prompted.clear()
+                monitor.recently_dismissed.clear()
+                monitor.playback_ready = False
+                monitor.play_start_time = time.time()
+                monitor.last_time = 0
+                monitor.last_toast_time = 0
+
+            log(f"🚀 Entered video block — video={video}, last_video={monitor.last_video}")
+            log(f"🎬 Now playing: {os.path.basename(video)}")
+
+            if video != monitor.last_video:
+                log("🆕 New video detected — resetting monitor state")
+                monitor.last_video = video
+                monitor.segment_file_found = False  # Will be set by parser
+                monitor.shown_missing_file_toast = False
+                monitor.prompted.clear()
+                monitor.recently_dismissed.clear()
+                monitor.playback_ready = False
+                monitor.play_start_time = time.time()
+                monitor.last_time = 0
+                monitor.last_toast_time = 0
+
+            # 🔧 Check user settings
+            addon = get_addon()
+
+            try:
+                allow_toast, item = should_show_missing_file_toast()
+                playback_type = infer_playback_type(item)
+                log(f"🔍 Playback type inferred via toast logic: '{playback_type}'")
+            except Exception as e:
+                log(f"❌ Failed to infer playback type via toast logic: {e}")
+                playback_type = ""
+                item = None
+
+            show_dialogs = is_skip_dialog_enabled(playback_type)
+            toast_movies = addon.getSettingBool("enable_for_movies")
+            toast_episodes = addon.getSettingBool("enable_for_tv_episodes")
+
+            log(f"🧪 Raw setting values → show_dialogs: {show_dialogs}, enable_for_movies: {toast_movies}, enable_for_tv_episodes: {toast_episodes}")
+
+            # ✅ Always parse segments if playback type is known
+            if not playback_type:
+                log("⚠ Playback type not detected — skipping segment parsing")
+                monitor.current_segments = []
+            else:
+                monitor.current_segments = parse_segments(video) or []
+                log(f"📦 Parsed {len(monitor.current_segments)} segments for playback_type: {playback_type}")
+
+                if monitor.segment_file_found and not monitor.current_segments:
+                    log("⚠ Segment file found but no segments parsed — possible empty or filtered file")
+
+                if not show_dialogs:
+                    log(f"🚫 Skip dialogs disabled for {playback_type} — segments will not trigger prompts")
 
         try:
             current_time = player.getTime()
@@ -292,25 +404,36 @@ while not monitor.abortRequested():
             log("⚠ player.getTime() failed — no media playing")
             continue
 
+        rewind_threshold = get_addon().getSettingInt("rewind_threshold_seconds")
+        if current_time < monitor.last_time and monitor.last_time - current_time > rewind_threshold:
+            log(f"⏪ Significant rewind detected ({monitor.last_time:.2f} → {current_time:.2f}) — threshold: {rewind_threshold}s")
+            monitor.prompted.clear()
+            monitor.recently_dismissed.clear()
+            log("🧹 recently_dismissed cleared due to rewind")
+
         if not monitor.playback_ready and current_time > 0:
             monitor.playback_ready = True
             monitor.playback_ready_time = time.time()
             log("✅ Playback confirmed via getTime() — setting playback_ready = True")
 
+        # ✅ Corrected toast logic (no global override)
         if (
             monitor.playback_ready
             and not monitor.shown_missing_file_toast
             and time.time() - monitor.playback_ready_time >= 2
-            and not monitor.current_segments
+            and not monitor.segment_file_found
         ):
             log("⚠ [TOAST BLOCK] Entered toast logic block")
             try:
-                allow_toast, item = should_show_missing_file_toast(None)
-                if allow_toast:
+                toast_enabled = (
+                    (playback_type == "movie" and toast_movies) or
+                    (playback_type == "episode" and toast_episodes)
+                )
+
+                if toast_enabled:
                     cooldown = 6
                     now = time.time()
                     if now - monitor.last_toast_time >= cooldown:
-                        playback_type = infer_playback_type(item)
                         msg_type = "episode" if playback_type == "episode" else "movie"
 
                         xbmcgui.Dialog().notification(
@@ -325,25 +448,17 @@ while not monitor.abortRequested():
                     else:
                         log(f"⏳ [TOAST BLOCK] Suppressed — cooldown active ({int(now - monitor.last_toast_time)}s since last toast)")
                 else:
-                    log("✅ [TOAST BLOCK] Toast suppressed by playback type check")
+                    log("✅ [TOAST BLOCK] Toast suppressed — toast toggle disabled for this type")
             except Exception as e:
                 log(f"❌ [TOAST BLOCK] should_show_missing_file_toast() failed: {e}")
-
             monitor.shown_missing_file_toast = True
-
-        rewind_threshold = get_addon().getSettingInt("rewind_threshold_seconds")
-        if current_time < monitor.last_time and monitor.last_time - current_time > rewind_threshold:
-            log(f"⏪ Significant rewind detected ({monitor.last_time:.2f} → {current_time:.2f}) — threshold: {rewind_threshold}s")
-            monitor.prompted.clear()
-            monitor.recently_dismissed.clear()
-            log("🧹 recently_dismissed cleared due to rewind")
-
-        monitor.last_time = current_time
 
         if not monitor.playback_ready:
             log("⏳ Playback not ready — waiting before processing segments")
+            monitor.last_time = current_time
             continue
 
+        # 🔁 Segment loop
         for segment in monitor.current_segments:
             seg_id = (int(segment.start_seconds), int(segment.end_seconds))
             log(f"🔍 Checking segment {seg_id} at time {current_time:.2f}")
@@ -355,43 +470,63 @@ while not monitor.abortRequested():
                 log(f"🙅 Segment {seg_id} is in recently_dismissed — skipping")
                 continue
             if not segment.is_active(current_time):
+                log(f"⏳ Segment {seg_id} not active at {current_time:.2f} — skipping")
                 continue
             if current_time > segment.end_seconds + 1.0:
+                log(f"⏩ Segment {seg_id} already passed — skipping")
                 continue
 
             log(f"🔎 Raw segment label before skip mode check: '{segment.segment_type_label}'")
 
             behavior = get_user_skip_mode(segment.segment_type_label)
+            log(f"🧪 Segment behavior for '{segment.segment_type_label}': {behavior}")
+
+            # ✅ Suppress 'ask' if dialogs are globally disabled
+            if not show_dialogs and behavior == "ask":
+                log(f"🚫 Dialogs disabled in settings — suppressing 'ask' behavior for segment {seg_id}")
+                monitor.prompted.add(seg_id)
+                continue    
             if behavior == "never":
                 log(f"🚫 Skipping dialog for '{segment.segment_type_label}' (user preference: never)")
                 continue
 
             log(f"🕒 Active segment: {segment.segment_type_label} [{segment.start_seconds}-{segment.end_seconds}] → {behavior}")
+            log(f"📘 Segment source: {segment.source}")
+
             if behavior == "auto":
                 player.seekTime(segment.end_seconds + 1.0)
                 monitor.last_time = segment.end_seconds + 1.0
                 monitor.prompted.add(seg_id)
-                xbmcgui.Dialog().notification("Skipped", f"{segment.segment_type_label.title()} skipped", time=2000)
+                xbmcgui.Dialog().notification(
+                    heading="Skipped",
+                    message=f"{segment.segment_type_label.title()} skipped",
+                    icon=ICON_PATH,
+                    time=2000,
+                    sound=False
+                )
                 log(f"⚡ Auto-skipped to {segment.end_seconds + 1.0}")
             elif behavior == "ask":
                 if not player.isPlayingVideo():
                     log("⚠ Playback not active — skipping dialog")
+                    monitor.prompted.add(seg_id)
                     continue
 
                 try:
                     log("🛑 Debouncing skip dialog for 300ms")
                     xbmc.sleep(300)
 
-                    layout_value = get_addon().getSetting("skip_dialog_position").replace(" ", "")
+                    layout_value = addon.getSetting("skip_dialog_position").replace(" ", "")
                     dialog_name = f"SkipDialog_{layout_value}.xml"
-                    full_path = f"{get_addon().getAddonInfo('path')}/resources/skins/default/720p/{dialog_name}"
+                    full_path = f"{addon.getAddonInfo('path')}/resources/skins/default/720p/{dialog_name}"
 
-                    if not xbmcvfs.exists(full_path):
+                    if xbmcvfs.exists(full_path):
+                        log(f"📐 Dialog layout found: {dialog_name}")
+                    else:
                         log(f"⚠ Dialog layout not found: {dialog_name} — falling back to SkipDialog.xml")
                         dialog_name = "SkipDialog.xml"
 
                     log(f"🎬 Showing skip dialog for: {segment.segment_type_label} → layout={dialog_name}")
-                    dialog = SkipDialog(dialog_name, get_addon().getAddonInfo("path"), "default", "720p")
+                    dialog = SkipDialog(dialog_name, addon.getAddonInfo("path"), "default", "720p")
                     dialog.segment = segment
                     dialog.doModal()
                     confirmed = getattr(dialog, "response", None)
@@ -401,15 +536,25 @@ while not monitor.abortRequested():
                         monitor.prompted.add(seg_id)
                         player.seekTime(segment.end_seconds + 1.0)
                         monitor.last_time = segment.end_seconds + 1.0
-                        xbmcgui.Dialog().notification("Skipped", f"{segment.segment_type_label.title()} skipped", time=2000)
-                        log(f"✅ User confirmed skip to {segment.end_seconds + 1.0}")
+                        xbmcgui.Dialog().notification(
+                            heading="Skipped",
+                            message=f"{segment.segment_type_label.title()} skipped",
+                            icon=ICON_PATH,
+                            time=2000,
+                            sound=False
+                        )
+                        log(f"✅ User confirmed skip — jumped to {segment.end_seconds + 1.0}")
                     else:
-                        log(f"🚫 User declined skip — adding {seg_id} to recently_dismissed")
                         monitor.recently_dismissed.add(seg_id)
+                        monitor.prompted.add(seg_id)
+                        log(f"🙅 User dismissed skip — segment {seg_id} added to recently_dismissed")
                 except Exception as e:
-                    log(f"❌ Skip dialog failed: {e}")
-            break
+                    log(f"❌ Error showing skip dialog: {e}")
+                    monitor.prompted.add(seg_id)
+                    continue
 
+        monitor.last_time = current_time
+
+    # 💤 Sleep and check for abort
     if monitor.waitForAbort(CHECK_INTERVAL):
-        break
-
+        log("🛑 Abort requested — exiting monitor loop")

@@ -1,6 +1,4 @@
-import html
 import unicodedata
-import xml.etree.ElementTree as ET
 import xbmcaddon
 import xbmc
 import xbmcvfs
@@ -16,7 +14,21 @@ def log_always(msg):
     xbmc.log(f"[{get_addon().getAddonInfo('id')} - SettingsUtils] {msg}", xbmc.LOGINFO)
 
 def normalize_label(label):
+    # Normalize and lowercase labels for consistent matching
     return unicodedata.normalize("NFKC", label or "").strip().lower()
+
+def is_skip_dialog_enabled(playback_type):
+    addon = get_addon()
+    if playback_type == "movie":
+        enabled = addon.getSettingBool("show_skip_dialog_movies")
+        log(f"🎬 Skip dialog enabled for movies: {enabled}")
+        return enabled
+    elif playback_type == "episode":
+        enabled = addon.getSettingBool("show_skip_dialog_episodes")
+        log(f"📺 Skip dialog enabled for episodes: {enabled}")
+        return enabled
+    log(f"⚠ Unknown playback type '{playback_type}' — skip dialog disabled")
+    return False
 
 def get_user_skip_mode(label):
     title = normalize_label(label)
@@ -24,11 +36,16 @@ def get_user_skip_mode(label):
 
     def parse_setting(key):
         raw = get_addon().getSetting(key)
+        if not raw:
+            log(f"⚠ Setting '{key}' is empty")
         return set(normalize_label(x) for x in raw.split(",") if x.strip())
 
     always = parse_setting("segment_always_skip")
     ask = parse_setting("segment_ask_skip")
     never = parse_setting("segment_never_skip")
+
+    if not always and not ask and not never:
+        log("⚠️ All skip mode lists are empty — using default behavior: ask")
 
     if title in always:
         log(f"⚡ Matched in 'always' list: {title}")
