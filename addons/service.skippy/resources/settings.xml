@@ -37,7 +37,7 @@
     <setting id="edl_action_mapping"
              type="text"
              label="EDL Action Type Mapping"
-             default="4:Segment,5:Intro,6:Ad,7:Commercial,8:Credits,9:Recap,10:Prologue,11:Epilogue"
+             default="4:Segment,5:Intro,6:Ad,7:Commercial,8:Credits,9:Recap,10:Prologue,11:Epilogue,12:Outro"
              tooltip="Format: action_type:label. Example: 4:Segment,5:Intro,6:Ad,7:Credits" />
 
 	<setting id="skip_overlapping_segments" 
