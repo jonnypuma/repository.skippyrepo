@@ -11,6 +11,10 @@ It provides both automatic and user-prompted skipping, and integrates seamlessly
 
 Discreet, cross-platform, and customizable.
 
+Supported Video Formats: Works for MKV files.
+
+Known Limitations: MP4 files are currently not supported when the video is played from an NFS share due to a technical limitation in how the add-on attempts to read sidecar files for MP4s over a network protocol. Don't know if it's a bug in Kodi itself or not. 
+
 ---
 
 ✅ Supported Kodi Versions and Platforms
@@ -70,7 +74,7 @@ Each second:
 
 <img width="2559" height="1599" alt="screenshot01" src="https://github.com/user-attachments/assets/c684b0b4-0d01-4908-8c00-f229984274b1" />
 <img width="2559" height="1599" alt="screenshot02" src="https://github.com/user-attachments/assets/e4dfe5d3-fb4d-45e2-892a-ed721b8b8781" />
-<img width="2559" height="1599" alt="screenshot03" src="https://github.com/user-attachments/assets/59602deb-c5c5-4f9f-98e6-fdc2578b5cc5" />
+<img width="1265" height="737" alt="screenshot03" src="https://github.com/user-attachments/assets/7a23bcb3-325a-4769-ac7d-17b0d4c9e66f" />
 
 ---
 
