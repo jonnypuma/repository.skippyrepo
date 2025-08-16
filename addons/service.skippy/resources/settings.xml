@@ -37,7 +37,7 @@
     <setting id="edl_action_mapping"
              type="text"
              label="EDL Action Type Mapping"
-             default="4:Segment,5:Intro,6:Ad,7:Commercial,8:Credits,9:Recap,10:Prologue,11:Epilogue,12:Outro"
+             default="4:Segment,5:Intro,6:Ad,7:Commercial,8:Credits,9:Recap,10:Prologue,11:Epilogue"
              tooltip="Format: action_type:label. Example: 4:Segment,5:Intro,6:Ad,7:Credits" />
 
 	<setting id="skip_overlapping_segments" 
@@ -82,7 +82,7 @@
              default="true" />
   </category>
 
-  <category label="'Not Found' Toast Notifications">
+  <category label="'Segment Toast Notifications">
 
     <setting id="enable_for_tv_episodes" 
              type="bool" 
@@ -95,6 +95,14 @@
              label="Enable for Movies" 
              default="false"
              tooltip="Show a notification if the metadata file (chapters.xml or .edl) cannot be found or read for the current movie." />
+
+    <setting id="show_toast_for_overlapping_nested_segments" 
+             type="bool" 
+             label="Enable overlapping segment toast if found in segment file" 
+             default="false"
+             tooltip="Show a notification if the metadata file (chapters.xml or .edl) has overlapping segments." />			 
+			 
+			 
   </category>
 
   <category label="Debug Logging">

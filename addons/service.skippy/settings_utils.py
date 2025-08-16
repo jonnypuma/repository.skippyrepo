@@ -75,3 +75,15 @@ def get_edl_type_map():
         except Exception as e:
             log(f"⚠️ Skipped invalid mapping '{pair}': {e}")
     return mapping
+
+# This function has been updated to use the correct API for Kodi v21.2 Omega
+def show_overlapping_toast():
+    try:
+        # Get the settings object from the addon
+        settings = get_addon().getSettings()
+        # Call the getBool method on the settings object
+        return settings.getBool("show_toast_for_overlapping_nested_segments")
+    except Exception as e:
+        log_always(f"EXCEPTION: {e}")
+        # Return False as a safe fallback if the setting isn't available or the call fails
+        return False

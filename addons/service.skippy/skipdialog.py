@@ -41,6 +41,17 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
         self._total_duration = self.segment.end_seconds - self.segment.start_seconds
         self._start_time = time.time()
 
+        # New: Set property for next segment jump time
+        if self.segment.next_segment_start is not None:
+            jump_m, jump_s = divmod(int(self.segment.next_segment_start), 60)
+            jump_str = f"Skip to next segment at {jump_m:02d}:{jump_s:02d}"
+            self.setProperty("next_jump_label", jump_str)
+            self.setProperty("show_next_jump", "true")
+            log(f"⏭️ Dialog configured for jump to next segment at {self.segment.next_segment_start}s")
+        else:
+            self.setProperty("show_next_jump", "false")
+            log("➡️ Dialog configured for normal skip to end of segment")
+
         # 🔧 Load progress bar setting
         try:
             raw = get_addon().getSetting("show_progress_bar").lower()
@@ -76,7 +87,7 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
             current = self.player.getTime()
             remaining = int(self.segment.end_seconds - current)
             m, s = divmod(max(remaining, 0), 60)
-            self.setProperty("countdown", f"{m}m{s}s" if m else f"{s}s")
+            self.setProperty("countdown", f"{m:02d}:{s:02d}")
 
             # 📊 Update progress bar
             if self._show_progress:
@@ -107,9 +118,14 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
             time.sleep(delay)
 
     def onClick(self, controlId):
-        self.response = (controlId == 3012)
+        if controlId == 3012:
+            self.response = self.segment.next_segment_start or self.segment.end_seconds
+            log(f"🖱️ User clicked skip → skipping to {self.response}s")
+        else:
+            self.response = False
+            log(f"🖱️ User clicked cancel/close → declining skip")
+
         self._closing = True
-        log(f"🖱️ User clicked: {controlId} → {'confirmed skip' if self.response else 'declined skip'}")
         self.close()
 
     def onAction(self, action):

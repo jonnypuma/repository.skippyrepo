@@ -1,108 +1,111 @@
 <window>
-  <coordinates>
-    <system>1</system>
-    <posx>0</posx>
-    <posy>0</posy>
-    <width>1920</width>
-    <height>1080</height>
-  </coordinates>
+  <coordinates>
+    <system>1</system>
+    <posx>0</posx>
+    <posy>0</posy>
+    <width>1920</width>
+    <height>1080</height>
+  </coordinates>
 
-  <zorder>1</zorder>
-  <defaultcontrol>3012</defaultcontrol>
+  <zorder>1</zorder>
+  <defaultcontrol>3012</defaultcontrol>
 
-  <!-- 🔼 Slide up from below -->
-  <animation type="WindowOpen">
-    <effect type="slide" start="0,100" end="0,0" time="300" tween="quadratic" easing="out" />
-    <effect type="fade" start="0" end="100" time="400" />
-  </animation>
+  <animation type="WindowOpen">
+    <effect type="slide" start="0,100" end="0,0" time="300" tween="quadratic" easing="out" />
+    <effect type="fade" start="0" end="100" time="400" />
+  </animation>
 
-  <animation type="WindowClose">
-    <effect type="slide" start="0,0" end="0,100" time="300" tween="quadratic" easing="in" />
-    <effect type="fade" start="100" end="0" time="300" />
-  </animation>
+  <animation type="WindowClose">
+    <effect type="slide" start="0,0" end="0,100" time="300" tween="quadratic" easing="in" />
+    <effect type="fade" start="100" end="0" time="300" />
+  </animation>
 
-  <controls>
-    <control type="group">
-      <posx>895</posx> <!-- Centered horizontally: (1920 - 430) / 2 -->
-      <posy>620</posy> <!-- Centered vertically: (1080 - 100) / 2 -->
-      <width>430</width>
-      <height>100</height>
+  <controls>
+    <control type="group">
+      <posx>895</posx>
+      <posy>620</posy>
+      <width>430</width>
+      <height>100</height>
 
-      <!-- Background -->
-      <control type="image">
-        <left>0</left><top>0</top>
-        <width>430</width><height>100</height>
-        <texture>white.png</texture>
-        <colordiffuse>F0000000</colordiffuse>
-      </control>
+      <control type="image">
+        <left>0</left><top>0</top>
+        <width>430</width><height>100</height>
+        <texture>white.png</texture>
+        <colordiffuse>F0000000</colordiffuse>
+      </control>
 
-      <!-- Skip icon -->
-      <control type="image">
-        <left>5</left><top>13</top>
-        <width>20</width><height>20</height>
-        <texture>icon_skip.png</texture>
-      </control>
+      <control type="image">
+        <left>5</left><top>13</top>
+        <width>20</width><height>20</height>
+        <texture>icon_skip.png</texture>
+      </control>
 
-      <!-- Close icon -->
-      <control type="image">
-        <left>280</left><top>13</top>
-        <width>20</width><height>20</height>
-        <texture>icon_close.png</texture>
-      </control>
+      <control type="image">
+        <left>280</left><top>13</top>
+        <width>20</width><height>20</height>
+        <texture>icon_close.png</texture>
+      </control>
 
-      <!-- Skip button -->
-      <control type="button" id="3012">
-        <left>35</left><top>10</top>
-        <width>240</width><height>25</height>
-        <label>Skip</label>
-        <onright>3013</onright>
-        <font>font16</font>
-        <texturefocus>button_focus_blue.png</texturefocus>
-        <texturenofocus>-</texturenofocus>
-        <textcolor>lightgrey</textcolor>
-        <textcolorfocus>white</textcolorfocus>
-        <aligny>center</aligny>
-        <textoffsetx>10</textoffsetx>
-      </control>
+      <control type="button" id="3012">
+        <left>35</left><top>10</top>
+        <width>240</width><height>25</height>
+        <label>Skip</label>
+        <onright>3013</onright>
+        <font>font16</font>
+        <texturefocus>button_focus_blue.png</texturefocus>
+        <texturenofocus>-</texturenofocus>
+        <textcolor>lightgrey</textcolor>
+        <textcolorfocus>white</textcolorfocus>
+        <aligny>center</aligny>
+        <textoffsetx>10</textoffsetx>
+      </control>
 
-      <!-- Close button -->
-      <control type="button" id="3013">
-        <left>300</left><top>10</top>
-        <width>80</width><height>25</height>
-        <label>Close</label>
-        <onleft>3012</onleft>
-        <onclick>Close</onclick>
-        <font>font16</font>
-        <texturefocus>button_focus_blue.png</texturefocus>
-        <texturenofocus>-</texturenofocus>
-        <textcolor>lightgrey</textcolor>
-        <textcolorfocus>white</textcolorfocus>
-        <aligny>center</aligny>
-        <textoffsetx>10</textoffsetx>
-      </control>
+      <control type="button" id="3013">
+        <left>300</left><top>10</top>
+        <width>80</width><height>25</height>
+        <label>Close</label>
+        <onleft>3012</onleft>
+        <onclick>Close</onclick>
+        <font>font16</font>
+        <texturefocus>button_focus_blue.png</texturefocus>
+        <texturenofocus>-</texturenofocus>
+        <textcolor>lightgrey</textcolor>
+        <textcolorfocus>white</textcolorfocus>
+        <aligny>center</aligny>
+        <textoffsetx>10</textoffsetx>
+      </control>
 
-      <!-- Countdown label -->
-      <control type="label" id="2">
-        <left>5</left><top>50</top>
-        <width>360</width><height>20</height>
-        <label>Segment ending in: $INFO[Window.Property(countdown)]</label>
-        <font>font10</font>
-        <textcolor>lightgrey</textcolor>
-        <align>left</align>
-        <visible>true</visible>
-      </control>
+      <control type="label">
+        <left>5</left><top>40</top>
+        <width>360</width><height>20</height>
+        <label>$INFO[Window.Property(next_jump_label)]</label>
+        <font>font12</font>
+        <!-- Updated text color to a light blue to make it more visible -->
+        <textcolor>FFADD8E6</textcolor>
+        <align>left</align>
+        <visible>String.IsEqual(Window.Property(show_next_jump),true)</visible>
+      </control>
 
-      <!-- Progress bar -->
-      <control type="progress" id="3014">
-        <left>5</left><top>85</top>
-        <width>370</width><height>5</height>
-        <texturebg>progress_background.png</texturebg>
-        <textureleft>progress_left.png</textureleft>
-        <midtexture>progress_mid.png</midtexture>
-        <textureright>progress_right.png</textureright>
-        <aspectratio>stretch</aspectratio>
-        <orientation>horizontal</orientation>
-      </control>
-    </control>
-  </controls>
+      <control type="label" id="2">
+        <left>5</left><top>60</top>
+        <width>360</width><height>20</height>
+        <label>Segment ending in: $INFO[Window.Property(countdown)]</label>
+        <font>font10</font>
+        <textcolor>lightgrey</textcolor>
+        <align>left</align>
+        <visible>true</visible>
+      </control>
+
+      <control type="progress" id="3014">
+        <left>5</left><top>85</top>
+        <width>370</width><height>5</height>
+        <texturebg>progress_background.png</texturebg>
+        <textureleft>progress_left.png</textureleft>
+        <midtexture>progress_mid.png</midtexture>
+        <textureright>progress_right.png</textureright>
+        <aspectratio>stretch</aspectratio>
+        <orientation>horizontal</orientation>
+      </control>
+    </control>
+  </controls>
 </window>

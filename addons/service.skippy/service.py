@@ -20,6 +20,7 @@ from settings_utils import (
     log,
     log_always,
     normalize_label,
+    show_overlapping_toast,
 )
 
 CHECK_INTERVAL = 1
@@ -42,6 +43,7 @@ class PlayerMonitor(xbmc.Monitor):
         self.item_metadata_ready = False
         self.last_playback_item = None
         self.last_toast_for_file = {}
+        self.toast_overlap_shown = False
 
 monitor = PlayerMonitor()
 player = xbmc.Player()
@@ -153,7 +155,6 @@ def should_show_missing_file_toast():
     }
     log(f"📨 JSON-RPC request: {json.dumps(query_item)}")
     response_item = xbmc.executeJSONRPC(json.dumps(query_item))
-    log(f"📬 JSON-RPC response: {response_item}")
     item_result = json.loads(response_item)
     item = item_result.get("result", {}).get("item", {})
 
@@ -232,7 +233,6 @@ def parse_chapters(video_path):
         log(f"❌ XML parse failed: {e}")
     return None
 
-
 def parse_edl(video_path):
     base = video_path.rsplit('.', 1)[0]
     fallback_base = None
@@ -285,44 +285,76 @@ def parse_edl(video_path):
     log(f"✅ Total segments parsed from EDL: {len(segments)}")
     return segments
 
-
-def parse_segments(path):
-    log(f"🚦 Starting segment parse for: {path}")
+def parse_and_process_segments(path):
+    """
+    Parses segments, filters them based on settings, and then links overlapping segments.
+    """
+    log(f"🚦 Starting new segment parse and process for: {path}")
     parsed = parse_chapters(path)
-    if parsed:
-        log("📘 Segments loaded from chapter XML")
-    else:
-        parsed = parse_edl(path)
-        if parsed:
-            log("📗 Segments loaded from EDL")
-
     if not parsed:
-        log("🚫 No segment file found — segment_file_found should already be set by parser")
+        parsed = parse_edl(path)
+    
+    if not parsed:
+        log("🚫 No segment file found or parsed segments were empty.")
         return []
 
+    # --- Pass 1: Filter segments based on user settings ---
+    log("⚙️ Pass 1: Filtering segments...")
     addon = get_addon()
     skip_overlaps = addon.getSettingBool("skip_overlapping_segments")
-    log(f"🔧 skip_overlapping_segments setting: {skip_overlaps}")
-
-    valid_segments = []
-    for seg in parsed:
-        overlap = False
-        for existing in valid_segments:
-            if not (seg.end_seconds <= existing.start_seconds or seg.start_seconds >= existing.end_seconds):
-                log(f"⚠ Overlapping segment detected: {seg.start_seconds}-{seg.end_seconds} overlaps with {existing.start_seconds}-{existing.end_seconds}")
-                overlap = True
+    
+    # Sort parsed segments to process them in order
+    segments = sorted(parsed, key=lambda s: s.start_seconds)
+    
+    filtered_segments = []
+    
+    for current_seg in segments:
+        is_overlapping_with_filtered = False
+        # Check if the current segment overlaps with any already-filtered segment
+        # The logic is not (end <= start or start >= end)
+        for existing_seg in filtered_segments:
+            if not (current_seg.end_seconds <= existing_seg.start_seconds or current_seg.start_seconds >= existing_seg.end_seconds):
+                is_overlapping_with_filtered = True
                 break
-        if overlap and skip_overlaps:
-            log(f"🚫 Skipping overlapping segment: {seg.start_seconds}-{seg.end_seconds} | label='{seg.segment_type_label}'")
+        
+        if is_overlapping_with_filtered and skip_overlaps:
+            log(f"🚫 Skipping segment {current_seg.start_seconds}-{current_seg.end_seconds} due to user setting 'skip_overlapping_segments' which detected an overlap.")
             continue
-        elif overlap and not skip_overlaps:
-            log(f"⚠ Overlap allowed by setting — keeping segment: {seg.start_seconds}-{seg.end_seconds} | label='{seg.segment_type_label}'")
+        
+        filtered_segments.append(current_seg)
+    
+    log(f"✅ Pass 1 complete. Filtered segments: {len(filtered_segments)}")
 
-        valid_segments.append(seg)
-
-    log(f"✅ Final segment count after overlap check: {len(valid_segments)}")
-    return valid_segments
-
+    # --- Pass 2: Link segments for progressive skipping and detect overlaps ---
+    log("🔗 Pass 2: Linking segments for progressive skipping...")
+    has_overlap_or_nested = False
+    
+    for i in range(len(filtered_segments)):
+        current_seg = filtered_segments[i]
+        
+        if i + 1 < len(filtered_segments):
+            next_seg = filtered_segments[i+1]
+            # Check for overlap with the 1-second buffer
+            if next_seg.start_seconds < current_seg.end_seconds - 1:
+                has_overlap_or_nested = True
+                
+                # Assign the jump point
+                current_seg.next_segment_start = next_seg.start_seconds
+                log(f"🔗 Detected overlap/nested. Setting jump point for '{current_seg.segment_type_label}' to {next_seg.start_seconds}s.")
+    
+    # Show toast notification if overlaps were found and setting is enabled
+    if has_overlap_or_nested and show_overlapping_toast() and not monitor.toast_overlap_shown:
+        xbmcgui.Dialog().notification(
+            heading="Skippy",
+            message="Overlapping/Nested segments detected.",
+            icon=ICON_PATH,
+            time=4000
+        )
+        monitor.toast_overlap_shown = True
+        log("Toast notification displayed for overlapping segments.")
+        
+    log(f"✅ Pass 2 complete. Final segments to process: {len(filtered_segments)}")
+    return filtered_segments
 
 log_always("📡 XML-EDL Intro Skipper service started.")
 
@@ -349,6 +381,7 @@ while not monitor.abortRequested():
                 monitor.play_start_time = time.time()
                 monitor.last_time = 0
                 monitor.last_toast_time = 0
+                monitor.toast_overlap_shown = False
 
             log(f"🚀 Entered video block — video={video}, last_video={monitor.last_video}")
             log(f"🎬 Now playing: {os.path.basename(video)}")
@@ -356,7 +389,7 @@ while not monitor.abortRequested():
             if video != monitor.last_video:
                 log("🆕 New video detected — resetting monitor state")
                 monitor.last_video = video
-                monitor.segment_file_found = False  # Will be set by parser
+                monitor.segment_file_found = False
                 monitor.shown_missing_file_toast = False
                 monitor.prompted.clear()
                 monitor.recently_dismissed.clear()
@@ -364,10 +397,9 @@ while not monitor.abortRequested():
                 monitor.play_start_time = time.time()
                 monitor.last_time = 0
                 monitor.last_toast_time = 0
-
-            # 🔧 Check user settings
+                monitor.toast_overlap_shown = False
+            
             addon = get_addon()
-
             try:
                 allow_toast, item = should_show_missing_file_toast()
                 playback_type = infer_playback_type(item)
@@ -383,19 +415,15 @@ while not monitor.abortRequested():
 
             log(f"🧪 Raw setting values → show_dialogs: {show_dialogs}, enable_for_movies: {toast_movies}, enable_for_tv_episodes: {toast_episodes}")
 
-            # ✅ Always parse segments if playback type is known
             if not playback_type:
                 log("⚠ Playback type not detected — skipping segment parsing")
                 monitor.current_segments = []
             else:
-                monitor.current_segments = parse_segments(video) or []
+                monitor.current_segments = parse_and_process_segments(video) or []
                 log(f"📦 Parsed {len(monitor.current_segments)} segments for playback_type: {playback_type}")
 
-                if monitor.segment_file_found and not monitor.current_segments:
-                    log("⚠ Segment file found but no segments parsed — possible empty or filtered file")
-
-                if not show_dialogs:
-                    log(f"🚫 Skip dialogs disabled for {playback_type} — segments will not trigger prompts")
+            if not show_dialogs:
+                log(f"🚫 Skip dialogs disabled for {playback_type} — segments will not trigger prompts")
 
         try:
             current_time = player.getTime()
@@ -416,7 +444,6 @@ while not monitor.abortRequested():
             monitor.playback_ready_time = time.time()
             log("✅ Playback confirmed via getTime() — setting playback_ready = True")
 
-        # ✅ Corrected toast logic (no global override)
         if (
             monitor.playback_ready
             and not monitor.shown_missing_file_toast
@@ -458,34 +485,29 @@ while not monitor.abortRequested():
             monitor.last_time = current_time
             continue
 
-        # 🔁 Segment loop
         for segment in monitor.current_segments:
             seg_id = (int(segment.start_seconds), int(segment.end_seconds))
-            log(f"🔍 Checking segment {seg_id} at time {current_time:.2f}")
-
+            
             if seg_id in monitor.prompted:
                 log(f"⏭ Segment {seg_id} already prompted — skipping")
                 continue
+                
             if seg_id in monitor.recently_dismissed:
                 log(f"🙅 Segment {seg_id} is in recently_dismissed — skipping")
                 continue
+
             if not segment.is_active(current_time):
                 log(f"⏳ Segment {seg_id} not active at {current_time:.2f} — skipping")
                 continue
-            if current_time > segment.end_seconds + 1.0:
-                log(f"⏩ Segment {seg_id} already passed — skipping")
-                continue
-
+            
             log(f"🔎 Raw segment label before skip mode check: '{segment.segment_type_label}'")
-
             behavior = get_user_skip_mode(segment.segment_type_label)
             log(f"🧪 Segment behavior for '{segment.segment_type_label}': {behavior}")
 
-            # ✅ Suppress 'ask' if dialogs are globally disabled
             if not show_dialogs and behavior == "ask":
                 log(f"🚫 Dialogs disabled in settings — suppressing 'ask' behavior for segment {seg_id}")
                 monitor.prompted.add(seg_id)
-                continue    
+                continue  
             if behavior == "never":
                 log(f"🚫 Skipping dialog for '{segment.segment_type_label}' (user preference: never)")
                 continue
@@ -493,9 +515,12 @@ while not monitor.abortRequested():
             log(f"🕒 Active segment: {segment.segment_type_label} [{segment.start_seconds}-{segment.end_seconds}] → {behavior}")
             log(f"📘 Segment source: {segment.source}")
 
+            # Correctly handle jump point from the new logic
+            jump_to = segment.next_segment_start if segment.next_segment_start is not None else segment.end_seconds + 1.0
+
             if behavior == "auto":
-                player.seekTime(segment.end_seconds + 1.0)
-                monitor.last_time = segment.end_seconds + 1.0
+                player.seekTime(jump_to)
+                monitor.last_time = jump_to
                 monitor.prompted.add(seg_id)
                 xbmcgui.Dialog().notification(
                     heading="Skipped",
@@ -504,7 +529,7 @@ while not monitor.abortRequested():
                     time=2000,
                     sound=False
                 )
-                log(f"⚡ Auto-skipped to {segment.end_seconds + 1.0}")
+                log(f"⚡ Auto-skipped to {jump_to}")
             elif behavior == "ask":
                 if not player.isPlayingVideo():
                     log("⚠ Playback not active — skipping dialog")
@@ -517,25 +542,16 @@ while not monitor.abortRequested():
 
                     layout_value = addon.getSetting("skip_dialog_position").replace(" ", "")
                     dialog_name = f"SkipDialog_{layout_value}.xml"
-                    full_path = f"{addon.getAddonInfo('path')}/resources/skins/default/720p/{dialog_name}"
-
-                    if xbmcvfs.exists(full_path):
-                        log(f"📐 Dialog layout found: {dialog_name}")
-                    else:
-                        log(f"⚠ Dialog layout not found: {dialog_name} — falling back to SkipDialog.xml")
-                        dialog_name = "SkipDialog.xml"
-
-                    log(f"🎬 Showing skip dialog for: {segment.segment_type_label} → layout={dialog_name}")
-                    dialog = SkipDialog(dialog_name, addon.getAddonInfo("path"), "default", "720p")
-                    dialog.segment = segment
+                    
+                    dialog = SkipDialog(dialog_name, addon.getAddonInfo("path"), "default", segment=segment)
                     dialog.doModal()
                     confirmed = getattr(dialog, "response", None)
                     del dialog
 
                     if confirmed:
                         monitor.prompted.add(seg_id)
-                        player.seekTime(segment.end_seconds + 1.0)
-                        monitor.last_time = segment.end_seconds + 1.0
+                        player.seekTime(jump_to) # Use the pre-calculated jump point
+                        monitor.last_time = jump_to
                         xbmcgui.Dialog().notification(
                             heading="Skipped",
                             message=f"{segment.segment_type_label.title()} skipped",
@@ -543,7 +559,7 @@ while not monitor.abortRequested():
                             time=2000,
                             sound=False
                         )
-                        log(f"✅ User confirmed skip — jumped to {segment.end_seconds + 1.0}")
+                        log(f"✅ User confirmed skip — jumped to {jump_to}")
                     else:
                         monitor.recently_dismissed.add(seg_id)
                         monitor.prompted.add(seg_id)
@@ -555,6 +571,5 @@ while not monitor.abortRequested():
 
         monitor.last_time = current_time
 
-    # 💤 Sleep and check for abort
     if monitor.waitForAbort(CHECK_INTERVAL):
         log("🛑 Abort requested — exiting monitor loop")

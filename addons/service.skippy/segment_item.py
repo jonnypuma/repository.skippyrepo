@@ -16,7 +16,7 @@ def normalize_label(text):
     return unicodedata.normalize("NFKC", text or "").strip().lower()
 
 class SegmentItem:
-    def __init__(self, start_seconds, end_seconds, label="segment", source="edl", action_type=None, timeout=5.0, allow_input=True):
+    def __init__(self, start_seconds, end_seconds, label="segment", source="edl", action_type=None, timeout=5.0, allow_input=True, next_segment_start=None):
         if end_seconds < start_seconds:
             raise ValueError(f"Segment end time ({end_seconds}) must be after start time ({start_seconds})")
 
@@ -27,6 +27,7 @@ class SegmentItem:
         self.action_type = normalize_label(action_type) if action_type else None
         self.timeout = timeout
         self.allow_input = allow_input
+        self.next_segment_start = next_segment_start  # New attribute for overlapping/nested skips
 
         log(f"🧩 New SegmentItem created: {self}")
 
@@ -49,14 +50,16 @@ class SegmentItem:
             "end": self.end_seconds,
             "label": self.segment_type_label,
             "source": self.source,
-            "action_type": self.action_type
+            "action_type": self.action_type,
+            "next_segment_start": self.next_segment_start # Include new attribute
         }
         log(f"📦 Converted SegmentItem to dict: {result}")
         return result
 
     def __str__(self):
         action = f", action={self.action_type}" if self.action_type else ""
-        return f"{self.segment_type_label} [{self.start_seconds}-{self.end_seconds}] ({self.source}{action})"
+        next_jump = f", next_jump={self.next_segment_start}" if self.next_segment_start else ""
+        return f"{self.segment_type_label} [{self.start_seconds}-{self.end_seconds}] ({self.source}{action}{next_jump})"
 
 # 🔍 Dialog trigger logic — stateless, no caching
 def should_show_skip_dialog(current_time, segments, last_shown_times, debounce_seconds=5):
@@ -89,7 +92,7 @@ if __name__ == "__main__":
             self.assertFalse(seg.is_active(25))
             self.assertEqual(seg.action_type, "skip")
             self.assertEqual(seg.timeout, 5.0)  # default value
-            self.assertTrue(seg.allow_input)   # default value
+            self.assertTrue(seg.allow_input)    # default value
 
         def test_invalid_segment(self):
             with self.assertRaises(ValueError):
@@ -102,7 +105,8 @@ if __name__ == "__main__":
                 "end": 15,
                 "label": "credits",
                 "source": "xml",
-                "action_type": "mute"
+                "action_type": "mute",
+                "next_segment_start": None,
             }
             self.assertEqual(seg.to_dict(), expected)
 
@@ -110,5 +114,18 @@ if __name__ == "__main__":
             seg = SegmentItem(0, 10, "ad", action_type="skip", timeout=8.0, allow_input=False)
             self.assertEqual(seg.timeout, 8.0)
             self.assertFalse(seg.allow_input)
+            
+        def test_with_next_segment_start(self):
+            seg = SegmentItem(10, 30, "intro", next_segment_start=20)
+            self.assertEqual(seg.next_segment_start, 20)
+            expected = {
+                "start": 10,
+                "end": 30,
+                "label": "intro",
+                "source": "edl",
+                "action_type": None,
+                "next_segment_start": 20
+            }
+            self.assertEqual(seg.to_dict(), expected)
 
     unittest.main()

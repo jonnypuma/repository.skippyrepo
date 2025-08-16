@@ -78,14 +78,26 @@
         <aligny>center</aligny><textoffsetx>10</textoffsetx>
       </control>
 
+      <control type="label">
+        <left>5</left><top>40</top>
+        <width>360</width><height>20</height>
+        <label>$INFO[Window.Property(next_jump_label)]</label>
+        <font>font12</font>
+        <!-- Updated text color to a light blue to make it more visible -->
+        <textcolor>FFADD8E6</textcolor>
+        <align>left</align>
+        <visible>String.IsEqual(Window.Property(show_next_jump),true)</visible>
+      </control>
+
       <!-- Countdown label -->
       <control type="label" id="2">
-        <left>5</left><top>50</top>
+        <left>5</left><top>60</top>
         <width>360</width><height>20</height>
         <label>Segment ending in: $INFO[Window.Property(countdown)]</label>
         <font>font10</font>
         <textcolor>lightgrey</textcolor>
-        <align>left</align><visible>true</visible>
+        <align>left</align>
+		<visible>true</visible>
       </control>
 
       <!-- Progress bar -->

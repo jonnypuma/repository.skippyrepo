@@ -8,6 +8,10 @@ It provides both automatic and user-prompted skipping, and integrates seamlessly
 
 Discreet, cross-platform, and customizable.
 
+Supported Video Formats: Works for MKV files.
+
+Known Limitations: MP4 files are currently not supported when the video is played from an NFS share due to a technical limitation in how the add-on attempts to read sidecar files for MP4s over a network protocol.
+
 ---
 '''xml
 ## 📁 Folder Structure
