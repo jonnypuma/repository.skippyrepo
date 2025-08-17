@@ -86,13 +86,13 @@
 
     <setting id="enable_for_tv_episodes" 
              type="bool" 
-             label="Enable for TV Episodes" 
+             label="Enable Missing Segment File Toast for TV Episodes" 
              default="true"
              tooltip="Show a notification if the metadata file (chapters.xml or .edl) cannot be found or read for the current episode." />
 
     <setting id="enable_for_movies" 
              type="bool" 
-             label="Enable for Movies" 
+             label="Enable Missing Segment File Toast for Movies" 
              default="false"
              tooltip="Show a notification if the metadata file (chapters.xml or .edl) cannot be found or read for the current movie." />
 
