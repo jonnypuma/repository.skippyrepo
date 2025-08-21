@@ -77,7 +77,7 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
 
     def _monitor_segment_end(self):
         delay = 0.25
-        timeout = 30  # Max dialog duration fallback
+        timeout = self._total_duration + 5  # ⏳ Dynamic timeout based on segment length
 
         while not self._closing:
             if not self.player.isPlaying():
