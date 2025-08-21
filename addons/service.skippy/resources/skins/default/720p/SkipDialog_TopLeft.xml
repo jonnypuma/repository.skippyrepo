@@ -56,7 +56,7 @@
         <label>Skip</label>
         <onright>3013</onright>
         <font>font16</font>
-        <texturefocus>button_focus_blue.png</texturefocus>
+        <texturefocus>$INFO[Window.Property(focus_texture)]</texturefocus>
         <texturenofocus>-</texturenofocus>
         <textcolor>lightgrey</textcolor>
         <textcolorfocus>white</textcolorfocus>
