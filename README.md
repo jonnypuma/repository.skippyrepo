@@ -17,6 +17,44 @@ Known Limitations: MP4 files are currently not supported when the video is playe
 
 ---
 
+'''xml
+## 📁 Folder Structure
+
+service.skippy/
+├── addon.xml
+├── README.yml
+├── service.py
+├── skipdialog.py
+├── segment_item.py
+├── settings_utils.py
+├── icon.png
+├── resources/
+│   ├── settings.xml
+│   └── skins/
+│       └── default/
+│           ├── 720p/
+│           │   ├── SkipDialog.xml              # Default fallback skip dialog located bottom right
+│           │   ├── SkipDialog_TopRight.xml     # Skip dialog located top right corner
+│           │   ├── SkipDialog_TopLeft.xml      # Skip dialog located top left corner
+│           │   ├── SkipDialog_BottomRight.xml  # Skip dialog located bottom right corner
+│           │   └── SkipDialog_BottomLeft.xml   # Skip dialog located bottom left corner
+│           └── media/
+│               ├── icon_skip.png               #skip button icon
+│               ├── icon_close.png              #close button icon
+│               ├── progress_left.png           #progress bar left segment
+│               ├── progress_right.png          #progress bar right segment
+│               ├── progress_background.png     #progress bar background texture
+│               ├── progress_mid.png            #progress bar middle segment
+│               ├── button_nofocus.png          #skip dialog button background texture when not highlighted
+│               ├── button_focus.png            #skip dialog button background texture when highlighted 
+│               ├── skippy.png                  #the Skippy logo displayed in user settings and toast notifications
+│               └── white.png                   # Dialog background (credit: im85288, Up Next)
+└── tools/
+    └── edl-updater.bat                         # (Optional) EDL action type batch normalizer
+'''
+
+---
+
 ✅ Supported Kodi Versions and Platforms
 
 Tested on **Kodi Omega 21.2** across:
@@ -97,8 +135,6 @@ if True:  # triggers skip dialog
 Found under:  
 `Settings → Add-ons → My Add-ons → Services → Skippy - Video Segment Skipper`
 
-<img width="2559" height="1599" alt="screenshot04" src="https://github.com/user-attachments/assets/b2ee73d6-2cdb-49a4-ac8d-e0f8b385cc05" />
-
 ⚙ Default settings Overview
 Default settings file loaded at first start located in: .../addons/service.skippy/resources/settings.xml
 Setting	Description:
@@ -110,19 +146,20 @@ Category: Segment Settings
 - segment_never_skip			Comma-separated list of labels to never skip
 - ignore_kodi_edl_actions       Default value - true
 - edl_action_mapping			Map .edl action codes to skip labels (e.g. 4:intro,5:credits)
-- skip_overlapping_segments Configurable overlap detection to help avoid redundant or conflicting skips
+- skip_overlapping_segments     Configurable overlap detection to help avoid redundant or conflicting skips
 
 Category: Customize Skip Dialog Look and Behavior
 - show_progress_bar			    Enables visual progress bar during skip dialog
 - skip_dialog_position	    	Chooses layout position for the skip confirmation dialog
 - rewind_threshold_seconds	    Threshold for detecting rewind and clearing dialog suppression states
 - show_skip_dialog_movies	    Show skip dialog for movies when behavior is set to ask	
-- show_skip_dialog_episodes	    Show skip dialog for TV episodes when behavior is set to ask
+- show_skip_dialog_episodes	    Show skip dialog for TV episodes when behavior is set to ask	
 
-Category: Not Found Toast notifications
-- enable_for_movies			    Skip support toggle for movie playback
-- enable_for_tv_episodes		Skip support toggle for episode playback
-
+Category: Segment Toast Notifications
+- show_not_found_toast_for_movies			    Enable Missing Segment File Toast for TV Episodes
+- show_not_found_toast_for_tv_episodes		    Enable Missing Segment File Toast for Movies
+- show_toast_for_overlapping_nested_segments    Enable overlapping segment toast if found in segment file
+- show_toast_for_skipped_segment                Enable toast notification for skipped segment
 
 Category: Debug Logging
 - enable_verbose_logging		Enables extra log entries for debugging
