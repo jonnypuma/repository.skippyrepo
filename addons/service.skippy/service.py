@@ -80,8 +80,8 @@ def get_video_file():
         return None
 
     log(f"🎯 Kodi playback path: {path}")
-    log(f"🔧 enable_for_movies: {get_addon().getSettingBool('enable_for_movies')}")
-    log(f"🔧 enable_for_tv_episodes: {get_addon().getSettingBool('enable_for_tv_episodes')}")
+    log(f"🔧 show_not_found_toast_for_movies: {get_addon().getSettingBool('show_not_found_toast_for_movies')}")
+    log(f"🔧 show_not_found_toast_for_tv_episodes: {get_addon().getSettingBool('show_not_found_toast_for_tv_episodes')}")
 
     if xbmcvfs.exists(path):
         return path
@@ -111,8 +111,8 @@ def should_show_missing_file_toast():
     log("🚦 Entered should_show_missing_file_toast()")
 
     addon = get_addon()
-    enable_for_movies = addon.getSettingBool("enable_for_movies")
-    enable_for_tv_episodes = addon.getSettingBool("enable_for_tv_episodes")
+    show_not_found_toast_for_movies = addon.getSettingBool("show_not_found_toast_for_movies")
+    show_not_found_toast_for_tv_episodes = addon.getSettingBool("show_not_found_toast_for_tv_episodes")
 
     query_active = {
         "jsonrpc": "2.0",
@@ -167,12 +167,12 @@ def should_show_missing_file_toast():
     log(f"📁 File: {item.get('file')}, Title: {item.get('title')}, Showtitle: {item.get('showtitle')}, Episode: {item.get('episode')}")
 
     if playback_type == "movie":
-        if not enable_for_movies:
+        if not show_not_found_toast_for_movies:
             log("🛑 Suppressing toast — movie playback and disabled in settings")
             return False, item
         log("✅ Toast allowed — movie playback and enabled in settings")
     elif playback_type == "episode":
-        if not enable_for_tv_episodes:
+        if not show_not_found_toast_for_tv_episodes:
             log("🛑 Suppressing toast — episode playback and disabled in settings")
             return False, item
         log("✅ Toast allowed — episode playback and enabled in settings")
@@ -410,10 +410,10 @@ while not monitor.abortRequested():
                 item = None
 
             show_dialogs = is_skip_dialog_enabled(playback_type)
-            toast_movies = addon.getSettingBool("enable_for_movies")
-            toast_episodes = addon.getSettingBool("enable_for_tv_episodes")
+            toast_movies = addon.getSettingBool("show_not_found_toast_for_movies")
+            toast_episodes = addon.getSettingBool("show_not_found_toast_for_tv_episodes")
 
-            log(f"🧪 Raw setting values → show_dialogs: {show_dialogs}, enable_for_movies: {toast_movies}, enable_for_tv_episodes: {toast_episodes}")
+            log(f"🧪 Raw setting values → show_dialogs: {show_dialogs}, show_not_found_toast_for_movies: {toast_movies}, show_not_found_toast_for_tv_episodes: {toast_episodes}")
 
             if not playback_type:
                 log("⚠ Playback type not detected — skipping segment parsing")
@@ -519,18 +519,28 @@ while not monitor.abortRequested():
             jump_to = segment.next_segment_start if segment.next_segment_start is not None else segment.end_seconds + 1.0
 
             if behavior == "auto":
+                log(f"⚙ Auto-skip behavior triggered for segment ID {seg_id} ({segment.segment_type_label})")
                 player.seekTime(jump_to)
                 monitor.last_time = jump_to
                 monitor.prompted.add(seg_id)
-                xbmcgui.Dialog().notification(
-                    heading="Skipped",
-                    message=f"{segment.segment_type_label.title()} skipped",
-                    icon=ICON_PATH,
-                    time=2000,
-                    sound=False
-                )
+
+                if addon.getSettingBool("show_toast_for_skipped_segment"):
+                    log("🔔 Showing toast notification for auto-skipped segment")
+                    xbmcgui.Dialog().notification(
+                        heading="Skipped",
+                        message=f"{segment.segment_type_label.title()} skipped",
+                        icon=ICON_PATH,
+                        time=2000,
+                        sound=False
+                    )
+                else:
+                    log("🔕 Skipped segment toast disabled by user setting")
+
                 log(f"⚡ Auto-skipped to {jump_to}")
+
             elif behavior == "ask":
+                log(f"🧠 Ask-skip behavior triggered for segment ID {seg_id} ({segment.segment_type_label})")
+
                 if not player.isPlayingVideo():
                     log("⚠ Playback not active — skipping dialog")
                     monitor.prompted.add(seg_id)
@@ -542,34 +552,43 @@ while not monitor.abortRequested():
 
                     layout_value = addon.getSetting("skip_dialog_position").replace(" ", "")
                     dialog_name = f"SkipDialog_{layout_value}.xml"
-                    
+                    log(f"📐 Using skip dialog layout: {dialog_name}")
+
                     dialog = SkipDialog(dialog_name, addon.getAddonInfo("path"), "default", segment=segment)
                     dialog.doModal()
                     confirmed = getattr(dialog, "response", None)
                     del dialog
 
                     if confirmed:
+                        log(f"✅ User confirmed skip for segment ID {seg_id}")
                         monitor.prompted.add(seg_id)
-                        player.seekTime(jump_to) # Use the pre-calculated jump point
+                        player.seekTime(jump_to)
                         monitor.last_time = jump_to
-                        xbmcgui.Dialog().notification(
-                            heading="Skipped",
-                            message=f"{segment.segment_type_label.title()} skipped",
-                            icon=ICON_PATH,
-                            time=2000,
-                            sound=False
-                        )
-                        log(f"✅ User confirmed skip — jumped to {jump_to}")
+
+                        if addon.getSettingBool("show_toast_for_skipped_segment"):
+                            log("🔔 Showing toast notification for user-confirmed skip")
+                            xbmcgui.Dialog().notification(
+                                heading="Skipped",
+                                message=f"{segment.segment_type_label.title()} skipped",
+                                icon=ICON_PATH,
+                                time=2000,
+                                sound=False
+                            )
+                        else:
+                            log("🔕 Skipped segment toast disabled by user setting")
+
+                        log(f"🚀 Jumped to {jump_to}")
                     else:
+                        log(f"🙅 User dismissed skip dialog for segment ID {seg_id}")
                         monitor.recently_dismissed.add(seg_id)
                         monitor.prompted.add(seg_id)
-                        log(f"🙅 User dismissed skip — segment {seg_id} added to recently_dismissed")
                 except Exception as e:
                     log(f"❌ Error showing skip dialog: {e}")
                     monitor.prompted.add(seg_id)
                     continue
 
-        monitor.last_time = current_time
+            monitor.last_time = current_time
+
 
     if monitor.waitForAbort(CHECK_INTERVAL):
         log("🛑 Abort requested — exiting monitor loop")

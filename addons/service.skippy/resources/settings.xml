@@ -54,14 +54,6 @@
              label="Show Progress Bar in Skip Dialog"
              default="true"
              tooltip="Hide or show the progress bar while a skipable segment is active." />
-			 
-	<setting id="skip_dialog_focus_texture"
-         type="labelenum"
-         label="Skip Dialog Highlight Style"
-         default="button_focus_blue.png"
-         values="Blue|Aqua|Aqua Bevel|Aqua Dark|Aqua Vignette"
-         optionvalues="button_focus_blue.png|button_focus_aqua.png|button_focus_aqua_bevel.png|button_focus_aqua_dark.png|button_focus_aqua_vignette.png"
-         tooltip="Choose the highlight style for focused buttons in the Skip Dialog." />
 
     <setting id="rewind_threshold_seconds" 
              type="number" 
@@ -90,15 +82,15 @@
              default="true" />
   </category>
 
-  <category label="'Segment Toast Notifications">
+  <category label="Segment Toast Notifications">
 
-    <setting id="enable_for_tv_episodes" 
+    <setting id="show_not_found_toast_for_tv_episodes" 
              type="bool" 
              label="Enable Missing Segment File Toast for TV Episodes" 
              default="true"
              tooltip="Show a notification if the metadata file (chapters.xml or .edl) cannot be found or read for the current episode." />
 
-    <setting id="enable_for_movies" 
+    <setting id="show_not_found_toast_for_movies" 
              type="bool" 
              label="Enable Missing Segment File Toast for Movies" 
              default="false"
@@ -110,7 +102,11 @@
              default="false"
              tooltip="Show a notification if the metadata file (chapters.xml or .edl) has overlapping segments." />			 
 			 
-			 
+    <setting id="show_toast_for_skipped_segment" 
+             type="bool" 
+             label="Enable toast notification for skipped segment" 
+             default="true"
+             tooltip="Show a toast notification if a segment is skipped." />					 
   </category>
 
   <category label="Debug Logging">

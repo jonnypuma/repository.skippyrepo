@@ -4,7 +4,6 @@ import xbmcaddon
 import threading
 import time
 import json
-import os
 
 def get_addon():
     return xbmcaddon.Addon()
@@ -21,18 +20,6 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
         super().__init__(*args)
         self.segment = kwargs.get("segment", None)
         log(f"📦 Loaded dialog layout: {args[0]}")
-
-        # 🎨 Pre-set focus texture so XML can optionally read it
-        focus_texture = get_addon().getSetting("skip_dialog_focus_texture") or "button_focus_blue.png"
-        texture_path = xbmc.translatePath(f"special://skin/media/{focus_texture}")
-        if not os.path.exists(texture_path):
-            log(f"⚠️ Texture not found at {texture_path} — falling back to default")
-            focus_texture = "button_focus_blue.png"
-        else:
-            log(f"🎨 Found focus texture: {texture_path}")
-
-        self.setProperty("focus_texture", focus_texture)
-        log(f"🎨 Pre-set focus texture property: {focus_texture}")
 
     def onInit(self):
         log_always(f"🔍 onInit called — segment={getattr(self, 'segment', None)}")
@@ -54,17 +41,7 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
         self._total_duration = self.segment.end_seconds - self.segment.start_seconds
         self._start_time = time.time()
 
-        log(f"🧠 Segment metadata: start={self.segment.start_seconds}, end={self.segment.end_seconds}, type={self.segment.segment_type_label}")
-
-        # 🎯 Apply focus texture directly to buttons
-        try:
-            self.getControl(3012).setTexture(self.getProperty("focus_texture"), xbmcgui.CONTROL_FOCUS)
-            self.getControl(3013).setTexture(self.getProperty("focus_texture"), xbmcgui.CONTROL_FOCUS)
-            log(f"🎯 Focus texture applied directly to buttons: {self.getProperty('focus_texture')}")
-        except Exception as e:
-            log(f"⚠️ Failed to apply focus texture: {e}")
-
-        # ⏭️ Set property for next segment jump time
+        # New: Set property for next segment jump time
         if self.segment.next_segment_start is not None:
             jump_m, jump_s = divmod(int(self.segment.next_segment_start), 60)
             jump_str = f"Skip to next segment at {jump_m:02d}:{jump_s:02d}"
@@ -100,7 +77,7 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
 
     def _monitor_segment_end(self):
         delay = 0.25
-        timeout = self._total_duration + 5
+        timeout = self._total_duration + 5  # ⏳ Dynamic timeout based on segment length
 
         while not self._closing:
             if not self.player.isPlaying():
@@ -112,6 +89,7 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
             m, s = divmod(max(remaining, 0), 60)
             self.setProperty("countdown", f"{m:02d}:{s:02d}")
 
+            # 📊 Update progress bar
             if self._show_progress:
                 try:
                     elapsed = max(current - self.segment.start_seconds, 0)
@@ -121,6 +99,7 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
                 except Exception as e:
                     log(f"⚠️ Progress bar update error: {e}")
 
+            # ⌛ Segment end reached
             if current >= self.segment.end_seconds - 0.5:
                 log("⌛ Segment ended — auto-decline")
                 self._closing = True
@@ -128,6 +107,7 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
                 self.close()
                 break
 
+            # ⏳ Timeout fallback
             if time.time() - self._start_time > timeout:
                 log("⏳ Timeout reached — auto-decline")
                 self._closing = True
