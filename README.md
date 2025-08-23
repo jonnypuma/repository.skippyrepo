@@ -17,44 +17,6 @@ Known Limitations: MP4 files are currently not supported when the video is playe
 
 ---
 
-'''xml
-## 📁 Folder Structure
-
-service.skippy/
-├── addon.xml
-├── README.yml
-├── service.py
-├── skipdialog.py
-├── segment_item.py
-├── settings_utils.py
-├── icon.png
-├── resources/
-│   ├── settings.xml
-│   └── skins/
-│       └── default/
-│           ├── 720p/
-│           │   ├── SkipDialog.xml              # Default fallback skip dialog located bottom right
-│           │   ├── SkipDialog_TopRight.xml     # Skip dialog located top right corner
-│           │   ├── SkipDialog_TopLeft.xml      # Skip dialog located top left corner
-│           │   ├── SkipDialog_BottomRight.xml  # Skip dialog located bottom right corner
-│           │   └── SkipDialog_BottomLeft.xml   # Skip dialog located bottom left corner
-│           └── media/
-│               ├── icon_skip.png               #skip button icon
-│               ├── icon_close.png              #close button icon
-│               ├── progress_left.png           #progress bar left segment
-│               ├── progress_right.png          #progress bar right segment
-│               ├── progress_background.png     #progress bar background texture
-│               ├── progress_mid.png            #progress bar middle segment
-│               ├── button_nofocus.png          #skip dialog button background texture when not highlighted
-│               ├── button_focus.png            #skip dialog button background texture when highlighted 
-│               ├── skippy.png                  #the Skippy logo displayed in user settings and toast notifications
-│               └── white.png                   # Dialog background (credit: im85288, Up Next)
-└── tools/
-    └── edl-updater.bat                         # (Optional) EDL action type batch normalizer
-'''
-
----
-
 ✅ Supported Kodi Versions and Platforms
 
 Tested on **Kodi Omega 21.2** across:
