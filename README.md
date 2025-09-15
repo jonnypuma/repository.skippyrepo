@@ -3,9 +3,9 @@ Repository for the Kodi addon: Skippy - Video Segment Skipper
 <img width="1024" height="1024" alt="icon" src="https://github.com/user-attachments/assets/a9566ad0-f74c-45b7-8243-85357f33b194" />
 # 📼 Skippy — The XML-EDL Segment Skipper
 
-Skippy is a Kodi service that detects and can skip predefined video segments such as intros, recaps, ads, or credits using companion `.xml` or `.edl` files. 
+Skippy is a Kodi service that intelligently detects and can skip predefined video segments such as intros, recaps, ads, or credits using companion `.xml` or `.edl` files. 
 
-Supports chaptered Matroska XML files and Mplayer/Kodi style EDL files.
+Supports chaptered Matroska XMLs, enhanced EDLs with labeled action types.
  
 It provides both automatic and user-prompted skipping, and integrates seamlessly into playback with customizable notifications and dialogs.
 
@@ -13,19 +13,54 @@ Discreet, cross-platform, and customizable.
 
 Supported Video Formats: Works for MKV files.
 
-Known Limitations: MP4 files are currently not supported when the video is played from an NFS share due to a technical limitation in how the add-on attempts to read sidecar files for MP4s over a network protocol. Don't know if it's a bug in Kodi itself or not. 
+Known Limitations: MP4 files are currently not supported when the video is played from an NFS share due to a technical limitation in how the add-on attempts to read sidecar files for MP4s over a network protocol.
 
 ---
 
-✅ Supported Kodi Versions and Platforms
+```xml
+## 📁 Folder Structure
 
+service.skippy/
+├── addon.xml
+├── README.md
+├── service.py
+├── skipdialog.py
+├── segment_item.py
+├── settings_utils.py
+├── icon.png
+├── resources/
+│   ├── settings.xml
+│   └── skins/
+│       └── default/
+│           ├── 720p/
+│           │   ├── SkipDialog.xml              # Default fallback skip dialog located bottom right
+│           │   ├── SkipDialog_TopRight.xml     # Skip dialog located top right corner
+│           │   ├── SkipDialog_TopLeft.xml      # Skip dialog located top left corner
+│           │   ├── SkipDialog_BottomRight.xml  # Skip dialog located bottom right corner
+│           │   └── SkipDialog_BottomLeft.xml   # Skip dialog located bottom left corner
+│           └── media/
+│               ├── icon_skip.png               #skip button icon
+│               ├── icon_close.png              #close button icon
+│               ├── progress_left.png           #progress bar left segment
+│               ├── progress_right.png          #progress bar right segment
+│               ├── progress_background.png     #progress bar background texture
+│               ├── progress_mid.png            #progress bar middle segment
+│               ├── button_nofocus.png          #skip dialog button background texture when not highlighted
+│               ├── button_focus.png            #skip dialog button background texture when highlighted 
+│               ├── skippy.png                  #the Skippy logo displayed in user settings and toast notifications
+│               └── white.png                   # Dialog background (credit: im85288, Up Next)
+└── tools/
+    └── edl-updater.bat                         # (Optional) EDL action type batch normalizer
+```
+
+✅ Supported Kodi Versions and Platforms
 Tested on **Kodi Omega 21.2** across:
 
-| Platform       			        | Status     |
+| Platform       			      | Status     |
 |---------------------------|------------|
-| Android (Nvidia Shield) 	 | ✅ Tested |
-| Linux (CoreELEC)  		      | ✅ Tested |
-| Windows 11       			      | ✅ Tested |
+| Android (Nvidia Shield) 	| ✅ Tested |
+| Linux (CoreELEC)  		    | ✅ Tested |
+| Windows 11       			    | ✅ Tested |
 
 ---
 
@@ -46,7 +81,6 @@ Tested on **Kodi Omega 21.2** across:
 ---
 
 🎬 Play the Video
-
 Start playback of MyMovie.mkv in Kodi. Skippy will:
 
 1. Search for XML or EDL metadata file alongside the video.
@@ -57,38 +91,33 @@ Start playback of MyMovie.mkv in Kodi. Skippy will:
 
 4. Skip, prompt or never ask based on your preferences
 
-5. Show a toast if no segments are found (if enabled)
+5- Show a toast if no segments are found (if enabled)
 
 Each second:
 - Checks current time against segment list
 - If within an active segment: Applies skip behavior
 - Flags as prompted to avoid repeats
 - Checks current playback time
-- If a matching segment becomes active, Skippy will based on label behavior defined in settings:
-```xml
-    ⏩ Skip automatically 
-    ❓ Prompt the user
-    🚫 Do nothing 
-```
+- If a matching segment is active and unskipped:
+    ⏩ Skips automatically 
+    ❓ Prompts the user
+    🚫 Does nothing — based on label behavior
 - Remembers if a segment is dismissed to avoid repeat prompts (unless user seeks back), i.e. at stop, end, or rewind: clears segment cache and skip history
-
-<img width="2559" height="1599" alt="screenshot01" src="https://github.com/user-attachments/assets/c684b0b4-0d01-4908-8c00-f229984274b1" />
-<img width="2559" height="1599" alt="screenshot02" src="https://github.com/user-attachments/assets/e4dfe5d3-fb4d-45e2-892a-ed721b8b8781" />
-<img width="1265" height="737" alt="screenshot03" src="https://github.com/user-attachments/assets/7a23bcb3-325a-4769-ac7d-17b0d4c9e66f" />
 
 ---
 
-🧪Forced cache clearing
-
+🧪 Forced Cache Clearing
 Force cache clearing (reparse segments every time), to avoid Kodi cache remembering what you have skipped if you want to restart a playback for instance.
 
 Done by:
-python
+```python
 monitor.last_video = None
+```
 
 Force prompt for testing:
-python
+```python
 if True:  # triggers skip dialog
+```
 
 ---
 
@@ -97,39 +126,44 @@ if True:  # triggers skip dialog
 Found under:  
 `Settings → Add-ons → My Add-ons → Services → Skippy - Video Segment Skipper`
 
-⚙ Default settings Overview
+⚙ Default Settings Overview
 Default settings file loaded at first start located in: .../addons/service.skippy/resources/settings.xml
-Setting	Description:
 
-Category: Segment Settings
-- custom_segment_keywords       Comma-separated list of labels (case-insensitive) the skipper should monitor
-- segment_always_skip			Comma-separated list of segment labels to skip automatically
-- segment_ask_skip			    Comma-separated list of labels to prompt for skipping
-- segment_never_skip			Comma-separated list of labels to never skip
-- ignore_kodi_edl_actions       Default value - true
-- edl_action_mapping			Map .edl action codes to skip labels (e.g. 4:intro,5:credits)
-- skip_overlapping_segments     Configurable overlap detection to help avoid redundant or conflicting skips
+| Setting | Description |
+|---------|-------------|
 
-Category: Customize Skip Dialog Look and Behavior
-- show_progress_bar			    Enables visual progress bar during skip dialog
-- skip_dialog_position	    	Chooses layout position for the skip confirmation dialog
-- rewind_threshold_seconds	    Threshold for detecting rewind and clearing dialog suppression states
-- show_skip_dialog_movies	    Show skip dialog for movies when behavior is set to ask	
-- show_skip_dialog_episodes	    Show skip dialog for TV episodes when behavior is set to ask	
+|Category:                    | Segment Settings                                                              |
+|-----------------------------|-------------------------------------------------------------------------------|
+| custom_segment_keywords     | Comma-separated list of labels (case-insensitive) the skipper should monitor  |
+| segment_always_skip         |	Comma-separated list of segment labels to skip automatically                  |
+| segment_ask_skip            | Comma-separated list of labels to prompt for skipping                         |
+| segment_never_skip          |	Comma-separated list of labels to never skip                                  |
+| ignore_kodi_edl_actions     | Default value - true                                                          |
+| edl_action_mapping          |	Map .edl action codes to skip labels (e.g. 4:intro,5:credits)                 |
+| skip_overlapping_segments   | Configurable overlap detection to help avoid redundant or conflicting skips   |
 
-Category: Segment Toast Notifications
-- show_not_found_toast_for_movies			    Enable Missing Segment File Toast for TV Episodes
-- show_not_found_toast_for_tv_episodes		    Enable Missing Segment File Toast for Movies
-- show_toast_for_overlapping_nested_segments    Enable overlapping segment toast if found in segment file
-- show_toast_for_skipped_segment                Enable toast notification for skipped segment
+|Category:                    | Customize Skip Dialog Look and Behavior                                       | 
+|-----------------------------|-------------------------------------------------------------------------------|
+| show_progress_bar			      | Enables visual progress bar during skip dialog                                |    
+| skip_dialog_position	    	| Chooses layout position for the skip confirmation dialog                      |
+| rewind_threshold_seconds	  | Threshold for detecting rewind and clearing dialog suppression states         |
+| show_skip_dialog_movies	    | Show skip dialog for movies when behavior is set to ask	                      |
+| show_skip_dialog_episodes	  | Show skip dialog for TV episodes when behavior is set to ask                  |
 
-Category: Debug Logging
-- enable_verbose_logging		Enables extra log entries for debugging
+|Category:                                    | Segment Toast Notifications                                    |
+|---------------------------------------------|----------------------------------------------------------------|
+| show_not_found_toast_for_movies             | Enable Missing Segment File Toast for Movies                   |
+| show_not_found_toast_for_tv_episodes        | Enable Missing Segment File Toast for TV Episodes              |
+| show_toast_for_overlapping_nested_segments  | Enable overlapping segment toast if found in segment file      |
+| show_toast_for_skipped_segment              | Enable toast notification for skipped segment                  |
+
+|Category:                    | Debug Logging                                                  |
+|-----------------------------|----------------------------------------------------------------|
+| enable_verbose_logging      | Enables extra log entries for debugging                        |
 
 ---
 
 🧠 Skip Modes examples
-
 Segment behavior is matched via normalized labels and defined in:
 
 - segment_always_skip
@@ -137,20 +171,21 @@ Segment behavior is matched via normalized labels and defined in:
 - segment_never_skip
 
 Examples:
-```xml
+
 segment_always_skip = commercial, ad
 segment_ask_skip = intro, recap, credits, pre-roll
 segment_never_skip = logo, preview, prologue, epilogue, main
-```
 
 ---
 
 📁 File Support
 Skippy supports the following segment definition files:
 
-- filename.edl
-- filename-chapters.xml
-. filename_chapters.xml
+filename.edl
+
+filename-chapters.xml
+
+filename_chapters.xml
 
 These should reside in the same directory as the video file. EDL files follow Kodi’s native format with start, end, and action code lines. XML files use a chapter-based structure. See section below.
 
@@ -158,10 +193,9 @@ These should reside in the same directory as the video file. EDL files follow Ko
 
 🧩 File Example
 Breaking.Bad.S01E02.mkv
-```xml
 ├── Breaking.Bad.S01E02-chapters.xml or Breaking.Bad.S01E02_chapters.xml    # XML chapter file
 └── Breaking.Bad.S01E02.edl                                                 # Fallback if no XML found
-```
+
 XML takes priority if both exist.
 
 ---
@@ -170,47 +204,44 @@ XML takes priority if both exist.
 Skippy supports two segment metadata formats, placed alongside the .mkv or video file:
 
 1. ✅ XML Chapter Files (Preferred)
-
 - Filenames: filename-chapters.xml or filename_chapters.xml
 - Format: Matroska-style (e.g. exported by Jellyfin)
 - Label: `<ChapterString>Intro</ChapterString>`
 - Configurable behavior per label: auto-skip / ask to skip / never
 
 2. ✅ Enhanced EDL Files (Fallback)
-
 - Filename: `filename.edl`
-- Format: <start_time> <end_time> <action_type>
+- Format: <start_time> <end_time> <action_type> ;label=Intro (or set preferred label in the settings.xml)
 - Configurable behavior per label: auto-skip / ask-to-skip / never (shares the same label settings as the xml route)
 
 📄 Sample Segment Files
 EDL files define skip segments using three values per line
 
 🧾 .edl File Content Example:
-```xml
 210 235 4 
-```
-→ Will skip or prompt from 3:30 to 3:55 if action type `4` is mapped to `'Intro'` 
 
-```xml
-Format: <start_time> <end_time> <action_type>. start_time and end_time are in seconds. action type is an integer between 4 to 99
-```
+→ Will skip or prompt from 3:30 to 3:55 if action type `4` is mapped to `'Intro'` 
+Format: <start_time> <end_time> <action_type>. start_time and end_time are in seconds. <action type> is an integer between 4 to 99
 Action mapping: action_code maps to a label via edl_action_mapping (e.g. 4:intro, 5:credits)
 
 
 ℹ️ Kodi may log a warning for unknown EDL action types — this is expected and harmless.
 
-Custom action types (4–99) are supported amd configurable via settings:
+Custom action types (4–99) are supported and configurable via settings:
 4 → Segment (default)
 5 → Intro
 6 → Ad, etc. — 
 
+Optional label support using comments:
+42.0 58.3 4 ;label=Intro
+
 If no label is present in edl file or defined in settings, 'Segment' is used as fallback
 
 📘 .xml Chapter Format
-
 XML files define segments using chapter metadata:
 
-```xml
+xml
+<?xml version="1.0" encoding="UTF-8"?>
 <Chapters>
   <EditionEntry>
     <ChapterAtom>
@@ -229,12 +260,6 @@ XML files define segments using chapter metadata:
     </ChapterAtom>
   </EditionEntry>
 </Chapters>
-```
-
-Here’s a breakdown of the chapters:
-- Intro: 00:00–01:00
-- Credits: 20:00–21:00
-
 ChapterString is the label used for skip mode matching
 
 Times must be in HH:MM:SS.mmm format
@@ -243,12 +268,21 @@ Labels are normalized (e.g. Intro, intro, INTRO all match)
 
 ---
 
+🧩 File Example
+Breaking.Bad.S01E02.mkv
+├── Breaking.Bad.S01E02-chapters.xml or Breaking.Bad.S01E02_chapters.xml    # XML chapter file
+└── Breaking.Bad.S01E02.edl                                                 # Fallback if no XML found
+
+XML takes priority if both exist.
+
+---
+
 ✅ Segment Behavior Logic Summary
-|Behavior	  |   Dialogs Enabled (show_dialogs = True)	    |   Dialogs Disabled (show_dialogs = False) |
-|-----------|---------------------------------------------|-------------------------------------------|
-|never	     |      ❌ Skip silently	                      |      ❌ Skip silently                    |
-|ask	       |      ✅ Show dialog	                        |      ❌ Suppress dialog                  |
-|auto	      |      ✅ Skip automatically	                 |      ✅ Skip automatically               |
+|Behavior	        | Dialogs Enabled (show_dialogs = True)	       | Dialogs Disabled (show_dialogs = False) |
+|-----------------|----------------------------------------------|-----------------------------------------|
+|never	           | ❌ Skip silently	                           | ❌ Skip silently                        |
+|ask	             | ✅ Show dialog	                              | ❌ Suppress dialog                      |
+|auto	            | ✅ Skip automatically	                      | ✅ Skip automatically                   |
 
 If show_skip_dialog_movies = False, then dialogs will be suppressed for movie segments even if their behavior is "ask".
 
@@ -259,23 +293,21 @@ This suppression is independent of the segment file presence or toast settings.
 ✅ Example
 If a segment in a movie has behavior "ask" and show_skip_dialog_movies = False, the dialog will not appear. Instead, the segment will be silently skipped or ignored depending on other settings.
 
-When is the missing segment file toast notifcation displayed:
-|Skip Dialog Enabled   |   Segment File Present   |   Toast Enabled   |   Show Toast? |
-|----------------------|--------------------------|-------------------|----------------|
-|✅ Yes	               |     ✅ Yes	             |    ✅ Yes	        |    ❌ No      |
-|✅ Yes	               |     ❌ No	               |    ✅ Yes	       |    ✅ Yes     |
-|❌ No	                |     ✅ Yes	             |    ✅ Yes	        |    ❌ No      |
-|❌ No	                |     ❌ No	               |    ✅ Yes	       |    ✅ Yes     |
-|❌ No	                |     ❌ No	               |    ❌ No	        |    ❌ No      |
-|✅ Yes	               |     ❌ No	               |    ❌ No	        |    ❌ No      |
-|❌ No	                |     ✅ Yes	             |    ❌ No	         |    ❌ No      |
+More detailed
+| Skip Dialog Enabled | Segment File Present	| Toast Enabled |	Show Toast? |
+|---------------------|----------------------|----------------|-------------|
+| ✅ Yes	             | ✅ Yes	              | ✅ Yes	       | ❌ No      |
+| ✅ Yes	             | ❌ No	               | ✅ Yes	       | ✅ Yes     |
+| ❌ No	              | ✅ Yes	              | ✅ Yes	       | ❌ No      |
+| ❌ No	              | ❌ No	               | ✅ Yes	       | ✅ Yes     |
+| ❌ No	              | ❌ No	               | ❌ No	        | ❌ No      |
+| ✅ Yes	             | ❌ No	               | ❌ No	        | ❌ No      |
+| ❌ No	              | ✅ Yes	              | ❌ No	        | ❌ No      |
 
 ---
 
 🚀 Usage Examples
-
 ✅ Auto-skip
-
 If your chapters.xml contains:
 
 <ChapterString>Intro</ChapterString>
@@ -283,7 +315,6 @@ If your chapters.xml contains:
 And you've configured "Intro" to auto-skip, the addon will jump past it without prompting.
 
 ❓ Ask to skip
-
 If your .edl file contains:
 
 0.0 90.0 9
@@ -291,8 +322,17 @@ And action code 9 maps to "Recap", and "Recap" is mapped to the "Ask to skip" se
 
 
 🔕 Never skip example
-
 If your segment label is "Credits" and you've mapped "Credits" to the "Never skip" setting, playback continues uninterrupted with no skip popup.
+
+---
+
+🍿 Toast Notification Behavior
+- Appears when a video has no matching skip segments
+
+
+Cooldown enforced per playback session (default: 6 seconds)
+
+- Resets on video stop or replay after cooldown
 
 ---
 
@@ -318,31 +358,104 @@ Skippy supports optional filtering of Kodi-native EDL action types (`0`, `1`, `2
 
 ---
 
-🍿 Toast Notification Behavior
+🔁 Skip Overlapping Segments
+Skippy now supports configurable overlap detection to help avoid redundant or conflicting skips. This feature ensures that segments which overlap in time are handled according to your preference.
 
-- Appears when a video has no matching skip segments
-- Suppressed if filtered by playback type
+⚙️ Setting: Skip overlapping segments
+Location: settings.xml → Segment Settings
 
-Cooldown enforced per playback session (default: 6 seconds)
+Type: Boolean toggle (true / false)
 
-- Resets on video stop or replay after cooldown
+Default: true
+
+🧠 What It Does
+
+**When Enabled (true):**
+Skippy will skip any segment that overlaps with one already accepted. This is useful when:
+- EDL or chapter files contain redundant entries
+- Multiple tools or sources generate overlapping metadata
+- You want to avoid double prompts or conflicting skips
+
+**When Disabled (false):**
+Skippy intelligently handles overlapping and nested segments with smart skip behavior:
+
+### 🔗 Nested Segments (One segment fully inside another)
+Example: Intro (0-50s) with Recap (20-40s) nested inside
+- **Intro dialog** appears at 0s: Shows "Skip to Recap at 00:20"
+- **Recap dialog** appears at 20s: Shows "Skip to remaining intro at 00:40"
+- **Intro dialog** reappears at 40s: Shows normal skip (no nested segments remaining)
+
+### 🔄 Partially Overlapping Segments
+Example: Segment A (45-133s) overlaps with Segment B (50-160s)
+- **Segment A dialog** appears at 45s: Shows "Skip to Segment B at 00:50"
+- **Segment B dialog** appears at 50s: Shows "Skip to end of Segment B at 02:40"
+
+### 🛡️ Race Condition Prevention
+- Only one dialog appears at a time
+- Parent segment dialogs are suppressed while nested/overlapping segments are active
+- Parent dialogs automatically reappear after nested segments are completed
+
+📊 Example Scenarios
+
+**Scenario 1: Overlapping Segments**
+```
+Segment A: 45.5 → 133.175
+Segment B: 50.0 → 160.0
+```
+
+Behavior:
+| Setting Value | Result |
+|---------------|--------|
+| true | Segment B is skipped entirely |
+| false | Smart progressive skipping: A → B → end of B |
+
+**Scenario 2: Nested Segments**
+```
+Intro: 0 → 50s
+Recap: 20 → 40s (nested inside Intro)
+```
+
+Behavior:
+| Setting Value | Result |
+|---------------|--------|
+| true | Recap is skipped entirely |
+| false | Progressive flow: Intro → Recap → remaining Intro |
+
+🧪 How to Test
+Enable verbose logging in settings.
+
+Toggle Skip overlapping segments on/off.
+
+Observe logs like:
+
+**When enabled:**
+```
+⚠ Overlapping segment detected: 50.0–100.0 overlaps with 45.5–133.175
+🚫 Skipping overlapping segment: 50.0–100.0 | label='segment'
+```
+
+**When disabled:**
+```
+🔍 Detected NESTED segment: 'recap' (20.0-40.0) is nested inside 'intro' (0.0-50.0)
+🔗 Setting jump point for nested 'recap' to 40.0s (remaining intro)
+🔗 Setting jump point for 'intro' to 20.0s (nested segment 'recap')
+```
 
 ---
 
 🚨 Logging
-
 Verbose logging reveals:
 
 - Parsed segments and labels
 - Playback state and detection
 - Toast decision logic and suppression
 - Skip dialog flow and user choice
+- Overlapping/nested segments
 - Enable via enable_verbose_logging for full insight.
 
 ---
 
 🔄 Batch EDL Action Type Normalizer (Windows)
-
 Located in tools/edl-updater.bat:
 
 Updates all .edl files under a folder recursively
@@ -355,57 +468,7 @@ Ensures full compatibility with Skippy’s behavior mappings
 
 ---
 
-🔁 Skip Overlapping Segments
-Skippy now supports configurable overlap detection to help avoid redundant or conflicting skips. This feature ensures that segments which overlap in time are handled according to your preference.
-
-⚙️ Setting: Skip overlapping segments
-Location: settings.xml → Segment Settings
-
-Type: Boolean toggle (true / false)
-
-Default: true
-
-🧠 What It Does
-When enabled, Skippy will skip any segment that overlaps with one already accepted. This is useful when:
-
-EDL or chapter files contain redundant entries
-
-Multiple tools or sources generate overlapping metadata
-
-You want to avoid double prompts or conflicting skips
-
-📊 Example
-Given the following segments:
-
-Segment A: 45.5 → 133.175
-Segment B: 50.0 → 100.0
-Segment C: 1416.45 → 1507.59
-Segment B overlaps with Segment A:
-
-Overlap window: 50.0 → 100.0
-
-Overlap duration: 50.0 → 100.0 (50 seconds)
-
-Percent overlap of Segment B: 100%
-
-Behavior:
-Setting Value	Result
-true	Segment B is skipped
-false	Segment B is kept
-🧪 How to Test
-Enable verbose logging in settings.
-
-Toggle Skip overlapping segments on/off.
-
-Observe logs like:
-
-⚠ Overlapping segment detected: 50.0–100.0 overlaps with 45.5–133.175
-🚫 Skipping overlapping segment: 50.0–100.0 | label='segment'
-
----
-
 🧾 License & Credits
-
 Not affiliated with Jellyfin, Kodi, MPlayer or Matroska
 
 white.png background courtesy of im85288 (Up Next add-on)
@@ -415,11 +478,12 @@ ________________________________________________________________________________
 
 🧼 Developer Notes
 - UI driven by WindowXMLDialog
-- EDL action types 0 and 3 (Kodi-native) are ignored by the addon due to them being used by Kodi's internal autoskip feature
+- EDL action types 0 and 3 (Kodi-native) are ignored
 - Only -chapters.xml and _chapters.xml and .edl files are scanned
 
 ---
 
 🧑‍💻 Contributors
-
 jonnyp — Architect, debugger
+
+Microsoft Copilot — Code assistant and README wrangler
