@@ -129,11 +129,8 @@ Found under:
 ⚙ Default Settings Overview
 Default settings file loaded at first start located in: .../addons/service.skippy/resources/settings.xml
 
-|---------|-------------|
 | Setting | Description |
-|---------|-------------|
 
-|-----------------------------|-------------------------------------------------------------------------------|
 |Category:                    | Segment Settings                                                              |
 |-----------------------------|-------------------------------------------------------------------------------|
 | custom_segment_keywords     | Comma-separated list of labels (case-insensitive) the skipper should monitor  |
@@ -143,9 +140,7 @@ Default settings file loaded at first start located in: .../addons/service.skipp
 | ignore_kodi_edl_actions     | Default value - true                                                          |
 | edl_action_mapping          |	Map .edl action codes to skip labels (e.g. 4:intro,5:credits)                 |
 | skip_overlapping_segments   | Configurable overlap detection to help avoid redundant or conflicting skips   |
-|-----------------------------|-------------------------------------------------------------------------------|
 
-|-----------------------------|-------------------------------------------------------------------------------|
 |Category:                    | Customize Skip Dialog Look and Behavior                                       | 
 |-----------------------------|-------------------------------------------------------------------------------|
 | show_progress_bar			      | Enables visual progress bar during skip dialog                                |    
@@ -153,22 +148,17 @@ Default settings file loaded at first start located in: .../addons/service.skipp
 | rewind_threshold_seconds	  | Threshold for detecting rewind and clearing dialog suppression states         |
 | show_skip_dialog_movies	    | Show skip dialog for movies when behavior is set to ask	                      |
 | show_skip_dialog_episodes	  | Show skip dialog for TV episodes when behavior is set to ask                  |
-|-----------------------------|-------------------------------------------------------------------------------|
 
-|---------------------------------------------|----------------------------------------------------------------|
 |Category:                                    | Segment Toast Notifications                                    |
 |---------------------------------------------|----------------------------------------------------------------|
 | show_not_found_toast_for_movies             | Enable Missing Segment File Toast for Movies                   |
 | show_not_found_toast_for_tv_episodes        | Enable Missing Segment File Toast for TV Episodes              |
 | show_toast_for_overlapping_nested_segments  | Enable overlapping segment toast if found in segment file      |
 | show_toast_for_skipped_segment              | Enable toast notification for skipped segment                  |
-|---------------------------------------------|----------------------------------------------------------------|
 
-|-----------------------------|----------------------------------------------------------------|
 |Category:                    | Debug Logging                                                  |
 |-----------------------------|----------------------------------------------------------------|
 | enable_verbose_logging      | Enables extra log entries for debugging                        |
-|-----------------------------|----------------------------------------------------------------|
 
 ---
 
