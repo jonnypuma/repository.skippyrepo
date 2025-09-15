@@ -292,15 +292,27 @@ This suppression is independent of the segment file presence or toast settings.
 If a segment in a movie has behavior "ask" and show_skip_dialog_movies = False, the dialog will not appear. Instead, the segment will be silently skipped or ignored depending on other settings.
 
 More detailed
-| Skip Dialog Enabled | Segment File Present	| Toast Enabled |	Show Toast? |
-|---------------------|----------------------|----------------|-------------|
-| ✅ Yes	             | ✅ Yes	              | ✅ Yes	       | ❌ No      |
-| ✅ Yes	             | ❌ No	               | ✅ Yes	       | ✅ Yes     |
-| ❌ No	              | ✅ Yes	              | ✅ Yes	       | ❌ No      |
-| ❌ No	              | ❌ No	               | ✅ Yes	       | ✅ Yes     |
-| ❌ No	              | ❌ No	               | ❌ No	        | ❌ No      |
-| ✅ Yes	             | ❌ No	               | ❌ No	        | ❌ No      |
-| ❌ No	              | ✅ Yes	              | ❌ No	        | ❌ No      |
+
+**Missing Segment File Toast Behavior:**
+| Skip Dialog Enabled | Segment File Present | Show Missing Segment Toast Enabled | Show Missing Segment Toast? |
+|---------------------|----------------------|-----------------------------------|----------------------------|
+| ✅ Yes              | ✅ Yes               | ✅ Yes                            | ❌ No                      |
+| ✅ Yes              | ❌ No                | ✅ Yes                            | ✅ Yes                     |
+| ❌ No               | ✅ Yes               | ✅ Yes                            | ❌ No                      |
+| ❌ No               | ❌ No                | ✅ Yes                            | ❌ No                      |
+| ❌ No               | ❌ No                | ❌ No                             | ❌ No                      |
+| ✅ Yes              | ❌ No                | ❌ No                             | ❌ No                      |
+| ❌ No               | ✅ Yes               | ❌ No                             | ❌ No                      |
+
+**Segment Skip Toast Behavior:**
+| Segment File Present | Segment Skipped | Show Segment Skip Toast Enabled | Show Segment Skip Toast? |
+|---------------------|-----------------|---------------------------------|--------------------------|
+| ✅ Yes              | ✅ Yes          | ✅ Yes                         | ✅ Yes                  |
+| ✅ Yes              | ✅ Yes          | ❌ No                          | ❌ No                   |
+| ✅ Yes              | ❌ No           | ✅ Yes                         | ❌ No                   |
+| ✅ Yes              | ❌ No           | ❌ No                          | ❌ No                   |
+| ❌ No               | ❌ No           | ✅ Yes                         | ❌ No                   |
+| ❌ No               | ❌ No           | ❌ No                          | ❌ No                   |
 
 ---
 
