@@ -41,13 +41,30 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
         self._total_duration = self.segment.end_seconds - self.segment.start_seconds
         self._start_time = time.time()
 
-        # New: Set property for next segment jump time
+        # Enhanced: Set property for next segment jump time with better info
         if self.segment.next_segment_start is not None:
             jump_m, jump_s = divmod(int(self.segment.next_segment_start), 60)
-            jump_str = f"Skip to next segment at {jump_m:02d}:{jump_s:02d}"
+            
+            # Use the next_segment_info if available, otherwise use generic text
+            if hasattr(self.segment, 'next_segment_info') and self.segment.next_segment_info:
+                # Extract segment label from info if it contains one
+                if "'" in self.segment.next_segment_info:
+                    # Extract text between quotes
+                    import re
+                    match = re.search(r"'([^']+)'", self.segment.next_segment_info)
+                    if match:
+                        segment_label = match.group(1).title()
+                        jump_str = f"Skip to {segment_label} at {jump_m:02d}:{jump_s:02d}"
+                    else:
+                        jump_str = f"Skip to next segment at {jump_m:02d}:{jump_s:02d}"
+                else:
+                    jump_str = f"Skip to next segment at {jump_m:02d}:{jump_s:02d}"
+            else:
+                jump_str = f"Skip to next segment at {jump_m:02d}:{jump_s:02d}"
+            
             self.setProperty("next_jump_label", jump_str)
             self.setProperty("show_next_jump", "true")
-            log(f"⏭️ Dialog configured for jump to next segment at {self.segment.next_segment_start}s")
+            log(f"⏭️ Dialog configured for jump to next segment at {self.segment.next_segment_start}s: {jump_str}")
         else:
             self.setProperty("show_next_jump", "false")
             log("➡️ Dialog configured for normal skip to end of segment")
@@ -119,7 +136,7 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
 
     def onClick(self, controlId):
         if controlId == 3012:
-            self.response = self.segment.next_segment_start or self.segment.end_seconds
+            self.response = self.segment.next_segment_start or self.segment.end_seconds + 1.0
             log(f"🖱️ User clicked skip → skipping to {self.response}s")
         else:
             self.response = False

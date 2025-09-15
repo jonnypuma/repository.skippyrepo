@@ -16,7 +16,7 @@ def normalize_label(text):
     return unicodedata.normalize("NFKC", text or "").strip().lower()
 
 class SegmentItem:
-    def __init__(self, start_seconds, end_seconds, label="segment", source="edl", action_type=None, timeout=5.0, allow_input=True, next_segment_start=None):
+    def __init__(self, start_seconds, end_seconds, label="segment", source="edl", action_type=None, timeout=5.0, allow_input=True, next_segment_start=None, next_segment_info=None):
         if end_seconds < start_seconds:
             raise ValueError(f"Segment end time ({end_seconds}) must be after start time ({start_seconds})")
 
@@ -28,6 +28,7 @@ class SegmentItem:
         self.timeout = timeout
         self.allow_input = allow_input
         self.next_segment_start = next_segment_start  # New attribute for overlapping/nested skips
+        self.next_segment_info = next_segment_info  # New attribute for describing the next segment
 
         log(f"🧩 New SegmentItem created: {self}")
 
@@ -51,7 +52,8 @@ class SegmentItem:
             "label": self.segment_type_label,
             "source": self.source,
             "action_type": self.action_type,
-            "next_segment_start": self.next_segment_start # Include new attribute
+            "next_segment_start": self.next_segment_start, # Include new attribute
+            "next_segment_info": self.next_segment_info # Include new attribute
         }
         log(f"📦 Converted SegmentItem to dict: {result}")
         return result
@@ -59,7 +61,8 @@ class SegmentItem:
     def __str__(self):
         action = f", action={self.action_type}" if self.action_type else ""
         next_jump = f", next_jump={self.next_segment_start}" if self.next_segment_start else ""
-        return f"{self.segment_type_label} [{self.start_seconds}-{self.end_seconds}] ({self.source}{action}{next_jump})"
+        next_info = f", next_info={self.next_segment_info}" if self.next_segment_info else ""
+        return f"{self.segment_type_label} [{self.start_seconds}-{self.end_seconds}] ({self.source}{action}{next_jump}{next_info})"
 
 # 🔍 Dialog trigger logic — stateless, no caching
 def should_show_skip_dialog(current_time, segments, last_shown_times, debounce_seconds=5):
@@ -107,6 +110,7 @@ if __name__ == "__main__":
                 "source": "xml",
                 "action_type": "mute",
                 "next_segment_start": None,
+                "next_segment_info": None,
             }
             self.assertEqual(seg.to_dict(), expected)
 
@@ -116,15 +120,17 @@ if __name__ == "__main__":
             self.assertFalse(seg.allow_input)
             
         def test_with_next_segment_start(self):
-            seg = SegmentItem(10, 30, "intro", next_segment_start=20)
+            seg = SegmentItem(10, 30, "intro", next_segment_start=20, next_segment_info="nested segment 'recap'")
             self.assertEqual(seg.next_segment_start, 20)
+            self.assertEqual(seg.next_segment_info, "nested segment 'recap'")
             expected = {
                 "start": 10,
                 "end": 30,
                 "label": "intro",
                 "source": "edl",
                 "action_type": None,
-                "next_segment_start": 20
+                "next_segment_start": 20,
+                "next_segment_info": "nested segment 'recap'"
             }
             self.assertEqual(seg.to_dict(), expected)
 
