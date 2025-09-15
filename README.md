@@ -240,7 +240,7 @@ If no label is present in edl file or defined in settings, 'Segment' is used as 
 📘 .xml Chapter Format
 XML files define segments using chapter metadata:
 
-xml
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Chapters>
   <EditionEntry>
@@ -265,7 +265,7 @@ ChapterString is the label used for skip mode matching
 Times must be in HH:MM:SS.mmm format
 
 Labels are normalized (e.g. Intro, intro, INTRO all match)
-
+```
 ---
 
 🧩 File Example
@@ -346,16 +346,16 @@ Skippy supports optional filtering of Kodi-native EDL action types (`0`, `1`, `2
 - **Default:** `true`
 
 #### ✅ Behavior
-| Setting Value | Action Types Parsed | Result |
-|---------------|---------------------|--------|
-| `true`        | Only custom actions (`>=4`) | Internal Kodi skip markers are ignored |
-| `false`       | All action types     | Autoskip or prompt for all segments, including Kodi-native ones |
+| Setting Value | Action Types Parsed         | Result                                                          |
+|---------------|-----------------------------|-----------------------------------------------------------------|
+| `true`        | Only custom actions (`>=4`) | Internal Kodi skip markers are ignored                          |
+| `false`       | All action types            | Autoskip or prompt for all segments, including Kodi-native ones |
 
-#### 📝 Example
-```edl
-237.5    326.326    5    intro
-1323.45  1429.184   2    segment
-
+#### 📝 Example EDL
+```xml
+237.5    326.326    5    <-- intro
+1323.45  1429.184   8    <-- recap
+```
 ---
 
 🔁 Skip Overlapping Segments
@@ -398,19 +398,19 @@ Example: Segment A (45-133s) overlaps with Segment B (50-160s)
 📊 Example Scenarios
 
 **Scenario 1: Overlapping Segments**
-```
+```xml
 Segment A: 45.5 → 133.175
 Segment B: 50.0 → 160.0
 ```
 
 Behavior:
-| Setting Value | Result |
-|---------------|--------|
-| true | Segment B is skipped entirely |
-| false | Smart progressive skipping: A → B → end of B |
+| Setting Value | Result                                       |
+|---------------|----------------------------------------------|
+| true          | Segment B is skipped entirely                |
+| false         | Smart progressive skipping: A → B → end of B |
 
 **Scenario 2: Nested Segments**
-```
+```xml
 Intro: 0 → 50s
 Recap: 20 → 40s (nested inside Intro)
 ```
@@ -429,7 +429,7 @@ Toggle Skip overlapping segments on/off.
 Observe logs like:
 
 **When enabled:**
-```
+```xml
 ⚠ Overlapping segment detected: 50.0–100.0 overlaps with 45.5–133.175
 🚫 Skipping overlapping segment: 50.0–100.0 | label='segment'
 ```
