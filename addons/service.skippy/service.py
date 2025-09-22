@@ -349,9 +349,80 @@ def should_suppress_segment_dialog(current_segment, all_segments, current_time):
     
     return False
 
-def parse_and_process_segments(path):
+def re_evaluate_segment_jump_points(segments, current_time):
+    """
+    Re-evaluate jump points for segments based on current playback position.
+    This is needed after major rewinds to ensure correct jump targets.
+    """
+    log(f"🔄 Re-evaluating jump points for {len(segments)} segments at time {current_time:.2f}")
+    
+    for i in range(len(segments)):
+        current_seg = segments[i]
+        
+        # Find the next segment that starts within or after this segment
+        next_jump_target = None
+        next_segment_info = None
+        
+        for j in range(i + 1, len(segments)):
+            next_seg = segments[j]
+            
+            # Check if next segment starts within current segment (overlap or nested)
+            if next_seg.start_seconds < current_seg.end_seconds:
+                # Determine relationship type
+                if is_nested_segment(current_seg, next_seg):
+                    # For nested segments, only set jump to nested segment if we're still before the nested segment
+                    if current_time < next_seg.start_seconds:
+                        log(f"🔍 Re-evaluating: '{next_seg.segment_type_label}' is nested in '{current_seg.segment_type_label}', current time {current_time:.2f} is before nested segment ({next_seg.start_seconds}-{next_seg.end_seconds})")
+                        next_jump_target = next_seg.start_seconds
+                        next_segment_info = f"nested segment '{next_seg.segment_type_label}'"
+                        break
+                    else:
+                        # We're at or past the nested segment, skip to end of parent
+                        log(f"🔍 Re-evaluating: '{next_seg.segment_type_label}' is nested in '{current_seg.segment_type_label}', but current time {current_time:.2f} is at or past nested segment ({next_seg.start_seconds}-{next_seg.end_seconds}), will skip to parent end")
+                        next_jump_target = None  # Will default to end of current segment
+                        next_segment_info = None
+                        break
+                        
+                elif is_overlapping_segment(current_seg, next_seg):
+                    log(f"🔍 Re-evaluating: '{next_seg.segment_type_label}' overlaps with '{current_seg.segment_type_label}'")
+                    next_jump_target = next_seg.start_seconds
+                    next_segment_info = f"overlapping segment '{next_seg.segment_type_label}'"
+                    break
+            else:
+                # No more segments within current segment, break
+                break
+        
+        # Update the segment's jump point
+        current_seg.next_segment_start = next_jump_target
+        current_seg.next_segment_info = next_segment_info
+        
+        if next_jump_target is not None:
+            log(f"🔗 Re-evaluated jump point for '{current_seg.segment_type_label}' to {next_jump_target}s ({next_segment_info})")
+        else:
+            log(f"🔗 Re-evaluated jump point for '{current_seg.segment_type_label}' to end of segment ({current_seg.end_seconds}s)")
+    
+    # Additional pass: Ensure nested segments have correct jump points when we're rewinding into them
+    log(f"🔍 Additional pass: Checking nested segments for correct jump points at time {current_time:.2f}")
+    for i in range(len(segments)):
+        current_seg = segments[i]
+        
+        # Check if current_time is within this segment
+        if current_seg.start_seconds <= current_time <= current_seg.end_seconds:
+            # Find if this segment is nested within any parent segment
+            for j in range(i):
+                parent_seg = segments[j]
+                if is_nested_segment(parent_seg, current_seg):
+                    # This is a nested segment, ensure it has the correct jump point
+                    if current_seg.next_segment_start != current_seg.end_seconds:
+                        log(f"🔧 Fixing nested segment '{current_seg.segment_type_label}': setting jump point to {current_seg.end_seconds}s (end of segment)")
+                        current_seg.next_segment_start = current_seg.end_seconds
+                        current_seg.next_segment_info = f"remaining {parent_seg.segment_type_label}"
+                    break
+
+def parse_and_process_segments(path, current_time=None):
     """
     Parses segments, filters them based on settings, and then links overlapping/nested segments.
+    If current_time is provided, the linking logic will be context-aware.
     """
     log(f"🚦 Starting new segment parse and process for: {path}")
     parsed = parse_chapters(path)
@@ -410,9 +481,18 @@ def parse_and_process_segments(path):
                 # Determine relationship type
                 if is_nested_segment(current_seg, next_seg):
                     log(f"🔍 Detected NESTED segment: '{next_seg.segment_type_label}' ({next_seg.start_seconds}-{next_seg.end_seconds}) is nested inside '{current_seg.segment_type_label}' ({current_seg.start_seconds}-{current_seg.end_seconds})")
-                    # For nested segments, jump to the start of the nested segment
-                    next_jump_target = next_seg.start_seconds
-                    next_segment_info = f"nested segment '{next_seg.segment_type_label}'"
+                    
+                    # Context-aware linking: only set jump to nested segment if we're before it
+                    if current_time is None or current_time < next_seg.start_seconds:
+                        # For nested segments, jump to the start of the nested segment
+                        next_jump_target = next_seg.start_seconds
+                        next_segment_info = f"nested segment '{next_seg.segment_type_label}'"
+                        log(f"🔗 Setting jump point for '{current_seg.segment_type_label}' to {next_jump_target}s ({next_segment_info})")
+                    else:
+                        # We're at or past the nested segment, skip to end of parent
+                        log(f"🔗 Context-aware: current time {current_time:.2f} is at or past nested segment, will skip to end of parent")
+                        next_jump_target = None  # Will default to end of current segment
+                        next_segment_info = None
                     
                     # Also set the nested segment to jump to the end of its own segment (not parent)
                     next_seg.next_segment_start = next_seg.end_seconds
@@ -510,30 +590,57 @@ while not monitor.abortRequested():
 
             log(f"🧪 Raw setting values → show_dialogs: {show_dialogs}, show_not_found_toast_for_movies: {toast_movies}, show_not_found_toast_for_tv_episodes: {toast_episodes}")
 
-            if not playback_type:
-                log("⚠ Playback type not detected — skipping segment parsing")
-                monitor.current_segments = []
-            else:
-                monitor.current_segments = parse_and_process_segments(video) or []
-                log(f"📦 Parsed {len(monitor.current_segments)} segments for playback_type: {playback_type}")
-
-            if not show_dialogs:
-                log(f"🚫 Skip dialogs disabled for {playback_type} — segments will not trigger prompts")
-
         try:
             current_time = player.getTime()
-            log(f"🧪 Current playback time: {current_time}")
+            log(f"🧪 Current playback time: {current_time}, last_time: {monitor.last_time}")
         except RuntimeError:
             log("⚠ player.getTime() failed — no media playing")
             continue
 
+        if not playback_type:
+            log("⚠ Playback type not detected — skipping segment parsing")
+            monitor.current_segments = []
+        else:
+            monitor.current_segments = parse_and_process_segments(video, current_time) or []
+            log(f"📦 Parsed {len(monitor.current_segments)} segments for playback_type: {playback_type}")
+
+        if not show_dialogs:
+            log(f"🚫 Skip dialogs disabled for {playback_type} — segments will not trigger prompts")
+
         rewind_threshold = get_addon().getSettingInt("rewind_threshold_seconds")
-        if current_time < monitor.last_time and monitor.last_time - current_time > rewind_threshold:
+        major_rewind_detected = False
+        
+        # Check for rewind BEFORE updating last_time
+        if monitor.last_time > 0:  # Only check if we have a previous time
+            rewind_detected = current_time < monitor.last_time and monitor.last_time - current_time > rewind_threshold
+            if rewind_detected:
+                log(f"🔍 Rewind check: current={current_time:.2f}, last={monitor.last_time:.2f}, threshold={rewind_threshold}, difference={monitor.last_time - current_time:.2f}")
+        else:
+            rewind_detected = False
+        
+        if rewind_detected:
             log(f"⏪ Significant rewind detected ({monitor.last_time:.2f} → {current_time:.2f}) — threshold: {rewind_threshold}s")
             monitor.prompted.clear()
             monitor.recently_dismissed.clear()
-            monitor.skipped_to_nested_segment.clear()
-            log("🧹 recently_dismissed and nested segment tracking cleared due to rewind")
+            
+            # Only clear nested segment tracking if the rewind takes us outside of any tracked nested segments
+            # This preserves the nested segment state if we're still within the nested segment after rewind
+            nested_segments_to_remove = []
+            for parent_seg_id, nested_segment in monitor.skipped_to_nested_segment.items():
+                if not nested_segment.is_active(current_time):
+                    # We've rewound outside this nested segment, so we can clear the tracking
+                    nested_segments_to_remove.append(parent_seg_id)
+                    log(f"🔄 Major rewind took us outside nested segment '{nested_segment.segment_type_label}', clearing tracking for parent {parent_seg_id}")
+            
+            for seg_id in nested_segments_to_remove:
+                del monitor.skipped_to_nested_segment[seg_id]
+            
+            # Re-evaluate segment jump points after major rewind to ensure correct jump targets
+            if monitor.current_segments:
+                re_evaluate_segment_jump_points(monitor.current_segments, current_time)
+            
+            major_rewind_detected = True
+            log("🧹 recently_dismissed cleared due to rewind, nested segment tracking selectively cleared, jump points re-evaluated")
         
         # Check if we've exited any nested segments and need to re-enable parent segment dialogs
         if monitor.skipped_to_nested_segment:
@@ -555,12 +662,10 @@ while not monitor.abortRequested():
                 else:
                     log(f"🔄 Exited nested segment '{nested_segment.segment_type_label}', parent segment {parent_seg_id} was not in prompted set")
                 
-                # Mark that this parent segment should skip to its end, not back to the nested segment
-                for seg in monitor.current_segments:
-                    if (int(seg.start_seconds), int(seg.end_seconds)) == parent_seg_id:
-                        seg.next_segment_start = None  # Clear the jump to nested segment
-                        log(f"🔄 Cleared next_segment_start for parent segment {parent_seg_id} - will now skip to end")
-                        break
+                # Re-evaluate segment jump points since we've exited a nested segment
+                if monitor.current_segments:
+                    log(f"🔄 Re-evaluating jump points after exiting nested segment '{nested_segment.segment_type_label}'")
+                    re_evaluate_segment_jump_points(monitor.current_segments, current_time)
         
         # Remove exited nested segments from tracking
         for seg_id in segments_to_remove:
@@ -612,7 +717,15 @@ while not monitor.abortRequested():
             monitor.last_time = current_time
             continue
 
-        for segment in monitor.current_segments:
+        # Process segments - if major rewind was detected, force re-evaluation of all segments
+        segments_to_process = monitor.current_segments
+        if major_rewind_detected:
+            log("🔄 Major rewind detected — re-evaluating all segments for active dialogs")
+        
+        # Debug: Show current state of tracking sets
+        log(f"📊 Current state: prompted={len(monitor.prompted)} items, recently_dismissed={len(monitor.recently_dismissed)} items, skipped_to_nested={len(monitor.skipped_to_nested_segment)} items")
+        
+        for segment in segments_to_process:
             seg_id = (int(segment.start_seconds), int(segment.end_seconds))
             
             if seg_id in monitor.prompted:
@@ -756,7 +869,8 @@ while not monitor.abortRequested():
                     monitor.prompted.add(seg_id)
                     continue
 
-            monitor.last_time = current_time
+        # Update last_time at the end of each main loop cycle for next iteration's rewind detection
+        monitor.last_time = current_time
 
 
     if monitor.waitForAbort(CHECK_INTERVAL):

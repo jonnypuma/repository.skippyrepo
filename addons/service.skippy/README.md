@@ -1,7 +1,7 @@
 <img width="1024" height="1024" alt="icon" src="https://github.com/user-attachments/assets/a9566ad0-f74c-45b7-8243-85357f33b194" />
 # 📼 Skippy — The XML-EDL Segment Skipper
 
-Skippy is a Kodi service which detects and can skip predefined video segments such as intros, recaps, ads, or credits using companion `.xml` or `.edl` files. 
+Skippy is a Kodi service that intelligently detects and can skip predefined video segments such as intros, recaps, ads, or credits using companion `.xml` or `.edl` files. 
 
 Supports chaptered Matroska XMLs, enhanced EDLs with labeled action types.
  
@@ -9,9 +9,9 @@ It provides both automatic and user-prompted skipping, and integrates seamlessly
 
 Discreet, cross-platform, and customizable.
 
-Supported Video Formats: Works for MKV files.
+Supported Video Formats: Works for MKV and AVI containers.
 
-Known Limitations: MP4 files are currently not supported when the video is played from an NFS share due to a technical limitation in how the add-on attempts to read sidecar files for MP4s over a network protocol.
+Known Limitations: Video files in MP4 containers are currently not working, seems to be a Kodi issue and not addon issue.
 
 ---
 
