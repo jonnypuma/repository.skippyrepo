@@ -703,14 +703,16 @@ while not monitor.abortRequested():
                             sound=False
                         )
                         monitor.last_toast_time = now
+                        monitor.shown_missing_file_toast = True
                         log(f"⚠ [TOAST BLOCK] Toast displayed for {msg_type}")
                     else:
                         log(f"⏳ [TOAST BLOCK] Suppressed — cooldown active ({int(now - monitor.last_toast_time)}s since last toast)")
                 else:
                     log("✅ [TOAST BLOCK] Toast suppressed — toast toggle disabled for this type")
+                    monitor.shown_missing_file_toast = True
             except Exception as e:
                 log(f"❌ [TOAST BLOCK] should_show_missing_file_toast() failed: {e}")
-            monitor.shown_missing_file_toast = True
+                monitor.shown_missing_file_toast = True
 
         if not monitor.playback_ready:
             log("⏳ Playback not ready — waiting before processing segments")
@@ -754,8 +756,8 @@ while not monitor.abortRequested():
             behavior = get_user_skip_mode(segment.segment_type_label)
             log(f"🧪 Segment behavior for '{segment.segment_type_label}': {behavior}")
 
-            if not show_dialogs and behavior == "ask":
-                log(f"🚫 Dialogs disabled in settings — suppressing 'ask' behavior for segment {seg_id}")
+            if not show_dialogs:
+                log(f"🚫 Dialogs disabled in settings — suppressing dialog for segment {seg_id} (behavior: {behavior})")
                 monitor.prompted.add(seg_id)
                 continue  
             if behavior == "never":
