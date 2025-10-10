@@ -294,15 +294,18 @@ This suppression is independent of the segment file presence or toast settings.
 If a segment in a movie has behavior "ask" and show_skip_dialog_movies = False, the dialog will not appear. Instead, the segment will be silently skipped or ignored depending on other settings.
 
 More detailed
-| Skip Dialog Enabled | Segment File Present	| Toast Enabled |	Show Toast? |
-|---------------------|----------------------|----------------|-------------|
-| ✅ Yes	             | ✅ Yes	              | ✅ Yes	       | ❌ No      |
-| ✅ Yes	             | ❌ No	               | ✅ Yes	       | ✅ Yes     |
-| ❌ No	              | ✅ Yes	              | ✅ Yes	       | ❌ No      |
-| ❌ No	              | ❌ No	               | ✅ Yes	       | ✅ Yes     |
-| ❌ No	              | ❌ No	               | ❌ No	        | ❌ No      |
-| ✅ Yes	             | ❌ No	               | ❌ No	        | ❌ No      |
-| ❌ No	              | ✅ Yes	              | ❌ No	        | ❌ No      |
+
+**Missing Segment File Toast Behavior:**
+| show_skip_dialog setting | Segment File Present | Show Missing Segment Toast Enabled | Show Missing Segment Toast? |
+|--------------------------|----------------------|-----------------------------------|----------------------------|
+| ✅ True                  | ✅ Yes               | ✅ Yes                            | ❌ No                      |
+| ✅ True                  | ❌ No                | ✅ Yes                            | ✅ Yes                     |
+| ❌ False                 | ✅ Yes               | ✅ Yes                            | ❌ No                      |
+| ❌ False                 | ❌ No                | ✅ Yes                            | ❌ No                      |
+| ❌ False                 | ❌ No                | ❌ No                             | ❌ No                      |
+| ✅ True                  | ❌ No                | ❌ No                             | ❌ No                      |
+| ❌ False                 | ✅ Yes               | ❌ No                             | ❌ No                      |
+
 
 ---
 
