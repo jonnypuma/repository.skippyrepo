@@ -85,7 +85,7 @@ Tested on **Kodi Omega 21.2** across:
 - 🧠 Label logic allows fine-grained control: `"intro"`, `"recap"`, `"ads"`, etc.
 - 🛡️ Platform-agnostic compatibility: Works seamlessly across Android, Windows, CoreELEC, and Linux.
 - 📊 Progress Bar Display toggle: Progress bar which fills up until end of segment. On/off toggle available under settings.
-- 🖼️ Skip Dialog Placement: Choose dialog layout position (Center, Top, Bottom, Side)
+- 🖼️ Skip Dialog Placement: Choose dialog layout position (Bottom Right, Top Right, Top Left, Bottom Left)
 - ⏪ Rewind detection logic: Resets skip prompts only on significant rewinds — with a user-defined threshold.
 - 📺 Toast segment file not-found notification filtering: Notifies when no segments were found for the current video. Toggle on/off for movies or TV episodes. Supports per-playback cooldown (default: 6 seconds)
 - 🧹 Debug logging: Verbose logs for each segment processed and decision made. Toggle on/off.
@@ -150,7 +150,7 @@ Default settings file loaded at first start located in: .../addons/service.skipp
 | segment_always_skip         |	Comma-separated list of segment labels to skip automatically                  |
 | segment_ask_skip            | Comma-separated list of labels to prompt for skipping                         |
 | segment_never_skip          |	Comma-separated list of labels to never skip                                  |
-| ignore_kodi_edl_actions     | Default value - true                                                          |
+| ignore_internal_edl_actions | Ignore internal EDL action types not in mapping (default: true)              |
 | edl_action_mapping          |	Map .edl action codes to skip labels (e.g. 4:intro,5:credits)                 |
 | skip_overlapping_segments   | Configurable overlap detection to help avoid redundant or conflicting skips   |
 
@@ -158,6 +158,7 @@ Default settings file loaded at first start located in: .../addons/service.skipp
 |-----------------------------|-------------------------------------------------------------------------------|
 | show_progress_bar			      | Enables visual progress bar during skip dialog                                |    
 | skip_dialog_position	    	| Chooses layout position for the skip confirmation dialog                      |
+| button_focus_style          | Choose visual style for focused buttons in skip dialog (Default, Aqua, Aqua Bevel, Aqua Dark, Aqua Vignette, Aqua Rounded, Blue) |
 | rewind_threshold_seconds	  | Threshold for detecting rewind and clearing dialog suppression states         |
 | show_skip_dialog_movies	    | Show skip dialog for movies when behavior is set to ask	                      |
 | show_skip_dialog_episodes	  | Show skip dialog for TV episodes when behavior is set to ask                  |
@@ -187,6 +188,57 @@ Examples:
 segment_always_skip = commercial, ad
 segment_ask_skip = intro, recap, credits, pre-roll
 segment_never_skip = logo, preview, prologue, epilogue, main
+
+---
+
+🎨 Button Focus Texture Customization
+
+Skippy supports multiple visual styles for the focused buttons in the skip dialog. You can choose from several pre-designed button focus textures:
+
+**Available Styles:**
+- **Default**: Standard blue focus texture
+- **Aqua**: Aqua-colored focus texture
+- **Aqua Bevel**: Aqua texture with beveled edges
+- **Aqua Dark**: Darker aqua variant
+- **Aqua Vignette**: Aqua texture with vignette effect
+- **Aqua Rounded**: Aqua texture with rounded corners
+- **Blue**: Alternative blue style
+
+**How to Change:**
+1. Go to `Settings → Add-ons → My Add-ons → Services → Skippy`
+2. Navigate to "Customize Skip Dialog Look and Behavior"
+3. Select your preferred "Button Focus Style"
+4. The change takes effect immediately for new skip dialogs
+
+**Technical Details:**
+- Button dimensions: 240x25 pixels
+- Textures are located in `resources/skins/default/media/`
+- The system dynamically updates all skip dialog XML files when you change the setting
+- No restart required - changes apply immediately
+
+---
+
+📊 Progress Bar Display
+
+Skippy includes a visual progress bar that shows the elapsed time of the current skip segment:
+
+**Features:**
+- **Visual Progress**: Fills up as the segment progresses toward its end
+- **Real-time Updates**: Updates every 0.25 seconds during segment playback
+- **Toggle Control**: Can be enabled/disabled in addon settings
+- **Dynamic Setting**: Changes to the setting take effect immediately without restart
+
+**How to Control:**
+1. Go to `Settings → Add-ons → My Add-ons → Services → Skippy`
+2. Navigate to "Customize Skip Dialog Look and Behavior"
+3. Toggle "Show Progress Bar in Skip Dialog" on/off
+4. Changes apply immediately for new skip dialogs
+
+**Technical Details:**
+- Progress bar dimensions: 370x5 pixels
+- Located at the bottom of the skip dialog
+- Uses custom textures: `progress_left.png`, `progress_mid.png`, `progress_right.png`, `progress_background.png`
+- Setting is read dynamically - no caching issues
 
 ---
 
@@ -365,7 +417,7 @@ Cooldown enforced per playback session (default: 6 seconds)
 Skippy supports optional filtering of Kodi-native EDL action types (`0`, `1`, `2`, `3`). This allows users to ignore internal skip markers and rely only on custom-defined segments.
 
 #### 🔧 Setting
-- **Name:** `ignore_kodi_edl_actions`
+- **Name:** `ignore_internal_edl_actions`
 - **Type:** Boolean
 - **Default:** `true`
 
