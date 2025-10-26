@@ -26,8 +26,16 @@ service.skippy/
 ├── segment_item.py
 ├── settings_utils.py
 ├── icon.png
+├── fanart.jpg
+├── screenshot01.png
+├── screenshot02.png
+├── screenshot03.png
+├── service.skippy - Copy.code-workspace
 ├── resources/
 │   ├── settings.xml
+│   ├── language/
+│   │   └── English/
+│   │       └── strings.po                      # Localization strings for addon settings
 │   └── skins/
 │       └── default/
 │           ├── 720p/
@@ -37,18 +45,24 @@ service.skippy/
 │           │   ├── SkipDialog_BottomRight.xml  # Skip dialog located bottom right corner
 │           │   └── SkipDialog_BottomLeft.xml   # Skip dialog located bottom left corner
 │           └── media/
-│               ├── icon_skip.png               #skip button icon
-│               ├── icon_close.png              #close button icon
-│               ├── progress_left.png           #progress bar left segment
-│               ├── progress_right.png          #progress bar right segment
-│               ├── progress_background.png     #progress bar background texture
-│               ├── progress_mid.png            #progress bar middle segment
-│               ├── button_nofocus.png          #skip dialog button background texture when not highlighted
-│               ├── button_focus.png            #skip dialog button background texture when highlighted 
-│               ├── skippy.png                  #the Skippy logo displayed in user settings and toast notifications
+│               ├── icon_skip.png               # Skip button icon
+│               ├── icon_close.png              # Close button icon
+│               ├── progress_left.png           # Progress bar left segment
+│               ├── progress_right.png          # Progress bar right segment
+│               ├── progress_background.png     # Progress bar background texture
+│               ├── progress_mid.png            # Progress bar middle segment
+│               ├── button_nofocus.png          # Skip dialog button background texture when not highlighted
+│               ├── button_focus.png            # Skip dialog button background texture when highlighted (default)
+│               ├── button_focus_aqua.png       # Aqua style button focus texture
+│               ├── button_focus_aqua_bevel.png # Aqua bevel style button focus texture
+│               ├── button_focus_aqua_dark.png  # Aqua dark style button focus texture
+│               ├── button_focus_aqua_vignette.png # Aqua vignette style button focus texture
+│               ├── button_focus_aqua_rounded.png # Aqua rounded style button focus texture
+│               ├── button_focus_blue.png       # Blue style button focus texture
 │               └── white.png                   # Dialog background (credit: im85288, Up Next)
 └── tools/
-    └── edl-updater.bat                         # (Optional) EDL action type batch normalizer
+    ├── edl-updater.bat                         # (Optional) EDL action type batch normalizer
+    └── ed-updater_all_but_4.bat               # (Optional) EDL updater for all action types except 4
 ```
 
 ✅ Supported Kodi Versions and Platforms
