@@ -5,15 +5,40 @@ import threading
 import time
 import json
 
+# Define a global variable to cache the addon object
+_addon = None
+
 def get_addon():
-    return xbmcaddon.Addon()
+    """Returns the xbmcaddon.Addon object for this addon,
+    or None if it fails to load."""
+    # Always create a fresh addon object to avoid caching issues
+    try:
+        return xbmcaddon.Addon("service.skippy")
+    except RuntimeError:
+        return None
 
 def log(msg):
-    if get_addon().getSettingBool("enable_verbose_logging"):
-        xbmc.log(f"[{get_addon().getAddonInfo('id')} - SkipDialog] {msg}", xbmc.LOGINFO)
+    addon = get_addon()
+    if addon and addon.getSettingBool("enable_verbose_logging"):
+        # The addon context might be lost, so check again before calling getAddonInfo
+        try:
+            xbmc.log(f"[{addon.getAddonInfo('id')} - SkipDialog] {msg}", xbmc.LOGINFO)
+        except RuntimeError:
+            # Fallback if the addon info can't be retrieved
+            xbmc.log(f"[service.skippy - SkipDialog] {msg}", xbmc.LOGINFO)
 
 def log_always(msg):
-    xbmc.log(f"[{get_addon().getAddonInfo('id')} - SkipDialog] {msg}", xbmc.LOGINFO)
+    # This function is now more robust against shutdown failures
+    addon = get_addon()
+    if addon:
+        # Check if the addon is still in context
+        try:
+            xbmc.log(f"[{addon.getAddonInfo('id')} - SkipDialog] {msg}", xbmc.LOGINFO)
+        except RuntimeError:
+            # Fallback for when context is lost
+            xbmc.log(f"[service.skippy - SkipDialog] {msg}", xbmc.LOGINFO)
+    else:
+        xbmc.log(f"[service.skippy - SkipDialog] {msg}", xbmc.LOGINFO)
 
 class SkipDialog(xbmcgui.WindowXMLDialog):
     def __init__(self, *args, **kwargs):
@@ -69,23 +94,21 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
             self.setProperty("show_next_jump", "false")
             log("➡️ Dialog configured for normal skip to end of segment")
 
-        # 🔧 Load progress bar setting
+        # 📊 Setup progress bar (read setting dynamically)
         try:
-            raw = get_addon().getSetting("show_progress_bar").lower()
-            self._show_progress = json.loads(raw)
-        except Exception:
-            self._show_progress = True
-            log("⚠️ Failed to parse show_progress_bar setting — defaulting to True")
-
-        log(f"🧩 show_progress_bar setting: {self._show_progress}")
-
-        # 📊 Setup progress bar
-        try:
+            # Read setting dynamically instead of caching
+            addon = get_addon()
+            raw_setting = addon.getSetting("show_progress_bar")
+            show_progress = addon.getSettingBool("show_progress_bar")
+            log(f"🧩 show_progress_bar raw setting: '{raw_setting}' -> bool: {show_progress}")
+            
             progress = self.getControl(3014)
-            progress.setVisible(self._show_progress)
-            if self._show_progress:
+            progress.setVisible(show_progress)
+            if show_progress:
                 progress.setPercent(0)
                 log("📊 Progress bar initialized at 0%")
+            else:
+                log("📊 Progress bar hidden due to setting")
         except Exception as e:
             log(f"⚠️ Progress bar control error: {e}")
 
@@ -106,15 +129,28 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
             m, s = divmod(max(remaining, 0), 60)
             self.setProperty("countdown", f"{m:02d}:{s:02d}")
 
-            # 📊 Update progress bar
-            if self._show_progress:
-                try:
+            # 📊 Update progress bar (check setting dynamically)
+            try:
+                # Re-read the setting each time to handle changes
+                addon = get_addon()
+                raw_setting = addon.getSetting("show_progress_bar")
+                show_progress = addon.getSettingBool("show_progress_bar")
+                
+                progress = self.getControl(3014)
+                progress.setVisible(show_progress)
+                
+                if show_progress:
                     elapsed = max(current - self.segment.start_seconds, 0)
                     percent = int((elapsed / self._total_duration) * 100)
                     percent = min(max(percent, 0), 100)
-                    self.getControl(3014).setPercent(percent)
-                except Exception as e:
-                    log(f"⚠️ Progress bar update error: {e}")
+                    progress.setPercent(percent)
+                    log(f"📊 Progress bar visible: {percent}% (raw: '{raw_setting}')")
+                else:
+                    # Ensure progress bar is hidden when disabled
+                    progress.setVisible(False)
+                    log(f"📊 Progress bar hidden due to setting (raw: '{raw_setting}')")
+            except Exception as e:
+                log(f"⚠️ Progress bar update error: {e}")
 
             # ⌛ Segment end reached
             if current >= self.segment.end_seconds - 0.5:
@@ -152,9 +188,12 @@ class SkipDialog(xbmcgui.WindowXMLDialog):
             self._closing = True
             self.close()
 
+
     def onClose(self):
         try:
-            if self._show_progress:
+            # Reset progress bar on close (read setting dynamically)
+            show_progress = get_addon().getSettingBool("show_progress_bar")
+            if show_progress:
                 self.getControl(3014).setPercent(0)
                 log("🔄 Progress bar reset on close")
         except Exception as e:

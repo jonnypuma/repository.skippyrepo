@@ -23,6 +23,48 @@ from settings_utils import (
     show_overlapping_toast,
 )
 
+def _update_button_textures(texture_path):
+    """Update button textures in XML files dynamically"""
+    try:
+        import os
+        import re
+        
+        # Get the addon path
+        addon = get_addon()
+        addon_path = addon.getAddonInfo('path')
+        xml_dir = os.path.join(addon_path, 'resources', 'skins', 'default', '720p')
+        
+        # List of XML files to update
+        xml_files = [
+            'SkipDialog_BottomRight.xml',
+            'SkipDialog_BottomLeft.xml', 
+            'SkipDialog_TopLeft.xml',
+            'SkipDialog_TopRight.xml'
+        ]
+        
+        for xml_file in xml_files:
+            xml_path = os.path.join(xml_dir, xml_file)
+            if os.path.exists(xml_path):
+                # Read the file
+                with open(xml_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                # Replace the texture path
+                content = re.sub(
+                    r'<texturefocus>.*?</texturefocus>',
+                    f'<texturefocus>{texture_path}</texturefocus>',
+                    content
+                )
+                
+                # Write back to file
+                with open(xml_path, 'w', encoding='utf-8') as f:
+                    f.write(content)
+                
+                log(f"📝 Updated {xml_file} with texture: {texture_path}")
+                
+    except Exception as e:
+        log(f"⚠️ Failed to update XML files: {e}")
+
 CHECK_INTERVAL = 1
 ICON_PATH = os.path.join(get_addon().getAddonInfo("path"), "icon.png")
 
@@ -622,25 +664,14 @@ while not monitor.abortRequested():
             log(f"⏪ Significant rewind detected ({monitor.last_time:.2f} → {current_time:.2f}) — threshold: {rewind_threshold}s")
             monitor.prompted.clear()
             monitor.recently_dismissed.clear()
-            
-            # Only clear nested segment tracking if the rewind takes us outside of any tracked nested segments
-            # This preserves the nested segment state if we're still within the nested segment after rewind
-            nested_segments_to_remove = []
-            for parent_seg_id, nested_segment in monitor.skipped_to_nested_segment.items():
-                if not nested_segment.is_active(current_time):
-                    # We've rewound outside this nested segment, so we can clear the tracking
-                    nested_segments_to_remove.append(parent_seg_id)
-                    log(f"🔄 Major rewind took us outside nested segment '{nested_segment.segment_type_label}', clearing tracking for parent {parent_seg_id}")
-            
-            for seg_id in nested_segments_to_remove:
-                del monitor.skipped_to_nested_segment[seg_id]
+            monitor.skipped_to_nested_segment.clear()
             
             # Re-evaluate segment jump points after major rewind to ensure correct jump targets
             if monitor.current_segments:
                 re_evaluate_segment_jump_points(monitor.current_segments, current_time)
             
             major_rewind_detected = True
-            log("🧹 recently_dismissed cleared due to rewind, nested segment tracking selectively cleared, jump points re-evaluated")
+            log("🧹 recently_dismissed cleared due to rewind, nested segment tracking cleared, jump points re-evaluated")
         
         # Check if we've exited any nested segments and need to re-enable parent segment dialogs
         if monitor.skipped_to_nested_segment:
@@ -726,6 +757,8 @@ while not monitor.abortRequested():
         
         # Debug: Show current state of tracking sets
         log(f"📊 Current state: prompted={len(monitor.prompted)} items, recently_dismissed={len(monitor.recently_dismissed)} items, skipped_to_nested={len(monitor.skipped_to_nested_segment)} items")
+        if monitor.recently_dismissed:
+            log(f"📊 Recently dismissed segments: {list(monitor.recently_dismissed)}")
         
         for segment in segments_to_process:
             seg_id = (int(segment.start_seconds), int(segment.end_seconds))
@@ -822,6 +855,15 @@ while not monitor.abortRequested():
                     dialog_name = f"SkipDialog_{layout_value}.xml"
                     log(f"📐 Using skip dialog layout: {dialog_name}")
 
+                    # 🎨 Update button focus texture before creating dialog
+                    try:
+                        focus_texture_file = addon.getSetting("button_focus_style")
+                        if focus_texture_file:
+                            _update_button_textures(focus_texture_file)
+                            log(f"🎨 Button focus texture set to: {focus_texture_file}")
+                    except Exception as e:
+                        log(f"⚠️ Failed to set button focus texture: {e}")
+
                     dialog = SkipDialog(dialog_name, addon.getAddonInfo("path"), "default", segment=segment)
                     dialog.doModal()
                     confirmed = getattr(dialog, "response", None)
@@ -866,6 +908,7 @@ while not monitor.abortRequested():
                         log(f"🙅 User dismissed skip dialog for segment ID {seg_id}")
                         monitor.recently_dismissed.add(seg_id)
                         monitor.prompted.add(seg_id)
+                        log(f"📊 Added {seg_id} to recently_dismissed and prompted sets")
                 except Exception as e:
                     log(f"❌ Error showing skip dialog: {e}")
                     monitor.prompted.add(seg_id)
