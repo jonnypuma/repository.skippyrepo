@@ -582,22 +582,27 @@ while not monitor.abortRequested():
 
         if video:
             # 🔁 Detect replay of same video
-            if (
-                video == monitor.last_video
-                and monitor.playback_ready
-                and player.getTime() < 5.0
-                and time.time() - monitor.playback_ready_time > 5.0
-            ):
-                log("🔁 Replay of same video detected — resetting monitor state")
-                monitor.shown_missing_file_toast = False
-                monitor.prompted.clear()
-                monitor.recently_dismissed.clear()
-                monitor.playback_ready = False
-                monitor.play_start_time = time.time()
-                monitor.last_time = 0
-                monitor.last_toast_time = 0
-                monitor.toast_overlap_shown = False
-                monitor.skipped_to_nested_segment.clear()
+            try:
+                current_playback_time = player.getTime()
+                if (
+                    video == monitor.last_video
+                    and monitor.playback_ready
+                    and current_playback_time < 5.0
+                    and time.time() - monitor.playback_ready_time > 5.0
+                ):
+                    log("🔁 Replay of same video detected — resetting monitor state")
+                    monitor.shown_missing_file_toast = False
+                    monitor.prompted.clear()
+                    monitor.recently_dismissed.clear()
+                    monitor.playback_ready = False
+                    monitor.play_start_time = time.time()
+                    monitor.last_time = 0
+                    monitor.last_toast_time = 0
+                    monitor.toast_overlap_shown = False
+                    monitor.skipped_to_nested_segment.clear()
+            except RuntimeError:
+                # Playback may have stopped, skip replay detection
+                pass
 
             log(f"🚀 Entered video block — video={video}, last_video={monitor.last_video}")
             log(f"🎬 Now playing: {os.path.basename(video)}")

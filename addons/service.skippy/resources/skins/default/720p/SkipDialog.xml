@@ -46,34 +46,40 @@
         <texture>icon_close.png</texture>
       </control>
 
-      <control type="button" id="3012">
-        <left>35</left><top>10</top>
-        <width>240</width><height>25</height>
-        <label>Skip</label>
-        <onright>3013</onright>
-        <font>font16</font>
-        <texturefocus>button_focus.png</texturefocus>
-        <texturenofocus>-</texturenofocus>
-        <textcolor>lightgrey</textcolor>
-        <textcolorfocus>white</textcolorfocus>
-        <aligny>center</aligny>
-        <textoffsetx>10</textoffsetx>
-      </control>
+      <control type="button" id="3012">
+        <left>35</left><top>10</top>
+        <width>240</width><height>25</height>
+        <label>Skip</label>
+        <onright>3013</onright>
+        <font>font16</font>
+        <texturefocus>button_focus.png</texturefocus>
+        <texturenofocus>-</texturenofocus>
+        <textcolor>lightgrey</textcolor>
+        <textcolorfocus>white</textcolorfocus>
+        <shadowcolor>black</shadowcolor>
+        <shadowoffsetx>1</shadowoffsetx>
+        <shadowoffsety>1</shadowoffsety>
+        <aligny>center</aligny>
+        <textoffsetx>10</textoffsetx>
+      </control>
 
-      <control type="button" id="3013">
-        <left>300</left><top>10</top>
-        <width>80</width><height>25</height>
-        <label>Close</label>
-        <onleft>3012</onleft>
-        <onclick>Close</onclick>
-        <font>font16</font>
-        <texturefocus>button_focus.png</texturefocus>
-        <texturenofocus>-</texturenofocus>
-        <textcolor>lightgrey</textcolor>
-        <textcolorfocus>white</textcolorfocus>
-        <aligny>center</aligny>
-        <textoffsetx>10</textoffsetx>
-      </control>
+      <control type="button" id="3013">
+        <left>300</left><top>10</top>
+        <width>80</width><height>25</height>
+        <label>Close</label>
+        <onleft>3012</onleft>
+        <onclick>Close</onclick>
+        <font>font16</font>
+        <texturefocus>button_focus.png</texturefocus>
+        <texturenofocus>-</texturenofocus>
+        <textcolor>lightgrey</textcolor>
+        <textcolorfocus>white</textcolorfocus>
+        <shadowcolor>black</shadowcolor>
+        <shadowoffsetx>1</shadowoffsetx>
+        <shadowoffsety>1</shadowoffsety>
+        <aligny>center</aligny>
+        <textoffsetx>10</textoffsetx>
+      </control>
 
       <control type="label">
         <left>5</left><top>40</top>

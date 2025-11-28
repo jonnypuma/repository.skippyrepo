@@ -56,6 +56,9 @@
         <texturenofocus>-</texturenofocus>
         <textcolor>lightgrey</textcolor>
         <textcolorfocus>white</textcolorfocus>
+        <shadowcolor>black</shadowcolor>
+        <shadowoffsetx>1</shadowoffsetx>
+        <shadowoffsety>1</shadowoffsety>
         <aligny>center</aligny>
         <textoffsetx>10</textoffsetx>
       </control>
@@ -71,6 +74,9 @@
         <texturenofocus>-</texturenofocus>
         <textcolor>lightgrey</textcolor>
         <textcolorfocus>white</textcolorfocus>
+        <shadowcolor>black</shadowcolor>
+        <shadowoffsetx>1</shadowoffsetx>
+        <shadowoffsety>1</shadowoffsety>
         <aligny>center</aligny>
         <textoffsetx>10</textoffsetx>
       </control>
