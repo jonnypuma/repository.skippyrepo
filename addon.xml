@@ -15,10 +15,16 @@
         <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi</summary>
         <description lang="en">Installs Skippy with full metadata and visuals</description>
         <platform>all</platform>
-        <icon>icon.png</icon>
-        <fanart>fanart.jpg</fanart>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
+        </assets>	
     </extension>
 </addon>
+
 
 
 
