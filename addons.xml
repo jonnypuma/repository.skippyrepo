@@ -11,6 +11,9 @@
     <download>https://github.com/jonnypuma/service.skippy/releases/download/V1.0.0/service.skippy-1.0.0.zip</download>
 
     <extension point="xbmc.addon.metadata">
+        <summary lang="en">Skippy - Video Segment Skipper</summary>
+        <description lang="en">Video segment skipper for Kodi</description>
+        <platform>all</platform>
         </extension>
 </addon>
 </addons>
