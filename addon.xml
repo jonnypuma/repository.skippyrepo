@@ -7,7 +7,8 @@
             <version>21.2.0</version>
             <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml?v=1.0.4</info>
             <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5?v=1.0.4</checksum>
-            </dir>
+            <datadir>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
+        </dir>
     </extension>
 
     <extension point="xbmc.addon.metadata">
@@ -18,3 +19,4 @@
         <fanart>fanart.jpg</fanart>
     </extension>
 </addon>
+
