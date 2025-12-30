@@ -1,36 +1,92 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <addons>
-<addon id="service.skippy" name="Skippy - Video Segment Skipper" version="1.0.0" provider-name="Skippy-McSkipface">
-        
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="service.segmenteditor"
+       name="Segment Editor"
+       version="1.0.0"
+       provider-name="Skippy-McSkipface">
+       
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+
+    <extension point="xbmc.service" library="service.py" />
+    
+    <extension point="xbmc.python.script" library="main.py">
+        <provides>executable</provides>
+    </extension>
+    
+    <extension point="xbmc.python.script" library="open_editor.py">
+        <provides>executable</provides>
+    </extension>
+    
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <summary>Edit EDL and chapter.xml segment files for videos during playback</summary>
+        <description>Allows you to edit segment files (.edl and chapter.xml) while watching videos. Supports adding, removing, and modifying segments. Can be triggered via keyboard shortcut or context menu during playback.</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
+            <screenshot>screenshot04.png</screenshot>
+        </assets>
+        <license>GPL-2.0-or-later</license>
+        <forum>https://forum.kodi.tv</forum>
+        <website>https://kodi.tv</website>
+    </extension>
+</addon>
+<addon id="service.skippy"
+       name="Skippy - Video Segment Skipper"
+       version="1.0.0"
+       provider-name="Skippy-McSkipface">
+       
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
     </requires>
 
     <extension point="xbmc.service" library="service.py" />
 
-    <download>https://github.com/jonnypuma/service.skippy/releases/download/V1.0.0/service.skippy-1.0.0.zip</download>
-
     <extension point="xbmc.addon.metadata">
-        <summary lang="en">Skippy - Video Segment Skipper</summary>
-        <description lang="en">Video segment skipper for Kodi</description>
+        <summary>Skippy is a video segment skipper which automatically detects and either autoskips or prompts to skip video segments, such as intros, recaps, and other chapters in video playback or never skips based on user preferences.</summary>
+        <description>Supports both Matroska-style chapters.xml and MPlayer-style .edl files. Action Type for .edl files should be set to 4 or higher (up to 99) to avoid conflicts with Kodi's internal autoskip feature. Batch script included to change .edl file action type. Uses customizable labels to identify skip-worthy segments. Monitors playback and prompts (or skips) based on labeled metadata.</description>
         <platform>all</platform>
-        </extension>
-</addon>
-<addon id="service.segmenteditor" name="Segment Editor" version="1.0.0" provider-name="Skippy-McSkipface">
-        
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
+        </assets>
+    </extension>
+</addon><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="service.subtitlesyncfixer" name="Subtitle Sync Fixer" version="1.0.0" provider-name="Kodi Community">
     <requires>
-        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="xbmc.python" version="3.0.0"/>
     </requires>
-
-    <extension point="xbmc.service" library="service.py" />
-
-    <download>https://github.com/jonnypuma/service.segmenteditor/releases/download/V1.0.0/service.segmenteditor.zip</download>
-
+    <extension point="xbmc.service" library="default.py" start="startup">
+        <provides>executable</provides>
+    </extension>
     <extension point="xbmc.addon.metadata">
-        <summary lang="en">Segment Editor</summary>
-        <description lang="en">Video segment editor for Kodi</description>
+        <summary lang="en">Automatically seeks back 1 second after 5 seconds of playback to fix subtitle display issues</summary>
+        <description lang="en">This service add-on automatically waits 5 seconds after video playback starts, then seeks back 1 second to trigger subtitle re-synchronization. This fixes the common issue where embedded subtitles don't appear until manually seeking backward.
+
+The add-on runs silently in the background and only activates when video playback begins. You can enable or disable it in the add-on settings.</description>
         <platform>all</platform>
-        </extension>
+        <language>en</language>
+        <license>MIT</license>
+        <forum>https://forum.kodi.tv</forum>
+        <website>https://kodi.tv</website>
+        <source>https://github.com</source>
+        <settings>
+            <setting file="resources/settings.xml" />
+        </settings>
+    </extension>
 </addon>
+
 </addons>
-
