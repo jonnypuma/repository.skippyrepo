@@ -13,16 +13,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install zip
-        run: sudo apt-get install -y zip
+      - name: Install zip tools
+        run: sudo apt-get install -y zip unzip
 
       - name: Build addons.xml
         run: |
           echo "<?xml version='1.0' encoding='UTF-8'?>" > addons.xml
           echo "<addons>" >> addons.xml
+
           for addon in zips/*; do
-            unzip -p "$addon"/*.zip addon.xml >> addons.xml
+            zipfile=$(ls "$addon"/*.zip)
+
+            # Find the addon.xml path inside the ZIP
+            addonxml=$(unzip -Z1 "$zipfile" | grep "addon.xml")
+
+            # Extract addon.xml and append to addons.xml
+            unzip -p "$zipfile" "$addonxml" >> addons.xml
           done
+
           echo "</addons>" >> addons.xml
 
       - name: Generate MD5
