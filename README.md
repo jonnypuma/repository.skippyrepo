@@ -1,3 +1,5 @@
+Kodi repository for:
+
 <img width="1200" height="1200" alt="icon" src="https://github.com/user-attachments/assets/56b02adc-6002-4a72-8936-446b077575b3" />
 
 # Skippy — The XML-EDL Segment Skipper
