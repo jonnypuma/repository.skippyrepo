@@ -1,5 +1,31 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <addons>
+<addon id="repository.skippyrepo"
+       name="Skippy Repo"
+       version="1.0.0" provider-name="Skippy-McSkipface">
+
+    <extension point="xbmc.addon.repository">
+        <dir>
+            <version>21.2.0</version>
+            <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5</checksum>
+            <datadir>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
+        </dir>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi</summary>
+        <description lang="en">Installs Skippy with full metadata and visuals</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
+        </assets>	
+    </extension>
+</addon>
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="service.segmenteditor"
        name="Segment Editor"
@@ -65,7 +91,7 @@
         </assets>
     </extension>
 </addon><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="service.subtitlesyncfixer" name="Subtitle Sync Fixer" version="1.0.0" provider-name="Kodi Community">
+<addon id="service.subtitlesyncfixer" name="Subtitle Sync Fixer" version="1.0.1" provider-name="Skippy-McSkipface">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
@@ -88,5 +114,6 @@ The add-on runs silently in the background and only activates when video playbac
         </settings>
     </extension>
 </addon>
+
 
 </addons>
