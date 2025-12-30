@@ -1,6 +1,6 @@
 Kodi repository for:
 
-<img width="1200" height="1200" alt="icon" src="https://github.com/user-attachments/assets/56b02adc-6002-4a72-8936-446b077575b3" />
+<img width="500" height="500" alt="icon" src="https://github.com/user-attachments/assets/56b02adc-6002-4a72-8936-446b077575b3" />
 
 # Skippy — The XML-EDL Segment Skipper
 
@@ -23,7 +23,7 @@ Known Limitations: Video files in MP4 containers are currently not working, seem
 
 ---
 
-<img width="815" height="810" alt="icon" src="https://github.com/user-attachments/assets/542b71c5-dcdc-44cc-ac35-46a86ada9dc7" />
+<img width="500" height="500" alt="icon" src="https://github.com/user-attachments/assets/542b71c5-dcdc-44cc-ac35-46a86ada9dc7" />
 
 # Segment Editor
 
