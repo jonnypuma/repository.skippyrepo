@@ -16,4 +16,21 @@
         <platform>all</platform>
         </extension>
 </addon>
+<addon id="service.segmenteditor" name="Segment Editor" version="1.0.0" provider-name="Skippy-McSkipface">
+        
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+
+    <extension point="xbmc.service" library="service.py" />
+
+    <download>https://github.com/jonnypuma/service.segmenteditor/releases/download/V1.0.0/service.segmenteditor.zip</download>
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Segment Editor</summary>
+        <description lang="en">Video segment editor for Kodi</description>
+        <platform>all</platform>
+        </extension>
+</addon>
 </addons>
+
