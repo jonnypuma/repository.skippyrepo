@@ -43,7 +43,8 @@ Segments are automatically sorted by start time, and the addon supports both pre
 
 ---
 
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/a2b0a711-ac3a-4c2b-9adc-071523eec21b" />
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/e9b7235b-1870-445c-9a8e-dfb73d1cafe9" />
+
 
 This service add-on automatically waits 5 seconds after video playback starts, then seeks back 1 second to trigger subtitle re-synchronization. This fixes the common issue where embedded subtitles don't appear until manually seeking backward.
 
