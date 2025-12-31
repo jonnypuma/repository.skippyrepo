@@ -18,7 +18,7 @@
         <platform>all</platform>
         <assets>
             <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
+            <fanart>fanart.png</fanart>
             <screenshot>screenshot01.png</screenshot>
             <screenshot>screenshot02.png</screenshot>
             <screenshot>screenshot03.png</screenshot>
