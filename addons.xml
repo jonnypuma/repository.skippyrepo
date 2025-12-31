@@ -1,66 +1,95 @@
-name: Build Kodi Repository
+<?xml version='1.0' encoding='UTF-8'?>
+<addons>
+<addon id="service.segmenteditor"
+       name="Segment Editor"
+       version="1.1.0"
+       provider-name="Skippy-McSkipface">
+       
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
 
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'zips/**'
+    <extension point="xbmc.service" library="service.py" />
+    
+    <extension point="xbmc.python.script" library="main.py">
+        <provides>executable</provides>
+    </extension>
+    
+    <extension point="xbmc.python.script" library="open_editor.py">
+        <provides>executable</provides>
+    </extension>
+    
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+    <extension point="xbmc.addon.metadata">
+        <summary>Edit EDL and chapter.xml segment files for videos during playback</summary>
+        <description>Allows you to edit segment files (.edl and chapter.xml) while watching videos. Supports adding, removing, and modifying segments. Can be triggered via keyboard shortcut or context menu during playback.</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
+            <screenshot>screenshot04.png</screenshot>
+        </assets>
+        <license>GPL-2.0-or-later</license>
+        <forum>https://forum.kodi.tv</forum>
+        <website>https://kodi.tv</website>
+    </extension>
+</addon>
+<addon id="service.subtitlesyncfixer" name="Subtitle Sync Fixer" version="1.1.0" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="default.py" start="startup">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Automatically seeks back 1 second after 5 seconds of playback to fix subtitle display issues</summary>
+        <description lang="en">This service add-on automatically waits 5 seconds after video playback starts, then seeks back 1 second to trigger subtitle re-synchronization. This fixes the common issue where embedded subtitles don't appear until manually seeking backward.
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 0
+The add-on runs silently in the background and only activates when video playback begins. You can enable or disable it in the add-on settings.</description>
+        <platform>all</platform>
+        <language>en</language>
+        <license>MIT</license>
+        <forum>https://forum.kodi.tv</forum>
+        <website>https://kodi.tv</website>
+        <source>https://github.com</source>
+        <settings>
+            <setting file="resources/settings.xml" />
+        </settings>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
 
-      - name: Install zip tools
-        run: sudo apt-get install -y zip unzip
+<addon id="service.skippy"
+       name="Skippy - Video Segment Skipper"
+       version="1.0.0"
+       provider-name="Skippy-McSkipface">
+       
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
 
-      - name: Build addons.xml and Extract Assets
-        run: |
-          echo "<?xml version='1.0' encoding='UTF-8'?>" > addons.xml
-          echo "<addons>" >> addons.xml
-          
-          find zips -name "*.zip" | while read zipfile; do
-            echo "Processing: $zipfile"
-            addon_dir=$(dirname "$zipfile")
-            
-            # 1. Extract the addon.xml for the master list
-            XML_PATH=$(unzip -Z1 "$zipfile" | grep "addon.xml" | head -n 1)
-            if [ -n "$XML_PATH" ]; then
-              unzip -p "$zipfile" "$XML_PATH" | grep -v '<?xml' >> addons.xml
-            fi
-            
-            # 2. Extract all images (png, jpg, jpeg) from the addon root inside the zip
-            # -j: junk paths (don't create subfolders)
-            # -o: overwrite existing files
-            # The pattern looks for icon, fanart, or screenshot with any image extension
-            unzip -j -o "$zipfile" "*icon.png" "*icon.jpg" "*fanart.png" "*fanart.jpg" "*screenshot*" -d "$addon_dir" || echo "Some assets not found in $zipfile"
-          done
-          
-          echo "</addons>" >> addons.xml
+    <extension point="xbmc.service" library="service.py" />
 
-      - name: Generate MD5
-        run: md5sum addons.xml | awk '{print $1}' > addons.xml.md5
-
-      - name: Update index.html version
-        run: |
-          NEW_VERSION=$(ls zips/repository.skippyrepo/*.zip | grep -oP '(?<=repository.skippyrepo-)[0-9.]+(?=.zip)' | head -n 1)
-          if [ ! -z "$NEW_VERSION" ]; then
-            echo "Updating index.html to version: $NEW_VERSION"
-            sed -i "s/repository.skippyrepo-[0-9.]*\.zip/repository.skippyrepo-$NEW_VERSION.zip/g" index.html
-          fi
-
-      - name: Commit and push changes
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          # Adding all images extracted by the unzip command
-          git add addons.xml addons.xml.md5 index.html zips/**/*.png zips/**/*.jpg zips/**/*.jpeg || echo "No images to add"
-          git commit -m "Auto-update repo files and assets [skip ci]" || echo "No changes"
-          git push origin main
+    <extension point="xbmc.addon.metadata">
+        <summary>Skippy is a video segment skipper which automatically detects and either autoskips or prompts to skip video segments, such as intros, recaps, and other chapters in video playback or never skips based on user preferences.</summary>
+        <description>Supports both Matroska-style chapters.xml and MPlayer-style .edl files. Action Type for .edl files should be set to 4 or higher (up to 99) to avoid conflicts with Kodi's internal autoskip feature. Batch script included to change .edl file action type. Uses customizable labels to identify skip-worthy segments. Monitors playback and prompts (or skips) based on labeled metadata.</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
+        </assets>
+    </extension>
+</addon>
+</addons>
