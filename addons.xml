@@ -91,11 +91,13 @@
         </assets>
     </extension>
 </addon><?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="service.subtitlesyncfixer" name="Subtitle Sync Fixer" version="1.0.2" provider-name="Skippy-McSkipface">
+<addon id="service.subtitlesyncfixer" name="Subtitle Sync Fixer" version="1.1.0" provider-name="Skippy-McSkipface">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
-    <extension point="xbmc.service" library="default.py" start="startup" />
+    <extension point="xbmc.service" library="default.py" start="startup">
+        <provides>executable</provides>
+    </extension>
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Automatically seeks back 1 second after 5 seconds of playback to fix subtitle display issues</summary>
         <description lang="en">This service add-on automatically waits 5 seconds after video playback starts, then seeks back 1 second to trigger subtitle re-synchronization. This fixes the common issue where embedded subtitles don't appear until manually seeking backward.
@@ -110,8 +112,11 @@ The add-on runs silently in the background and only activates when video playbac
         <settings>
             <setting file="resources/settings.xml" />
         </settings>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
     </extension>
 </addon>
-
 
 </addons>
