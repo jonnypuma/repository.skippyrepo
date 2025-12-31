@@ -1,6 +1,6 @@
 <addon id="repository.skippyrepo"
        name="Skippy Repo"
-       version="1.0.0"
+       version="1.0.1"
        provider-name="Skippy-McSkipface">
 
     <extension point="xbmc.addon.repository">
