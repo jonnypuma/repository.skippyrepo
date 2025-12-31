@@ -25,14 +25,16 @@ jobs:
         run: |
           echo "<?xml version='1.0' encoding='UTF-8'?>" > addons.xml
           echo "<addons>" >> addons.xml
-          
-          # Find all zips in the zips/ directory
           find zips -name "*.zip" | while read zipfile; do
             echo "Processing: $zipfile"
-            # Extract addon.xml content, removing the XML declaration if present
-            unzip -p "$zipfile" "*/addon.xml" | grep -v '<?xml' >> addons.xml
+            XML_PATH=$(unzip -Z1 "$zipfile" | grep "addon.xml" | head -n 1)
+            if [ -n "$XML_PATH" ]; then
+              unzip -p "$zipfile" "$XML_PATH" | grep -v '<?xml' >> addons.xml
+            else
+              echo "ERROR: No addon.xml found in $zipfile"
+              exit 1
+            fi
           done
-          
           echo "</addons>" >> addons.xml
 
       - name: Generate MD5
@@ -40,15 +42,10 @@ jobs:
 
       - name: Update index.html version
         run: |
-          # Identify the latest version from the filename in zips/repository.skippyrepo/
           NEW_VERSION=$(ls zips/repository.skippyrepo/*.zip | grep -oP '(?<=repository.skippyrepo-)[0-9.]+(?=.zip)' | head -n 1)
-          
           if [ ! -z "$NEW_VERSION" ]; then
             echo "Updating index.html to version: $NEW_VERSION"
-            # Replaces the version number in any link matching repository.skippyrepo-X.X.X.zip
             sed -i "s/repository.skippyrepo-[0-9.]*\.zip/repository.skippyrepo-$NEW_VERSION.zip/g" index.html
-          else
-            echo "Could not determine NEW_VERSION. Skipping index.html update."
           fi
 
       - name: Commit and push changes
@@ -56,6 +53,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add addons.xml addons.xml.md5 index.html
-          # Only commits if there are actual changes to these files
-          git commit -m "Auto-update repository files and index.html [skip ci]" || echo "No changes to commit"
+          git commit -m "Auto-update repository files [skip ci]" || echo "No changes"
           git push origin main
