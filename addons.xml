@@ -70,12 +70,11 @@
         <website>https://kodi.tv</website>
     </extension>
 </addon>
-<addon id="service.subtitlesyncfixer" name="Subtitle Sync Fixer" version="1.1.0" provider-name="Skippy-McSkipface">
+<addon id="service.subtitlesyncfixer" name="Subtitle Sync Fixer" version="1.1.1" provider-name="Skippy-McSkipface">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
     <extension point="xbmc.service" library="default.py" start="startup">
-        <provides>executable</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Automatically seeks back 1 second after 5 seconds of playback to fix subtitle display issues</summary>
