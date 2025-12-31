@@ -21,12 +21,16 @@ jobs:
       - name: Install zip tools
         run: sudo apt-get install -y zip unzip
 
-      - name: Build addons.xml
+      - name: Build addons.xml and Extract Assets
         run: |
           echo "<?xml version='1.0' encoding='UTF-8'?>" > addons.xml
           echo "<addons>" >> addons.xml
+          
           find zips -name "*.zip" | while read zipfile; do
             echo "Processing: $zipfile"
+            addon_dir=$(dirname "$zipfile")
+            
+            # 1. Extract the addon.xml content for the master list
             XML_PATH=$(unzip -Z1 "$zipfile" | grep "addon.xml" | head -n 1)
             if [ -n "$XML_PATH" ]; then
               unzip -p "$zipfile" "$XML_PATH" | grep -v '<?xml' >> addons.xml
@@ -34,7 +38,15 @@ jobs:
               echo "ERROR: No addon.xml found in $zipfile"
               exit 1
             fi
+
+            # 2. Extract any image files (icon, fanart, screenshots) to the addon folder
+            # This looks for any file ending in png, jpg, or jpeg inside the zip
+            unzip -Z1 "$zipfile" | grep -Ei "\.(png|jpg|jpeg)$" | while read img; do
+              echo "Extracting asset: $img to $addon_dir"
+              unzip -j -o "$zipfile" "$img" -d "$addon_dir"
+            done
           done
+          
           echo "</addons>" >> addons.xml
 
       - name: Generate MD5
@@ -52,6 +64,12 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
+          
+          # Add the core repo files
           git add addons.xml addons.xml.md5 index.html
-          git commit -m "Auto-update repository files [skip ci]" || echo "No changes"
+          
+          # Add any extracted images in the zips subdirectories
+          git add zips/**/*.png zips/**/*.jpg zips/**/*.jpeg 2>/dev/null || echo "No new images to add"
+          
+          git commit -m "Auto-update repository files and assets [skip ci]" || echo "No changes"
           git push origin main
