@@ -2,7 +2,7 @@
 <addons>
 <addon id="repository.skippyrepo"
        name="Skippy Repo"
-       version="1.0.3"
+       version="1.0.4"
        provider-name="Skippy-McSkipface">
 
     <extension point="xbmc.addon.repository">
@@ -120,5 +120,6 @@ The add-on runs silently in the background and only activates when video playbac
             <screenshot>screenshot03.png</screenshot>
         </assets>
     </extension>
+
 </addon>
 </addons>
