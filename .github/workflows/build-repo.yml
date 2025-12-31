@@ -30,21 +30,19 @@ jobs:
             echo "Processing: $zipfile"
             addon_dir=$(dirname "$zipfile")
             
-            # 1. Extract the addon.xml content for the master list
+            # 1. Extract the addon.xml
             XML_PATH=$(unzip -Z1 "$zipfile" | grep "addon.xml" | head -n 1)
-            if [ -n "$XML_PATH" ]; then
-              unzip -p "$zipfile" "$XML_PATH" | grep -v '<?xml' >> addons.xml
-            else
-              echo "ERROR: No addon.xml found in $zipfile"
-              exit 1
-            fi
+            unzip -p "$zipfile" "$XML_PATH" | grep -v '<?xml' >> addons.xml
 
-            # 2. Extract any image files (icon, fanart, screenshots) to the addon folder
-            # This looks for any file ending in png, jpg, or jpeg inside the zip
-            unzip -Z1 "$zipfile" | grep -Ei "\.(png|jpg|jpeg)$" | while read img; do
-              echo "Extracting asset: $img to $addon_dir"
-              unzip -j -o "$zipfile" "$img" -d "$addon_dir"
-            done
+            # 2. Extract Images
+            # We try common names specifically. 
+            # -j ignores the internal zip folder structure and puts them in addon_dir
+            # We use multiple patterns to ensure we catch root files and nested files
+            unzip -j -o "$zipfile" "icon.png" "icon.jpg" "fanart.jpg" "fanart.png" "*icon.png" "*icon.jpg" "*fanart.jpg" "*fanart.png" "*/screenshot*" -d "$addon_dir" || echo "Note: Some assets not found in $zipfile"
+            
+            # Debug: Show what is in the folder now
+            echo "Files now in $addon_dir:"
+            ls -F "$addon_dir"
           done
           
           echo "</addons>" >> addons.xml
@@ -56,7 +54,6 @@ jobs:
         run: |
           NEW_VERSION=$(ls zips/repository.skippyrepo/*.zip | grep -oP '(?<=repository.skippyrepo-)[0-9.]+(?=.zip)' | head -n 1)
           if [ ! -z "$NEW_VERSION" ]; then
-            echo "Updating index.html to version: $NEW_VERSION"
             sed -i "s/repository.skippyrepo-[0-9.]*\.zip/repository.skippyrepo-$NEW_VERSION.zip/g" index.html
           fi
 
@@ -65,11 +62,14 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           
-          # Add the core repo files
+          # Add everything in the zips directory explicitly
           git add addons.xml addons.xml.md5 index.html
+          git add zips/
           
-          # Add any extracted images in the zips subdirectories
-          git add zips/**/*.png zips/**/*.jpg zips/**/*.jpeg 2>/dev/null || echo "No new images to add"
-          
-          git commit -m "Auto-update repository files and assets [skip ci]" || echo "No changes"
-          git push origin main
+          # Only commit if changes exist
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto-update repo files and assets [skip ci]"
+            git push origin main
+          fi
