@@ -13,7 +13,7 @@
     </extension>
 
     <extension point="xbmc.addon.metadata">
-        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi and companion Segment Editor</summary>
+        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi and companion tool Segment Editor + other tools</summary>
         <description lang="en">Installs Skippy, Segment Editor and other Kodi addons</description>
         <platform>all</platform>
         <assets>
@@ -25,6 +25,7 @@
         </assets>
     </extension>
 </addon>
+
 
 
 
