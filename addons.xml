@@ -30,6 +30,57 @@
 
 
 
+<addon id="service.subtitlesyncfixer" name="Subtitle Sync Fixer" version="1.1.1" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="default.py" start="startup">
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Automatically seeks back 1 second after 5 seconds of playback to fix subtitle display issues</summary>
+        <description lang="en">This service add-on automatically waits 5 seconds after video playback starts, then seeks back 1 second to trigger subtitle re-synchronization. This fixes the common issue where embedded subtitles don't appear until manually seeking backward.
+
+The add-on runs silently in the background and only activates when video playback begins. You can enable or disable it in the add-on settings.</description>
+        <platform>all</platform>
+        <language>en</language>
+        <license>MIT</license>
+        <forum>https://forum.kodi.tv</forum>
+        <website>https://kodi.tv</website>
+        <source>https://github.com</source>
+        <settings>
+            <setting file="resources/settings.xml" />
+        </settings>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="service.skippy"
+       name="Skippy - Video Segment Skipper"
+       version="1.0.18"
+       provider-name="Skippy-McSkipface">
+       
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+
+    <extension point="xbmc.service" library="service.py" />
+
+    <extension point="xbmc.addon.metadata">
+        <summary>Skippy is a video segment skipper which automatically detects and either autoskips or prompts to skip video segments, such as intros, recaps, and other chapters in video playback or never skips based on user preferences.</summary>
+        <description>Supports both Matroska-style chapters.xml and MPlayer-style .edl files. Action Type for .edl files should be set to 4 or higher (up to 99) to avoid conflicts with Kodi's internal autoskip feature. Batch script included to change .edl file action type. Uses customizable labels to identify skip-worthy segments. Monitors playback and prompts (or skips) based on labeled metadata.</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
+        </assets>
+    </extension>
+</addon>
 <addon id="service.segmenteditor"
        name="Segment Editor"
        version="1.1.1"
@@ -68,57 +119,6 @@
         <license>GPL-2.0-or-later</license>
         <forum>https://forum.kodi.tv</forum>
         <website>https://kodi.tv</website>
-    </extension>
-</addon>
-<addon id="service.subtitlesyncfixer" name="Subtitle Sync Fixer" version="1.1.1" provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="default.py" start="startup">
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Automatically seeks back 1 second after 5 seconds of playback to fix subtitle display issues</summary>
-        <description lang="en">This service add-on automatically waits 5 seconds after video playback starts, then seeks back 1 second to trigger subtitle re-synchronization. This fixes the common issue where embedded subtitles don't appear until manually seeking backward.
-
-The add-on runs silently in the background and only activates when video playback begins. You can enable or disable it in the add-on settings.</description>
-        <platform>all</platform>
-        <language>en</language>
-        <license>MIT</license>
-        <forum>https://forum.kodi.tv</forum>
-        <website>https://kodi.tv</website>
-        <source>https://github.com</source>
-        <settings>
-            <setting file="resources/settings.xml" />
-        </settings>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-        </assets>
-    </extension>
-</addon>
-
-<addon id="service.skippy"
-       name="Skippy - Video Segment Skipper"
-       version="1.0.3"
-       provider-name="Skippy-McSkipface">
-       
-    <requires>
-        <import addon="xbmc.python" version="3.0.0" />
-    </requires>
-
-    <extension point="xbmc.service" library="service.py" />
-
-    <extension point="xbmc.addon.metadata">
-        <summary>Skippy is a video segment skipper which automatically detects and either autoskips or prompts to skip video segments, such as intros, recaps, and other chapters in video playback or never skips based on user preferences.</summary>
-        <description>Supports both Matroska-style chapters.xml and MPlayer-style .edl files. Action Type for .edl files should be set to 4 or higher (up to 99) to avoid conflicts with Kodi's internal autoskip feature. Batch script included to change .edl file action type. Uses customizable labels to identify skip-worthy segments. Monitors playback and prompts (or skips) based on labeled metadata.</description>
-        <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-            <screenshot>screenshot01.png</screenshot>
-            <screenshot>screenshot02.png</screenshot>
-            <screenshot>screenshot03.png</screenshot>
-        </assets>
     </extension>
 </addon>
 </addons>
