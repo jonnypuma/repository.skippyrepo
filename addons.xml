@@ -86,4 +86,44 @@ The add-on runs silently in the background and only activates when video playbac
         </assets>
     </extension>
 </addon>
+<addon id="service.segmenteditor"
+       name="Segment Editor"
+       version="1.2.5"
+       provider-name="Skippy-McSkipface">
+       
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+
+    <extension point="xbmc.service" library="service.py" />
+    
+    <extension point="xbmc.python.script" library="main.py">
+        <provides>executable</provides>
+    </extension>
+    
+    <extension point="xbmc.python.script" library="open_editor.py">
+        <provides>executable</provides>
+    </extension>
+    
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <summary>Edit EDL and chapter.xml segment files for videos during playback</summary>
+        <description>Allows you to edit segment files (.edl and chapter.xml) while watching videos. Supports adding, removing, and modifying segments. Can be triggered via keyboard shortcut, the context menu, or Kodi's NotifyAll JSON-RPC. If the video has embedded Matroska chapters, the editor offers to import them on first edit (requires mkvextract).</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
+            <screenshot>screenshot04.png</screenshot>
+        </assets>
+        <license>GPL-2.0-or-later</license>
+        <forum>https://forum.kodi.tv</forum>
+        <website>https://kodi.tv</website>
+    </extension>
+</addon>
 </addons>
