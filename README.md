@@ -43,6 +43,20 @@ Segments are automatically sorted by start time, and the addon supports both pre
 
 ---
 
+<img width="424" height="395" alt="icon" src="https://github.com/user-attachments/assets/52bc6554-8d8f-4229-8801-80cecc7f0354" />
+
+# Trickplay
+
+Kodi background service that can generate/show **Jellyfin trickplay** seek thumbnails or user custom ones
+
+## Skin integration required
+
+**This addon does not work out of the box.** It runs as a service that crops thumbnails and publishes window properties, but **your active Kodi skin must display them**.
+
+For each skin you use, you must merge trickplay preview controls from this repo into that skin’s own **`DialogSeekBar.xml`**.
+
+---
+
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/e9b7235b-1870-445c-9a8e-dfb73d1cafe9" />
 
 # Subtitle Sync Fixer
