@@ -25,7 +25,7 @@ Known Limitations: Video files in MP4 containers are currently not working, seem
 
 <img width="500" height="500" alt="icon" src="https://github.com/user-attachments/assets/542b71c5-dcdc-44cc-ac35-46a86ada9dc7" />
 
-# Segment Editor
+# Segment Editor - NOTE: No longer updated. Integrated into Skippy addon with new functionality
 
 Segment Editor is a Kodi service addon for editing EDL and chapter.xml segment files during video playback and a companion service to the Skippy Segment Skipper addon. 
 
