@@ -2,7 +2,7 @@
 <addons>
 <addon id="service.skippy"
        name="Skippy - Video Segment Skipper"
-       version="3.3.4"
+       version="3.4.0"
        provider-name="Skippy-McSkipface">
        
     <requires>
@@ -16,7 +16,7 @@
 
     <extension point="xbmc.service" library="service.py" />
 
-    <extension point="xbmc.python.script" library="segment_marker.py">
+    <extension point="xbmc.python.script" library="skippy_runscript_entry.py">
         <provides>executable</provides>
     </extension>
 
