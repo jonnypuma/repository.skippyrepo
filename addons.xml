@@ -73,7 +73,7 @@
 </addon>
 <addon id="service.skippy"
        name="Skippy - Video Segment Skipper"
-       version="3.7.0"
+       version="3.7.2"
        provider-name="Skippy-McSkipface">
        
     <requires>
