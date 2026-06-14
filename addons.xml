@@ -133,11 +133,10 @@ The add-on runs silently in the background and only activates when video playbac
 
 <addon id="service.trickplay"
        name="Trickplay Preview"
-       version="3.2.0"
+       version="3.3.0"
        provider-name="Skippy-McSkipface">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
-        <import addon="tools.ffmpeg-tools"/>
     </requires>
     <extension point="xbmc.python.script" library="script_generator.py">
         <provides>executable</provides>
