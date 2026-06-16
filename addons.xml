@@ -2,7 +2,7 @@
 <addons>
 <addon id="service.library.updatarr"
        name="Library Updatarr"
-       version="1.0.2"
+       version="2.2.2"
        provider-name="Skippy-McSkipface">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
@@ -17,6 +17,10 @@
                 <label>32000</label>
                 <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType)</visible>
             </item>
+            <item library="context_remove.py">
+                <label>32070</label>
+                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
+            </item>
         </menu>
     </extension>
     <extension point="xbmc.addon.metadata">
@@ -24,7 +28,7 @@
         <description lang="en_GB">Library Updatarr scans your existing Kodi video library for movies, TV shows, and episodes with missing posters, fanart, or metadata. It applies local artwork and NFO files first, then uses your installed online scrapers to fill remaining gaps — without wiping the database or scanning for new files.</description>
         <platform>all</platform>
         <license>GPL-2.0-or-later</license>
-        <news>1.0.2 — Context menu label ID fix; Kodi v22 library-scan check; DialogProgress API fix. 1.0.1 — Context menu strings; scan cancel. 1.0.0 — Initial release.</news>
+        <news>2.2.2 — Remove from library: video types only (not music). 2.2.1 — tvshow.path warning.</news>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
