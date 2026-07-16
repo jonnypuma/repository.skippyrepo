@@ -1,66 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <addons>
-<addon id="service.library.updatarr"
-       name="Library Updatarr"
-       version="2.2.2"
+<addon id="repository.skippyrepo"
+       name="Skippy Repo"
+       version="1.0.4"
        provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="service.py" start="login"/>
-    <extension point="xbmc.python.script" library="launcher.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="context.py">
-                <label>32000</label>
-                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType)</visible>
-            </item>
-            <item library="context_remove.py">
-                <label>32070</label>
-                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Populate missing metadata and artwork for existing library items.</summary>
-        <description lang="en_GB">Library Updatarr scans your existing Kodi video library for movies, TV shows, and episodes with missing posters, fanart, or metadata. It applies local artwork and NFO files first, then uses your installed online scrapers to fill remaining gaps — without wiping the database or scanning for new files.</description>
-        <platform>all</platform>
-        <license>GPL-2.0-or-later</license>
-        <news>2.2.2 — Remove from library: video types only (not music). 2.2.1 — tvshow.path warning.</news>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="service.segmenteditor"
-       name="Segment Editor"
-       version="1.2.5"
-       provider-name="Skippy-McSkipface">
-       
-    <requires>
-        <import addon="xbmc.python" version="3.0.0" />
-    </requires>
 
-    <extension point="xbmc.service" library="service.py" />
-    
-    <extension point="xbmc.python.script" library="main.py">
-        <provides>executable</provides>
-    </extension>
-    
-    <extension point="xbmc.python.script" library="open_editor.py">
-        <provides>executable</provides>
-    </extension>
-    
-    <extension point="xbmc.python.script" library="default.py">
-        <provides>executable</provides>
+    <extension point="xbmc.addon.repository">
+        <dir>
+            <version>21.2.0</version>
+            <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
+        </dir>
     </extension>
 
     <extension point="xbmc.addon.metadata">
-        <summary>Edit EDL and chapter.xml segment files for videos during playback</summary>
-        <description>Allows you to edit segment files (.edl and chapter.xml) while watching videos. Supports adding, removing, and modifying segments. Can be triggered via keyboard shortcut, the context menu, or Kodi's NotifyAll JSON-RPC. If the video has embedded Matroska chapters, the editor offers to import them on first edit (requires mkvextract).</description>
+        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi and companion Segment Editor</summary>
+        <description lang="en">Installs Skippy, Segment Editor and other Kodi addons</description>
         <platform>all</platform>
         <assets>
             <icon>icon.png</icon>
@@ -68,16 +24,15 @@
             <screenshot>screenshot01.png</screenshot>
             <screenshot>screenshot02.png</screenshot>
             <screenshot>screenshot03.png</screenshot>
-            <screenshot>screenshot04.png</screenshot>
         </assets>
-        <license>GPL-2.0-or-later</license>
-        <forum>https://forum.kodi.tv</forum>
-        <website>https://kodi.tv</website>
     </extension>
 </addon>
+
+
+
 <addon id="service.skippy"
        name="Skippy - Video Segment Skipper"
-       version="5.1.5"
+       version="5.2.8"
        provider-name="Skippy-McSkipface">
        
     <requires>
@@ -135,23 +90,32 @@ The add-on runs silently in the background and only activates when video playbac
     </extension>
 </addon>
 
-<addon id="repository.skippyrepo"
-       name="Skippy Repo"
-       version="1.0.4"
+<addon id="service.segmenteditor"
+       name="Segment Editor"
+       version="1.2.5"
        provider-name="Skippy-McSkipface">
+       
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
 
-    <extension point="xbmc.addon.repository">
-        <dir>
-            <version>21.2.0</version>
-            <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
-        </dir>
+    <extension point="xbmc.service" library="service.py" />
+    
+    <extension point="xbmc.python.script" library="main.py">
+        <provides>executable</provides>
+    </extension>
+    
+    <extension point="xbmc.python.script" library="open_editor.py">
+        <provides>executable</provides>
+    </extension>
+    
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
     </extension>
 
     <extension point="xbmc.addon.metadata">
-        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi and companion Segment Editor</summary>
-        <description lang="en">Installs Skippy, Segment Editor and other Kodi addons</description>
+        <summary>Edit EDL and chapter.xml segment files for videos during playback</summary>
+        <description>Allows you to edit segment files (.edl and chapter.xml) while watching videos. Supports adding, removing, and modifying segments. Can be triggered via keyboard shortcut, the context menu, or Kodi's NotifyAll JSON-RPC. If the video has embedded Matroska chapters, the editor offers to import them on first edit (requires mkvextract).</description>
         <platform>all</platform>
         <assets>
             <icon>icon.png</icon>
@@ -159,12 +123,48 @@ The add-on runs silently in the background and only activates when video playbac
             <screenshot>screenshot01.png</screenshot>
             <screenshot>screenshot02.png</screenshot>
             <screenshot>screenshot03.png</screenshot>
+            <screenshot>screenshot04.png</screenshot>
+        </assets>
+        <license>GPL-2.0-or-later</license>
+        <forum>https://forum.kodi.tv</forum>
+        <website>https://kodi.tv</website>
+    </extension>
+</addon>
+<addon id="service.library.updatarr"
+       name="Library Updatarr"
+       version="2.2.2"
+       provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="service.py" start="login"/>
+    <extension point="xbmc.python.script" library="launcher.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="context.py">
+                <label>32000</label>
+                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType)</visible>
+            </item>
+            <item library="context_remove.py">
+                <label>32070</label>
+                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Populate missing metadata and artwork for existing library items.</summary>
+        <description lang="en_GB">Library Updatarr scans your existing Kodi video library for movies, TV shows, and episodes with missing posters, fanart, or metadata. It applies local artwork and NFO files first, then uses your installed online scrapers to fill remaining gaps — without wiping the database or scanning for new files.</description>
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <news>2.2.2 — Remove from library: video types only (not music). 2.2.1 — tvshow.path warning.</news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
 </addon>
-
-
-
 
 <addon id="service.trickplay"
        name="Trickplay Preview"
