@@ -32,7 +32,7 @@
 
 <addon id="service.skippy"
        name="Skippy - Video Segment Skipper"
-       version="5.2.13"
+       version="5.3.1"
        provider-name="Skippy-McSkipface">
        
     <requires>
@@ -168,7 +168,7 @@ The add-on runs silently in the background and only activates when video playbac
 
 <addon id="service.trickplay"
        name="Trickplay Preview"
-       version="6.4.5"
+       version="6.5.1"
        provider-name="Skippy-McSkipface">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
