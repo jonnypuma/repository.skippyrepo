@@ -1,5 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <addons>
+
+<addon id="service.trickplay"
+       name="Trickplay Preview"
+       version="7.1.4"
+       provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="script_generator.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py" start="login"/>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <summary lang="en">Shows Jellyfin trickplay seek thumbnails during video scrubbing.</summary>
+        <description lang="en">Reads or generates Jellyfin trickplay sprite tiles alongside your media, crops preview frames with Pillow while you scrub, and shows them via skin window properties. Optional ffmpeg generator writes .trickplay sidecars; use Install preview tools for Pillow (preview) and ffmpeg (generation). Use Show addon status / Install skin snippet in settings (DialogSeekBar.xml for most skins; VideoFullScreen.xml for Bello). Generation/HDR requires ffmpeg, ffprobe, and optionally dovi_tool.</description>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
 <addon id="repository.skippyrepo"
        name="Skippy Repo"
        version="1.0.4"
@@ -29,66 +52,6 @@
 </addon>
 
 
-
-<addon id="service.skippy"
-       name="Skippy - Video Segment Skipper"
-       version="5.3.4"
-       provider-name="Skippy-McSkipface">
-       
-    <requires>
-        <import addon="xbmc.python" version="3.0.0" />
-        <!-- Optional: TMDB Helper requires script.module.jurialmunkey; listing it here helps Kodi
-             resolve the chain when optional dependencies are installed (repo must ship the module,
-             or install the module ZIP from jurialmunkey GitHub releases first). Skippy does not import it. -->
-        <import addon="script.module.jurialmunkey" version="0.0.0" optional="true" />
-        <import addon="plugin.video.themoviedb.helper" version="0.0.0" optional="true" />
-    </requires>
-
-    <extension point="xbmc.service" library="service.py" />
-
-    <extension point="xbmc.python.script" library="skippy_runscript_entry.py">
-        <provides>executable</provides>
-    </extension>
-
-    <extension point="xbmc.addon.metadata">
-        <summary>Skippy: skip, mark, and edit video segments (intros, recaps, credits, and more) using local or online data.</summary>
-        <description>All-in-one Kodi companion for chapter-style workflows: automatically skip or prompt on segments, mark new ranges during playback, and open a full segment editor for .edl and Matroska-style chapters.xml sidecars. Highly configurable keywords, EDL action types, dialogs, and optional online lookups (TheIntroDB / IntroDB.app). Separate keymaps for marker (skippy_marker.xml) and editor (skippy_editor.xml).</description>
-        <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-            <screenshot>screenshot01.png</screenshot>
-            <screenshot>screenshot02.png</screenshot>
-            <screenshot>screenshot03.png</screenshot>
-        </assets>
-    </extension>
-</addon>
-<addon id="service.subtitlesyncfixer" name="Subtitle Sync Fixer" version="1.1.1" provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="default.py" start="startup">
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Automatically seeks back 1 second after 5 seconds of playback to fix subtitle display issues</summary>
-        <description lang="en">This service add-on automatically waits 5 seconds after video playback starts, then seeks back 1 second to trigger subtitle re-synchronization. This fixes the common issue where embedded subtitles don't appear until manually seeking backward.
-
-The add-on runs silently in the background and only activates when video playback begins. You can enable or disable it in the add-on settings.</description>
-        <platform>all</platform>
-        <language>en</language>
-        <license>MIT</license>
-        <forum>https://forum.kodi.tv</forum>
-        <website>https://kodi.tv</website>
-        <source>https://github.com</source>
-        <settings>
-            <setting file="resources/settings.xml" />
-        </settings>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-        </assets>
-    </extension>
-</addon>
 
 <addon id="service.segmenteditor"
        name="Segment Editor"
@@ -130,6 +93,66 @@ The add-on runs silently in the background and only activates when video playbac
         <website>https://kodi.tv</website>
     </extension>
 </addon>
+<addon id="service.subtitlesyncfixer" name="Subtitle Sync Fixer" version="1.1.1" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="default.py" start="startup">
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Automatically seeks back 1 second after 5 seconds of playback to fix subtitle display issues</summary>
+        <description lang="en">This service add-on automatically waits 5 seconds after video playback starts, then seeks back 1 second to trigger subtitle re-synchronization. This fixes the common issue where embedded subtitles don't appear until manually seeking backward.
+
+The add-on runs silently in the background and only activates when video playback begins. You can enable or disable it in the add-on settings.</description>
+        <platform>all</platform>
+        <language>en</language>
+        <license>MIT</license>
+        <forum>https://forum.kodi.tv</forum>
+        <website>https://kodi.tv</website>
+        <source>https://github.com</source>
+        <settings>
+            <setting file="resources/settings.xml" />
+        </settings>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="service.skippy"
+       name="Skippy - Video Segment Skipper"
+       version="5.3.4"
+       provider-name="Skippy-McSkipface">
+       
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <!-- Optional: TMDB Helper requires script.module.jurialmunkey; listing it here helps Kodi
+             resolve the chain when optional dependencies are installed (repo must ship the module,
+             or install the module ZIP from jurialmunkey GitHub releases first). Skippy does not import it. -->
+        <import addon="script.module.jurialmunkey" version="0.0.0" optional="true" />
+        <import addon="plugin.video.themoviedb.helper" version="0.0.0" optional="true" />
+    </requires>
+
+    <extension point="xbmc.service" library="service.py" />
+
+    <extension point="xbmc.python.script" library="skippy_runscript_entry.py">
+        <provides>executable</provides>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <summary>Skippy: skip, mark, and edit video segments (intros, recaps, credits, and more) using local or online data.</summary>
+        <description>All-in-one Kodi companion for chapter-style workflows: automatically skip or prompt on segments, mark new ranges during playback, and open a full segment editor for .edl and Matroska-style chapters.xml sidecars. Highly configurable keywords, EDL action types, dialogs, and optional online lookups (TheIntroDB / IntroDB.app). Separate keymaps for marker (skippy_marker.xml) and editor (skippy_editor.xml).</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
+        </assets>
+    </extension>
+</addon>
 <addon id="service.library.updatarr"
        name="Library Updatarr"
        version="2.2.2"
@@ -159,29 +182,6 @@ The add-on runs silently in the background and only activates when video playbac
         <platform>all</platform>
         <license>GPL-2.0-or-later</license>
         <news>2.2.2 — Remove from library: video types only (not music). 2.2.1 — tvshow.path warning.</news>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon>
-
-<addon id="service.trickplay"
-       name="Trickplay Preview"
-       version="7.1.3"
-       provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.python.script" library="script_generator.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="xbmc.service" library="service.py" start="login"/>
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <license>GPL-2.0-or-later</license>
-        <summary lang="en">Shows Jellyfin trickplay seek thumbnails during video scrubbing.</summary>
-        <description lang="en">Reads or generates Jellyfin trickplay sprite tiles alongside your media, crops preview frames with Pillow while you scrub, and shows them via skin window properties. Optional ffmpeg generator writes .trickplay sidecars; use Install preview tools for Pillow (preview) and ffmpeg (generation). Use Show addon status / Install skin snippet in settings (DialogSeekBar.xml for most skins; VideoFullScreen.xml for Bello). Generation/HDR requires ffmpeg, ffprobe, and optionally dovi_tool.</description>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
