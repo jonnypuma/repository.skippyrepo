@@ -7,6 +7,10 @@ on:
     paths:
       - 'zips/**'
 
+# Grant write access to push back to repository
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,32 +23,32 @@ jobs:
           fetch-depth: 0
 
       - name: Install zip tools
-        run: sudo apt-get install -y zip unzip
+        run: sudo apt-get update && sudo apt-get install -y zip unzip
 
       - name: Build addons.xml and Extract Assets
         run: |
           echo "<?xml version='1.0' encoding='UTF-8'?>" > addons.xml
           echo "<addons>" >> addons.xml
-          
-          find zips -name "*.zip" | while read zipfile; do
+
+          find zips -type f -name "*.zip" | while read -r zipfile; do
             echo "Processing: $zipfile"
             addon_dir=$(dirname "$zipfile")
-            
-            # 1. Extract the addon.xml
-            XML_PATH=$(unzip -Z1 "$zipfile" | grep "addon.xml" | head -n 1)
-            unzip -p "$zipfile" "$XML_PATH" | grep -v '<?xml' >> addons.xml
 
-            # 2. Extract Images
-            # We try common names specifically. 
-            # -j ignores the internal zip folder structure and puts them in addon_dir
-            # We use multiple patterns to ensure we catch root files and nested files
-            unzip -j -o "$zipfile" "icon.png" "icon.jpg" "fanart.jpg" "fanart.png" "*icon.png" "*icon.jpg" "*fanart.jpg" "*fanart.png" "*/screenshot*" -d "$addon_dir" || echo "Note: Some assets not found in $zipfile"
-            
-            # Debug: Show what is in the folder now
-            echo "Files now in $addon_dir:"
+            # 1. Locate and extract addon.xml safely
+            XML_PATH=$(unzip -Z1 "$zipfile" | grep -i "addon.xml" | head -n 1 || true)
+            if [ -n "$XML_PATH" ]; then
+              unzip -p "$zipfile" "$XML_PATH" | grep -v '<?xml' >> addons.xml || true
+            else
+              echo "Warning: No addon.xml found in $zipfile"
+            fi
+
+            # 2. Extract icons and fanart
+            unzip -j -o "$zipfile" "icon.png" "icon.jpg" "fanart.jpg" "fanart.png" "*icon.png" "*icon.jpg" "*fanart.jpg" "*fanart.png" "*/screenshot*" -d "$addon_dir" 2>/dev/null || echo "Note: Some assets not found in $zipfile"
+
+            echo "Files in $addon_dir:"
             ls -F "$addon_dir"
           done
-          
+
           echo "</addons>" >> addons.xml
 
       - name: Generate MD5
@@ -52,21 +56,20 @@ jobs:
 
       - name: Update index.html version
         run: |
-          NEW_VERSION=$(ls zips/repository.skippyrepo/*.zip | grep -oP '(?<=repository.skippyrepo-)[0-9.]+(?=.zip)' | head -n 1)
-          if [ ! -z "$NEW_VERSION" ]; then
+          NEW_VERSION=$(ls zips/repository.skippyrepo/*.zip 2>/dev/null | grep -oP '(?<=repository.skippyrepo-)[0-9.]+(?=.zip)' | head -n 1 || true)
+          if [ -n "$NEW_VERSION" ] && [ -f index.html ]; then
             sed -i "s/repository.skippyrepo-[0-9.]*\.zip/repository.skippyrepo-$NEW_VERSION.zip/g" index.html
           fi
 
       - name: Commit and push changes
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          
-          # Add everything in the zips directory explicitly
-          git add addons.xml addons.xml.md5 index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add addons.xml addons.xml.md5
+          [ -f index.html ] && git add index.html
           git add zips/
-          
-          # Only commit if changes exist
+
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
