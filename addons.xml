@@ -92,7 +92,7 @@ The add-on runs silently in the background and only activates when video playbac
 
 <addon id="service.skippy"
        name="Skippy - Video Segment Skipper"
-       version="7.1.2"
+       version="7.1.7"
        provider-name="Skippy-McSkipface">
        
     <requires>
