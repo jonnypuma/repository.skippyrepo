@@ -1,70 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <addons>
-<addon id="service.library.updatarr"
-       name="Library Updatarr"
-       version="2.2.2"
+
+<addon id="service.trickplay"
+       name="Trickplay Preview"
+       version="9.4.0"
        provider-name="Skippy-McSkipface">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
-    <extension point="xbmc.service" library="service.py" start="login"/>
-    <extension point="xbmc.python.script" library="launcher.py">
+    <extension point="xbmc.python.script" library="script_generator.py">
         <provides>executable</provides>
     </extension>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="context.py">
-                <label>32000</label>
-                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType)</visible>
-            </item>
-            <item library="context_remove.py">
-                <label>32070</label>
-                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
-            </item>
-        </menu>
-    </extension>
+    <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Populate missing metadata and artwork for existing library items.</summary>
-        <description lang="en_GB">Library Updatarr scans your existing Kodi video library for movies, TV shows, and episodes with missing posters, fanart, or metadata. It applies local artwork and NFO files first, then uses your installed online scrapers to fill remaining gaps — without wiping the database or scanning for new files.</description>
         <platform>all</platform>
         <license>GPL-2.0-or-later</license>
-        <news>2.2.2 — Remove from library: video types only (not music). 2.2.1 — tvshow.path warning.</news>
+        <summary lang="en">Shows Jellyfin trickplay seek thumbnails during video scrubbing.</summary>
+        <description lang="en">Reads or generates Jellyfin trickplay sprite tiles alongside your media, crops preview frames with Pillow while you scrub, and shows them via skin window properties. Optional ffmpeg generator writes .trickplay sidecars; use Install preview tools for Pillow (preview) and ffmpeg (generation). Use Show addon status / Install skin snippet in settings (DialogSeekBar.xml for most skins; VideoFullScreen.xml for Bello). Generation/HDR requires ffmpeg, ffprobe, and optionally dovi_tool.</description>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
 </addon>
-<addon id="repository.skippyrepo"
-       name="Skippy Repo"
-       version="1.0.4"
-       provider-name="Skippy-McSkipface">
-
-    <extension point="xbmc.addon.repository">
-        <dir>
-            <version>21.2.0</version>
-            <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
-        </dir>
-    </extension>
-
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi and companion Segment Editor</summary>
-        <description lang="en">Installs Skippy, Segment Editor and other Kodi addons</description>
-        <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-            <screenshot>screenshot01.png</screenshot>
-            <screenshot>screenshot02.png</screenshot>
-            <screenshot>screenshot03.png</screenshot>
-        </assets>
-    </extension>
-</addon>
-
-
-
 <addon id="service.segmenteditor"
        name="Segment Editor"
        version="1.2.5"
@@ -132,6 +90,41 @@ The add-on runs silently in the background and only activates when video playbac
     </extension>
 </addon>
 
+<addon id="service.library.updatarr"
+       name="Library Updatarr"
+       version="2.2.2"
+       provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="service.py" start="login"/>
+    <extension point="xbmc.python.script" library="launcher.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="context.py">
+                <label>32000</label>
+                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType)</visible>
+            </item>
+            <item library="context_remove.py">
+                <label>32070</label>
+                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Populate missing metadata and artwork for existing library items.</summary>
+        <description lang="en_GB">Library Updatarr scans your existing Kodi video library for movies, TV shows, and episodes with missing posters, fanart, or metadata. It applies local artwork and NFO files first, then uses your installed online scrapers to fill remaining gaps — without wiping the database or scanning for new files.</description>
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <news>2.2.2 — Remove from library: video types only (not music). 2.2.1 — tvshow.path warning.</news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
 <addon id="service.skippy"
        name="Skippy - Video Segment Skipper"
        version="7.2.3"
@@ -189,27 +182,34 @@ The add-on runs silently in the background and only activates when video playbac
         </assets>
     </extension>
 </addon>
-
-<addon id="service.trickplay"
-       name="Trickplay Preview"
-       version="9.4.0"
+<addon id="repository.skippyrepo"
+       name="Skippy Repo"
+       version="1.0.4"
        provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.python.script" library="script_generator.py">
-        <provides>executable</provides>
+
+    <extension point="xbmc.addon.repository">
+        <dir>
+            <version>21.2.0</version>
+            <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
+        </dir>
     </extension>
-    <extension point="xbmc.service" library="service.py" start="login"/>
+
     <extension point="xbmc.addon.metadata">
+        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi and companion Segment Editor</summary>
+        <description lang="en">Installs Skippy, Segment Editor and other Kodi addons</description>
         <platform>all</platform>
-        <license>GPL-2.0-or-later</license>
-        <summary lang="en">Shows Jellyfin trickplay seek thumbnails during video scrubbing.</summary>
-        <description lang="en">Reads or generates Jellyfin trickplay sprite tiles alongside your media, crops preview frames with Pillow while you scrub, and shows them via skin window properties. Optional ffmpeg generator writes .trickplay sidecars; use Install preview tools for Pillow (preview) and ffmpeg (generation). Use Show addon status / Install skin snippet in settings (DialogSeekBar.xml for most skins; VideoFullScreen.xml for Bello). Generation/HDR requires ffmpeg, ffprobe, and optionally dovi_tool.</description>
         <assets>
             <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
+            <fanart>fanart.png</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
         </assets>
     </extension>
 </addon>
+
+
+
 </addons>
