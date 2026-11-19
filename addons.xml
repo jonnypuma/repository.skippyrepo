@@ -35,6 +35,425 @@
         </assets>
     </extension>
 </addon>
+<addon id="skin.aeon.fuse" version="0.56.53" name="Aeon Fuse" provider-name="Skippy-McSkipface">
+	<requires>
+		<import addon="xbmc.gui" version="5.17.0"/>
+		<import addon="script.skinvariables" version="2.1.21"/>
+		<import addon="script.aeon.helper" version="0.3.115"/>
+		<!-- Optional: borrowed artwork colour (TMDb Helper colour service) and true Next up (embuary). -->
+		<!-- optional: each adds its feature when installed (README.md, "Add-ons", says what and where to get it) -->
+		<import addon="plugin.video.themoviedb.helper" version="4.0.0" optional="true"/>
+		<import addon="script.embuary.helper" version="2.0.0" optional="true"/>
+		<import addon="script.artistslideshow" optional="true"/>
+		<import addon="script.cu.lrclyrics" optional="true"/>
+		<import addon="script.karmamole.helper" optional="true"/>
+		<import addon="service.skippy" optional="true"/>
+		<import addon="service.trickplay" optional="true"/>
+		<import addon="script.tinyppi" optional="true"/>
+		<import addon="resource.images.studios.white" optional="true"/>
+		<import addon="resource.images.recordlabels.white" optional="true"/>
+		<import addon="resource.images.languageflags.colour" optional="true"/>
+		<import addon="resource.images.languageflags.rounded" optional="true"/>
+		<import addon="resource.fonts.copacetic" optional="true"/>
+		<import addon="resource.font.robotocjksc" optional="true"/>
+	</requires>
+	<extension point="xbmc.gui.skin" debugging="false" effectslowdown="1">
+		<res width="1920" height="1080" aspect="16:9" default="true" folder="1080i"/>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">Aeon Fuse - the look of Aeon 2 with ideas from Arctic Fuse, built on the Glass skin.</summary>
+		<description lang="en_GB">Aeon Fuse brings the look of Aeon 2 to Kodi with ideas from Arctic Fuse. Three themes (Aeon, Aeon Glass, Fused Glass), four menu styles, library views for films, shows and music with watched marks, media chips and time left, a Planner of new episodes, and its own screensaver and waveform visualizer. Built on the Glass skin; the Aeon Fuse Helper add-on does the work Kodi cannot.</description>
+		<platform>all</platform>
+		<license>GPL-2.0-or-later</license>
+		<source>https://github.com/jonnypuma</source>
+		<website>https://jonnypuma.github.io/</website>
+		<news>v0.39.8
+- Fused Glass background progress (guide / channel loading), EPG tools: scroll through channels, guide now pin aligned, lyrics shade rounded, OSD falls back to the show poster when a season poster is landscape.
+
+v0.39.7
+- Fixed a freeze (black screen) after stopping music. TV guide restyled (one glass card, programme chips). Lyrics: Left/Right/Up/Down scrub, the music OSD keeps its focus. Now playing card and cover rounded.
+
+v0.39.6
+- EPG tools: Channel group returns to the guide on the group's first channel. Custom Home items: heading like Movies (Random Sets). Rounded shapes: exact pills, concentric bars in cards and panels.
+
+v0.39.5
+- Home menu editor: options on a card, Choose icon row back, no overlap on Set path; Fused Glass highlight white with the Fuse menu theme. Live TV: wider list card, smaller info panel, Filter and other options as pills.
+
+v0.39.4
+- Library strip: music is the panel's own bottom band (cover in the icon column, bars, artist, song; progress fills the band). Live TV: round focus pills like the frosted ones, always Figtree.
+
+v0.39.3
+- TV: channel symbols drawn (Figtree), area tabs on a card that switch with Left/Right; Home icon row centred; song progress fills the now playing capsule and the new music section of the library strip; set spotlight dots follow the film strip.
+
+v0.39.2
+- Home > Planner: Down reaches the days of the week, OK opens the Planner on that day; counts per episodes, films, albums.
+
+v0.39.1
+- Home menu with only the focused name: three icons each side, evenly spaced.
+
+v0.39.0
+- Skip button on the player card: Tab (default) or Glass, on the Video OSD and the small seek bar.
+- Planner: Available in library marks; rounded cells, rows and pictures in Fused Glass.
+
+v0.38.0
+- 19 font combinations; Power card on Home; Home menu with icons beside the focused name; TV guide and EPG tools as cards.
+- Player info card, seek bar like the OSD, round toast icons, List view and Low list cards, episode tag gradients.
+
+v0.37.0
+- Landing animation setting (Pop, Grow, Fade, Glow, Nudge, Lift, None) and five font combinations with a live preview.
+- Video OSD: times clear of the seek marker, calmer top bar, Up next in the card, left block centred.
+
+v0.36.0
+- Focus highlight setting (Fused Glass): white pill, flat bar, frosted glass, outline or tight bar, with drop shadows.
+- The skin's skip button for Skippy in the Fused Glass style; gear backdrop removed from settings; Home mark under the icon.
+
+v0.35.0
+- All settings dialogs in the Fused Glass rows; group lines; aligned dividers; Skippy button and chapter thumbs restyled.
+- Music Fanart list: album count and cycling cover back in the list card; artist clearlogo. Show chips on spotlights.
+- Neutral backdrop with vignette, Colours from the picture on screen, 24-hour clock, Now playing corner at the top right.
+
+v0.34.0
+- Fused Glass settings pages like the mockup (separate cards, rounded rows, help inside the card), add-on settings fixed.
+- Backdrop Neutral / Fanart / Colours works in every theme and media type; Colours follows the hidden fanart.
+- Info pages blend into the fanart; rounded review cards and online rows; music Fanart list with bio, albums, tracks.
+- Cards view: landscape first; Banner list rounded; progress ring on art; screensaver keeps the whole picture.
+
+v0.33.0
+- Planner sources: wanted films, episodes and albums from Radarr, Sonarr and Lidarr in the Planner.
+
+v0.32.0
+- Spotlight category at the top left (RANDOM SHOWS), uniform clearlogos, Favourites page, random settings backdrop, rounded corners fixed, Fused music views.
+
+v0.31.0
+- Fused Glass: all library views rounded, real frost behind panels, A-Z bubble, Home tabs, player card, rounded dialogs, new screensaver. Recent searches on Home.
+
+v0.30.0
+- Weather on Home: current conditions, the next hours and this week. The screensaver shows the weather as its fourth slide.
+
+v0.29.2
+- Home: the spotlight text is no longer darkened twice. Fused Glass: toasts dock to the clock everywhere; List and Low list as cards.
+
+v0.29.1
+- Fused Glass: library views. Floating A-Z and settings rails, white pill rows, rounded wall tiles with a focus ring.
+
+v0.29.0
+- New theme: Fused Glass (Skin settings > Theme). First part: Home, toasts, chips, focus rows. Glass stays.
+
+v0.28.5
+- Home strips use the Sort by, Reverse order and Items in row set for each submenu entry.
+- Artwork type: new Thumb (episode stills); Landscape shows the landscape artwork.
+- The More tile takes the shape of its row.
+- Recently watched is now Recently played: watched or stopped partway, last played first.
+- Submenu editor: Autoscroll removed (submenu rows never scroll); summary spacing fixed.
+
+v0.28.4
+- Skin settings, Home menu and Context menu: no stray divider or row lines in the options pane.
+
+v0.28.3
+- Home menu editors: the options of each submenu and list entry show again (hidden since 0.28.0).
+- Planner: never during playback; it waits three quiet minutes after playback.</news>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+			<screenshot>resources/screenshot-04.jpg</screenshot>
+			<screenshot>resources/screenshot-05.jpg</screenshot>
+			<screenshot>resources/screenshot-06.jpg</screenshot>
+			<screenshot>resources/screenshot-07.jpg</screenshot>
+			<screenshot>resources/screenshot-08.jpg</screenshot>
+			<screenshot>resources/screenshot-09.jpg</screenshot>
+			<screenshot>resources/screenshot-10.jpg</screenshot>
+		</assets>
+	</extension>
+</addon>
+<addon id="repository.skippyrepo"
+       name="Skippy Repo"
+       version="1.0.4"
+       provider-name="Skippy-McSkipface">
+
+    <extension point="xbmc.addon.repository">
+        <dir>
+            <version>21.2.0</version>
+            <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
+        </dir>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi and companion Segment Editor</summary>
+        <description lang="en">Installs Skippy, Segment Editor and other Kodi addons</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
+        </assets>
+    </extension>
+</addon>
+
+
+
+<addon id="visualization.aeonwave.linux-arm64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux ARM64)" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>linux</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux ARM64)</summary>
+    <description lang="en_GB">Build for Linux ARM64 (64-bit ARM, OpenGL ES): CoreELEC / LibreELEC 64-bit, Raspberry Pi 4 and 5. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="script.texture.cache" name="Texture Cache Utility" version="2.0.6" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.1"/>
+    </requires>
+    <extension point="xbmc.python.script" library="main.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py"/>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="context.py">
+                <label>30200</label>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set) | String.IsEqual(ListItem.DBType,artist) | String.IsEqual(ListItem.DBType,album) | String.IsEqual(ListItem.DBType,song) | String.IsEqual(ListItem.DBType,musicvideo)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <source>script.texture.cache</source>
+        <website>https://kodi.tv</website>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+        <summary lang="en_GB">Kodi GUI wrapper (script.texture.cache) for Milhouse texturecache</summary>
+        <description lang="en_GB">Texture Cache Utility (script.texture.cache) is a Kodi GUI wrapper for Milhouse's texturecache. Cache artwork, prune, clean orphans, and run QA from Kodi with presets, progress, cancel, scheduled maintenance, and a library context menu. Bundled engine: https://github.com/xbmc/texturecache</description>
+        <news lang="en_GB">2.0.6: Import local artwork is in Pick commands as well as Run preset.</news>
+        <reuselanguageinvoker>false</reuselanguageinvoker>
+    </extension>
+</addon>
+<addon id="visualization.aeonwave.linux-armv7" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux ARM 32-bit)" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>linux</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux ARM 32-bit)</summary>
+    <description lang="en_GB">Build for Linux ARM 32-bit (OpenGL ES): 32-bit LibreELEC / CoreELEC images. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="visualization.aeonwave.windows-x64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Windows x64)" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_windx="visualization.aeonwave.dll"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>windx</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Windows x64)</summary>
+    <description lang="en_GB">Build for Windows x64 (DirectX 11): Kodi for Windows. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="service.audio.enforcer" name="Audio Enforcer" version="1.0.0" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="default.py" start="startup">
+    </extension>
+    <extension point="xbmc.python.script" library="resources/lib/showrules.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="resources/lib/context.py">
+                <label>32080</label>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Selects a preferred audio track when playback starts</summary>
+        <description lang="en">Audio Enforcer selects the first available audio track from up to five choices when a video starts. A choice can be the original language, the file's default track, Kodi's audio language, or a specific language. The original language comes from the file, and from TheMovieDB Helper when the file does not say. Commentary tracks can be skipped. Trailers, extras, and individual shows or movies can each use their own choice.</description>
+        <platform>all</platform>
+        <language>en</language>
+        <license>MIT</license>
+        <forum>https://forum.kodi.tv</forum>
+        <website>https://kodi.tv</website>
+        <news>Version 1.0.0 selects a preferred audio track when playback starts, including the original language, the file default, and a language for one show.</news>
+        <settings>
+            <setting file="resources/settings.xml" />
+        </settings>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="screensaver.aeon.fuse" name="Aeon Fuse Screensaver" version="1.3.0" provider-name="Aeon Fuse">
+	<requires>
+		<import addon="xbmc.python" version="3.0.1"/>
+	</requires>
+	<extension point="xbmc.ui.screensaver" library="screensaver.py"/>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">Random movies, TV shows and albums from your library, in the Aeon Fuse look.</summary>
+		<description lang="en_GB">The Aeon Fuse skin's screensaver as a regular Kodi screensaver: choose it and its wait time under Settings > Interface > Screensaver. It cycles through random movies, TV shows and albums (each can be switched off in its settings). Under another skin it shows a black screen.</description>
+		<platform>all</platform>
+		<license>GPL-2.0-or-later</license>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>
+<addon id="script.versions.updatarr"
+       name="Video Versions Updatarr"
+       version="0.1.2"
+       provider-name="Skippy-McSkipface">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.python.script" library="main.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.service" library="service.py"/>
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.manage">
+      <item library="context.py">
+        <label>32050</label>
+        <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)</visible>
+      </item>
+    </menu>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <license>MIT</license>
+    <source>https://github.com/jonnypuma/script.versions.updatarr</source>
+    <website>https://github.com/jonnypuma/script.versions.updatarr</website>
+    <summary lang="en_GB">Automatically update and assign Kodi Video Versions from NFO files and filenames directly in the database.</summary>
+    <description lang="en_GB">Kodi v21+ Video Versions does not yet import version names from NFO files or filenames during library scans. Video Versions Updatarr fills this gap by reading &lt;videoassettitle&gt;, &lt;edition&gt; NFO tags, or filename edition patterns, automatically adding custom version types and updating the videoversion database table. Supports both SQLite and MariaDB/MySQL with automatic configuration detection and a minimum 3-backup retention with easy restore.</description>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="visualization.aeonwave.linux-x86_64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux x86-64)" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>linux</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux x86-64)</summary>
+    <description lang="en_GB">Build for Linux x86-64 (OpenGL): desktop Linux, LibreELEC Generic. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="script.ratings.updatarr" name="Ratings Updatarr" version="1.2.9" provider-name="Skippy-McSkipface">
+  <requires>
+    <import addon="xbmc.python" version="3.0.1"/>
+    <import addon="plugin.video.themoviedb.helper" version="5.3.0" optional="true"/>
+  </requires>
+  <extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.main">
+      <item library="context_item.py">
+        <label>32105</label>
+        <visible>!String.IsEmpty(ListItem.DBID) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode)]</visible>
+      </item>
+    </menu>
+  </extension>
+  <extension point="xbmc.service" library="service.py" start="login"/>
+  <extension point="xbmc.addon.metadata">
+    <reuselanguageinvoker>false</reuselanguageinvoker>
+    <platform>all</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>local</source>
+    <summary lang="en_GB">Refresh library ratings by media type</summary>
+    <description lang="en_GB">Refresh scraped ratings for movies, TV shows, episodes, or all of those types. IMDb scores come from IMDb's non-commercial dataset files. TMDb is the main online source, and a score already cached by TMDbHelper is reused. OMDb adds Rotten Tomatoes critic and Metacritic scores. Trakt adds a public Trakt score. Requests stay inside the limits published by those services. Personal star ratings are left alone. This product uses the TMDb API but is not endorsed or certified by TMDb.</description>
+    <news>v1.2.9
+- Installs on Kodi Omega 21.2
+v1.2.8
+- Use TMDbHelper's cached TMDb score when no TMDb key is set
+v1.2.7
+- Show the summary after a finished update
+v1.2.6
+- OMDb requests use the documented apikey and IMDb id lookup
+v1.2.5
+- OMDb requires an API key; the free key allows 1,000 requests a day
+v1.2.4
+- Option to write only ratings the item does not already have
+v1.2.3
+- Download IMDb data now, from the settings, as well as on the automatic schedule
+v1.2.2
+- Choose a local folder for the IMDb downloads and the SQLite index
+v1.2.1
+- Local IMDb database is a provider switch, with the other providers
+- Media type switches apply to All video and the schedule
+v1.2.0
+- Reuse a TMDb score and IDs already cached by TMDbHelper
+- Keep TMDb, Trakt, and OMDb requests inside the limits those services publish
+v1.1.0
+- IMDb scores from the IMDb dataset files, refreshed about every 30 days
+- Run daily at chosen times, or on an hourly interval
+- Background runs, a summary, and a log of the last 10 runs
+- Skip a write unless the rating moved by more than the chosen amount
+v1.0.0
+- Update movies, TV shows, episodes, or all three
+- Context menu for the selected item, its media type, or the whole video library
+- Optional scheduled run
+    </news>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.png</fanart>
+    </assets>
+  </extension>
+</addon>
 <addon id="service.subtitle.enforcer" name="Subtitle Enforcer" version="2.4.0" provider-name="Skippy-McSkipface">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
@@ -184,135 +603,6 @@ v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments
         </assets>
     </extension>
 </addon>
-<addon id="visualization.aeonwave.linux-x86_64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux x86-64)" provider-name="Aeon Fuse">
-  <requires>
-    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
-    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
-    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
-    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
-  </requires>
-  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
-  <extension point="xbmc.addon.metadata">
-    <platform>linux</platform>
-    <license>GPL-2.0-or-later</license>
-    <source>https://github.com/xbmc/visualization.waveform</source>
-    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux x86-64)</summary>
-    <description lang="en_GB">Build for Linux x86-64 (OpenGL): desktop Linux, LibreELEC Generic. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
-    <assets>
-      <icon>resources/icon.png</icon>
-      <fanart>resources/fanart.jpg</fanart>
-    </assets>
-  </extension>
-</addon>
-<addon id="service.audio.enforcer" name="Audio Enforcer" version="1.0.0" provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="default.py" start="startup">
-    </extension>
-    <extension point="xbmc.python.script" library="resources/lib/showrules.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="resources/lib/context.py">
-                <label>32080</label>
-                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Selects a preferred audio track when playback starts</summary>
-        <description lang="en">Audio Enforcer selects the first available audio track from up to five choices when a video starts. A choice can be the original language, the file's default track, Kodi's audio language, or a specific language. The original language comes from the file, and from TheMovieDB Helper when the file does not say. Commentary tracks can be skipped. Trailers, extras, and individual shows or movies can each use their own choice.</description>
-        <platform>all</platform>
-        <language>en</language>
-        <license>MIT</license>
-        <forum>https://forum.kodi.tv</forum>
-        <website>https://kodi.tv</website>
-        <news>Version 1.0.0 selects a preferred audio track when playback starts, including the original language, the file default, and a language for one show.</news>
-        <settings>
-            <setting file="resources/settings.xml" />
-        </settings>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-        </assets>
-    </extension>
-</addon>
-
-<addon id="service.trickplay"
-       name="Trickplay Preview"
-       version="9.4.0"
-       provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.python.script" library="script_generator.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="xbmc.service" library="service.py" start="login"/>
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <license>GPL-2.0-or-later</license>
-        <summary lang="en">Shows Jellyfin trickplay seek thumbnails during video scrubbing.</summary>
-        <description lang="en">Reads or generates Jellyfin trickplay sprite tiles alongside your media, crops preview frames with Pillow while you scrub, and shows them via skin window properties. Optional ffmpeg generator writes .trickplay sidecars; use Install preview tools for Pillow (preview) and ffmpeg (generation). Use Show addon status / Install skin snippet in settings (DialogSeekBar.xml for most skins; VideoFullScreen.xml for Bello). Generation/HDR requires ffmpeg, ffprobe, and optionally dovi_tool.</description>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="script.texture.cache" name="Texture Cache Utility" version="2.0.6" provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.1"/>
-    </requires>
-    <extension point="xbmc.python.script" library="main.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="xbmc.service" library="service.py"/>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="context.py">
-                <label>30200</label>
-                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set) | String.IsEqual(ListItem.DBType,artist) | String.IsEqual(ListItem.DBType,album) | String.IsEqual(ListItem.DBType,song) | String.IsEqual(ListItem.DBType,musicvideo)</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <license>GPL-2.0-or-later</license>
-        <source>script.texture.cache</source>
-        <website>https://kodi.tv</website>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-        <summary lang="en_GB">Kodi GUI wrapper (script.texture.cache) for Milhouse texturecache</summary>
-        <description lang="en_GB">Texture Cache Utility (script.texture.cache) is a Kodi GUI wrapper for Milhouse's texturecache. Cache artwork, prune, clean orphans, and run QA from Kodi with presets, progress, cancel, scheduled maintenance, and a library context menu. Bundled engine: https://github.com/xbmc/texturecache</description>
-        <news lang="en_GB">2.0.6: Import local artwork is in Pick commands as well as Run preset.</news>
-        <reuselanguageinvoker>false</reuselanguageinvoker>
-    </extension>
-</addon>
-<addon id="visualization.aeonwave.linux-armv7" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux ARM 32-bit)" provider-name="Aeon Fuse">
-  <requires>
-    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
-    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
-    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
-    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
-  </requires>
-  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
-  <extension point="xbmc.addon.metadata">
-    <platform>linux</platform>
-    <license>GPL-2.0-or-later</license>
-    <source>https://github.com/xbmc/visualization.waveform</source>
-    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux ARM 32-bit)</summary>
-    <description lang="en_GB">Build for Linux ARM 32-bit (OpenGL ES): 32-bit LibreELEC / CoreELEC images. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
-    <assets>
-      <icon>resources/icon.png</icon>
-      <fanart>resources/fanart.jpg</fanart>
-    </assets>
-  </extension>
-</addon>
 <addon id="script.aeon.helper" name="Aeon Fuse Helper" version="0.3.115" provider-name="Aeon Fuse">
 	<requires>
 		<import addon="xbmc.python" version="3.0.1"/>
@@ -407,184 +697,27 @@ v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments
 		<license>GPL-2.0-or-later</license>
 	</extension>
 </addon>
-<addon id="repository.skippyrepo"
-       name="Skippy Repo"
-       version="1.0.4"
+
+<addon id="service.trickplay"
+       name="Trickplay Preview"
+       version="9.4.0"
        provider-name="Skippy-McSkipface">
-
-    <extension point="xbmc.addon.repository">
-        <dir>
-            <version>21.2.0</version>
-            <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
-        </dir>
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="script_generator.py">
+        <provides>executable</provides>
     </extension>
-
+    <extension point="xbmc.service" library="service.py" start="login"/>
     <extension point="xbmc.addon.metadata">
-        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi and companion Segment Editor</summary>
-        <description lang="en">Installs Skippy, Segment Editor and other Kodi addons</description>
         <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <summary lang="en">Shows Jellyfin trickplay seek thumbnails during video scrubbing.</summary>
+        <description lang="en">Reads or generates Jellyfin trickplay sprite tiles alongside your media, crops preview frames with Pillow while you scrub, and shows them via skin window properties. Optional ffmpeg generator writes .trickplay sidecars; use Install preview tools for Pillow (preview) and ffmpeg (generation). Use Show addon status / Install skin snippet in settings (DialogSeekBar.xml for most skins; VideoFullScreen.xml for Bello). Generation/HDR requires ffmpeg, ffprobe, and optionally dovi_tool.</description>
         <assets>
             <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-            <screenshot>screenshot01.png</screenshot>
-            <screenshot>screenshot02.png</screenshot>
-            <screenshot>screenshot03.png</screenshot>
+            <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon>
-
-
-
-<addon id="screensaver.aeon.fuse" name="Aeon Fuse Screensaver" version="1.3.0" provider-name="Aeon Fuse">
-	<requires>
-		<import addon="xbmc.python" version="3.0.1"/>
-	</requires>
-	<extension point="xbmc.ui.screensaver" library="screensaver.py"/>
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en_GB">Random movies, TV shows and albums from your library, in the Aeon Fuse look.</summary>
-		<description lang="en_GB">The Aeon Fuse skin's screensaver as a regular Kodi screensaver: choose it and its wait time under Settings > Interface > Screensaver. It cycles through random movies, TV shows and albums (each can be switched off in its settings). Under another skin it shows a black screen.</description>
-		<platform>all</platform>
-		<license>GPL-2.0-or-later</license>
-		<assets>
-			<icon>resources/icon.png</icon>
-			<fanart>resources/fanart.jpg</fanart>
-		</assets>
-	</extension>
-</addon>
-<addon id="script.versions.updatarr"
-       name="Video Versions Updatarr"
-       version="0.1.2"
-       provider-name="Skippy-McSkipface">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0"/>
-  </requires>
-  <extension point="xbmc.python.script" library="main.py">
-    <provides>executable</provides>
-  </extension>
-  <extension point="xbmc.service" library="service.py"/>
-  <extension point="kodi.context.item">
-    <menu id="kodi.core.manage">
-      <item library="context.py">
-        <label>32050</label>
-        <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)</visible>
-      </item>
-    </menu>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <platform>all</platform>
-    <license>MIT</license>
-    <source>https://github.com/jonnypuma/script.versions.updatarr</source>
-    <website>https://github.com/jonnypuma/script.versions.updatarr</website>
-    <summary lang="en_GB">Automatically update and assign Kodi Video Versions from NFO files and filenames directly in the database.</summary>
-    <description lang="en_GB">Kodi v21+ Video Versions does not yet import version names from NFO files or filenames during library scans. Video Versions Updatarr fills this gap by reading &lt;videoassettitle&gt;, &lt;edition&gt; NFO tags, or filename edition patterns, automatically adding custom version types and updating the videoversion database table. Supports both SQLite and MariaDB/MySQL with automatic configuration detection and a minimum 3-backup retention with easy restore.</description>
-    <assets>
-      <icon>icon.png</icon>
-      <fanart>fanart.jpg</fanart>
-    </assets>
-  </extension>
-</addon>
-<addon id="script.ratings.updatarr" name="Ratings Updatarr" version="1.2.9" provider-name="Skippy-McSkipface">
-  <requires>
-    <import addon="xbmc.python" version="3.0.1"/>
-    <import addon="plugin.video.themoviedb.helper" version="5.3.0" optional="true"/>
-  </requires>
-  <extension point="xbmc.python.script" library="default.py">
-    <provides>executable</provides>
-  </extension>
-  <extension point="kodi.context.item">
-    <menu id="kodi.core.main">
-      <item library="context_item.py">
-        <label>32105</label>
-        <visible>!String.IsEmpty(ListItem.DBID) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode)]</visible>
-      </item>
-    </menu>
-  </extension>
-  <extension point="xbmc.service" library="service.py" start="login"/>
-  <extension point="xbmc.addon.metadata">
-    <reuselanguageinvoker>false</reuselanguageinvoker>
-    <platform>all</platform>
-    <license>GPL-2.0-or-later</license>
-    <source>local</source>
-    <summary lang="en_GB">Refresh library ratings by media type</summary>
-    <description lang="en_GB">Refresh scraped ratings for movies, TV shows, episodes, or all of those types. IMDb scores come from IMDb's non-commercial dataset files. TMDb is the main online source, and a score already cached by TMDbHelper is reused. OMDb adds Rotten Tomatoes critic and Metacritic scores. Trakt adds a public Trakt score. Requests stay inside the limits published by those services. Personal star ratings are left alone. This product uses the TMDb API but is not endorsed or certified by TMDb.</description>
-    <news>v1.2.9
-- Installs on Kodi Omega 21.2
-v1.2.8
-- Use TMDbHelper's cached TMDb score when no TMDb key is set
-v1.2.7
-- Show the summary after a finished update
-v1.2.6
-- OMDb requests use the documented apikey and IMDb id lookup
-v1.2.5
-- OMDb requires an API key; the free key allows 1,000 requests a day
-v1.2.4
-- Option to write only ratings the item does not already have
-v1.2.3
-- Download IMDb data now, from the settings, as well as on the automatic schedule
-v1.2.2
-- Choose a local folder for the IMDb downloads and the SQLite index
-v1.2.1
-- Local IMDb database is a provider switch, with the other providers
-- Media type switches apply to All video and the schedule
-v1.2.0
-- Reuse a TMDb score and IDs already cached by TMDbHelper
-- Keep TMDb, Trakt, and OMDb requests inside the limits those services publish
-v1.1.0
-- IMDb scores from the IMDb dataset files, refreshed about every 30 days
-- Run daily at chosen times, or on an hourly interval
-- Background runs, a summary, and a log of the last 10 runs
-- Skip a write unless the rating moved by more than the chosen amount
-v1.0.0
-- Update movies, TV shows, episodes, or all three
-- Context menu for the selected item, its media type, or the whole video library
-- Optional scheduled run
-    </news>
-    <assets>
-      <icon>icon.png</icon>
-      <fanart>fanart.png</fanart>
-    </assets>
-  </extension>
-</addon>
-<addon id="visualization.aeonwave.windows-x64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Windows x64)" provider-name="Aeon Fuse">
-  <requires>
-    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
-    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
-    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
-    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
-  </requires>
-  <extension point="xbmc.player.musicviz" library_windx="visualization.aeonwave.dll"/>
-  <extension point="xbmc.addon.metadata">
-    <platform>windx</platform>
-    <license>GPL-2.0-or-later</license>
-    <source>https://github.com/xbmc/visualization.waveform</source>
-    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Windows x64)</summary>
-    <description lang="en_GB">Build for Windows x64 (DirectX 11): Kodi for Windows. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
-    <assets>
-      <icon>resources/icon.png</icon>
-      <fanart>resources/fanart.jpg</fanart>
-    </assets>
-  </extension>
-</addon>
-<addon id="visualization.aeonwave.linux-arm64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux ARM64)" provider-name="Aeon Fuse">
-  <requires>
-    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
-    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
-    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
-    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
-  </requires>
-  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
-  <extension point="xbmc.addon.metadata">
-    <platform>linux</platform>
-    <license>GPL-2.0-or-later</license>
-    <source>https://github.com/xbmc/visualization.waveform</source>
-    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux ARM64)</summary>
-    <description lang="en_GB">Build for Linux ARM64 (64-bit ARM, OpenGL ES): CoreELEC / LibreELEC 64-bit, Raspberry Pi 4 and 5. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
-    <assets>
-      <icon>resources/icon.png</icon>
-      <fanart>resources/fanart.jpg</fanart>
-    </assets>
-  </extension>
 </addon>
 </addons>
