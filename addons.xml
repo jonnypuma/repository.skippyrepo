@@ -206,7 +206,7 @@
     <menu id="kodi.core.manage">
       <item library="context.py">
         <label>32050</label>
-        <visible>String.IsEqual(ListItem.DBType,movie)</visible>
+        <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)</visible>
       </item>
     </menu>
   </extension>
