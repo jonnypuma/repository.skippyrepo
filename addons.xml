@@ -131,6 +131,29 @@
         </assets>
     </extension>
 </addon>
+<addon id="script.versions.updatarr"
+       name="Video Versions Updatarr"
+       version="0.1.0"
+       provider-name="Skippy-McSkipface">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.python.script" library="main.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <license>MIT</license>
+    <source>https://github.com/jonnypuma/script.versions.updatarr</source>
+    <website>https://github.com/jonnypuma/script.versions.updatarr</website>
+    <summary lang="en_GB">Automatically update and assign Kodi Video Versions from NFO files and filenames directly in the database.</summary>
+    <description lang="en_GB">Kodi v21+ Video Versions does not yet import version names from NFO files or filenames during library scans. Video Versions Updatarr fills this gap by reading &lt;videoassettitle&gt;, &lt;edition&gt; NFO tags, or filename edition patterns, automatically adding custom version types and updating the videoversion database table. Supports both SQLite and MariaDB/MySQL with automatic configuration detection and a minimum 3-backup retention with easy restore.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
 <addon id="script.ratings.updatarr" name="Ratings Updatarr" version="1.2.8" provider-name="Ratings Updatarr">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
