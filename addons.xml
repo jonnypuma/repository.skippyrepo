@@ -209,7 +209,7 @@
 </addon>
 <addon id="script.versions.updatarr"
        name="Video Versions Updatarr"
-       version="0.1.0"
+       version="0.1.2"
        provider-name="Skippy-McSkipface">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
