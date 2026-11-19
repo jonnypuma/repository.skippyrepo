@@ -65,6 +65,26 @@
 
 
 
+<addon id="visualization.aeonwave.linux-arm64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux ARM64)" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>linux</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux ARM64)</summary>
+    <description lang="en_GB">Build for Linux ARM64 (64-bit ARM, OpenGL ES): CoreELEC / LibreELEC 64-bit, Raspberry Pi 4 and 5. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
 <addon id="script.texture.cache" name="Texture Cache Utility" version="2.0.6" provider-name="Skippy-McSkipface">
     <requires>
         <import addon="xbmc.python" version="3.0.1"/>
@@ -95,6 +115,46 @@
         <news lang="en_GB">2.0.6: Import local artwork is in Pick commands as well as Run preset.</news>
         <reuselanguageinvoker>false</reuselanguageinvoker>
     </extension>
+</addon>
+<addon id="visualization.aeonwave.linux-armv7" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux ARM 32-bit)" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>linux</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux ARM 32-bit)</summary>
+    <description lang="en_GB">Build for Linux ARM 32-bit (OpenGL ES): 32-bit LibreELEC / CoreELEC images. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="visualization.aeonwave.windows-x64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Windows x64)" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_windx="visualization.aeonwave.dll"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>windx</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Windows x64)</summary>
+    <description lang="en_GB">Build for Windows x64 (DirectX 11): Kodi for Windows. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
 </addon>
 <addon id="service.audio.enforcer" name="Audio Enforcer" version="1.0.0" provider-name="Skippy-McSkipface">
     <requires>
@@ -160,6 +220,26 @@
     <assets>
       <icon>icon.png</icon>
       <fanart>fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="visualization.aeonwave.linux-x86_64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux x86-64)" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>linux</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux x86-64)</summary>
+    <description lang="en_GB">Build for Linux x86-64 (OpenGL): desktop Linux, LibreELEC Generic. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
     </assets>
   </extension>
 </addon>
