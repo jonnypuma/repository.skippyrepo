@@ -1,86 +1,163 @@
-**All add-ons and apps by jonnypuma:** [jonnypuma.github.io](https://jonnypuma.github.io/)
-
-Kodi repository for:
-
-<img width="500" height="500" alt="icon" src="https://github.com/user-attachments/assets/56b02adc-6002-4a72-8936-446b077575b3" />
-
-# Skippy — The XML-EDL Segment Skipper
-
-
-Skippy is a Kodi service that detects and can skip predefined video segments such as intros, recaps, ads, or credits using companion `.xml` or `.edl` files. 
-
-- Reads companion metadata files (Matroska-style .xml chapter files or MPlayer-style .edl files) placed alongside video files to identify skip-worthy segments.
-- Provides both automatic and user-prompted skipping, and integrates seamlessly into playback with customizable notifications and dialogs.
-- It detects playback type (movie vs. TV episode) using metadata and filename heuristics, and can show customizable skip dialogs with progress bars at configurable screen positions. 
-- Handles complex scenarios like nested and overlapping segments, intelligently managing parent-child relationships so dialogs appear at the right times. 
-- Includes rewind detection that resets skip prompts only on significant rewinds, and respects user dismissals so dismissed segments don't reappear after pause/resume.
-- Provides optional toast notifications when no segment files are found, supports multiple button focus styles, and includes debug logging.
-
-<img width="858" height="313" alt="image" src="https://github.com/user-attachments/assets/019bc5ee-4b83-4a56-9098-2618db5c8d41" />
-<img width="374" height="147" alt="2026-06-15 22_29_21-Kodi" src="https://github.com/user-attachments/assets/471f4207-a66a-466c-9ac1-109aff0e622d" />
-
-<img width="1267" height="704" alt="screenshot06" src="https://github.com/user-attachments/assets/afe25b5d-cef2-4ea3-8a8b-ee4df9d8a8c9" />
-<img width="1259" height="709" alt="screenshot05" src="https://github.com/user-attachments/assets/d9978fc4-daf0-47e1-9d81-c80c4a7f5e9d" />
-<img width="1262" height="708" alt="screenshot04" src="https://github.com/user-attachments/assets/8527089e-0dcb-4bc1-8efe-5ccdff1bcef9" />
-<img width="1264" height="707" alt="screenshot03" src="https://github.com/user-attachments/assets/a5ced74c-5842-41ca-b0f1-2795244624c5" />
-<img width="1261" height="694" alt="screenshot02" src="https://github.com/user-attachments/assets/1f646129-b585-4f0f-b478-928e68ccf6a4" />
-<img width="1262" height="699" alt="screenshot01" src="https://github.com/user-attachments/assets/f6bed7d2-7f5c-4b3d-b714-13e84b189d6e" />
-
-Supported Video Formats: Works for MKV and AVI containers.
-
-Discreet, cross-platform, and customizable.
-
-Tested on Kodi Omega 21.2 across Android, Linux (CoreELEC), and Windows platforms, Skippy works with MKV and AVI containers but has known limitations with MP4 files due to Kodi constraints.
-
-Known Limitations: Video files in MP4 containers are currently not working, seems to be a Kodi issue and not addon issue.
+<div align="center">
+  <img src="https://jonnypuma.github.io/assets/repository.skippyrepo/icon.webp" width="160" alt="Skippy Repo">
+  <h1>Skippy Repo</h1>
+  <p><b>A Kodi add-on repository by <a href="https://github.com/jonnypuma/">jonnypuma</a></b><br>
+  Skip intros and credits, show seek thumbnails, pick the right audio and subtitles, and keep your library tidy.</p>
+  <p><a href="#install"><b>Install</b></a> · <a href="#add-ons"><b>Add-ons</b></a> · <a href="https://jonnypuma.github.io/"><b>Website</b></a> · <a href="https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/repository.skippyrepo/repository.skippyrepo-1.0.4.zip"><b>Repository zip</b></a></p>
+</div>
 
 ---
 
-<img width="500" height="500" alt="icon" src="https://github.com/user-attachments/assets/542b71c5-dcdc-44cc-ac35-46a86ada9dc7" />
+## Install
 
-# Segment Editor - NOTE: No longer updated. Integrated into Skippy addon with new functionality
+Install the repository once. Kodi then lists the add-ons under <b>Install from repository</b> and keeps them up to date.
 
-Segment Editor is a Kodi service addon for editing EDL and chapter.xml segment files during video playback and a companion service to the Skippy Segment Skipper addon. 
+<table>
+  <tr>
+    <td width="52" align="center"><b>1</b></td>
+    <td>In Kodi, open <b>Settings › System › Add-ons</b> and allow <b>Unknown sources</b>.</td>
+  </tr>
+  <tr>
+    <td align="center"><b>2</b></td>
+    <td>Open <b>Settings › File manager › Add source</b> and enter <code>https://jonnypuma.github.io/repository.skippyrepo/</code></td>
+  </tr>
+  <tr>
+    <td align="center"><b>3</b></td>
+    <td>Open <b>Add-ons › Install from zip file</b>, pick that source and choose <b>repository.skippyrepo.zip</b>.</td>
+  </tr>
+  <tr>
+    <td align="center"><b>4</b></td>
+    <td>Open <b>Add-ons › Install from repository › Skippy Repo</b> and install what you need.</td>
+  </tr>
+</table>
 
-It supports both EDL (Edit Decision List) and Matroska chapter XML formats, with automatic detection that prefers chapters.xml over .edl files. The editor can be opened via keyboard shortcut (default CTRL+E), remote control key mapping, or trigger file, and works while the video plays in the background.
-
-The interface includes a segment list showing all segments with labels, times, and durations, plus real-time playback controls. 
-
-You can pause/resume playback, seek precisely with buttons (-30s to +30s), and mark start/end points for segment creation. Segments can be added using marked times, at the current playback position with a user-set duration, or by manually entering start and end times. Pressing Enter/Select on a list item jumps playback to the start of that segment for quick navigation.
-
-The addon provides visual indicators for nested segments (fully contained within another) and overlapping segments (partially overlapping), helping identify potential conflicts. 
-
-Edit and Delete buttons appear next to each segment, and you can modify start times, end times, and labels. Keyboard shortcuts (Space for pause, S for start, E for end, D for delete) provide quick access to common functions. 
-
-Segments are automatically sorted by start time, and the addon supports both predefined labels (configurable in settings) and custom labels. Changes can be saved to EDL, XML, or both formats based on your preferences, making it easy to create and manage skip segments for intros, recaps, credits, or any other video sections.
-
----
-
-<img width="424" height="395" alt="icon" src="https://github.com/user-attachments/assets/52bc6554-8d8f-4229-8801-80cecc7f0354" />
-
-# Trickplay
-
-Kodi background service that can generate/show **Jellyfin trickplay** seek thumbnails or user custom ones
-
-## Skin integration required
-
-**This addon does not work out of the box.** It runs as a service that crops thumbnails and publishes window properties, but **your active Kodi skin must display them**.
-
-For each skin you use, you must merge trickplay preview controls from this repo into that skin’s own **`DialogSeekBar.xml`**.
+Or <a href="https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/repository.skippyrepo/repository.skippyrepo-1.0.4.zip">download the repository zip</a> and install it from a USB stick or a network share.
 
 ---
 
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/e9b7235b-1870-445c-9a8e-dfb73d1cafe9" />
+## Add-ons
 
-# Subtitle Sync Fixer
+<p>Seven add-ons, each with its own page on the <a href="https://jonnypuma.github.io/">website</a>. Click a picture to open it.</p>
 
-This service add-on automatically waits 5 seconds after video playback starts, then seeks back 1 second to trigger subtitle re-synchronization. This fixes the common issue where embedded subtitles don't appear until manually seeking backward.
+<table>
+  <tr>
+    <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/service.skippy"><img src="https://jonnypuma.github.io/assets/service.skippy/next-takeover.webp" alt="Skippy"></a></td>
+    <td valign="top">
+      <h3><img src="https://jonnypuma.github.io/assets/service.skippy/icon.webp" width="32" height="32" align="absmiddle" alt=""> Skippy <sub>&nbsp;Kodi service</sub></h3>
+      <p><b>Skip, mark, and edit video segments (intros, recaps, credits, and more) using local or online data.</b></p>
+      <p>Skippy skips or asks using sidecar <code>.edl</code> and Matroska-style <code>chapters.xml</code> data, marks new ranges during playback, and has a built-in Segment Editor. Optional online lookup from TheIntroDB and IntroDB.app.</p>
+      <ul><li>Auto-skip, prompt, or ignore segments based on per-label rules</li><li>Skip dialogs in many looks, with a Studio to build your own</li><li>Next episode popup, binge mode, per-title auto-skip and statistics</li><li>Works with MKV, MP4, AVI and other common formats</li></ul>
+      <p><a href="https://jonnypuma.github.io/#/service.skippy">Project page</a> · <a href="https://github.com/jonnypuma/service.skippy">GitHub</a> · <a href="https://github.com/jonnypuma/service.skippy/releases">Releases</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/service.skippy">Zip files</a></p>
+    </td>
+  </tr>
+</table>
 
-The add-on runs silently in the background and only activates when video playback begins. You can enable or disable it in the add-on settings.
+<table>
+  <tr>
+    <td width="50%" align="center"><a href="https://jonnypuma.github.io/assets/service.skippy/skip-looks.webp"><img src="https://jonnypuma.github.io/assets/service.skippy/skip-looks.webp" alt="Skip dialog layouts in six of the looks"></a><br><sub>Skip dialog layouts in six of the looks</sub></td>
+    <td width="50%" align="center"><a href="https://jonnypuma.github.io/assets/service.skippy/studio-look.webp"><img src="https://jonnypuma.github.io/assets/service.skippy/studio-look.webp" alt="Skip dialog Studio with a live preview"></a><br><sub>Skip dialog Studio with a live preview</sub></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center"><a href="https://jonnypuma.github.io/assets/service.skippy/next-cards.webp"><img src="https://jonnypuma.github.io/assets/service.skippy/next-cards.webp" alt="Next episode popup: card forms"></a><br><sub>Next episode popup: card forms</sub></td>
+    <td width="50%" align="center"><a href="https://jonnypuma.github.io/assets/service.skippy/editor.webp"><img src="https://jonnypuma.github.io/assets/service.skippy/editor.webp" alt="Segment Editor: list, timeline and tools"></a><br><sub>Segment Editor: list, timeline and tools</sub></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/service.trickplay"><img src="https://jonnypuma.github.io/assets/service.trickplay/fanart.webp" alt="Trickplay Preview"></a></td>
+    <td valign="top">
+      <h3><img src="https://jonnypuma.github.io/assets/service.trickplay/icon.webp" width="32" height="32" align="absmiddle" alt=""> Trickplay Preview <sub>&nbsp;Kodi service</sub></h3>
+      <p><b>Shows Jellyfin trickplay seek thumbnails during video scrubbing.</b></p>
+      <p>Reads or generates Jellyfin trickplay sprite tiles alongside your media, crops preview frames while you scrub, and shows them through skin window properties. An optional ffmpeg generator writes <code>.trickplay</code> sidecars.</p>
+      <ul><li>Reference snippets for Estuary Mod v2, Arctic Fuse 2 and 3, Aeon Nox SiLVO, Arctic Zephyr, Arctic Horizon, Bello, Bingie and more</li><li>Setup wizard checks Pillow, ffmpeg and the active skin</li><li><b>Skin integration required:</b> your skin must display the preview (<code>DialogSeekBar.xml</code>)</li></ul>
+      <p><a href="https://jonnypuma.github.io/#/service.trickplay">Project page</a> · <a href="https://github.com/jonnypuma/service.trickplay">GitHub</a> · <a href="https://github.com/jonnypuma/service.trickplay/releases">Releases</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/service.trickplay">Zip files</a></p>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/service.subtitle.enforcer"><img src="https://jonnypuma.github.io/assets/service.subtitle.enforcer/fanart.webp" alt="Subtitle Enforcer"></a></td>
+    <td valign="top">
+      <h3><img src="https://jonnypuma.github.io/assets/service.subtitle.enforcer/icon.webp" width="32" height="32" align="absmiddle" alt=""> Subtitle Enforcer <sub>&nbsp;Kodi service</sub></h3>
+      <p><b>Selects a preferred subtitle when playback starts, and can seek back so subtitles appear.</b></p>
+      <p>Turns on the first available subtitle from up to five languages, in the order you set. It can also seek back a few seconds, which makes Kodi show embedded subtitles that otherwise stay hidden. This is the old Subtitle Sync Fixer, now part of the add-on.</p>
+      <ul><li>Priorities: original language, default language, a listed language or Kodi's own</li><li>Hearing impaired, SDH and forced tracks per language</li><li>Trailers, extras and single shows can have their own rule</li></ul>
+      <p><a href="https://jonnypuma.github.io/#/service.subtitle.enforcer">Project page</a> · <a href="https://github.com/jonnypuma/service.subtitle.enforcer">GitHub</a> · <a href="https://github.com/jonnypuma/service.subtitle.enforcer/releases">Releases</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/service.subtitle.enforcer">Zip files</a></p>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/service.audio.enforcer"><img src="https://jonnypuma.github.io/assets/service.audio.enforcer/fanart.webp" alt="Audio Enforcer"></a></td>
+    <td valign="top">
+      <h3><img src="https://jonnypuma.github.io/assets/service.audio.enforcer/icon.webp" width="32" height="32" align="absmiddle" alt=""> Audio Enforcer <sub>&nbsp;Kodi service</sub></h3>
+      <p><b>Selects a preferred audio track when playback starts.</b></p>
+      <p>Selects the first available audio track from up to five choices when a video starts. A choice can be the original language, the file's default track, Kodi's audio language, or a specific language.</p>
+      <ul><li>Original language from the file, and from TheMovieDB Helper when the file does not say</li><li>Commentary tracks can be skipped</li><li>Trailers, extras, and individual shows or movies can each use their own choice</li></ul>
+      <p><a href="https://jonnypuma.github.io/#/service.audio.enforcer">Project page</a> · <a href="https://github.com/jonnypuma/service.audio.enforcer">GitHub</a> · <a href="https://github.com/jonnypuma/service.audio.enforcer/releases">Releases</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/service.audio.enforcer">Zip files</a></p>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/script.ratings.updatarr"><img src="https://jonnypuma.github.io/assets/script.ratings.updatarr/fanart.webp" alt="Ratings Updatarr"></a></td>
+    <td valign="top">
+      <h3><img src="https://jonnypuma.github.io/assets/script.ratings.updatarr/icon.webp" width="32" height="32" align="absmiddle" alt=""> Ratings Updatarr <sub>&nbsp;Kodi script</sub></h3>
+      <p><b>Refresh library ratings by media type.</b></p>
+      <p>Refreshes scraped ratings in a Kodi 22 library for movies, TV shows and episodes. Your personal star rating is left alone.</p>
+      <ul><li>IMDb scores from IMDb's non-commercial dataset files</li><li>TMDb as the main online source; a score cached by TMDbHelper is reused</li><li>OMDb adds Rotten Tomatoes and Metacritic, Trakt adds the public Trakt score</li></ul>
+      <p><a href="https://jonnypuma.github.io/#/script.ratings.updatarr">Project page</a> · <a href="https://github.com/jonnypuma/script.ratings.updatarr">GitHub</a> · <a href="https://github.com/jonnypuma/script.ratings.updatarr/releases">Releases</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/script.ratings.updatarr">Zip files</a></p>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/service.library.updatarr"><img src="https://jonnypuma.github.io/assets/service.library.updatarr/fanart.webp" alt="Library Updatarr"></a></td>
+    <td valign="top">
+      <h3><img src="https://jonnypuma.github.io/assets/service.library.updatarr/icon.webp" width="32" height="32" align="absmiddle" alt=""> Library Updatarr <sub>&nbsp;Kodi service</sub></h3>
+      <p><b>Populate missing metadata and artwork for existing library items.</b></p>
+      <p>Scans your video library for movies, TV shows and episodes with missing posters, fanart or metadata. It applies local artwork and NFO files first, then your installed scrapers fill the gaps, without wiping the database or scanning for new files.</p>
+      <ul><li>Library context menu items, including Remove from library for video types</li></ul>
+      <p><a href="https://jonnypuma.github.io/#/service.library.updatarr">Project page</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/service.library.updatarr">Zip files</a></p>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/script.texture.cache"><img src="https://jonnypuma.github.io/assets/script.texture.cache/fanart.webp" alt="Texture Cache Utility"></a></td>
+    <td valign="top">
+      <h3><img src="https://jonnypuma.github.io/assets/script.texture.cache/icon.webp" width="32" height="32" align="absmiddle" alt=""> Texture Cache Utility <sub>&nbsp;Kodi script</sub></h3>
+      <p><b>A Kodi GUI wrapper for Milhouse's texturecache.</b></p>
+      <p>Cache artwork, prune, clean orphans and run QA from Kodi, with presets, progress, cancel, scheduled maintenance and a library context menu.</p>
+      <ul><li>Command presets with an optional media-type scope</li><li>Live progress, cancel, and confirmation before destructive commands</li><li>Scheduled maintenance when Kodi is idle</li></ul>
+      <p><a href="https://jonnypuma.github.io/#/script.texture.cache">Project page</a> · <a href="https://github.com/jonnypuma/script.texture.cache">GitHub</a> · <a href="https://github.com/jonnypuma/script.texture.cache/releases">Releases</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/script.texture.cache">Zip files</a></p>
+    </td>
+  </tr>
+</table>
 
 ---
 
-Contributors
-jonnyp — Architect, debugger
+## Also by jonnypuma
+
+<table>
+  <tr>
+    <td width="33%" valign="top"><b>Aeon Fuse</b><br>A Kodi skin: the look of Aeon 2 with ideas from Arctic Fuse, with its Helper and Screensaver.<br><a href="https://jonnypuma.github.io/#/skin.aeon.fuse">Project page</a></td>
+    <td width="33%" valign="top"><b>Curator</b><br>An all-in-one media manager for music, movies, movie sets and TV shows. Docker.<br><a href="https://jonnypuma.github.io/#/curator">Project page</a></td>
+    <td valign="top"><b>More Docker apps</b><br>Video Analyzer, Kodi Now Playing Multi and Kodi Library Information.<br><a href="https://jonnypuma.github.io/#docker">Website</a></td>
+  </tr>
+</table>
 
 ---
+
+## Retired
+
+- <b>Segment Editor</b> is no longer updated. It is built into <a href="https://jonnypuma.github.io/#/service.skippy">Skippy</a>, with more features.
+- <b>Subtitle Sync Fixer</b> is replaced by <a href="https://jonnypuma.github.io/#/service.subtitle.enforcer">Subtitle Enforcer</a>. Disable the old service if it is still installed, or both will seek at the start of playback.
+
+<sub>Each add-on carries its own licence, named on its page. Independent projects, not affiliated with the Kodi Foundation.</sub>
