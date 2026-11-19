@@ -123,6 +123,86 @@
 
 
 
+<addon id="visualization.aeonwave" version="1.5.2" name="Aeon Fuse Waveform Visualizer" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_windx="visualization.aeonwave.dll"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>windx</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card</summary>
+    <description lang="en_GB">Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="visualization.aeonwave" version="1.5.2" name="Aeon Fuse Waveform Visualizer" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>linux</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card</summary>
+    <description lang="en_GB">Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="visualization.aeonwave" version="1.5.2" name="Aeon Fuse Waveform Visualizer" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>linux</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card</summary>
+    <description lang="en_GB">Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="visualization.aeonwave" version="1.5.2" name="Aeon Fuse Waveform Visualizer" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>linux</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card</summary>
+    <description lang="en_GB">Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
 <addon id="service.audio.enforcer" name="Audio Enforcer" version="1.0.0" provider-name="Skippy-McSkipface">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
