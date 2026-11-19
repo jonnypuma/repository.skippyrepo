@@ -35,151 +35,65 @@
         </assets>
     </extension>
 </addon>
-<addon id="service.subtitle.enforcer" name="Subtitle Enforcer" version="2.4.0" provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="default.py" start="startup">
-    </extension>
-    <extension point="xbmc.python.script" library="default.py">
-    </extension>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="resources/lib/context.py">
-                <label>32058</label>
-                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Selects a preferred subtitle when playback starts, and can seek back so subtitles appear</summary>
-        <description lang="en">Subtitle Enforcer turns on the first available subtitle from up to five languages, in the order you set. A priority can be Original language, Default language, a listed language, Kodi's own subtitle language, or any language name or code. Original language follows the film, even when the audio is a dub, and TMDB wins if it disagrees with the file or the library. Default language uses the audio language the file marks as default. Leave the TMDB API key empty to use TMDBHelper's key. Each language can include hearing impaired (HI), SDH, and forced tracks, and the choice can follow whether you understand the audio. Trailers, extras, and individual shows can be skipped or given their own rule. It can also wait a few seconds after playback starts and seek backward, which makes Kodi show embedded subtitles that otherwise stay hidden until a manual seek.</description>
-        <platform>all</platform>
-        <language>en</language>
-        <license>MIT</license>
-        <forum>https://forum.kodi.tv</forum>
-        <website>https://kodi.tv</website>
-        <source>https://github.com</source>
-        <news>Version 2.4.0 gives a show or movie its own subtitle language, including the title that is playing.</news>
-        <settings>
-            <setting file="resources/settings.xml" />
-        </settings>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="service.skippy"
-       name="Skippy - Video Segment Skipper"
-       version="8.32.4"
+<addon id="repository.skippyrepo"
+       name="Skippy Repo"
+       version="1.0.4"
        provider-name="Skippy-McSkipface">
-       
-    <requires>
-        <import addon="xbmc.python" version="3.0.0" />
-        <!-- Optional: TMDB Helper requires script.module.jurialmunkey; listing it here helps Kodi
-             resolve the chain when optional dependencies are installed (repo must ship the module,
-             or install the module ZIP from jurialmunkey GitHub releases first). Skippy does not import it. -->
-        <import addon="script.module.jurialmunkey" version="0.0.0" optional="true" />
-        <import addon="plugin.video.themoviedb.helper" version="0.0.0" optional="true" />
-    </requires>
 
-    <extension point="xbmc.service" library="service.py" />
-
-    <extension point="xbmc.python.script" library="skippy_runscript_entry.py">
-        <provides>executable</provides>
+    <extension point="xbmc.addon.repository">
+        <dir>
+            <version>21.2.0</version>
+            <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
+        </dir>
     </extension>
 
     <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Skippy: skip, mark, and edit video segments (intros, recaps, credits, and more) using local or online data.</summary>
-        <description lang="en_GB">All-in-one Kodi companion for chapter-style workflows: automatically skip or prompt on segments, mark new ranges during playback, and open a full segment editor for .edl and Matroska-style chapters.xml sidecars. Configurable segment types (skip mode, aliases, EDL numbers), dialogs, and optional online lookups (TheIntroDB / IntroDB.app). Separate keymaps for marker (skippy_marker.xml) and editor (skippy_editor.xml). Optional next episode prompt: offers the next episode (or the next movie of a collection) near the end, can start it automatically, and asks "Still watching?" after several episodes in a row.</description>
-        <summary lang="da_DK">Skippy: spring over, markér og rediger videosegmenter (intro, resuméer, rulletekster og mere) med lokale eller online data.</summary>
-        <description lang="da_DK">Alt-i-ét Kodi-ledsager til kapitelbaserede arbejdsgange: spring automatisk over eller spørg ved segmenter, markér nye intervaller under afspilning, og åbn en komplet segmenteditor til .edl- og Matroska-lignende chapters.xml-sidecarfiler. Konfigurerbare segmenttyper (springtilstand, aliasser, EDL-numre), dialoger og valgfri onlineopslag (TheIntroDB / IntroDB.app). Separate tastaturtilknytninger til markør (skippy_marker.xml) og editor (skippy_editor.xml). Valgfri prompt for næste afsnit: tilbyder næste afsnit (eller næste film i en samling) nær slutningen, kan starte det automatisk og spørger "Ser du stadig med?" efter flere afsnit i træk.</description>
-        <summary lang="nl_NL">Skippy: sla videosegmenten (intro's, samenvattingen, aftiteling en meer) over, markeer en bewerk ze met lokale of online gegevens.</summary>
-        <description lang="nl_NL">Alles-in-één Kodi-hulpmiddel voor hoofdstukgebaseerde workflows: sla segmenten automatisch over of vraag erom, markeer tijdens het afspelen nieuwe bereiken en open een volledige segmenteditor voor .edl- en Matroska-achtige chapters.xml-sidecarbestanden. Instelbare segmenttypen (overslaan-modus, aliassen, EDL-nummers), dialogen en optionele online zoekopdrachten (TheIntroDB / IntroDB.app). Aparte toetsenschema's voor markeerder (skippy_marker.xml) en editor (skippy_editor.xml). Optionele vraag voor de volgende aflevering: biedt tegen het einde de volgende aflevering (of de volgende film uit een collectie) aan, kan die automatisch starten en vraagt "Kijk je nog?" na meerdere afleveringen achter elkaar.</description>
-        <summary lang="fr_FR">Skippy : passez, marquez et modifiez des segments vidéo (génériques d'intro, résumés, génériques de fin, etc.) à partir de données locales ou en ligne.</summary>
-        <description lang="fr_FR">Compagnon Kodi tout-en-un pour les flux de travail par chapitres : passez automatiquement les segments ou demandez confirmation, marquez de nouvelles plages pendant la lecture et ouvrez un éditeur de segments complet pour les fichiers annexes .edl et chapters.xml de type Matroska. Types de segments configurables (mode de saut, alias, numéros EDL), boîtes de dialogue et recherches en ligne facultatives (TheIntroDB / IntroDB.app). Keymaps distincts pour le marqueur (skippy_marker.xml) et l'éditeur (skippy_editor.xml). Proposition facultative de l'épisode suivant : propose l'épisode suivant (ou le film suivant d'une collection) vers la fin, peut le lancer automatiquement et demande « Vous regardez toujours ? » après plusieurs épisodes d'affilée.</description>
-        <summary lang="de_DE">Skippy: Videosegmente (Intros, Rückblicke, Abspann und mehr) überspringen, markieren und bearbeiten – mit lokalen oder Online-Daten.</summary>
-        <description lang="de_DE">Kodi-Komplettlösung für kapitelbasierte Abläufe: Segmente automatisch überspringen oder nachfragen, während der Wiedergabe neue Bereiche markieren und einen vollständigen Segment-Editor für .edl- und Matroska-artige chapters.xml-Sidecar-Dateien öffnen. Konfigurierbare Segmenttypen (Überspringmodus, Aliase, EDL-Nummern), Dialoge und optionale Online-Abfragen (TheIntroDB / IntroDB.app). Getrennte Tastenbelegungen für Marker (skippy_marker.xml) und Editor (skippy_editor.xml). Optionale Abfrage zur nächsten Folge: bietet gegen Ende die nächste Folge (oder den nächsten Film einer Sammlung) an, kann sie automatisch starten und fragt „Noch dabei?“ nach mehreren Folgen am Stück.</description>
-        <summary lang="el_GR">Skippy: παράλειψη, επισήμανση και επεξεργασία τμημάτων βίντεο (εισαγωγές, ανακεφαλαιώσεις, τίτλοι τέλους και άλλα) με τοπικά ή διαδικτυακά δεδομένα.</summary>
-        <description lang="el_GR">Ολοκληρωμένος βοηθός Kodi για ροές εργασίας βασισμένες σε κεφάλαια: αυτόματη παράλειψη τμημάτων ή ερώτηση, επισήμανση νέων διαστημάτων κατά την αναπαραγωγή και πλήρης επεξεργαστής τμημάτων για αρχεία sidecar .edl και chapters.xml τύπου Matroska. Ρυθμιζόμενοι τύποι τμημάτων (λειτουργία παράλειψης, ψευδώνυμα, αριθμοί EDL), διάλογοι και προαιρετικές διαδικτυακές αναζητήσεις (TheIntroDB / IntroDB.app). Ξεχωριστές αντιστοιχίσεις πλήκτρων για τον δείκτη (skippy_marker.xml) και τον επεξεργαστή (skippy_editor.xml). Προαιρετική πρόταση επόμενου επεισοδίου: προτείνει το επόμενο επεισόδιο (ή την επόμενη ταινία μιας συλλογής) κοντά στο τέλος, μπορεί να το ξεκινήσει αυτόματα και ρωτά «Ακόμα παρακολουθείς;» μετά από αρκετά συνεχόμενα επεισόδια.</description>
-        <summary lang="it_IT">Skippy: salta, segna e modifica i segmenti video (intro, riassunti, titoli di coda e altro) usando dati locali o online.</summary>
-        <description lang="it_IT">Compagno Kodi tutto in uno per i flussi di lavoro basati sui capitoli: salta automaticamente i segmenti o chiedi conferma, segna nuovi intervalli durante la riproduzione e apri un editor di segmenti completo per i file sidecar .edl e chapters.xml in stile Matroska. Tipi di segmento configurabili (modalità di salto, alias, numeri EDL), finestre di dialogo e ricerche online facoltative (TheIntroDB / IntroDB.app). Mappature tasti separate per il marcatore (skippy_marker.xml) e l'editor (skippy_editor.xml). Proposta facoltativa dell'episodio successivo: propone l'episodio successivo (o il film successivo di una raccolta) verso la fine, può avviarlo automaticamente e chiede «Stai ancora guardando?» dopo diversi episodi di fila.</description>
-        <summary lang="nb_NO">Skippy: hopp over, marker og rediger videosegmenter (intro, oppsummeringer, rulletekster og mer) med lokale eller nettbaserte data.</summary>
-        <description lang="nb_NO">Alt-i-ett Kodi-følgesvenn for kapittelbaserte arbeidsflyter: hopp automatisk over segmenter eller spør, marker nye områder under avspilling, og åpne en full segmentredigerer for .edl- og Matroska-lignende chapters.xml-sidecar-filer. Konfigurerbare segmenttyper (hoppmodus, aliaser, EDL-numre), dialoger og valgfrie nettoppslag (TheIntroDB / IntroDB.app). Separate tastetilordninger for markør (skippy_marker.xml) og redigerer (skippy_editor.xml). Valgfritt spørsmål om neste episode: tilbyr neste episode (eller neste film i en samling) mot slutten, kan starte den automatisk og spør «Ser du fortsatt på?» etter flere episoder på rad.</description>
-        <summary lang="es_ES">Skippy: omite, marca y edita segmentos de vídeo (intros, resúmenes, créditos y más) con datos locales o en línea.</summary>
-        <description lang="es_ES">Compañero todo en uno de Kodi para flujos de trabajo basados en capítulos: omite segmentos automáticamente o pregunta, marca nuevos intervalos durante la reproducción y abre un editor de segmentos completo para archivos sidecar .edl y chapters.xml de estilo Matroska. Tipos de segmento configurables (modo de salto, alias, números EDL), diálogos y búsquedas en línea opcionales (TheIntroDB / IntroDB.app). Asignaciones de teclas independientes para el marcador (skippy_marker.xml) y el editor (skippy_editor.xml). Aviso opcional del siguiente episodio: ofrece el siguiente episodio (o la siguiente película de una colección) cerca del final, puede iniciarlo automáticamente y pregunta «¿Sigues viendo?» tras varios episodios seguidos.</description>
-        <summary lang="sv_SE">Skippy: hoppa över, markera och redigera videosegment (intron, sammanfattningar, eftertexter och mer) med lokala eller onlinedata.</summary>
-        <description lang="sv_SE">Allt-i-ett-följeslagare för Kodi för kapitelbaserade arbetsflöden: hoppa automatiskt över segment eller fråga, markera nya intervall under uppspelning och öppna en fullständig segmentredigerare för .edl- och Matroska-liknande chapters.xml-sidecarfiler. Konfigurerbara segmenttyper (hoppläge, alias, EDL-nummer), dialogrutor och valfria onlineuppslag (TheIntroDB / IntroDB.app). Separata tangentbindningar för markör (skippy_marker.xml) och redigerare (skippy_editor.xml). Valfri fråga om nästa avsnitt: erbjuder nästa avsnitt (eller nästa film i en samling) mot slutet, kan starta det automatiskt och frågar ”Tittar du fortfarande?” efter flera avsnitt i rad.</description>
-        <summary lang="pt_BR">Skippy: pule, marque e edite segmentos de vídeo (aberturas, recapitulações, créditos e mais) com dados locais ou online.</summary>
-        <description lang="pt_BR">Companheiro completo do Kodi para fluxos de trabalho baseados em capítulos: pule segmentos automaticamente ou pergunte, marque novos intervalos durante a reprodução e abra um editor de segmentos completo para arquivos sidecar .edl e chapters.xml no estilo Matroska. Tipos de segmento configuráveis (modo de pulo, apelidos, números EDL), diálogos e buscas online opcionais (TheIntroDB / IntroDB.app). Mapas de teclas separados para o marcador (skippy_marker.xml) e o editor (skippy_editor.xml). Aviso opcional do próximo episódio: oferece o próximo episódio (ou o próximo filme de uma coleção) perto do fim, pode iniciá-lo automaticamente e pergunta "Ainda está assistindo?" após vários episódios seguidos.</description>
+        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi and companion Segment Editor</summary>
+        <description lang="en">Installs Skippy, Segment Editor and other Kodi addons</description>
         <platform>all</platform>
-        <license>MIT</license>
-        <source>https://github.com/jonnypuma/service.skippy</source>
-        <news>v8.32.4: The Studios open much faster on a slow box (they filled in row by row over several seconds).
-v8.32.3: Dialogs no longer use up Kodi's window numbers: after about a hundred dialogs none opened until Kodi was restarted.
-v8.32.2: The skip dialog and the Up Next popup no longer flash before they appear: all parts come together.
-v8.32.1: Up Next, Takeover: the small window with what is playing is gone. Kodi cannot show the video small there; the window only showed a piece of the picture.
-v8.32.0: Up Next and the skip dialog open faster and never show half drawn: the popup is made ready when playback starts, its pictures are cached ahead, and it stays unseen until it is complete. The last three Studio rows work: Follow the skin style, Keep clear of subtitles, Focus style.
-v8.31.0: Up Next: progress as a line, a circle or a fill (on the button, the card or the picture), fanart behind the card, a Watch credits button, the credits in a small window in Takeover, the Poster card drawn like the others, and seven more Studio rows at work.
-v8.30.0: Up Next: Picture is a choice for the drawn designs: the episode picture, the poster, the poster set into the episode picture, or none.
-v8.29.0: Up Next has its Studio, as in the mockup: Look, Layout, Picture, Buttons, Motion and Autoplay, a live preview that plays the popup, what the row in focus does, presets with your saved ones, Save as preset and Reset.
-v8.28.0: Up Next: the drawn Card in Fused Glass Dark is the default, and the popup comes at the start of the Credits segment by default. Customize Up Next has Preset (every drawn design in every look, the twelve own looks among them), Size (Full, Compact, Minimal) and Size on screen (Small, Medium, Large); a saved look keeps both. The looks of the earlier popup are named (legacy). A segment type of your own gets a colour of its own.
-v8.27.0: Up Next: the Queue is drawn by Skippy as in the mockup, with three cards to pick from, Play a later one, and Full, Compact and Minimal forms. What is written on a button now changes colour with the focus in every drawn dialog.
-v8.26.0: Up Next: seven designs drawn by Skippy, as in the mockups (Card, Poster slab, Play ring, Lower third, Float, Takeover, Side rail), each Full, Compact and Minimal, in every look of the drawn skip dialog. The popup of earlier versions is now Card (legacy) and stays the default.
-v8.25.2: Segment editor: a segment just created is the highlighted one, in the list and on the timeline; the focus stays on the button that made it.
-v8.25.1: Segment editor: the label picker opens in the editor's own panel look (Dark, Frost or Clear).
-v8.25.0: Segment editor, List and drawer: a Look row over the nine actions, with Dark overlay (on / off) and Panels (Fused Glass Dark, Frost, Clear). The panels reach closer to the edges of the screen, and the list rows use the width for long type names and the source.
-v8.24.2: Segment editor: the text of a list row is at the mockup's sizes, so the source is no longer cut off and a NESTED flag fits beside it.
-v8.24.1: Segment editor, List and drawer: always in the Fused Glass Dark look, like the Studio. The small labels (headers, tags, the words in the timeline's blocks, the times, the NESTED flag) are drawn at the mockup's size.
-v8.24.0: Segment editor: the timeline zooms on the highlighted segment and the ones connected to it, its blocks have round corners, the highlighted one has handles and its times under it, the playhead a marker. The NESTED flag and the tags are flat rounded chips. Sources are written in words (Local EDL, Chapters).
-v8.23.1: Segment editor: long type names and film-length times fit their row, the NESTED flag fits its chip, and a timeline block shows its word only when it fits whole.
-v8.23.0: Segment editor, List and drawer: rebuilt to its mockup. A header with the number of segments and the video's title, one-line rows (from - to, length, source, a NESTED flag), a timeline that shows the stretch around the highlighted segment with a word in every block and the times under it. Float: the words before the countdown stand still.
-v8.22.0: The drawn skip dialogs move: Appears (Fade, Rise, Pop, Slide in), Leaves (Fade, Drop, Shrink) and the pulse of the last five seconds. The Studio's live preview plays it: the dialog comes, its countdown and bar run, and it leaves.
-v8.21.2: The presets are listed with the drawn designs first, then your own, then the classic card's (legacy).
-v8.21.1: Studio: wider choices in the switch rows (Compact, Rounded and Medium fit their pill). The presets of the classic card are named (legacy).
-v8.21.0: The Stack card in Fused Glass Dark is the default skip dialog. From a look of your own, the Preset row goes back to the design's own preset and resets its options. Studio: Preview segment type on the Look tab steps through all types; the time on the Skip button has its own switch and the preview shows its format and content.
-v8.20.0: Studio: every tab shows all its options (those that do not apply to the design in use are dimmed and say why), Design is back on the Look tab, long tabs scroll. Text outline has a strength (Off, Light, Medium, Strong) and the text shadow falls to the lower right.
-v8.19.0: The skip dialog Studio is rebuilt to its mockup: six tabs (Look, Layout, Text, Buttons, Motion, Behaviour), rows with switch groups, toggles, colour dots, sliders and the nine places, an About this setting panel under the preview, and Intro / Credits / Nested previews. New: Distance from the edge, Button the focus starts on, nine positions for drawn designs.
-v8.18.0: Drawn skip dialogs appear much faster on slow boxes. New in the Studio: Size on screen (Small, Medium, Large), Accent colour, Progress style, Overlay gradient and its direction. Lighter text shadows, a shade under every panel, and the segment editor's list goes Left to the segment tools and Right to the timeline.
-v8.17.1: Drawn skip dialogs: the duration on the Skip button was shown as :00, times lose their leading zero (0:27), and the Timeline's playhead time now runs.
-v8.17.0: Cinema band, Float, Split, Timeline and Side rail are now drawn to their mockups too. New in the Studio: Text shadow (Off to Heavy) and Text size. The Skip button says the segment type only when nothing else in the dialog does.
-v8.16.0: Corner slab and Dial are now drawn to their mockups like the Stack card, in Full, Compact and Minimal. Background overlay has a new default, The design's own: a chosen overlay takes the place of a design's shade instead of lying on top of it.
-v8.15.0: New skip dialog layout Stack card, drawn by Skippy itself to the mockup: type and range with the accent dot, the nested line in its own box, icons on the buttons, the time at the right of Skip. Options: corners, Close button (Skip takes its room without it), icons, the two lines. In the segment editor Right from the list reaches the segment actions.
-v8.14.0: A saved skip dialog preset of a new layout now stores the whole dialog (size, overlay, motion). Customize next episode popup has Popup layout and Layout look rows, and a saved look stores the layout, its look and the picture.
-v8.13.0: Two more layouts for the next episode popup: Takeover (the next episode takes the whole screen) and Queue (the next three episodes side by side; Left and Right pick one).
-v8.12.0: Every new skip dialog layout now has a Minimal form of its own; Minimal mode uses it instead of the old chip.
-v8.11.0: Skip dialog layouts: six background overlays (square, rounded, band, corner glow), a choice of how the dialog appears and leaves, and a pulse in the last five seconds.
-v8.10.0: Next episode popup pictures: Poster and episode now stand side by side at one height with round corners, and there are two new choices, Fanart and poster and Fanart and episode.
-v8.9.0: Twelve looks of their own for the skip dialog layouts and the next episode popup layouts: Neon, Paper, Sunset, Ocean, Brutal, Terminal, Wireframe, Luxe, Pastel, Gloss, Mono and VHS. Each is a preset with every layout.
-v8.8.0: Every skip dialog layout in every look is now a preset by name (48 of them), and OK on Preset in the Studio opens a wall with a picture of every preset.
-v8.7.0: Six new layouts for the next episode popup next to the classic card: Poster card, Picture slab, Play ring, Lower third, Float and Side rail, in six looks.
-v8.6.0: The next episode popup can show the poster, the poster with the episode picture, or the fanart behind it. New skip dialog layouts colour their bar by the kind of segment, and there is a Poster card layout.
-v8.5.0: Customize Skip Dialog is now the Studio: settings in five tabs, a live preview of the whole screen and a strip of presets, in the Fused Glass Dark look.
-v8.4.0: Customize Skip Dialog picks the skip dialog layout and its look, with a live preview of every layout.
-v8.3.0: Seven new layouts for the skip dialog next to the classic card (Playback &amp; Dialog &gt; Skip dialog layout): Corner slab, Dial, Cinema band, Float, Split, Timeline and Side rail, each in a large and a small form and in six looks (Layout look).
-v8.2.0: The looks of the skin Aeon Fuse as presets for the skip dialog and the next episode popup: Fused Glass Dark, Frost and Clear, Fused Glass style, Aeon and Aeon Glass, each as Full, Compact and Minimal. A new Card style gives the card round corners or one of these looks. The presets of earlier versions are still there, at the end of the list, marked (legacy).
-v8.1.0: Two new layouts for the segment editor that leave the picture visible: List and drawer (the default) and Drawer, next to the Classic panel (Segment Editor > Editor layout). Every button is there in all three. New: a timeline with a coloured block per segment, the playhead and a mark under the highlighted segment.
-v8.0.0: A new look for Skippy's own windows, in five styles to choose from under Segment Settings > Window style: Fused Glass Dark, Frost (the default) and Clear, Aeon and Aeon Glass. The segment editor, the type picker, the segment types editor, the source picker, statistics and lists and both Customize screens follow it. The skip dialog and the next episode popup keep their own looks.
-v7.15.2: The next episode popup's look, colours, button highlight, bar and card opacity, and the default upload target, can be changed again: Kodi refused every choice but the default.
-v7.15.1: What you save in Customize next episode popup and Customize skip dialog is kept when you leave the settings with Back or Cancel.
-v7.15.0: Progress bars move with every video frame instead of jumping a percent at a time, in the skip dialog, the next episode popup and in skins that ask Skippy to drive their own bar. Smooth progress is on by default.
-v7.14.0: Skins can draw their own next episode popup, the way they can draw their own skip button: Skippy fills Home window properties and the skin's buttons answer it.
-v7.13.1: Customize next episode popup and Customize skip dialog show what you saved when opened again from the settings.
-v7.13.0: Skins can show the segment playing, the time left, the next segment and the next episode from Home window properties, and draw their own skip button with RunScript(service.skippy,skip_current), which also works from a key.
-v7.12.0: Binge mode: the intro plays on the first episode of a sitting and is skipped from the second on, optionally the recap too. Statistics show time saved per show or film. A new Current video window shows where the segments came from, what each one will do and why, and the last error.
-v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments from loading. "Still watching?" counts episodes Kodi starts by itself. A new video starts without the previous video's segments. Code defaults match the settings. A failed save to an NFS share no longer lands in the share's root folder. Unknown RunScript commands no longer mark a segment. Online lookups check the year, so remakes get their own segments. Hide OSD display during skip is on by default. More screens are translated.</news>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.png</fanart>
             <screenshot>screenshot01.png</screenshot>
             <screenshot>screenshot02.png</screenshot>
             <screenshot>screenshot03.png</screenshot>
-            <screenshot>screenshot04.png</screenshot>
-            <screenshot>screenshot05.png</screenshot>
-            <screenshot>screenshot06.png</screenshot>
-            <screenshot>screenshot07.png</screenshot>
         </assets>
+    </extension>
+</addon>
+
+
+
+<addon id="script.texture.cache" name="Texture Cache Utility" version="2.0.6" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.1"/>
+    </requires>
+    <extension point="xbmc.python.script" library="main.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py"/>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="context.py">
+                <label>30200</label>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set) | String.IsEqual(ListItem.DBType,artist) | String.IsEqual(ListItem.DBType,album) | String.IsEqual(ListItem.DBType,song) | String.IsEqual(ListItem.DBType,musicvideo)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <source>script.texture.cache</source>
+        <website>https://kodi.tv</website>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+        <summary lang="en_GB">Kodi GUI wrapper (script.texture.cache) for Milhouse texturecache</summary>
+        <description lang="en_GB">Texture Cache Utility (script.texture.cache) is a Kodi GUI wrapper for Milhouse's texturecache. Cache artwork, prune, clean orphans, and run QA from Kodi with presets, progress, cancel, scheduled maintenance, and a library context menu. Bundled engine: https://github.com/xbmc/texturecache</description>
+        <news lang="en_GB">2.0.6: Import local artwork is in Pick commands as well as Run preset.</news>
+        <reuselanguageinvoker>false</reuselanguageinvoker>
     </extension>
 </addon>
 <addon id="service.audio.enforcer" name="Audio Enforcer" version="1.0.0" provider-name="Skippy-McSkipface">
@@ -217,90 +131,6 @@ v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments
         </assets>
     </extension>
 </addon>
-
-<addon id="service.trickplay"
-       name="Trickplay Preview"
-       version="9.4.0"
-       provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.python.script" library="script_generator.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="xbmc.service" library="service.py" start="login"/>
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <license>GPL-2.0-or-later</license>
-        <summary lang="en">Shows Jellyfin trickplay seek thumbnails during video scrubbing.</summary>
-        <description lang="en">Reads or generates Jellyfin trickplay sprite tiles alongside your media, crops preview frames with Pillow while you scrub, and shows them via skin window properties. Optional ffmpeg generator writes .trickplay sidecars; use Install preview tools for Pillow (preview) and ffmpeg (generation). Use Show addon status / Install skin snippet in settings (DialogSeekBar.xml for most skins; VideoFullScreen.xml for Bello). Generation/HDR requires ffmpeg, ffprobe, and optionally dovi_tool.</description>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="script.texture.cache" name="Texture Cache Utility" version="2.0.6" provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.1"/>
-    </requires>
-    <extension point="xbmc.python.script" library="main.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="xbmc.service" library="service.py"/>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="context.py">
-                <label>30200</label>
-                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set) | String.IsEqual(ListItem.DBType,artist) | String.IsEqual(ListItem.DBType,album) | String.IsEqual(ListItem.DBType,song) | String.IsEqual(ListItem.DBType,musicvideo)</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <license>GPL-2.0-or-later</license>
-        <source>script.texture.cache</source>
-        <website>https://kodi.tv</website>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-        <summary lang="en_GB">Kodi GUI wrapper (script.texture.cache) for Milhouse texturecache</summary>
-        <description lang="en_GB">Texture Cache Utility (script.texture.cache) is a Kodi GUI wrapper for Milhouse's texturecache. Cache artwork, prune, clean orphans, and run QA from Kodi with presets, progress, cancel, scheduled maintenance, and a library context menu. Bundled engine: https://github.com/xbmc/texturecache</description>
-        <news lang="en_GB">2.0.6: Import local artwork is in Pick commands as well as Run preset.</news>
-        <reuselanguageinvoker>false</reuselanguageinvoker>
-    </extension>
-</addon>
-<addon id="repository.skippyrepo"
-       name="Skippy Repo"
-       version="1.0.4"
-       provider-name="Skippy-McSkipface">
-
-    <extension point="xbmc.addon.repository">
-        <dir>
-            <version>21.2.0</version>
-            <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
-        </dir>
-    </extension>
-
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi and companion Segment Editor</summary>
-        <description lang="en">Installs Skippy, Segment Editor and other Kodi addons</description>
-        <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-            <screenshot>screenshot01.png</screenshot>
-            <screenshot>screenshot02.png</screenshot>
-            <screenshot>screenshot03.png</screenshot>
-        </assets>
-    </extension>
-</addon>
-
-
-
 <addon id="script.ratings.updatarr" name="Ratings Updatarr" version="1.2.8" provider-name="Ratings Updatarr">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
@@ -423,5 +253,176 @@ v1.0.0
       <fanart>resources/fanart.png</fanart>
     </assets>
   </extension>
+</addon>
+<addon id="service.subtitle.enforcer" name="Subtitle Enforcer" version="2.4.0" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="default.py" start="startup">
+    </extension>
+    <extension point="xbmc.python.script" library="default.py">
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="resources/lib/context.py">
+                <label>32058</label>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Selects a preferred subtitle when playback starts, and can seek back so subtitles appear</summary>
+        <description lang="en">Subtitle Enforcer turns on the first available subtitle from up to five languages, in the order you set. A priority can be Original language, Default language, a listed language, Kodi's own subtitle language, or any language name or code. Original language follows the film, even when the audio is a dub, and TMDB wins if it disagrees with the file or the library. Default language uses the audio language the file marks as default. Leave the TMDB API key empty to use TMDBHelper's key. Each language can include hearing impaired (HI), SDH, and forced tracks, and the choice can follow whether you understand the audio. Trailers, extras, and individual shows can be skipped or given their own rule. It can also wait a few seconds after playback starts and seek backward, which makes Kodi show embedded subtitles that otherwise stay hidden until a manual seek.</description>
+        <platform>all</platform>
+        <language>en</language>
+        <license>MIT</license>
+        <forum>https://forum.kodi.tv</forum>
+        <website>https://kodi.tv</website>
+        <source>https://github.com</source>
+        <news>Version 2.4.0 gives a show or movie its own subtitle language, including the title that is playing.</news>
+        <settings>
+            <setting file="resources/settings.xml" />
+        </settings>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="service.skippy"
+       name="Skippy - Video Segment Skipper"
+       version="8.33.0"
+       provider-name="Skippy-McSkipface">
+       
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <!-- Optional: TMDB Helper requires script.module.jurialmunkey; listing it here helps Kodi
+             resolve the chain when optional dependencies are installed (repo must ship the module,
+             or install the module ZIP from jurialmunkey GitHub releases first). Skippy does not import it. -->
+        <import addon="script.module.jurialmunkey" version="0.0.0" optional="true" />
+        <import addon="plugin.video.themoviedb.helper" version="0.0.0" optional="true" />
+    </requires>
+
+    <extension point="xbmc.service" library="service.py" />
+
+    <extension point="xbmc.python.script" library="skippy_runscript_entry.py">
+        <provides>executable</provides>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Skippy: skip, mark, and edit video segments (intros, recaps, credits, and more) using local or online data.</summary>
+        <description lang="en_GB">All-in-one Kodi companion for chapter-style workflows: automatically skip or prompt on segments, mark new ranges during playback, and open a full segment editor for .edl and Matroska-style chapters.xml sidecars. Configurable segment types (skip mode, aliases, EDL numbers), dialogs, and optional online lookups (TheIntroDB / IntroDB.app). Separate keymaps for marker (skippy_marker.xml) and editor (skippy_editor.xml). Optional next episode prompt: offers the next episode (or the next movie of a collection) near the end, can start it automatically, and asks "Still watching?" after several episodes in a row.</description>
+        <summary lang="da_DK">Skippy: spring over, markér og rediger videosegmenter (intro, resuméer, rulletekster og mere) med lokale eller online data.</summary>
+        <description lang="da_DK">Alt-i-ét Kodi-ledsager til kapitelbaserede arbejdsgange: spring automatisk over eller spørg ved segmenter, markér nye intervaller under afspilning, og åbn en komplet segmenteditor til .edl- og Matroska-lignende chapters.xml-sidecarfiler. Konfigurerbare segmenttyper (springtilstand, aliasser, EDL-numre), dialoger og valgfri onlineopslag (TheIntroDB / IntroDB.app). Separate tastaturtilknytninger til markør (skippy_marker.xml) og editor (skippy_editor.xml). Valgfri prompt for næste afsnit: tilbyder næste afsnit (eller næste film i en samling) nær slutningen, kan starte det automatisk og spørger "Ser du stadig med?" efter flere afsnit i træk.</description>
+        <summary lang="nl_NL">Skippy: sla videosegmenten (intro's, samenvattingen, aftiteling en meer) over, markeer en bewerk ze met lokale of online gegevens.</summary>
+        <description lang="nl_NL">Alles-in-één Kodi-hulpmiddel voor hoofdstukgebaseerde workflows: sla segmenten automatisch over of vraag erom, markeer tijdens het afspelen nieuwe bereiken en open een volledige segmenteditor voor .edl- en Matroska-achtige chapters.xml-sidecarbestanden. Instelbare segmenttypen (overslaan-modus, aliassen, EDL-nummers), dialogen en optionele online zoekopdrachten (TheIntroDB / IntroDB.app). Aparte toetsenschema's voor markeerder (skippy_marker.xml) en editor (skippy_editor.xml). Optionele vraag voor de volgende aflevering: biedt tegen het einde de volgende aflevering (of de volgende film uit een collectie) aan, kan die automatisch starten en vraagt "Kijk je nog?" na meerdere afleveringen achter elkaar.</description>
+        <summary lang="fr_FR">Skippy : passez, marquez et modifiez des segments vidéo (génériques d'intro, résumés, génériques de fin, etc.) à partir de données locales ou en ligne.</summary>
+        <description lang="fr_FR">Compagnon Kodi tout-en-un pour les flux de travail par chapitres : passez automatiquement les segments ou demandez confirmation, marquez de nouvelles plages pendant la lecture et ouvrez un éditeur de segments complet pour les fichiers annexes .edl et chapters.xml de type Matroska. Types de segments configurables (mode de saut, alias, numéros EDL), boîtes de dialogue et recherches en ligne facultatives (TheIntroDB / IntroDB.app). Keymaps distincts pour le marqueur (skippy_marker.xml) et l'éditeur (skippy_editor.xml). Proposition facultative de l'épisode suivant : propose l'épisode suivant (ou le film suivant d'une collection) vers la fin, peut le lancer automatiquement et demande « Vous regardez toujours ? » après plusieurs épisodes d'affilée.</description>
+        <summary lang="de_DE">Skippy: Videosegmente (Intros, Rückblicke, Abspann und mehr) überspringen, markieren und bearbeiten – mit lokalen oder Online-Daten.</summary>
+        <description lang="de_DE">Kodi-Komplettlösung für kapitelbasierte Abläufe: Segmente automatisch überspringen oder nachfragen, während der Wiedergabe neue Bereiche markieren und einen vollständigen Segment-Editor für .edl- und Matroska-artige chapters.xml-Sidecar-Dateien öffnen. Konfigurierbare Segmenttypen (Überspringmodus, Aliase, EDL-Nummern), Dialoge und optionale Online-Abfragen (TheIntroDB / IntroDB.app). Getrennte Tastenbelegungen für Marker (skippy_marker.xml) und Editor (skippy_editor.xml). Optionale Abfrage zur nächsten Folge: bietet gegen Ende die nächste Folge (oder den nächsten Film einer Sammlung) an, kann sie automatisch starten und fragt „Noch dabei?“ nach mehreren Folgen am Stück.</description>
+        <summary lang="el_GR">Skippy: παράλειψη, επισήμανση και επεξεργασία τμημάτων βίντεο (εισαγωγές, ανακεφαλαιώσεις, τίτλοι τέλους και άλλα) με τοπικά ή διαδικτυακά δεδομένα.</summary>
+        <description lang="el_GR">Ολοκληρωμένος βοηθός Kodi για ροές εργασίας βασισμένες σε κεφάλαια: αυτόματη παράλειψη τμημάτων ή ερώτηση, επισήμανση νέων διαστημάτων κατά την αναπαραγωγή και πλήρης επεξεργαστής τμημάτων για αρχεία sidecar .edl και chapters.xml τύπου Matroska. Ρυθμιζόμενοι τύποι τμημάτων (λειτουργία παράλειψης, ψευδώνυμα, αριθμοί EDL), διάλογοι και προαιρετικές διαδικτυακές αναζητήσεις (TheIntroDB / IntroDB.app). Ξεχωριστές αντιστοιχίσεις πλήκτρων για τον δείκτη (skippy_marker.xml) και τον επεξεργαστή (skippy_editor.xml). Προαιρετική πρόταση επόμενου επεισοδίου: προτείνει το επόμενο επεισόδιο (ή την επόμενη ταινία μιας συλλογής) κοντά στο τέλος, μπορεί να το ξεκινήσει αυτόματα και ρωτά «Ακόμα παρακολουθείς;» μετά από αρκετά συνεχόμενα επεισόδια.</description>
+        <summary lang="it_IT">Skippy: salta, segna e modifica i segmenti video (intro, riassunti, titoli di coda e altro) usando dati locali o online.</summary>
+        <description lang="it_IT">Compagno Kodi tutto in uno per i flussi di lavoro basati sui capitoli: salta automaticamente i segmenti o chiedi conferma, segna nuovi intervalli durante la riproduzione e apri un editor di segmenti completo per i file sidecar .edl e chapters.xml in stile Matroska. Tipi di segmento configurabili (modalità di salto, alias, numeri EDL), finestre di dialogo e ricerche online facoltative (TheIntroDB / IntroDB.app). Mappature tasti separate per il marcatore (skippy_marker.xml) e l'editor (skippy_editor.xml). Proposta facoltativa dell'episodio successivo: propone l'episodio successivo (o il film successivo di una raccolta) verso la fine, può avviarlo automaticamente e chiede «Stai ancora guardando?» dopo diversi episodi di fila.</description>
+        <summary lang="nb_NO">Skippy: hopp over, marker og rediger videosegmenter (intro, oppsummeringer, rulletekster og mer) med lokale eller nettbaserte data.</summary>
+        <description lang="nb_NO">Alt-i-ett Kodi-følgesvenn for kapittelbaserte arbeidsflyter: hopp automatisk over segmenter eller spør, marker nye områder under avspilling, og åpne en full segmentredigerer for .edl- og Matroska-lignende chapters.xml-sidecar-filer. Konfigurerbare segmenttyper (hoppmodus, aliaser, EDL-numre), dialoger og valgfrie nettoppslag (TheIntroDB / IntroDB.app). Separate tastetilordninger for markør (skippy_marker.xml) og redigerer (skippy_editor.xml). Valgfritt spørsmål om neste episode: tilbyr neste episode (eller neste film i en samling) mot slutten, kan starte den automatisk og spør «Ser du fortsatt på?» etter flere episoder på rad.</description>
+        <summary lang="es_ES">Skippy: omite, marca y edita segmentos de vídeo (intros, resúmenes, créditos y más) con datos locales o en línea.</summary>
+        <description lang="es_ES">Compañero todo en uno de Kodi para flujos de trabajo basados en capítulos: omite segmentos automáticamente o pregunta, marca nuevos intervalos durante la reproducción y abre un editor de segmentos completo para archivos sidecar .edl y chapters.xml de estilo Matroska. Tipos de segmento configurables (modo de salto, alias, números EDL), diálogos y búsquedas en línea opcionales (TheIntroDB / IntroDB.app). Asignaciones de teclas independientes para el marcador (skippy_marker.xml) y el editor (skippy_editor.xml). Aviso opcional del siguiente episodio: ofrece el siguiente episodio (o la siguiente película de una colección) cerca del final, puede iniciarlo automáticamente y pregunta «¿Sigues viendo?» tras varios episodios seguidos.</description>
+        <summary lang="sv_SE">Skippy: hoppa över, markera och redigera videosegment (intron, sammanfattningar, eftertexter och mer) med lokala eller onlinedata.</summary>
+        <description lang="sv_SE">Allt-i-ett-följeslagare för Kodi för kapitelbaserade arbetsflöden: hoppa automatiskt över segment eller fråga, markera nya intervall under uppspelning och öppna en fullständig segmentredigerare för .edl- och Matroska-liknande chapters.xml-sidecarfiler. Konfigurerbara segmenttyper (hoppläge, alias, EDL-nummer), dialogrutor och valfria onlineuppslag (TheIntroDB / IntroDB.app). Separata tangentbindningar för markör (skippy_marker.xml) och redigerare (skippy_editor.xml). Valfri fråga om nästa avsnitt: erbjuder nästa avsnitt (eller nästa film i en samling) mot slutet, kan starta det automatiskt och frågar ”Tittar du fortfarande?” efter flera avsnitt i rad.</description>
+        <summary lang="pt_BR">Skippy: pule, marque e edite segmentos de vídeo (aberturas, recapitulações, créditos e mais) com dados locais ou online.</summary>
+        <description lang="pt_BR">Companheiro completo do Kodi para fluxos de trabalho baseados em capítulos: pule segmentos automaticamente ou pergunte, marque novos intervalos durante a reprodução e abra um editor de segmentos completo para arquivos sidecar .edl e chapters.xml no estilo Matroska. Tipos de segmento configuráveis (modo de pulo, apelidos, números EDL), diálogos e buscas online opcionais (TheIntroDB / IntroDB.app). Mapas de teclas separados para o marcador (skippy_marker.xml) e o editor (skippy_editor.xml). Aviso opcional do próximo episódio: oferece o próximo episódio (ou o próximo filme de uma coleção) perto do fim, pode iniciá-lo automaticamente e pergunta "Ainda está assistindo?" após vários episódios seguidos.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <source>https://github.com/jonnypuma/service.skippy</source>
+        <news>v8.33.0: Up Next Takeover + video (test): the playing video small over the next episode. Segment editor: the video small above the timeline. Studios: Background, Progress bar edges, Artwork edges.
+v8.32.4: The Studios open much faster on a slow box (they filled in row by row over several seconds).
+v8.32.3: Dialogs no longer use up Kodi's window numbers: after about a hundred dialogs none opened until Kodi was restarted.
+v8.32.2: The skip dialog and the Up Next popup no longer flash before they appear: all parts come together.
+v8.32.1: Up Next, Takeover: the small window with what is playing is gone. Kodi cannot show the video small there; the window only showed a piece of the picture.
+v8.32.0: Up Next and the skip dialog open faster and never show half drawn: the popup is made ready when playback starts, its pictures are cached ahead, and it stays unseen until it is complete. The last three Studio rows work: Follow the skin style, Keep clear of subtitles, Focus style.
+v8.31.0: Up Next: progress as a line, a circle or a fill (on the button, the card or the picture), fanart behind the card, a Watch credits button, the credits in a small window in Takeover, the Poster card drawn like the others, and seven more Studio rows at work.
+v8.30.0: Up Next: Picture is a choice for the drawn designs: the episode picture, the poster, the poster set into the episode picture, or none.
+v8.29.0: Up Next has its Studio, as in the mockup: Look, Layout, Picture, Buttons, Motion and Autoplay, a live preview that plays the popup, what the row in focus does, presets with your saved ones, Save as preset and Reset.
+v8.28.0: Up Next: the drawn Card in Fused Glass Dark is the default, and the popup comes at the start of the Credits segment by default. Customize Up Next has Preset (every drawn design in every look, the twelve own looks among them), Size (Full, Compact, Minimal) and Size on screen (Small, Medium, Large); a saved look keeps both. The looks of the earlier popup are named (legacy). A segment type of your own gets a colour of its own.
+v8.27.0: Up Next: the Queue is drawn by Skippy as in the mockup, with three cards to pick from, Play a later one, and Full, Compact and Minimal forms. What is written on a button now changes colour with the focus in every drawn dialog.
+v8.26.0: Up Next: seven designs drawn by Skippy, as in the mockups (Card, Poster slab, Play ring, Lower third, Float, Takeover, Side rail), each Full, Compact and Minimal, in every look of the drawn skip dialog. The popup of earlier versions is now Card (legacy) and stays the default.
+v8.25.2: Segment editor: a segment just created is the highlighted one, in the list and on the timeline; the focus stays on the button that made it.
+v8.25.1: Segment editor: the label picker opens in the editor's own panel look (Dark, Frost or Clear).
+v8.25.0: Segment editor, List and drawer: a Look row over the nine actions, with Dark overlay (on / off) and Panels (Fused Glass Dark, Frost, Clear). The panels reach closer to the edges of the screen, and the list rows use the width for long type names and the source.
+v8.24.2: Segment editor: the text of a list row is at the mockup's sizes, so the source is no longer cut off and a NESTED flag fits beside it.
+v8.24.1: Segment editor, List and drawer: always in the Fused Glass Dark look, like the Studio. The small labels (headers, tags, the words in the timeline's blocks, the times, the NESTED flag) are drawn at the mockup's size.
+v8.24.0: Segment editor: the timeline zooms on the highlighted segment and the ones connected to it, its blocks have round corners, the highlighted one has handles and its times under it, the playhead a marker. The NESTED flag and the tags are flat rounded chips. Sources are written in words (Local EDL, Chapters).
+v8.23.1: Segment editor: long type names and film-length times fit their row, the NESTED flag fits its chip, and a timeline block shows its word only when it fits whole.
+v8.23.0: Segment editor, List and drawer: rebuilt to its mockup. A header with the number of segments and the video's title, one-line rows (from - to, length, source, a NESTED flag), a timeline that shows the stretch around the highlighted segment with a word in every block and the times under it. Float: the words before the countdown stand still.
+v8.22.0: The drawn skip dialogs move: Appears (Fade, Rise, Pop, Slide in), Leaves (Fade, Drop, Shrink) and the pulse of the last five seconds. The Studio's live preview plays it: the dialog comes, its countdown and bar run, and it leaves.
+v8.21.2: The presets are listed with the drawn designs first, then your own, then the classic card's (legacy).
+v8.21.1: Studio: wider choices in the switch rows (Compact, Rounded and Medium fit their pill). The presets of the classic card are named (legacy).
+v8.21.0: The Stack card in Fused Glass Dark is the default skip dialog. From a look of your own, the Preset row goes back to the design's own preset and resets its options. Studio: Preview segment type on the Look tab steps through all types; the time on the Skip button has its own switch and the preview shows its format and content.
+v8.20.0: Studio: every tab shows all its options (those that do not apply to the design in use are dimmed and say why), Design is back on the Look tab, long tabs scroll. Text outline has a strength (Off, Light, Medium, Strong) and the text shadow falls to the lower right.
+v8.19.0: The skip dialog Studio is rebuilt to its mockup: six tabs (Look, Layout, Text, Buttons, Motion, Behaviour), rows with switch groups, toggles, colour dots, sliders and the nine places, an About this setting panel under the preview, and Intro / Credits / Nested previews. New: Distance from the edge, Button the focus starts on, nine positions for drawn designs.
+v8.18.0: Drawn skip dialogs appear much faster on slow boxes. New in the Studio: Size on screen (Small, Medium, Large), Accent colour, Progress style, Overlay gradient and its direction. Lighter text shadows, a shade under every panel, and the segment editor's list goes Left to the segment tools and Right to the timeline.
+v8.17.1: Drawn skip dialogs: the duration on the Skip button was shown as :00, times lose their leading zero (0:27), and the Timeline's playhead time now runs.
+v8.17.0: Cinema band, Float, Split, Timeline and Side rail are now drawn to their mockups too. New in the Studio: Text shadow (Off to Heavy) and Text size. The Skip button says the segment type only when nothing else in the dialog does.
+v8.16.0: Corner slab and Dial are now drawn to their mockups like the Stack card, in Full, Compact and Minimal. Background overlay has a new default, The design's own: a chosen overlay takes the place of a design's shade instead of lying on top of it.
+v8.15.0: New skip dialog layout Stack card, drawn by Skippy itself to the mockup: type and range with the accent dot, the nested line in its own box, icons on the buttons, the time at the right of Skip. Options: corners, Close button (Skip takes its room without it), icons, the two lines. In the segment editor Right from the list reaches the segment actions.
+v8.14.0: A saved skip dialog preset of a new layout now stores the whole dialog (size, overlay, motion). Customize next episode popup has Popup layout and Layout look rows, and a saved look stores the layout, its look and the picture.
+v8.13.0: Two more layouts for the next episode popup: Takeover (the next episode takes the whole screen) and Queue (the next three episodes side by side; Left and Right pick one).
+v8.12.0: Every new skip dialog layout now has a Minimal form of its own; Minimal mode uses it instead of the old chip.
+v8.11.0: Skip dialog layouts: six background overlays (square, rounded, band, corner glow), a choice of how the dialog appears and leaves, and a pulse in the last five seconds.
+v8.10.0: Next episode popup pictures: Poster and episode now stand side by side at one height with round corners, and there are two new choices, Fanart and poster and Fanart and episode.
+v8.9.0: Twelve looks of their own for the skip dialog layouts and the next episode popup layouts: Neon, Paper, Sunset, Ocean, Brutal, Terminal, Wireframe, Luxe, Pastel, Gloss, Mono and VHS. Each is a preset with every layout.
+v8.8.0: Every skip dialog layout in every look is now a preset by name (48 of them), and OK on Preset in the Studio opens a wall with a picture of every preset.
+v8.7.0: Six new layouts for the next episode popup next to the classic card: Poster card, Picture slab, Play ring, Lower third, Float and Side rail, in six looks.
+v8.6.0: The next episode popup can show the poster, the poster with the episode picture, or the fanart behind it. New skip dialog layouts colour their bar by the kind of segment, and there is a Poster card layout.
+v8.5.0: Customize Skip Dialog is now the Studio: settings in five tabs, a live preview of the whole screen and a strip of presets, in the Fused Glass Dark look.
+v8.4.0: Customize Skip Dialog picks the skip dialog layout and its look, with a live preview of every layout.
+v8.3.0: Seven new layouts for the skip dialog next to the classic card (Playback &amp; Dialog &gt; Skip dialog layout): Corner slab, Dial, Cinema band, Float, Split, Timeline and Side rail, each in a large and a small form and in six looks (Layout look).
+v8.2.0: The looks of the skin Aeon Fuse as presets for the skip dialog and the next episode popup: Fused Glass Dark, Frost and Clear, Fused Glass style, Aeon and Aeon Glass, each as Full, Compact and Minimal. A new Card style gives the card round corners or one of these looks. The presets of earlier versions are still there, at the end of the list, marked (legacy).
+v8.1.0: Two new layouts for the segment editor that leave the picture visible: List and drawer (the default) and Drawer, next to the Classic panel (Segment Editor > Editor layout). Every button is there in all three. New: a timeline with a coloured block per segment, the playhead and a mark under the highlighted segment.
+v8.0.0: A new look for Skippy's own windows, in five styles to choose from under Segment Settings > Window style: Fused Glass Dark, Frost (the default) and Clear, Aeon and Aeon Glass. The segment editor, the type picker, the segment types editor, the source picker, statistics and lists and both Customize screens follow it. The skip dialog and the next episode popup keep their own looks.
+v7.15.2: The next episode popup's look, colours, button highlight, bar and card opacity, and the default upload target, can be changed again: Kodi refused every choice but the default.
+v7.15.1: What you save in Customize next episode popup and Customize skip dialog is kept when you leave the settings with Back or Cancel.
+v7.15.0: Progress bars move with every video frame instead of jumping a percent at a time, in the skip dialog, the next episode popup and in skins that ask Skippy to drive their own bar. Smooth progress is on by default.
+v7.14.0: Skins can draw their own next episode popup, the way they can draw their own skip button: Skippy fills Home window properties and the skin's buttons answer it.
+v7.13.1: Customize next episode popup and Customize skip dialog show what you saved when opened again from the settings.
+v7.13.0: Skins can show the segment playing, the time left, the next segment and the next episode from Home window properties, and draw their own skip button with RunScript(service.skippy,skip_current), which also works from a key.
+v7.12.0: Binge mode: the intro plays on the first episode of a sitting and is skipped from the second on, optionally the recap too. Statistics show time saved per show or film. A new Current video window shows where the segments came from, what each one will do and why, and the last error.
+v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments from loading. "Still watching?" counts episodes Kodi starts by itself. A new video starts without the previous video's segments. Code defaults match the settings. A failed save to an NFS share no longer lands in the share's root folder. Unknown RunScript commands no longer mark a segment. Online lookups check the year, so remakes get their own segments. Hide OSD display during skip is on by default. More screens are translated.</news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
+            <screenshot>screenshot04.png</screenshot>
+            <screenshot>screenshot05.png</screenshot>
+            <screenshot>screenshot06.png</screenshot>
+            <screenshot>screenshot07.png</screenshot>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="service.trickplay"
+       name="Trickplay Preview"
+       version="9.4.0"
+       provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="script_generator.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py" start="login"/>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <summary lang="en">Shows Jellyfin trickplay seek thumbnails during video scrubbing.</summary>
+        <description lang="en">Reads or generates Jellyfin trickplay sprite tiles alongside your media, crops preview frames with Pillow while you scrub, and shows them via skin window properties. Optional ffmpeg generator writes .trickplay sidecars; use Install preview tools for Pillow (preview) and ffmpeg (generation). Use Show addon status / Install skin snippet in settings (DialogSeekBar.xml for most skins; VideoFullScreen.xml for Bello). Generation/HDR requires ffmpeg, ffprobe, and optionally dovi_tool.</description>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
 </addon>
 </addons>
