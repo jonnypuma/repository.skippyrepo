@@ -165,6 +165,18 @@ v0.28.3
 			<screenshot>resources/screenshot-08.jpg</screenshot>
 			<screenshot>resources/screenshot-09.jpg</screenshot>
 			<screenshot>resources/screenshot-10.jpg</screenshot>
+			<screenshot>resources/screenshot-11.jpg</screenshot>
+			<screenshot>resources/screenshot-12.jpg</screenshot>
+			<screenshot>resources/screenshot-13.jpg</screenshot>
+			<screenshot>resources/screenshot-14.jpg</screenshot>
+			<screenshot>resources/screenshot-15.jpg</screenshot>
+			<screenshot>resources/screenshot-16.jpg</screenshot>
+			<screenshot>resources/screenshot-17.jpg</screenshot>
+			<screenshot>resources/screenshot-18.jpg</screenshot>
+			<screenshot>resources/screenshot-19.jpg</screenshot>
+			<screenshot>resources/screenshot-20.jpg</screenshot>
+			<screenshot>resources/screenshot-21.jpg</screenshot>
+			<screenshot>resources/screenshot-22.jpg</screenshot>
 		</assets>
 	</extension>
 </addon>
@@ -612,7 +624,7 @@ v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments
         </assets>
     </extension>
 </addon>
-<addon id="script.aeon.helper" name="Aeon Fuse Helper" version="0.3.115" provider-name="Aeon Fuse">
+<addon id="script.aeon.helper" name="Aeon Fuse Helper" version="0.3.123" provider-name="Aeon Fuse">
 	<requires>
 		<import addon="xbmc.python" version="3.0.1"/>
 		<!-- optional: the Planner and online lists read TMDb Helper; artwork colours come from KarmaMole's helper -->
