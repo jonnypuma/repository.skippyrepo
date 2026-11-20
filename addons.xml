@@ -632,7 +632,7 @@ v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments
     </assets>
   </extension>
 </addon>
-<addon id="script.ratings.updatarr" name="Ratings Updatarr" version="1.3.0" provider-name="Skippy-McSkipface">
+<addon id="script.ratings.updatarr" name="Ratings Updatarr" version="1.3.1" provider-name="Skippy-McSkipface">
   <requires>
     <import addon="xbmc.python" version="3.0.1"/>
     <import addon="plugin.video.themoviedb.helper" version="5.3.0" optional="true"/>
@@ -656,7 +656,11 @@ v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments
     <source>local</source>
     <summary lang="en_GB">Refresh library ratings by media type</summary>
     <description lang="en_GB">Refresh scraped ratings for movies, TV shows, episodes, or all of those types. IMDb scores come from IMDb's non-commercial dataset files. TMDb is the main online source, and a score already cached by TMDbHelper is reused. OMDb adds Rotten Tomatoes critic and Metacritic scores. MDbList can supply IMDb, TMDb, Trakt, Rotten Tomatoes critic and audience, Metacritic, Letterboxd, and MyAnimeList scores in one call. Trakt adds a public Trakt score. Requests stay inside the limits published by those services. Personal star ratings are left alone. This product uses the TMDb API but is not endorsed or certified by TMDb.</description>
-    <news>v1.3.0
+    <news>v1.3.1
+- Batch TMDb episode fetches by season, add HTTP keep-alive connection pooling and transient network retries, and shrink IMDb SQLite index by skipping unrated episodes
+- Add Status &amp; test keys panel, Dry-run preview mode with per-item change log, minimum vote-increase threshold, and optional .nfo writeback
+- Add Recently added to the main menu and episodes=true RunScript shortcut for TV shows
+v1.3.0
 - Add MDbList provider, Rotten Tomatoes Audience, Letterboxd, and MyAnimeList ratings
 - Context menu options for TV show with all episodes and season episodes
 - Option to filter by recently added days, update after video library scans, and pause during playback
