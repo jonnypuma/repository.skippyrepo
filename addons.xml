@@ -35,7 +35,7 @@
         </assets>
     </extension>
 </addon>
-<addon id="skin.aeon.fuse" version="0.56.53" name="Aeon Fuse" provider-name="Skippy-McSkipface">
+<addon id="skin.aeon.fuse" version="0.56.54" name="Aeon Fuse" provider-name="Skippy-McSkipface">
 	<requires>
 		<import addon="xbmc.gui" version="5.17.0"/>
 		<import addon="script.skinvariables" version="2.1.21"/>
@@ -49,7 +49,6 @@
 		<import addon="script.karmamole.helper" optional="true"/>
 		<import addon="service.skippy" optional="true"/>
 		<import addon="service.trickplay" optional="true"/>
-		<import addon="script.tinyppi" optional="true"/>
 		<import addon="resource.images.studios.white" optional="true"/>
 		<import addon="resource.images.recordlabels.white" optional="true"/>
 		<import addon="resource.images.languageflags.colour" optional="true"/>
@@ -624,7 +623,7 @@ v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments
         </assets>
     </extension>
 </addon>
-<addon id="script.aeon.helper" name="Aeon Fuse Helper" version="0.3.123" provider-name="Aeon Fuse">
+<addon id="script.aeon.helper" name="Aeon Fuse Helper" version="0.3.124" provider-name="Aeon Fuse">
 	<requires>
 		<import addon="xbmc.python" version="3.0.1"/>
 		<!-- optional: the Planner and online lists read TMDb Helper; artwork colours come from KarmaMole's helper -->
