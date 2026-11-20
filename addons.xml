@@ -179,6 +179,41 @@ v0.28.3
         </assets>
     </extension>
 </addon>
+<addon id="service.library.updatarr"
+       name="Library Updatarr"
+       version="2.3.0"
+       provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="service.py" start="login"/>
+    <extension point="xbmc.python.script" library="launcher.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="context.py">
+                <label>32000</label>
+                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)]</visible>
+            </item>
+            <item library="context_remove.py">
+                <label>32070</label>
+                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Populate missing metadata and artwork for existing library items.</summary>
+        <description lang="en_GB">Library Updatarr scans your existing Kodi video library for movies, TV shows, and episodes with missing posters, fanart, or metadata. It applies local artwork and NFO files first, then uses your installed online scrapers to fill remaining gaps — without wiping the database or scanning for new files.</description>
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <news>2.3.0 — Run lock, episode/movie artwork extensions, batched artwork updates, and bug fixes. 2.2.2 — Remove from library: video types only (not music). 2.2.1 — tvshow.path warning.</news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
 <addon id="service.subtitle.enforcer" name="Subtitle Enforcer" version="2.4.0" provider-name="Skippy-McSkipface">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
