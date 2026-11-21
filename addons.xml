@@ -1,665 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <addons>
-<addon id="visualization.aeonwave.windows-x64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Windows x64)" provider-name="Aeon Fuse">
-  <requires>
-    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
-    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
-    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
-    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
-  </requires>
-  <extension point="xbmc.player.musicviz" library_windx="visualization.aeonwave.dll"/>
-  <extension point="xbmc.addon.metadata">
-    <platform>windx</platform>
-    <license>GPL-2.0-or-later</license>
-    <source>https://github.com/xbmc/visualization.waveform</source>
-    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Windows x64)</summary>
-    <description lang="en_GB">Build for Windows x64 (DirectX 11): Kodi for Windows. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
-    <assets>
-      <icon>resources/icon.png</icon>
-      <fanart>resources/fanart.jpg</fanart>
-    </assets>
-  </extension>
-</addon>
-<addon id="visualization.aeonwave.linux-arm64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux ARM64)" provider-name="Aeon Fuse">
-  <requires>
-    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
-    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
-    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
-    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
-  </requires>
-  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
-  <extension point="xbmc.addon.metadata">
-    <platform>linux</platform>
-    <license>GPL-2.0-or-later</license>
-    <source>https://github.com/xbmc/visualization.waveform</source>
-    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux ARM64)</summary>
-    <description lang="en_GB">Build for Linux ARM64 (64-bit ARM, OpenGL ES): CoreELEC / LibreELEC 64-bit, Raspberry Pi 4 and 5. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
-    <assets>
-      <icon>resources/icon.png</icon>
-      <fanart>resources/fanart.jpg</fanart>
-    </assets>
-  </extension>
-</addon>
-<addon id="visualization.aeonwave.linux-x86_64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux x86-64)" provider-name="Aeon Fuse">
-  <requires>
-    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
-    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
-    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
-    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
-  </requires>
-  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
-  <extension point="xbmc.addon.metadata">
-    <platform>linux</platform>
-    <license>GPL-2.0-or-later</license>
-    <source>https://github.com/xbmc/visualization.waveform</source>
-    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux x86-64)</summary>
-    <description lang="en_GB">Build for Linux x86-64 (OpenGL): desktop Linux, LibreELEC Generic. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
-    <assets>
-      <icon>resources/icon.png</icon>
-      <fanart>resources/fanart.jpg</fanart>
-    </assets>
-  </extension>
-</addon>
-<addon id="screensaver.aeon.fuse" name="Aeon Fuse Screensaver" version="1.3.0" provider-name="Aeon Fuse">
-	<requires>
-		<import addon="xbmc.python" version="3.0.1"/>
-	</requires>
-	<extension point="xbmc.ui.screensaver" library="screensaver.py"/>
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en_GB">Random movies, TV shows and albums from your library, in the Aeon Fuse look.</summary>
-		<description lang="en_GB">The Aeon Fuse skin's screensaver as a regular Kodi screensaver: choose it and its wait time under Settings > Interface > Screensaver. It cycles through random movies, TV shows and albums (each can be switched off in its settings). Under another skin it shows a black screen.</description>
-		<platform>all</platform>
-		<license>GPL-2.0-or-later</license>
-		<assets>
-			<icon>resources/icon.png</icon>
-			<fanart>resources/fanart.jpg</fanart>
-		</assets>
-	</extension>
-</addon>
-<addon id="script.metadata.updatarr"
-       name="Metadata Updatarr"
-       version="0.1.1"
-       provider-name="Skippy-McSkipface">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0"/>
-  </requires>
-  <extension point="xbmc.python.script" library="main.py">
-    <provides>executable</provides>
-  </extension>
-  <extension point="xbmc.service" library="service.py"/>
-  <extension point="kodi.context.item">
-    <menu id="kodi.core.manage">
-      <item library="context.py">
-        <label>32050</label>
-        <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)</visible>
-      </item>
-    </menu>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <platform>all</platform>
-    <license>MIT</license>
-    <source>https://github.com/jonnypuma/script.metadata.updatarr</source>
-    <website>https://github.com/jonnypuma/script.metadata.updatarr</website>
-    <summary lang="en_GB">Unified Kodi metadata &amp; Video Versions updater from local .nfo files, filenames, and TMDbHelper fallback.</summary>
-    <description lang="en_GB">Metadata Updatarr combines Video Versions management (NFO/filename edition detection, quality badges, duplicate movie grouping, default version swapping, label normalization) with missing metadata recovery (season plots &amp; names, movie plots &amp; taglines) using local .nfo files with TMDbHelper/TMDB fallback. Supports SQLite and MariaDB/MySQL with automatic 3+ backup retention.</description>
-    <assets>
-      <icon>icon.png</icon>
-      <fanart>fanart.jpg</fanart>
-    </assets>
-  </extension>
-</addon>
-<addon id="script.metadata.updatarr"
-       name="Metadata Updatarr"
-       version="0.1.3"
-       provider-name="Skippy-McSkipface">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0"/>
-  </requires>
-  <extension point="xbmc.python.script" library="main.py">
-    <provides>executable</provides>
-  </extension>
-  <extension point="xbmc.service" library="service.py"/>
-  <extension point="kodi.context.item">
-    <menu id="kodi.core.manage">
-      <item library="context.py">
-        <label>32050</label>
-        <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)</visible>
-      </item>
-    </menu>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <platform>all</platform>
-    <license>MIT</license>
-    <source>https://github.com/jonnypuma/script.metadata.updatarr</source>
-    <website>https://github.com/jonnypuma/script.metadata.updatarr</website>
-    <summary lang="en_GB">Unified Kodi metadata &amp; Video Versions updater from local .nfo files, filenames, and TMDbHelper fallback.</summary>
-    <description lang="en_GB">Metadata Updatarr combines Video Versions management (NFO/filename edition detection, quality badges, duplicate movie grouping, default version swapping, label normalization) with missing metadata recovery (season plots &amp; names, movie plots &amp; taglines) using local .nfo files with TMDbHelper/TMDB fallback. Supports SQLite and MariaDB/MySQL with automatic 3+ backup retention.</description>
-    <assets>
-      <icon>icon.png</icon>
-      <fanart>fanart.jpg</fanart>
-    </assets>
-  </extension>
-</addon>
-<addon id="service.subtitle.enforcer" name="Subtitle Enforcer" version="2.4.1" provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="default.py" start="startup">
-    </extension>
-    <extension point="xbmc.python.script" library="resources/lib/script.py">
-    </extension>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="resources/lib/context.py">
-                <label>32058</label>
-                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Selects a preferred subtitle when playback starts, and can seek back so subtitles appear</summary>
-        <description lang="en_GB">Subtitle Enforcer turns on the first available subtitle from up to five languages, in the order you set. A priority can be Original language, Default language, a listed language, Kodi's own subtitle language, or any language name or code. Original language follows the film, even when the audio is a dub, and TMDB wins if it disagrees with the file or the library. Default language uses the audio language the file marks as default. Leave the TMDB API key empty to use TMDBHelper's key. Each language can include hearing impaired (HI), SDH, and forced tracks, and the choice can follow whether you understand the audio. Trailers, extras, and individual shows can be skipped or given their own rule. It can also wait a few seconds after playback starts and seek backward, which makes Kodi show embedded subtitles that otherwise stay hidden until a manual seek.</description>
-        <platform>all</platform>
-        <license>MIT</license>
-        <website>https://jonnypuma.github.io/#/service.subtitle.enforcer</website>
-        <source>https://github.com/jonnypuma/service.subtitle.enforcer</source>
-        <news>Version 2.4.1 fixes context-menu TV show lookups, stale TMDBHelper IDs, URL trailer/extra detection, and reduces background service overhead.</news>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="service.subtitle.enforcer" name="Subtitle Enforcer" version="2.4.0" provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="default.py" start="startup">
-    </extension>
-    <extension point="xbmc.python.script" library="default.py">
-    </extension>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="resources/lib/context.py">
-                <label>32058</label>
-                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Selects a preferred subtitle when playback starts, and can seek back so subtitles appear</summary>
-        <description lang="en">Subtitle Enforcer turns on the first available subtitle from up to five languages, in the order you set. A priority can be Original language, Default language, a listed language, Kodi's own subtitle language, or any language name or code. Original language follows the film, even when the audio is a dub, and TMDB wins if it disagrees with the file or the library. Default language uses the audio language the file marks as default. Leave the TMDB API key empty to use TMDBHelper's key. Each language can include hearing impaired (HI), SDH, and forced tracks, and the choice can follow whether you understand the audio. Trailers, extras, and individual shows can be skipped or given their own rule. It can also wait a few seconds after playback starts and seek backward, which makes Kodi show embedded subtitles that otherwise stay hidden until a manual seek.</description>
-        <platform>all</platform>
-        <language>en</language>
-        <license>MIT</license>
-        <forum>https://forum.kodi.tv</forum>
-        <website>https://kodi.tv</website>
-        <source>https://github.com</source>
-        <news>Version 2.4.0 gives a show or movie its own subtitle language, including the title that is playing.</news>
-        <settings>
-            <setting file="resources/settings.xml" />
-        </settings>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="service.subtitle.enforcer" name="Subtitle Enforcer" version="2.4.2" provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="default.py" start="startup">
-    </extension>
-    <extension point="xbmc.python.script" library="resources/lib/script.py">
-    </extension>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="resources/lib/context.py">
-                <label>32058</label>
-                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Selects a preferred subtitle when playback starts, and can seek back so subtitles appear</summary>
-        <description lang="en_GB">Subtitle Enforcer turns on the first available subtitle from up to five languages, in the order you set. A priority can be Original language, Default language, a listed language, Kodi's own subtitle language, or any language name or code. Original language follows the film, even when the audio is a dub, and TMDB wins if it disagrees with the file or the library. Default language uses the audio language the file marks as default. Leave the TMDB API key empty to use TMDBHelper's key. Each language can include hearing impaired (HI), SDH, and forced tracks, and the choice can follow whether you understand the audio. Trailers, extras, and individual shows can be skipped or given their own rule. It can also wait a few seconds after playback starts and seek backward, which makes Kodi show embedded subtitles that otherwise stay hidden until a manual seek.</description>
-        <platform>all</platform>
-        <license>MIT</license>
-        <website>https://jonnypuma.github.io/#/service.subtitle.enforcer</website>
-        <source>https://github.com/jonnypuma/service.subtitle.enforcer</source>
-        <news>Version 2.4.2 splits the add-on into focused modules, makes TMDB lookups non-blocking and cached across episodes, and reduces idle and playback polling overhead.</news>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-        </assets>
-    </extension>
-</addon>
-
-<addon id="service.trickplay"
-       name="Trickplay Preview"
-       version="9.4.0"
-       provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.python.script" library="script_generator.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="xbmc.service" library="service.py" start="login"/>
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <license>GPL-2.0-or-later</license>
-        <summary lang="en">Shows Jellyfin trickplay seek thumbnails during video scrubbing.</summary>
-        <description lang="en">Reads or generates Jellyfin trickplay sprite tiles alongside your media, crops preview frames with Pillow while you scrub, and shows them via skin window properties. Optional ffmpeg generator writes .trickplay sidecars; use Install preview tools for Pillow (preview) and ffmpeg (generation). Use Show addon status / Install skin snippet in settings (DialogSeekBar.xml for most skins; VideoFullScreen.xml for Bello). Generation/HDR requires ffmpeg, ffprobe, and optionally dovi_tool.</description>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="service.library.updatarr"
-       name="Library Updatarr"
-       version="2.2.2"
-       provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="service.py" start="login"/>
-    <extension point="xbmc.python.script" library="launcher.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="context.py">
-                <label>32000</label>
-                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType)</visible>
-            </item>
-            <item library="context_remove.py">
-                <label>32070</label>
-                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Populate missing metadata and artwork for existing library items.</summary>
-        <description lang="en_GB">Library Updatarr scans your existing Kodi video library for movies, TV shows, and episodes with missing posters, fanart, or metadata. It applies local artwork and NFO files first, then uses your installed online scrapers to fill remaining gaps — without wiping the database or scanning for new files.</description>
-        <platform>all</platform>
-        <license>GPL-2.0-or-later</license>
-        <news>2.2.2 — Remove from library: video types only (not music). 2.2.1 — tvshow.path warning.</news>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="service.library.updatarr"
-       name="Library Updatarr"
-       version="2.3.0"
-       provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="service.py" start="login"/>
-    <extension point="xbmc.python.script" library="launcher.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="context.py">
-                <label>32000</label>
-                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)]</visible>
-            </item>
-            <item library="context_remove.py">
-                <label>32070</label>
-                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en_GB">Populate missing metadata and artwork for existing library items.</summary>
-        <description lang="en_GB">Library Updatarr scans your existing Kodi video library for movies, TV shows, and episodes with missing posters, fanart, or metadata. It applies local artwork and NFO files first, then uses your installed online scrapers to fill remaining gaps — without wiping the database or scanning for new files.</description>
-        <platform>all</platform>
-        <license>GPL-2.0-or-later</license>
-        <news>2.3.0 — Run lock, episode/movie artwork extensions, batched artwork updates, and bug fixes. 2.2.2 — Remove from library: video types only (not music). 2.2.1 — tvshow.path warning.</news>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="repository.skippyrepo"
-       name="Skippy Repo"
-       version="1.0.4"
-       provider-name="Skippy-McSkipface">
-
-    <extension point="xbmc.addon.repository">
-        <dir>
-            <version>21.2.0</version>
-            <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
-        </dir>
-    </extension>
-
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi and companion Segment Editor</summary>
-        <description lang="en">Installs Skippy, Segment Editor and other Kodi addons</description>
-        <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-            <screenshot>screenshot01.png</screenshot>
-            <screenshot>screenshot02.png</screenshot>
-            <screenshot>screenshot03.png</screenshot>
-        </assets>
-    </extension>
-</addon>
-
-
-
-<addon id="visualization.aeonwave.linux-armv7" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux ARM 32-bit)" provider-name="Aeon Fuse">
-  <requires>
-    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
-    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
-    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
-    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
-  </requires>
-  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
-  <extension point="xbmc.addon.metadata">
-    <platform>linux</platform>
-    <license>GPL-2.0-or-later</license>
-    <source>https://github.com/xbmc/visualization.waveform</source>
-    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux ARM 32-bit)</summary>
-    <description lang="en_GB">Build for Linux ARM 32-bit (OpenGL ES): 32-bit LibreELEC / CoreELEC images. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
-    <assets>
-      <icon>resources/icon.png</icon>
-      <fanart>resources/fanart.jpg</fanart>
-    </assets>
-  </extension>
-</addon>
-<addon id="script.aeon.helper" name="Aeon Fuse Helper" version="0.3.125" provider-name="Aeon Fuse">
-	<requires>
-		<import addon="xbmc.python" version="3.0.1"/>
-		<!-- optional: the Planner and online lists read TMDb Helper; artwork colours come from KarmaMole's helper -->
-		<import addon="plugin.video.themoviedb.helper" optional="true"/>
-		<import addon="script.karmamole.helper" optional="true"/>
-	</requires>
-	<extension point="xbmc.service" library="service.py"/>
-	<extension point="xbmc.python.script" library="swap.py"/>
-	<!-- lists for the artist information page; provides nothing, so it is not listed among the music add-ons -->
-	<extension point="xbmc.python.pluginsource" library="plugin.py">
-		<provides></provides>
-	</extension>
-	<!-- context menu items, in the order and with the switches of Aeon Fuse's Skin settings > Context menu.
-	     Generated by resources/lib/ctxmenu.addon_items (tests/test_ctxmenu.py checks it): every item at every place. -->
-	<extension point="kodi.context.item">
-		<menu id="kodi.core.main">
-			<item library="context.py" args="refresh,1">
-				<label>32000</label>
-				<visible>[String.IsEqual(Skin.String(aeon.ctx.pos1),refresh) | String.IsEmpty(Skin.String(aeon.ctx.pos1))] + Skin.HasSetting(aeon.ctx.refresh) + !ListItem.IsParentFolder + Integer.IsGreater(ListItem.DBID,0) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
-			</item>
-			<item library="context.py" args="update,1">
-				<label>32001</label>
-				<visible>String.IsEqual(Skin.String(aeon.ctx.pos1),update) + Skin.HasSetting(aeon.ctx.update) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
-			</item>
-			<item library="context.py" args="clean,1">
-				<label>32002</label>
-				<visible>String.IsEqual(Skin.String(aeon.ctx.pos1),clean) + Skin.HasSetting(aeon.ctx.clean) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
-			</item>
-			<item library="context.py" args="shot,1">
-				<label>32003</label>
-				<visible>String.IsEqual(Skin.String(aeon.ctx.pos1),shot) + !Skin.HasSetting(aeon.ctx.noshot)</visible>
-			</item>
-			<item library="context.py" args="refresh,2">
-				<label>32000</label>
-				<visible>String.IsEqual(Skin.String(aeon.ctx.pos2),refresh) + Skin.HasSetting(aeon.ctx.refresh) + !ListItem.IsParentFolder + Integer.IsGreater(ListItem.DBID,0) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
-			</item>
-			<item library="context.py" args="update,2">
-				<label>32001</label>
-				<visible>[String.IsEqual(Skin.String(aeon.ctx.pos2),update) | String.IsEmpty(Skin.String(aeon.ctx.pos1))] + Skin.HasSetting(aeon.ctx.update) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
-			</item>
-			<item library="context.py" args="clean,2">
-				<label>32002</label>
-				<visible>String.IsEqual(Skin.String(aeon.ctx.pos2),clean) + Skin.HasSetting(aeon.ctx.clean) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
-			</item>
-			<item library="context.py" args="shot,2">
-				<label>32003</label>
-				<visible>String.IsEqual(Skin.String(aeon.ctx.pos2),shot) + !Skin.HasSetting(aeon.ctx.noshot)</visible>
-			</item>
-			<item library="context.py" args="refresh,3">
-				<label>32000</label>
-				<visible>String.IsEqual(Skin.String(aeon.ctx.pos3),refresh) + Skin.HasSetting(aeon.ctx.refresh) + !ListItem.IsParentFolder + Integer.IsGreater(ListItem.DBID,0) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
-			</item>
-			<item library="context.py" args="update,3">
-				<label>32001</label>
-				<visible>String.IsEqual(Skin.String(aeon.ctx.pos3),update) + Skin.HasSetting(aeon.ctx.update) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
-			</item>
-			<item library="context.py" args="clean,3">
-				<label>32002</label>
-				<visible>[String.IsEqual(Skin.String(aeon.ctx.pos3),clean) | String.IsEmpty(Skin.String(aeon.ctx.pos1))] + Skin.HasSetting(aeon.ctx.clean) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
-			</item>
-			<item library="context.py" args="shot,3">
-				<label>32003</label>
-				<visible>String.IsEqual(Skin.String(aeon.ctx.pos3),shot) + !Skin.HasSetting(aeon.ctx.noshot)</visible>
-			</item>
-			<item library="context.py" args="refresh,4">
-				<label>32000</label>
-				<visible>String.IsEqual(Skin.String(aeon.ctx.pos4),refresh) + Skin.HasSetting(aeon.ctx.refresh) + !ListItem.IsParentFolder + Integer.IsGreater(ListItem.DBID,0) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
-			</item>
-			<item library="context.py" args="update,4">
-				<label>32001</label>
-				<visible>String.IsEqual(Skin.String(aeon.ctx.pos4),update) + Skin.HasSetting(aeon.ctx.update) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
-			</item>
-			<item library="context.py" args="clean,4">
-				<label>32002</label>
-				<visible>String.IsEqual(Skin.String(aeon.ctx.pos4),clean) + Skin.HasSetting(aeon.ctx.clean) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
-			</item>
-			<item library="context.py" args="shot,4">
-				<label>32003</label>
-				<visible>[String.IsEqual(Skin.String(aeon.ctx.pos4),shot) | String.IsEmpty(Skin.String(aeon.ctx.pos1))] + !Skin.HasSetting(aeon.ctx.noshot)</visible>
-			</item>
-		</menu>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en_GB">Library counts for the Aeon Fuse skin.</summary>
-		<description lang="en_GB">Also publishes every rating (IMDb, TMDb, Rotten Tomatoes, Trakt) of the focused item as Home properties (aeon.r.*), because Kodi lists only carry the default rating. Reads the size of the video and music libraries through JSON-RPC and publishes it as Home window properties (aeon.count.movies, aeon.count.tvshows, aeon.count.episodes, aeon.count.artists, aeon.count.albums, aeon.count.songs) for the Aeon Fuse skin. It refreshes on start-up and after every library scan or clean. It does nothing under other skins.</description>
-		<platform>all</platform>
-		<assets>
-			<icon>resources/icon.png</icon>
-			<fanart>resources/fanart.jpg</fanart>
-		</assets>
-		<license>GPL-2.0-or-later</license>
-	</extension>
-</addon>
-<addon id="service.audio.enforcer" name="Audio Enforcer" version="1.1.0" provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="default.py" start="startup">
-    </extension>
-    <extension point="xbmc.python.script" library="resources/lib/showrules.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="resources/lib/context.py">
-                <label>32080</label>
-                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Selects a preferred audio track when playback starts</summary>
-        <description lang="en">Audio Enforcer selects the first available audio track from up to five choices when a video starts. A choice can be the original language, the file's default track, Kodi's audio language, or a specific language. The original language comes from the file, and from TheMovieDB Helper when the file does not say. Commentary tracks can be skipped. Trailers, extras, and individual shows or movies can each use their own choice.</description>
-        <platform>all</platform>
-        <language>en</language>
-        <license>MIT</license>
-        <forum>https://github.com/jonnypuma/service.audio.enforcer/issues</forum>
-        <website>https://jonnypuma.github.io/#/service.audio.enforcer</website>
-        <source>https://github.com/jonnypuma/service.audio.enforcer</source>
-        <news>Version 1.1.0 adds audio description filtering, quality-over-default preference, show-rule fallback, notification modes, cache clearing, Unicode title matching, and performance improvements.</news>
-        <settings>
-            <setting file="resources/settings.xml" />
-        </settings>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="service.audio.enforcer" name="Audio Enforcer" version="1.2.0" provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="default.py" start="startup">
-    </extension>
-    <extension point="xbmc.python.script" library="resources/lib/showrules.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="resources/lib/context.py">
-                <label>32080</label>
-                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Selects a preferred audio track when playback starts</summary>
-        <description lang="en">Audio Enforcer selects the first available audio track from up to five choices when a video starts. A choice can be the original language, the file's default track, Kodi's audio language, or a specific language. The original language comes from the file, and from TheMovieDB Helper when the file does not say. Commentary tracks can be skipped. Trailers, extras, and individual shows or movies can each use their own choice.</description>
-        <platform>all</platform>
-        <language>en</language>
-        <license>MIT</license>
-        <forum>https://github.com/jonnypuma/service.audio.enforcer/issues</forum>
-        <website>https://jonnypuma.github.io/#/service.audio.enforcer</website>
-        <source>https://github.com/jonnypuma/service.audio.enforcer</source>
-        <news>Version 1.2.0 skips original-language lookups when an earlier priority already matches, overlaps lookups with stream stabilization, removes duplicate Helper database scans, and caches TMDB credentials and language lookups in memory.</news>
-        <settings>
-            <setting file="resources/settings.xml" />
-        </settings>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="service.audio.enforcer" name="Audio Enforcer" version="1.0.0" provider-name="Skippy-McSkipface">
-    <requires>
-        <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-    <extension point="xbmc.service" library="default.py" start="startup">
-    </extension>
-    <extension point="xbmc.python.script" library="resources/lib/showrules.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="kodi.context.item">
-        <menu id="kodi.core.main">
-            <item library="resources/lib/context.py">
-                <label>32080</label>
-                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
-            </item>
-        </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en">Selects a preferred audio track when playback starts</summary>
-        <description lang="en">Audio Enforcer selects the first available audio track from up to five choices when a video starts. A choice can be the original language, the file's default track, Kodi's audio language, or a specific language. The original language comes from the file, and from TheMovieDB Helper when the file does not say. Commentary tracks can be skipped. Trailers, extras, and individual shows or movies can each use their own choice.</description>
-        <platform>all</platform>
-        <language>en</language>
-        <license>MIT</license>
-        <forum>https://forum.kodi.tv</forum>
-        <website>https://kodi.tv</website>
-        <news>Version 1.0.0 selects a preferred audio track when playback starts, including the original language, the file default, and a language for one show.</news>
-        <settings>
-            <setting file="resources/settings.xml" />
-        </settings>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.png</fanart>
-        </assets>
-    </extension>
-</addon>
-<addon id="script.ratings.updatarr" name="Ratings Updatarr" version="1.3.2" provider-name="Skippy-McSkipface">
-  <requires>
-    <import addon="xbmc.python" version="3.0.1"/>
-    <import addon="plugin.video.themoviedb.helper" version="5.3.0" optional="true"/>
-  </requires>
-  <extension point="xbmc.python.script" library="default.py">
-    <provides>executable</provides>
-  </extension>
-  <extension point="kodi.context.item">
-    <menu id="kodi.core.main">
-      <item library="context_item.py">
-        <label>32105</label>
-        <visible>!String.IsEmpty(ListItem.DBID) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)]</visible>
-      </item>
-    </menu>
-  </extension>
-  <extension point="xbmc.service" library="service.py" start="login"/>
-  <extension point="xbmc.addon.metadata">
-    <reuselanguageinvoker>false</reuselanguageinvoker>
-    <platform>all</platform>
-    <license>GPL-2.0-or-later</license>
-    <source>local</source>
-    <summary lang="en_GB">Refresh library ratings by media type</summary>
-    <description lang="en_GB">Refresh scraped ratings for movies, TV shows, episodes, or all of those types. IMDb scores come from IMDb's non-commercial dataset files. TMDb is the main online source, and a score already cached by TMDbHelper is reused. OMDb adds Rotten Tomatoes critic and Metacritic scores. MDbList can supply IMDb, TMDb, Trakt, Rotten Tomatoes critic and audience, Metacritic, Letterboxd, and MyAnimeList scores in one call. Trakt adds a public Trakt score. Requests stay inside the limits published by those services. Personal star ratings are left alone. This product uses the TMDb API but is not endorsed or certified by TMDb.</description>
-    <news>v1.3.2
-- Add Database settings tab to choose Kodi JSON-RPC, auto-detected advancedsettings.xml/SQLite, or manual MariaDB/MySQL server, port, credentials, and database name
-- Add Test database connection button and show active database target in Status &amp; test keys
-v1.3.1
-- Batch TMDb episode fetches by season, add HTTP keep-alive connection pooling and transient network retries, and shrink IMDb SQLite index by skipping unrated episodes
-- Add Status &amp; test keys panel, Dry-run preview mode with per-item change log, minimum vote-increase threshold, and optional .nfo writeback
-- Add Recently added to the main menu and episodes=true RunScript shortcut for TV shows
-v1.3.0
-- Add MDbList provider, Rotten Tomatoes Audience, Letterboxd, and MyAnimeList ratings
-- Context menu options for TV show with all episodes and season episodes
-- Option to filter by recently added days, update after video library scans, and pause during playback
-- Real progress percentages and faster SQLite indexing for IMDb datasets
-- Resolve parent show IMDb IDs for episodes, prioritize quota-limited items, and record failure details in Recent runs
-- Fix TMDbHelper cache filtering, scheduled cancellation handling, and root addon artwork paths
-v1.2.9
-- Installs on Kodi Omega 21.2
-v1.2.8
-- Use TMDbHelper's cached TMDb score when no TMDb key is set
-v1.2.7
-- Show the summary after a finished update
-v1.2.6
-- OMDb requests use the documented apikey and IMDb id lookup
-v1.2.5
-- OMDb requires an API key; the free key allows 1,000 requests a day
-v1.2.4
-- Option to write only ratings the item does not already have
-v1.2.3
-- Download IMDb data now, from the settings, as well as on the automatic schedule
-v1.2.2
-- Choose a local folder for the IMDb downloads and the SQLite index
-v1.2.1
-- Local IMDb database is a provider switch, with the other providers
-- Media type switches apply to All video and the schedule
-v1.2.0
-- Reuse a TMDb score and IDs already cached by TMDbHelper
-- Keep TMDb, Trakt, and OMDb requests inside the limits those services publish
-v1.1.0
-- IMDb scores from the IMDb dataset files, refreshed about every 30 days
-- Run daily at chosen times, or on an hourly interval
-- Background runs, a summary, and a log of the last 10 runs
-- Skip a write unless the rating moved by more than the chosen amount
-v1.0.0
-- Update movies, TV shows, episodes, or all three
-- Context menu for the selected item, its media type, or the whole video library
-- Optional scheduled run
-    </news>
-    <assets>
-      <icon>icon.png</icon>
-      <fanart>fanart.png</fanart>
-    </assets>
-  </extension>
-</addon>
-<addon id="skin.aeon.fuse" version="0.56.55" name="Aeon Fuse" provider-name="Skippy-McSkipface">
+<addon id="skin.aeon.fuse" version="0.56.56" name="Aeon Fuse" provider-name="Skippy-McSkipface">
 	<requires>
 		<import addon="xbmc.gui" version="5.17.0"/>
 		<import addon="script.skinvariables" version="2.1.21"/>
-		<import addon="script.aeon.helper" version="0.3.115"/>
+		<import addon="script.aeon.helper" version="0.3.128"/>
 		<!-- Optional: borrowed artwork colour (TMDb Helper colour service) and true Next up (embuary). -->
 		<!-- optional: each adds its feature when installed (README.md, "Add-ons", says what and where to get it) -->
 		<import addon="plugin.video.themoviedb.helper" version="4.0.0" optional="true"/>
@@ -799,68 +144,170 @@ v0.28.3
 		</assets>
 	</extension>
 </addon>
-<addon id="script.texture.cache" name="Texture Cache Utility" version="2.0.6" provider-name="Skippy-McSkipface">
+<addon id="service.library.updatarr"
+       name="Library Updatarr"
+       version="2.2.2"
+       provider-name="Skippy-McSkipface">
     <requires>
-        <import addon="xbmc.python" version="3.0.1"/>
+        <import addon="xbmc.python" version="3.0.0"/>
     </requires>
-    <extension point="xbmc.python.script" library="main.py">
+    <extension point="xbmc.service" library="service.py" start="login"/>
+    <extension point="xbmc.python.script" library="launcher.py">
         <provides>executable</provides>
     </extension>
-    <extension point="xbmc.service" library="service.py"/>
     <extension point="kodi.context.item">
         <menu id="kodi.core.main">
             <item library="context.py">
-                <label>30200</label>
-                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set) | String.IsEqual(ListItem.DBType,artist) | String.IsEqual(ListItem.DBType,album) | String.IsEqual(ListItem.DBType,song) | String.IsEqual(ListItem.DBType,musicvideo)</visible>
+                <label>32000</label>
+                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType)</visible>
+            </item>
+            <item library="context_remove.py">
+                <label>32070</label>
+                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
             </item>
         </menu>
     </extension>
     <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Populate missing metadata and artwork for existing library items.</summary>
+        <description lang="en_GB">Library Updatarr scans your existing Kodi video library for movies, TV shows, and episodes with missing posters, fanart, or metadata. It applies local artwork and NFO files first, then uses your installed online scrapers to fill remaining gaps — without wiping the database or scanning for new files.</description>
         <platform>all</platform>
         <license>GPL-2.0-or-later</license>
-        <source>script.texture.cache</source>
-        <website>https://kodi.tv</website>
+        <news>2.2.2 — Remove from library: video types only (not music). 2.2.1 — tvshow.path warning.</news>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
         </assets>
-        <summary lang="en_GB">Kodi GUI wrapper (script.texture.cache) for Milhouse texturecache</summary>
-        <description lang="en_GB">Texture Cache Utility (script.texture.cache) is a Kodi GUI wrapper for Milhouse's texturecache. Cache artwork, prune, clean orphans, and run QA from Kodi with presets, progress, cancel, scheduled maintenance, and a library context menu. Bundled engine: https://github.com/xbmc/texturecache</description>
-        <news lang="en_GB">2.0.6: Import local artwork is in Pick commands as well as Run preset.</news>
-        <reuselanguageinvoker>false</reuselanguageinvoker>
     </extension>
 </addon>
-<addon id="script.versions.updatarr"
-       name="Video Versions Updatarr"
-       version="0.2.0"
+<addon id="service.library.updatarr"
+       name="Library Updatarr"
+       version="2.3.0"
        provider-name="Skippy-McSkipface">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0"/>
-  </requires>
-  <extension point="xbmc.python.script" library="main.py">
-    <provides>executable</provides>
-  </extension>
-  <extension point="xbmc.service" library="service.py"/>
-  <extension point="kodi.context.item">
-    <menu id="kodi.core.manage">
-      <item library="context.py">
-        <label>32050</label>
-        <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)</visible>
-      </item>
-    </menu>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <platform>all</platform>
-    <license>MIT</license>
-    <source>https://github.com/jonnypuma/script.versions.updatarr</source>
-    <website>https://github.com/jonnypuma/script.versions.updatarr</website>
-    <summary lang="en_GB">Automatically update and assign Kodi Video Versions from NFO files and filenames directly in the database.</summary>
-    <description lang="en_GB">Kodi v21+ Video Versions does not yet import version names from NFO files or filenames during library scans. Video Versions Updatarr fills this gap by reading &lt;videoassettitle&gt;, &lt;edition&gt; NFO tags, or filename edition patterns, automatically adding custom version types and updating the videoversion database table. Supports both SQLite and MariaDB/MySQL with automatic configuration detection and a minimum 3-backup retention with easy restore.</description>
-    <assets>
-      <icon>icon.png</icon>
-      <fanart>fanart.jpg</fanart>
-    </assets>
-  </extension>
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="service.py" start="login"/>
+    <extension point="xbmc.python.script" library="launcher.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="context.py">
+                <label>32000</label>
+                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)]</visible>
+            </item>
+            <item library="context_remove.py">
+                <label>32070</label>
+                <visible>System.HasAddon(service.library.updatarr) + System.AddonIsEnabled(service.library.updatarr) + !String.IsEmpty(ListItem.DBID) + !String.IsEmpty(ListItem.DBType) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Populate missing metadata and artwork for existing library items.</summary>
+        <description lang="en_GB">Library Updatarr scans your existing Kodi video library for movies, TV shows, and episodes with missing posters, fanart, or metadata. It applies local artwork and NFO files first, then uses your installed online scrapers to fill remaining gaps — without wiping the database or scanning for new files.</description>
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <news>2.3.0 — Run lock, episode/movie artwork extensions, batched artwork updates, and bug fixes. 2.2.2 — Remove from library: video types only (not music). 2.2.1 — tvshow.path warning.</news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="service.subtitle.enforcer" name="Subtitle Enforcer" version="2.4.2" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="default.py" start="startup">
+    </extension>
+    <extension point="xbmc.python.script" library="resources/lib/script.py">
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="resources/lib/context.py">
+                <label>32058</label>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Selects a preferred subtitle when playback starts, and can seek back so subtitles appear</summary>
+        <description lang="en_GB">Subtitle Enforcer turns on the first available subtitle from up to five languages, in the order you set. A priority can be Original language, Default language, a listed language, Kodi's own subtitle language, or any language name or code. Original language follows the film, even when the audio is a dub, and TMDB wins if it disagrees with the file or the library. Default language uses the audio language the file marks as default. Leave the TMDB API key empty to use TMDBHelper's key. Each language can include hearing impaired (HI), SDH, and forced tracks, and the choice can follow whether you understand the audio. Trailers, extras, and individual shows can be skipped or given their own rule. It can also wait a few seconds after playback starts and seek backward, which makes Kodi show embedded subtitles that otherwise stay hidden until a manual seek.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <website>https://jonnypuma.github.io/#/service.subtitle.enforcer</website>
+        <source>https://github.com/jonnypuma/service.subtitle.enforcer</source>
+        <news>Version 2.4.2 splits the add-on into focused modules, makes TMDB lookups non-blocking and cached across episodes, and reduces idle and playback polling overhead.</news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="service.subtitle.enforcer" name="Subtitle Enforcer" version="2.4.1" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="default.py" start="startup">
+    </extension>
+    <extension point="xbmc.python.script" library="resources/lib/script.py">
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="resources/lib/context.py">
+                <label>32058</label>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Selects a preferred subtitle when playback starts, and can seek back so subtitles appear</summary>
+        <description lang="en_GB">Subtitle Enforcer turns on the first available subtitle from up to five languages, in the order you set. A priority can be Original language, Default language, a listed language, Kodi's own subtitle language, or any language name or code. Original language follows the film, even when the audio is a dub, and TMDB wins if it disagrees with the file or the library. Default language uses the audio language the file marks as default. Leave the TMDB API key empty to use TMDBHelper's key. Each language can include hearing impaired (HI), SDH, and forced tracks, and the choice can follow whether you understand the audio. Trailers, extras, and individual shows can be skipped or given their own rule. It can also wait a few seconds after playback starts and seek backward, which makes Kodi show embedded subtitles that otherwise stay hidden until a manual seek.</description>
+        <platform>all</platform>
+        <license>MIT</license>
+        <website>https://jonnypuma.github.io/#/service.subtitle.enforcer</website>
+        <source>https://github.com/jonnypuma/service.subtitle.enforcer</source>
+        <news>Version 2.4.1 fixes context-menu TV show lookups, stale TMDBHelper IDs, URL trailer/extra detection, and reduces background service overhead.</news>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="service.subtitle.enforcer" name="Subtitle Enforcer" version="2.4.0" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="default.py" start="startup">
+    </extension>
+    <extension point="xbmc.python.script" library="default.py">
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="resources/lib/context.py">
+                <label>32058</label>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Selects a preferred subtitle when playback starts, and can seek back so subtitles appear</summary>
+        <description lang="en">Subtitle Enforcer turns on the first available subtitle from up to five languages, in the order you set. A priority can be Original language, Default language, a listed language, Kodi's own subtitle language, or any language name or code. Original language follows the film, even when the audio is a dub, and TMDB wins if it disagrees with the file or the library. Default language uses the audio language the file marks as default. Leave the TMDB API key empty to use TMDBHelper's key. Each language can include hearing impaired (HI), SDH, and forced tracks, and the choice can follow whether you understand the audio. Trailers, extras, and individual shows can be skipped or given their own rule. It can also wait a few seconds after playback starts and seek backward, which makes Kodi show embedded subtitles that otherwise stay hidden until a manual seek.</description>
+        <platform>all</platform>
+        <language>en</language>
+        <license>MIT</license>
+        <forum>https://forum.kodi.tv</forum>
+        <website>https://kodi.tv</website>
+        <source>https://github.com</source>
+        <news>Version 2.4.0 gives a show or movie its own subtitle language, including the title that is playing.</news>
+        <settings>
+            <setting file="resources/settings.xml" />
+        </settings>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
 </addon>
 <addon id="service.skippy"
        name="Skippy - Video Segment Skipper"
@@ -978,5 +425,558 @@ v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments
             <screenshot>screenshot07.png</screenshot>
         </assets>
     </extension>
+</addon>
+<addon id="script.metadata.updatarr"
+       name="Metadata Updatarr"
+       version="0.1.1"
+       provider-name="Skippy-McSkipface">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.python.script" library="main.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.service" library="service.py"/>
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.manage">
+      <item library="context.py">
+        <label>32050</label>
+        <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)</visible>
+      </item>
+    </menu>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <license>MIT</license>
+    <source>https://github.com/jonnypuma/script.metadata.updatarr</source>
+    <website>https://github.com/jonnypuma/script.metadata.updatarr</website>
+    <summary lang="en_GB">Unified Kodi metadata &amp; Video Versions updater from local .nfo files, filenames, and TMDbHelper fallback.</summary>
+    <description lang="en_GB">Metadata Updatarr combines Video Versions management (NFO/filename edition detection, quality badges, duplicate movie grouping, default version swapping, label normalization) with missing metadata recovery (season plots &amp; names, movie plots &amp; taglines) using local .nfo files with TMDbHelper/TMDB fallback. Supports SQLite and MariaDB/MySQL with automatic 3+ backup retention.</description>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="script.metadata.updatarr"
+       name="Metadata Updatarr"
+       version="0.1.3"
+       provider-name="Skippy-McSkipface">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.python.script" library="main.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.service" library="service.py"/>
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.manage">
+      <item library="context.py">
+        <label>32050</label>
+        <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)</visible>
+      </item>
+    </menu>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <license>MIT</license>
+    <source>https://github.com/jonnypuma/script.metadata.updatarr</source>
+    <website>https://github.com/jonnypuma/script.metadata.updatarr</website>
+    <summary lang="en_GB">Unified Kodi metadata &amp; Video Versions updater from local .nfo files, filenames, and TMDbHelper fallback.</summary>
+    <description lang="en_GB">Metadata Updatarr combines Video Versions management (NFO/filename edition detection, quality badges, duplicate movie grouping, default version swapping, label normalization) with missing metadata recovery (season plots &amp; names, movie plots &amp; taglines) using local .nfo files with TMDbHelper/TMDB fallback. Supports SQLite and MariaDB/MySQL with automatic 3+ backup retention.</description>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="visualization.aeonwave.linux-x86_64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux x86-64)" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>linux</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux x86-64)</summary>
+    <description lang="en_GB">Build for Linux x86-64 (OpenGL): desktop Linux, LibreELEC Generic. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="service.audio.enforcer" name="Audio Enforcer" version="1.2.0" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="default.py" start="startup">
+    </extension>
+    <extension point="xbmc.python.script" library="resources/lib/showrules.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="resources/lib/context.py">
+                <label>32080</label>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Selects a preferred audio track when playback starts</summary>
+        <description lang="en">Audio Enforcer selects the first available audio track from up to five choices when a video starts. A choice can be the original language, the file's default track, Kodi's audio language, or a specific language. The original language comes from the file, and from TheMovieDB Helper when the file does not say. Commentary tracks can be skipped. Trailers, extras, and individual shows or movies can each use their own choice.</description>
+        <platform>all</platform>
+        <language>en</language>
+        <license>MIT</license>
+        <forum>https://github.com/jonnypuma/service.audio.enforcer/issues</forum>
+        <website>https://jonnypuma.github.io/#/service.audio.enforcer</website>
+        <source>https://github.com/jonnypuma/service.audio.enforcer</source>
+        <news>Version 1.2.0 skips original-language lookups when an earlier priority already matches, overlaps lookups with stream stabilization, removes duplicate Helper database scans, and caches TMDB credentials and language lookups in memory.</news>
+        <settings>
+            <setting file="resources/settings.xml" />
+        </settings>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="service.audio.enforcer" name="Audio Enforcer" version="1.1.0" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="default.py" start="startup">
+    </extension>
+    <extension point="xbmc.python.script" library="resources/lib/showrules.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="resources/lib/context.py">
+                <label>32080</label>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Selects a preferred audio track when playback starts</summary>
+        <description lang="en">Audio Enforcer selects the first available audio track from up to five choices when a video starts. A choice can be the original language, the file's default track, Kodi's audio language, or a specific language. The original language comes from the file, and from TheMovieDB Helper when the file does not say. Commentary tracks can be skipped. Trailers, extras, and individual shows or movies can each use their own choice.</description>
+        <platform>all</platform>
+        <language>en</language>
+        <license>MIT</license>
+        <forum>https://github.com/jonnypuma/service.audio.enforcer/issues</forum>
+        <website>https://jonnypuma.github.io/#/service.audio.enforcer</website>
+        <source>https://github.com/jonnypuma/service.audio.enforcer</source>
+        <news>Version 1.1.0 adds audio description filtering, quality-over-default preference, show-rule fallback, notification modes, cache clearing, Unicode title matching, and performance improvements.</news>
+        <settings>
+            <setting file="resources/settings.xml" />
+        </settings>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="service.audio.enforcer" name="Audio Enforcer" version="1.0.0" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.service" library="default.py" start="startup">
+    </extension>
+    <extension point="xbmc.python.script" library="resources/lib/showrules.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="resources/lib/context.py">
+                <label>32080</label>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Selects a preferred audio track when playback starts</summary>
+        <description lang="en">Audio Enforcer selects the first available audio track from up to five choices when a video starts. A choice can be the original language, the file's default track, Kodi's audio language, or a specific language. The original language comes from the file, and from TheMovieDB Helper when the file does not say. Commentary tracks can be skipped. Trailers, extras, and individual shows or movies can each use their own choice.</description>
+        <platform>all</platform>
+        <language>en</language>
+        <license>MIT</license>
+        <forum>https://forum.kodi.tv</forum>
+        <website>https://kodi.tv</website>
+        <news>Version 1.0.0 selects a preferred audio track when playback starts, including the original language, the file default, and a language for one show.</news>
+        <settings>
+            <setting file="resources/settings.xml" />
+        </settings>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="service.trickplay"
+       name="Trickplay Preview"
+       version="9.4.0"
+       provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="script_generator.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py" start="login"/>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <summary lang="en">Shows Jellyfin trickplay seek thumbnails during video scrubbing.</summary>
+        <description lang="en">Reads or generates Jellyfin trickplay sprite tiles alongside your media, crops preview frames with Pillow while you scrub, and shows them via skin window properties. Optional ffmpeg generator writes .trickplay sidecars; use Install preview tools for Pillow (preview) and ffmpeg (generation). Use Show addon status / Install skin snippet in settings (DialogSeekBar.xml for most skins; VideoFullScreen.xml for Bello). Generation/HDR requires ffmpeg, ffprobe, and optionally dovi_tool.</description>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+<addon id="script.texture.cache" name="Texture Cache Utility" version="2.0.6" provider-name="Skippy-McSkipface">
+    <requires>
+        <import addon="xbmc.python" version="3.0.1"/>
+    </requires>
+    <extension point="xbmc.python.script" library="main.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.service" library="service.py"/>
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="context.py">
+                <label>30200</label>
+                <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,set) | String.IsEqual(ListItem.DBType,artist) | String.IsEqual(ListItem.DBType,album) | String.IsEqual(ListItem.DBType,song) | String.IsEqual(ListItem.DBType,musicvideo)</visible>
+            </item>
+        </menu>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <source>script.texture.cache</source>
+        <website>https://kodi.tv</website>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+        <summary lang="en_GB">Kodi GUI wrapper (script.texture.cache) for Milhouse texturecache</summary>
+        <description lang="en_GB">Texture Cache Utility (script.texture.cache) is a Kodi GUI wrapper for Milhouse's texturecache. Cache artwork, prune, clean orphans, and run QA from Kodi with presets, progress, cancel, scheduled maintenance, and a library context menu. Bundled engine: https://github.com/xbmc/texturecache</description>
+        <news lang="en_GB">2.0.6: Import local artwork is in Pick commands as well as Run preset.</news>
+        <reuselanguageinvoker>false</reuselanguageinvoker>
+    </extension>
+</addon>
+<addon id="visualization.aeonwave.linux-armv7" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux ARM 32-bit)" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>linux</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux ARM 32-bit)</summary>
+    <description lang="en_GB">Build for Linux ARM 32-bit (OpenGL ES): 32-bit LibreELEC / CoreELEC images. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="script.aeon.helper" name="Aeon Fuse Helper" version="0.3.128" provider-name="Aeon Fuse">
+	<requires>
+		<import addon="xbmc.python" version="3.0.1"/>
+		<!-- optional: the Planner and online lists read TMDb Helper; artwork colours come from KarmaMole's helper -->
+		<import addon="plugin.video.themoviedb.helper" optional="true"/>
+		<import addon="script.karmamole.helper" optional="true"/>
+	</requires>
+	<extension point="xbmc.service" library="service.py"/>
+	<extension point="xbmc.python.script" library="swap.py"/>
+	<!-- lists for the artist information page; provides nothing, so it is not listed among the music add-ons -->
+	<extension point="xbmc.python.pluginsource" library="plugin.py">
+		<provides></provides>
+	</extension>
+	<!-- context menu items, in the order and with the switches of Aeon Fuse's Skin settings > Context menu.
+	     Generated by resources/lib/ctxmenu.addon_items (tests/test_ctxmenu.py checks it): every item at every place. -->
+	<extension point="kodi.context.item">
+		<menu id="kodi.core.main">
+			<item library="context.py" args="refresh,1">
+				<label>32000</label>
+				<visible>[String.IsEqual(Skin.String(aeon.ctx.pos1),refresh) | String.IsEmpty(Skin.String(aeon.ctx.pos1))] + Skin.HasSetting(aeon.ctx.refresh) + !ListItem.IsParentFolder + Integer.IsGreater(ListItem.DBID,0) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
+			</item>
+			<item library="context.py" args="update,1">
+				<label>32001</label>
+				<visible>String.IsEqual(Skin.String(aeon.ctx.pos1),update) + Skin.HasSetting(aeon.ctx.update) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
+			</item>
+			<item library="context.py" args="clean,1">
+				<label>32002</label>
+				<visible>String.IsEqual(Skin.String(aeon.ctx.pos1),clean) + Skin.HasSetting(aeon.ctx.clean) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
+			</item>
+			<item library="context.py" args="shot,1">
+				<label>32003</label>
+				<visible>String.IsEqual(Skin.String(aeon.ctx.pos1),shot) + !Skin.HasSetting(aeon.ctx.noshot)</visible>
+			</item>
+			<item library="context.py" args="refresh,2">
+				<label>32000</label>
+				<visible>String.IsEqual(Skin.String(aeon.ctx.pos2),refresh) + Skin.HasSetting(aeon.ctx.refresh) + !ListItem.IsParentFolder + Integer.IsGreater(ListItem.DBID,0) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
+			</item>
+			<item library="context.py" args="update,2">
+				<label>32001</label>
+				<visible>[String.IsEqual(Skin.String(aeon.ctx.pos2),update) | String.IsEmpty(Skin.String(aeon.ctx.pos1))] + Skin.HasSetting(aeon.ctx.update) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
+			</item>
+			<item library="context.py" args="clean,2">
+				<label>32002</label>
+				<visible>String.IsEqual(Skin.String(aeon.ctx.pos2),clean) + Skin.HasSetting(aeon.ctx.clean) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
+			</item>
+			<item library="context.py" args="shot,2">
+				<label>32003</label>
+				<visible>String.IsEqual(Skin.String(aeon.ctx.pos2),shot) + !Skin.HasSetting(aeon.ctx.noshot)</visible>
+			</item>
+			<item library="context.py" args="refresh,3">
+				<label>32000</label>
+				<visible>String.IsEqual(Skin.String(aeon.ctx.pos3),refresh) + Skin.HasSetting(aeon.ctx.refresh) + !ListItem.IsParentFolder + Integer.IsGreater(ListItem.DBID,0) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
+			</item>
+			<item library="context.py" args="update,3">
+				<label>32001</label>
+				<visible>String.IsEqual(Skin.String(aeon.ctx.pos3),update) + Skin.HasSetting(aeon.ctx.update) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
+			</item>
+			<item library="context.py" args="clean,3">
+				<label>32002</label>
+				<visible>[String.IsEqual(Skin.String(aeon.ctx.pos3),clean) | String.IsEmpty(Skin.String(aeon.ctx.pos1))] + Skin.HasSetting(aeon.ctx.clean) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
+			</item>
+			<item library="context.py" args="shot,3">
+				<label>32003</label>
+				<visible>String.IsEqual(Skin.String(aeon.ctx.pos3),shot) + !Skin.HasSetting(aeon.ctx.noshot)</visible>
+			</item>
+			<item library="context.py" args="refresh,4">
+				<label>32000</label>
+				<visible>String.IsEqual(Skin.String(aeon.ctx.pos4),refresh) + Skin.HasSetting(aeon.ctx.refresh) + !ListItem.IsParentFolder + Integer.IsGreater(ListItem.DBID,0) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,episode) | String.IsEqual(ListItem.DBType,musicvideo)]</visible>
+			</item>
+			<item library="context.py" args="update,4">
+				<label>32001</label>
+				<visible>String.IsEqual(Skin.String(aeon.ctx.pos4),update) + Skin.HasSetting(aeon.ctx.update) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
+			</item>
+			<item library="context.py" args="clean,4">
+				<label>32002</label>
+				<visible>String.IsEqual(Skin.String(aeon.ctx.pos4),clean) + Skin.HasSetting(aeon.ctx.clean) + [Window.IsActive(videos) | Window.IsActive(music) | Window.IsActive(home)]</visible>
+			</item>
+			<item library="context.py" args="shot,4">
+				<label>32003</label>
+				<visible>[String.IsEqual(Skin.String(aeon.ctx.pos4),shot) | String.IsEmpty(Skin.String(aeon.ctx.pos1))] + !Skin.HasSetting(aeon.ctx.noshot)</visible>
+			</item>
+		</menu>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">Library counts for the Aeon Fuse skin.</summary>
+		<description lang="en_GB">Also publishes every rating (IMDb, TMDb, Rotten Tomatoes, Trakt) of the focused item as Home properties (aeon.r.*), because Kodi lists only carry the default rating. Reads the size of the video and music libraries through JSON-RPC and publishes it as Home window properties (aeon.count.movies, aeon.count.tvshows, aeon.count.episodes, aeon.count.artists, aeon.count.albums, aeon.count.songs) for the Aeon Fuse skin. It refreshes on start-up and after every library scan or clean. It does nothing under other skins.</description>
+		<platform>all</platform>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+		</assets>
+		<license>GPL-2.0-or-later</license>
+	</extension>
+</addon>
+<addon id="repository.skippyrepo"
+       name="Skippy Repo"
+       version="1.0.4"
+       provider-name="Skippy-McSkipface">
+
+    <extension point="xbmc.addon.repository">
+        <dir>
+            <version>21.2.0</version>
+            <info>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/main/zips/</datadir>
+        </dir>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Github repository for Skippy - Video Segment Skipper for Kodi and companion Segment Editor</summary>
+        <description lang="en">Installs Skippy, Segment Editor and other Kodi addons</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+            <screenshot>screenshot01.png</screenshot>
+            <screenshot>screenshot02.png</screenshot>
+            <screenshot>screenshot03.png</screenshot>
+        </assets>
+    </extension>
+</addon>
+
+
+
+<addon id="screensaver.aeon.fuse" name="Aeon Fuse Screensaver" version="1.3.0" provider-name="Aeon Fuse">
+	<requires>
+		<import addon="xbmc.python" version="3.0.1"/>
+	</requires>
+	<extension point="xbmc.ui.screensaver" library="screensaver.py"/>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">Random movies, TV shows and albums from your library, in the Aeon Fuse look.</summary>
+		<description lang="en_GB">The Aeon Fuse skin's screensaver as a regular Kodi screensaver: choose it and its wait time under Settings > Interface > Screensaver. It cycles through random movies, TV shows and albums (each can be switched off in its settings). Under another skin it shows a black screen.</description>
+		<platform>all</platform>
+		<license>GPL-2.0-or-later</license>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>
+<addon id="script.versions.updatarr"
+       name="Video Versions Updatarr"
+       version="0.2.0"
+       provider-name="Skippy-McSkipface">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.python.script" library="main.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.service" library="service.py"/>
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.manage">
+      <item library="context.py">
+        <label>32050</label>
+        <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)</visible>
+      </item>
+    </menu>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <license>MIT</license>
+    <source>https://github.com/jonnypuma/script.versions.updatarr</source>
+    <website>https://github.com/jonnypuma/script.versions.updatarr</website>
+    <summary lang="en_GB">Automatically update and assign Kodi Video Versions from NFO files and filenames directly in the database.</summary>
+    <description lang="en_GB">Kodi v21+ Video Versions does not yet import version names from NFO files or filenames during library scans. Video Versions Updatarr fills this gap by reading &lt;videoassettitle&gt;, &lt;edition&gt; NFO tags, or filename edition patterns, automatically adding custom version types and updating the videoversion database table. Supports both SQLite and MariaDB/MySQL with automatic configuration detection and a minimum 3-backup retention with easy restore.</description>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="script.ratings.updatarr" name="Ratings Updatarr" version="1.3.2" provider-name="Skippy-McSkipface">
+  <requires>
+    <import addon="xbmc.python" version="3.0.1"/>
+    <import addon="plugin.video.themoviedb.helper" version="5.3.0" optional="true"/>
+  </requires>
+  <extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.main">
+      <item library="context_item.py">
+        <label>32105</label>
+        <visible>!String.IsEmpty(ListItem.DBID) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)]</visible>
+      </item>
+    </menu>
+  </extension>
+  <extension point="xbmc.service" library="service.py" start="login"/>
+  <extension point="xbmc.addon.metadata">
+    <reuselanguageinvoker>false</reuselanguageinvoker>
+    <platform>all</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>local</source>
+    <summary lang="en_GB">Refresh library ratings by media type</summary>
+    <description lang="en_GB">Refresh scraped ratings for movies, TV shows, episodes, or all of those types. IMDb scores come from IMDb's non-commercial dataset files. TMDb is the main online source, and a score already cached by TMDbHelper is reused. OMDb adds Rotten Tomatoes critic and Metacritic scores. MDbList can supply IMDb, TMDb, Trakt, Rotten Tomatoes critic and audience, Metacritic, Letterboxd, and MyAnimeList scores in one call. Trakt adds a public Trakt score. Requests stay inside the limits published by those services. Personal star ratings are left alone. This product uses the TMDb API but is not endorsed or certified by TMDb.</description>
+    <news>v1.3.2
+- Add Database settings tab to choose Kodi JSON-RPC, auto-detected advancedsettings.xml/SQLite, or manual MariaDB/MySQL server, port, credentials, and database name
+- Add Test database connection button and show active database target in Status &amp; test keys
+v1.3.1
+- Batch TMDb episode fetches by season, add HTTP keep-alive connection pooling and transient network retries, and shrink IMDb SQLite index by skipping unrated episodes
+- Add Status &amp; test keys panel, Dry-run preview mode with per-item change log, minimum vote-increase threshold, and optional .nfo writeback
+- Add Recently added to the main menu and episodes=true RunScript shortcut for TV shows
+v1.3.0
+- Add MDbList provider, Rotten Tomatoes Audience, Letterboxd, and MyAnimeList ratings
+- Context menu options for TV show with all episodes and season episodes
+- Option to filter by recently added days, update after video library scans, and pause during playback
+- Real progress percentages and faster SQLite indexing for IMDb datasets
+- Resolve parent show IMDb IDs for episodes, prioritize quota-limited items, and record failure details in Recent runs
+- Fix TMDbHelper cache filtering, scheduled cancellation handling, and root addon artwork paths
+v1.2.9
+- Installs on Kodi Omega 21.2
+v1.2.8
+- Use TMDbHelper's cached TMDb score when no TMDb key is set
+v1.2.7
+- Show the summary after a finished update
+v1.2.6
+- OMDb requests use the documented apikey and IMDb id lookup
+v1.2.5
+- OMDb requires an API key; the free key allows 1,000 requests a day
+v1.2.4
+- Option to write only ratings the item does not already have
+v1.2.3
+- Download IMDb data now, from the settings, as well as on the automatic schedule
+v1.2.2
+- Choose a local folder for the IMDb downloads and the SQLite index
+v1.2.1
+- Local IMDb database is a provider switch, with the other providers
+- Media type switches apply to All video and the schedule
+v1.2.0
+- Reuse a TMDb score and IDs already cached by TMDbHelper
+- Keep TMDb, Trakt, and OMDb requests inside the limits those services publish
+v1.1.0
+- IMDb scores from the IMDb dataset files, refreshed about every 30 days
+- Run daily at chosen times, or on an hourly interval
+- Background runs, a summary, and a log of the last 10 runs
+- Skip a write unless the rating moved by more than the chosen amount
+v1.0.0
+- Update movies, TV shows, episodes, or all three
+- Context menu for the selected item, its media type, or the whole video library
+- Optional scheduled run
+    </news>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.png</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="visualization.aeonwave.windows-x64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Windows x64)" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_windx="visualization.aeonwave.dll"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>windx</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Windows x64)</summary>
+    <description lang="en_GB">Build for Windows x64 (DirectX 11): Kodi for Windows. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
+<addon id="visualization.aeonwave.linux-arm64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux ARM64)" provider-name="Aeon Fuse">
+  <requires>
+    <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
+    <import addon="kodi.binary.global.gui" minversion="5.15.0" version="5.15.1"/>
+    <import addon="kodi.binary.global.filesystem" minversion="1.1.11" version="1.1.11"/>
+    <import addon="kodi.binary.instance.visualization" minversion="5.0.0" version="5.0.0"/>
+  </requires>
+  <extension point="xbmc.player.musicviz" library_linux="visualization.aeonwave.so.1.5.2"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>linux</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/xbmc/visualization.waveform</source>
+    <summary lang="en_GB">One thin waveform line, made for the Aeon Fuse Now playing card (Linux ARM64)</summary>
+    <description lang="en_GB">Build for Linux ARM64 (64-bit ARM, OpenGL ES): CoreELEC / LibreELEC 64-bit, Raspberry Pi 4 and 5. Aeon Fuse Waveform Visualizer is the Waveform visualisation of Kodi (by MrC and Team Kodi, visualization.waveform 22.1.1) changed for the Aeon Fuse skin: it draws one channel (left or right), both mixed, both overlaid, or both as two lines (as Waveform does), as a line through the middle of its box, of the same thin width on flat and steep strokes. Each point is the average of the audio it covers, smoothed with its neighbours and the frame before, and drawn as a smooth curve, so the line stays calm. How much is set by Smoothness, 0 (the raw samples, as Waveform) to 10 (calmest). Settings: channels, smoothness, points per line, height, smooth curve, line thickness, colours. Install the build for your device: the same add-on is published for Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64.</description>
+    <assets>
+      <icon>resources/icon.png</icon>
+      <fanart>resources/fanart.jpg</fanart>
+    </assets>
+  </extension>
 </addon>
 </addons>
