@@ -130,6 +130,19 @@ Or <a href="https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/ma
 
 <table>
   <tr>
+    <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/script.metadata.updatarr"><img src="https://jonnypuma.github.io/assets/script.metadata.updatarr/fanart.webp" alt="Metadata Updatarr"></a></td>
+    <td valign="top">
+      <h3><img src="https://jonnypuma.github.io/assets/script.metadata.updatarr/icon.webp" width="32" height="32" align="absmiddle" alt=""> Metadata Updatarr <sub>&nbsp;Kodi script</sub></h3>
+      <p><b>Missing metadata and Video Versions, straight in the Kodi database.</b></p>
+      <p>Fills in missing plots, taglines, cast and stream details for movies, shows and episodes from local .nfo files, TMDbHelper and OMDb, and assigns Video Versions from NFO tags and filenames. It replaces Video Versions Updatarr.</p>
+      <ul><li>Season, movie, TV show and episode metadata, with a scope picker</li><li>Video Versions, duplicate grouping and default version swapping</li><li>Backups before every write, with restore</li></ul>
+      <p><a href="https://jonnypuma.github.io/#/script.metadata.updatarr">Project page</a> · <a href="https://github.com/jonnypuma/script.metadata.updatarr">GitHub</a> · <a href="https://github.com/jonnypuma/script.metadata.updatarr/releases">Releases</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/script.metadata.updatarr">Zip files</a></p>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
     <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/script.texture.cache"><img src="https://jonnypuma.github.io/assets/script.texture.cache/fanart.webp" alt="Texture Cache Utility"></a></td>
     <td valign="top">
       <h3><img src="https://jonnypuma.github.io/assets/script.texture.cache/icon.webp" width="32" height="32" align="absmiddle" alt=""> Texture Cache Utility <sub>&nbsp;Kodi script</sub></h3>
