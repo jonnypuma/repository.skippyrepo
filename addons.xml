@@ -936,6 +936,82 @@ v1.0.0
     </assets>
   </extension>
 </addon>
+<addon id="script.ratings.updatarr" name="Ratings Updatarr" version="1.3.2" provider-name="Skippy-McSkipface">
+  <requires>
+    <import addon="xbmc.python" version="3.0.1"/>
+    <import addon="plugin.video.themoviedb.helper" version="5.3.0" optional="true"/>
+  </requires>
+  <extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.main">
+      <item library="context_item.py">
+        <label>32105</label>
+        <visible>!String.IsEmpty(ListItem.DBID) + [String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,tvshow) | String.IsEqual(ListItem.DBType,season) | String.IsEqual(ListItem.DBType,episode)]</visible>
+      </item>
+    </menu>
+  </extension>
+  <extension point="xbmc.service" library="service.py" start="login"/>
+  <extension point="xbmc.addon.metadata">
+    <reuselanguageinvoker>false</reuselanguageinvoker>
+    <platform>all</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>local</source>
+    <summary lang="en_GB">Refresh library ratings by media type</summary>
+    <description lang="en_GB">Refresh scraped ratings for movies, TV shows, episodes, or all of those types. IMDb scores come from IMDb's non-commercial dataset files. TMDb is the main online source, and a score already cached by TMDbHelper is reused. OMDb adds Rotten Tomatoes critic and Metacritic scores. MDbList can supply IMDb, TMDb, Trakt, Rotten Tomatoes critic and audience, Metacritic, Letterboxd, and MyAnimeList scores in one call. Trakt adds a public Trakt score. Requests stay inside the limits published by those services. Personal star ratings are left alone. This product uses the TMDb API but is not endorsed or certified by TMDb.</description>
+    <news>v1.3.2
+- Add Database settings tab to choose Kodi JSON-RPC, auto-detected advancedsettings.xml/SQLite, or manual MariaDB/MySQL server, port, credentials, and database name
+- Add Test database connection button and show active database target in Status &amp; test keys
+v1.3.1
+- Batch TMDb episode fetches by season, add HTTP keep-alive connection pooling and transient network retries, and shrink IMDb SQLite index by skipping unrated episodes
+- Add Status &amp; test keys panel, Dry-run preview mode with per-item change log, minimum vote-increase threshold, and optional .nfo writeback
+- Add Recently added to the main menu and episodes=true RunScript shortcut for TV shows
+v1.3.0
+- Add MDbList provider, Rotten Tomatoes Audience, Letterboxd, and MyAnimeList ratings
+- Context menu options for TV show with all episodes and season episodes
+- Option to filter by recently added days, update after video library scans, and pause during playback
+- Real progress percentages and faster SQLite indexing for IMDb datasets
+- Resolve parent show IMDb IDs for episodes, prioritize quota-limited items, and record failure details in Recent runs
+- Fix TMDbHelper cache filtering, scheduled cancellation handling, and root addon artwork paths
+v1.2.9
+- Installs on Kodi Omega 21.2
+v1.2.8
+- Use TMDbHelper's cached TMDb score when no TMDb key is set
+v1.2.7
+- Show the summary after a finished update
+v1.2.6
+- OMDb requests use the documented apikey and IMDb id lookup
+v1.2.5
+- OMDb requires an API key; the free key allows 1,000 requests a day
+v1.2.4
+- Option to write only ratings the item does not already have
+v1.2.3
+- Download IMDb data now, from the settings, as well as on the automatic schedule
+v1.2.2
+- Choose a local folder for the IMDb downloads and the SQLite index
+v1.2.1
+- Local IMDb database is a provider switch, with the other providers
+- Media type switches apply to All video and the schedule
+v1.2.0
+- Reuse a TMDb score and IDs already cached by TMDbHelper
+- Keep TMDb, Trakt, and OMDb requests inside the limits those services publish
+v1.1.0
+- IMDb scores from the IMDb dataset files, refreshed about every 30 days
+- Run daily at chosen times, or on an hourly interval
+- Background runs, a summary, and a log of the last 10 runs
+- Skip a write unless the rating moved by more than the chosen amount
+v1.0.0
+- Update movies, TV shows, episodes, or all three
+- Context menu for the selected item, its media type, or the whole video library
+- Optional scheduled run
+    </news>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.png</fanart>
+    </assets>
+  </extension>
+</addon>
 <addon id="visualization.aeonwave.windows-x64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Windows x64)" provider-name="Aeon Fuse">
   <requires>
     <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
