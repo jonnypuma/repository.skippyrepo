@@ -458,6 +458,38 @@ v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments
     </assets>
   </extension>
 </addon>
+<addon id="script.metadata.updatarr"
+       name="Metadata Updatarr"
+       version="0.1.3"
+       provider-name="Skippy-McSkipface">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0"/>
+  </requires>
+  <extension point="xbmc.python.script" library="main.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.service" library="service.py"/>
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.manage">
+      <item library="context.py">
+        <label>32050</label>
+        <visible>String.IsEqual(ListItem.DBType,movie) | String.IsEqual(ListItem.DBType,episode)</visible>
+      </item>
+    </menu>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <license>MIT</license>
+    <source>https://github.com/jonnypuma/script.metadata.updatarr</source>
+    <website>https://github.com/jonnypuma/script.metadata.updatarr</website>
+    <summary lang="en_GB">Unified Kodi metadata &amp; Video Versions updater from local .nfo files, filenames, and TMDbHelper fallback.</summary>
+    <description lang="en_GB">Metadata Updatarr combines Video Versions management (NFO/filename edition detection, quality badges, duplicate movie grouping, default version swapping, label normalization) with missing metadata recovery (season plots &amp; names, movie plots &amp; taglines) using local .nfo files with TMDbHelper/TMDB fallback. Supports SQLite and MariaDB/MySQL with automatic 3+ backup retention.</description>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+  </extension>
+</addon>
 <addon id="visualization.aeonwave.linux-x86_64" version="1.5.2" name="Aeon Fuse Waveform Visualizer (Linux x86-64)" provider-name="Aeon Fuse">
   <requires>
     <import addon="kodi.binary.global.main" minversion="2.0.3" version="2.0.4"/>
