@@ -37,7 +37,63 @@ Or <a href="https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/ma
 
 ## Add-ons
 
-<p>Seven add-ons, each with its own page on the <a href="https://jonnypuma.github.io/">website</a>. Click a picture to open it.</p>
+<p>Twelve add-ons, each with its own page on the <a href="https://jonnypuma.github.io/">website</a>. Click a picture to open it.</p>
+
+<h3 align="center">The Aeon Fuse skin and its companions</h3>
+
+<table>
+  <tr>
+    <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/skin.aeon.fuse"><img src="https://jonnypuma.github.io/assets/skin.aeon.fuse/aeon/t/aeon_movies_list.webp" alt="Aeon Fuse"></a></td>
+    <td valign="top">
+      <h3><img src="https://jonnypuma.github.io/assets/skin.aeon.fuse/icon.webp" width="32" height="32" align="absmiddle" alt=""> Aeon Fuse <sub>&nbsp;Kodi skin</sub></h3>
+      <p><b>The look of Aeon 2 with ideas from Arctic Fuse, built on the Glass skin.</b></p>
+      <p>A Kodi skin with library views built around the Aeon 2 list and walls, a Home screen with a spotlight and widget rows, its own screensaver and a setup wizard. Install the Helper with it: Kodi adds it as a dependency.</p>
+      <ul><li>Four looks: Aeon, Aeon Glass, Fused Glass and Fusion</li><li>Four menu styles in Aeon and Aeon Glass: Mosaic, Ledger, Bridge and Tab slab</li><li>Skip buttons with Skippy, seek thumbnails with Trickplay, the Planner with TMDb Helper</li><li>English plus 22 translations</li></ul>
+      <p><a href="https://jonnypuma.github.io/#/skin.aeon.fuse">Project page</a> · <a href="https://github.com/jonnypuma/skin.aeon.fuse">GitHub</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/skin.aeon.fuse">Zip files</a></p>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/script.aeon.helper"><img src="https://jonnypuma.github.io/assets/script.aeon.helper/fanart.webp" alt="Aeon Fuse Helper"></a></td>
+    <td valign="top">
+      <h3><img src="https://jonnypuma.github.io/assets/script.aeon.helper/icon.webp" width="32" height="32" align="absmiddle" alt=""> Aeon Fuse Helper <sub>&nbsp;Kodi script</sub></h3>
+      <p><b>The helper add-on of the Aeon Fuse skin. The skin requires it.</b></p>
+      <p>It works out what a skin cannot do in XML and hands the results to the skin. Under another skin its service does nothing.</p>
+      <ul><li>Library counts, refreshed after every scan or clean</li><li>Every rating of the focused item: IMDb, TMDb, Rotten Tomatoes and Trakt</li><li>Planner data: upcoming episodes and films, read from TMDb Helper</li><li>Artwork colours, and memory hand-back on small Linux boxes</li></ul>
+      <p><a href="https://jonnypuma.github.io/#/script.aeon.helper">Project page</a> · <a href="https://github.com/jonnypuma/script.aeon.helper">GitHub</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/script.aeon.helper">Zip files</a></p>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/screensaver.aeon.fuse"><img src="https://jonnypuma.github.io/assets/screensaver.aeon.fuse/fanart.webp" alt="Aeon Fuse Screensaver"></a></td>
+    <td valign="top">
+      <h3><img src="https://jonnypuma.github.io/assets/screensaver.aeon.fuse/icon.webp" width="32" height="32" align="absmiddle" alt=""> Aeon Fuse Screensaver <sub>&nbsp;Kodi screensaver</sub></h3>
+      <p><b>Random movies, TV shows and albums from your library, in the Aeon Fuse look.</b></p>
+      <p>Shows random films, TV shows and albums from your library in the skin's own screensaver window. While music plays it shows the song and its cover in a corner. Under another skin it shows a black screen.</p>
+      <ul><li>Movies, TV shows and albums, each switched on or off</li><li>Zoom and slide the backgrounds</li><li>Settings in English and the skin's 22 languages</li></ul>
+      <p><a href="https://jonnypuma.github.io/#/screensaver.aeon.fuse">Project page</a> · <a href="https://github.com/jonnypuma/screensaver.aeon.fuse">GitHub</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/screensaver.aeon.fuse">Zip files</a></p>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="42%" valign="top"><a href="https://jonnypuma.github.io/#/visualization.aeonwave"><img src="https://jonnypuma.github.io/assets/visualization.aeonwave/fanart.webp" alt="Aeon Fuse Waveform Visualizer"></a></td>
+    <td valign="top">
+      <h3><img src="https://jonnypuma.github.io/assets/visualization.aeonwave/icon.webp" width="32" height="32" align="absmiddle" alt=""> Aeon Fuse Waveform Visualizer <sub>&nbsp;Kodi visualisation</sub></h3>
+      <p><b>One thin waveform line, made for the Aeon Fuse Now playing card.</b></p>
+      <p>Kodi's own Waveform, reworked to sit cleanly in the skin's waveform box. One add-on per platform, because Kodi cannot tell the three Linux builds apart: install the one for your device.</p>
+      <ul><li>One clean line, the same thin width on flat and steep passages</li><li>Left, right, both mixed, both overlaid or two lines; smoothness 0 to 10</li><li>Linux ARM64, Linux ARM 32-bit, Linux x86-64 and Windows x64 (Kodi 22)</li></ul>
+      <p><a href="https://jonnypuma.github.io/#/visualization.aeonwave">Project page</a> · <a href="https://github.com/jonnypuma/visualization.aeonwave">GitHub</a> · <a href="https://github.com/jonnypuma/visualization.aeonwave/tree/main/source">Source and build script</a><br>Zip files: <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/visualization.aeonwave.linux-arm64">Linux ARM64</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/visualization.aeonwave.linux-armv7">Linux ARM 32-bit</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/visualization.aeonwave.linux-x86_64">Linux x86-64</a> · <a href="https://github.com/jonnypuma/repository.skippyrepo/tree/main/zips/visualization.aeonwave.windows-x64">Windows x64</a></p>
+    </td>
+  </tr>
+</table>
+
+<h3 align="center">More add-ons</h3>
 
 <table>
   <tr>
@@ -160,8 +216,7 @@ Or <a href="https://raw.githubusercontent.com/jonnypuma/repository.skippyrepo/ma
 
 <table>
   <tr>
-    <td width="33%" valign="top"><b>Aeon Fuse</b><br>A Kodi skin: the look of Aeon 2 with ideas from Arctic Fuse, with its Helper and Screensaver.<br><a href="https://jonnypuma.github.io/#/skin.aeon.fuse">Project page</a></td>
-    <td width="33%" valign="top"><b>Curator</b><br>An all-in-one media manager for music, movies, movie sets and TV shows. Docker.<br><a href="https://jonnypuma.github.io/#/curator">Project page</a></td>
+    <td width="50%" valign="top"><b>Curator</b><br>An all-in-one media manager for music, movies, movie sets and TV shows. Docker.<br><a href="https://jonnypuma.github.io/#/curator">Project page</a></td>
     <td valign="top"><b>More Docker apps</b><br>Video Analyzer, Kodi Now Playing Multi and Kodi Library Information.<br><a href="https://jonnypuma.github.io/#docker">Website</a></td>
   </tr>
 </table>
