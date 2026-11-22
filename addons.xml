@@ -640,7 +640,7 @@ v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments
         </assets>
     </extension>
 </addon>
-<addon id="script.texture.cache" name="Texture Cache Utility" version="2.0.6" provider-name="Skippy-McSkipface">
+<addon id="script.texture.cache" name="Texture Cache Utility" version="2.0.7" provider-name="Skippy-McSkipface">
     <requires>
         <import addon="xbmc.python" version="3.0.1"/>
     </requires>
@@ -667,7 +667,7 @@ v7.11.6: Merge and Update online sidecar saves no longer stop a video's segments
         </assets>
         <summary lang="en_GB">Kodi GUI wrapper (script.texture.cache) for Milhouse texturecache</summary>
         <description lang="en_GB">Texture Cache Utility (script.texture.cache) is a Kodi GUI wrapper for Milhouse's texturecache. Cache artwork, prune, clean orphans, and run QA from Kodi with presets, progress, cancel, scheduled maintenance, and a library context menu. Bundled engine: https://github.com/xbmc/texturecache</description>
-        <news lang="en_GB">2.0.6: Import local artwork is in Pick commands as well as Run preset.</news>
+        <news lang="en_GB">2.0.7: Stop 60s schedule log spam, handle Kodi shutdown cleanly, react to settings changes, XML-safe settings fallback, and add packaging/tests.</news>
         <reuselanguageinvoker>false</reuselanguageinvoker>
     </extension>
 </addon>
